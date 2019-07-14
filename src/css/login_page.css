@@ -1,0 +1,185 @@
+.loginpage{
+  animation:moveallup .3s ease-in 1;
+  position:relative;
+  padding-bottom:1000px;
+}
+@keyframes moveallup{
+  0%{
+
+    top:1000px
+  }
+  100%{
+
+    top:0px
+  }
+
+}
+@keyframes appear{
+  0%{
+
+    opacity:0
+  }
+  100%{
+
+    opacity:1
+  }
+
+}
+.redB{
+  background:red;
+}
+.signup{
+  float:right;
+}
+.whiteB{
+  background:purple;
+}
+.loginModal{
+  padding-top:3%;
+  opacity:.9;
+  height:700px;
+  padding-bottom: 10px !important;
+  margin-top:1%;
+  animation:appear .3s ease-in;
+  z-index:2px;
+  background:none;
+  position: relative;
+  bottom:7px;
+
+}
+.logoLogin{
+  width:50%;margin-left:25%;
+}
+.mt5{
+  margin-top:2.5%;
+}
+.inputL{
+  background:black;
+  color:white;
+  opacity:.4;
+  width:50%;
+  margin-left: 25%;
+  border:2px solid white;
+}
+.loginBtn{
+  background:#f4f4f4;width:50% !important; margin-left:25%;
+}
+.googleL{
+  background:white;
+  border:2px solid white;
+  color:black;
+  float:left;
+}
+.mt10{
+  margin-top:10%
+}
+.w100{
+  width:100%;
+}
+.placeholderSheet{
+  position:absolute;
+  opacity:.3;
+  top:0%;
+  left:0%;
+  height:650px;
+  width:100%
+}
+
+.switcher{
+  width:50%;
+  margin-left:25%;
+  position: relative;
+  bottom:5px;
+  background:none;
+  border:2px solid white;
+}
+.switcher:hover{
+  background:white;
+  color:black;
+  border:2px solid black;
+
+}
+
+@media  screen and (max-width: 650px ) and (min-width:481px) {
+  .inputL{
+    width:100%;
+    margin-left:0;
+  }
+  .divider{
+    margin-top:5%;
+  }
+  .signup{
+    font-size: 9px;
+  }
+  .switcher{
+    margin-top: 2%;
+    margin-left:0;
+    width:100% !important;
+  }
+  .logoLogin{
+    margin-top: 50%;
+    width:80%;
+    position: relative;
+    right:15%;
+  }
+  .loginBtn{
+    margin-top:25px;
+    width: 100% !important;
+    margin-left:0;
+  }
+  .googleL{
+    width:200px !important;
+  }
+}
+@media  screen and (max-width: 480px ){
+  .inputL{
+    width:100%;
+    margin-left:0;
+    margin-top:10px;
+  }
+  .loginModal{
+    position: relative;
+    right:15px;
+    top:-20px;
+    height:400px !important;
+
+  }
+  .divider{
+    margin-top:5%;
+  }
+  .signup{
+    font-size: 9px;
+    margin-top: 5px;
+  }
+  .switcher{
+    margin-top: 10%;
+    margin-left:0;
+    width:100% !important;
+  }
+  .loginModal{
+    height:600px;
+    margin-top:15px;
+    margin-left:15px;
+    border:white 0px groove;
+  }
+  .logoLogin{
+    margin-top: 70%;
+    width:100%;
+    position: relative;
+    right:21%;
+  }
+  .loginBtn{
+    margin-top:25px;
+    width: 100% !important;
+    margin-left:0;
+  }
+  .signup{
+    width:100px ;
+  }
+  .googleL{
+    font-size: 12px;
+    opacity:0;
+    width:150px;
+  }
+
+}
