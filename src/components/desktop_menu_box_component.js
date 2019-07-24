@@ -3,7 +3,9 @@ import React from "react";
 
 class DesktopBox extends React.Component {
   render(){
-
+    // Returns the Box for the menu
+    // Shows item name,image, and price
+    // Whe clicked SetItem will set that item to the state and save it cookie
     return(
 
       <div className="boxItem"onClick = {()=>{this.props.SetItem(this.props.menu.food[this.props.i])}}>

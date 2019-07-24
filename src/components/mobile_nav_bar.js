@@ -25,7 +25,10 @@ class MobileNavBar extends React.Component{
  closeNav() {
     document.getElementById("mySidenav").style.width = "0";
   }
-
+  // Navbar JSX
+  // Icons will redirect user to the pages
+  // When not clicked will show as 3 bars
+  // When clicked expand by 500 pixels and menu will show
   render(){
 
     return(

@@ -4,7 +4,7 @@ import React from "react";
 class MobileBox extends React.Component {
 
   render(){
-
+      // Renders Mobile Item boxes to menu page
     return(
       <li className="list-group-item" onClick = {()=>{this.props.SetItem(this.props.menu.food[this.props.i])}}>
         <div className="textBoxMenu">

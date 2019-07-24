@@ -4,9 +4,9 @@ import "./../css/loadingMap.css";
 
 
 export default class LoadingMap extends React.Component {
-
+  // Loading map animation
   render(){
-    return <div style={{background:"white",width:"100%",height:"1000px"}}> <img className="loaderMap" src="assets/images/loader.gif" /> </div>
+    return <div> <img className="loaderMap" src="assets/images/loader.gif" /> </div>
   }
-  
+
 }

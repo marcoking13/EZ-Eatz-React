@@ -7,6 +7,9 @@
 
 }
 }
+.loaderMap{
+  background:white;width:100%;height:1000px
+}
 @media screen and (min-width:1090px) {
   .loaderMap{
     width:50%;

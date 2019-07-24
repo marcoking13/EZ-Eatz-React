@@ -6,13 +6,17 @@ import Star from "./../images/star.png";
 
 class FoodBox extends React.Component {
   render(){
+    // Renders the Foodtruck Box for the home page;
+
     return(
+
 
       <div className="foodTruckContainer"  onClick = {(e)=>{
 
         var foodtruckID = this.props.foodtruck.objectID;
         cookie.remove("foodtruckCurrent",{path:"/"});
         cookie.save("foodtruckCurrent",foodtruckID,{path:"/"});
+      
         this.props.changeURL("menu");
 
       }}>
@@ -25,7 +29,7 @@ class FoodBox extends React.Component {
           </div>
 
         </div>
-      
+
       </div>
     );
 

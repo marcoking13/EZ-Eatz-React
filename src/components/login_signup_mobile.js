@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "./../images/logo.png";
 
 class LoginSignupMobile extends React.Component{
-
+  //JSX for the login and signup page mobile
   render(){
     return(
       <div className="container-fluid bb">

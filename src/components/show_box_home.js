@@ -5,8 +5,10 @@ import Star from "./../images/star.png";
 
 
 class ShowBox extends React.Component {
-
+    // JSX for the menu showcase
+    // Shows the background image, name, rating, and checkout button
   render(){
+    // background of foodtruck
     var background = this.props.foodtruck.background;
     return(
       <div className="showCaseBox">

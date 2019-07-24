@@ -40,11 +40,12 @@ class App extends Component {
   }
   componentWillMount(){
       if(cookie.load("account",{path:"/"})){
-        console.log(cookie.load("account",{path:"/"}))
-        this.Inialization();
+
+        this.Initialization()
+
       }
   }
-  Inialization(){
+  Initialization(){
 
       axios.get("/api/users").then((res)=>{
 

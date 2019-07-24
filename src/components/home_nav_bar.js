@@ -39,10 +39,10 @@ class NavBarHome extends React.Component {
   //JSX functions//
   //--------------------------------------------------------------------------
 
-
   renderMapIcon(){
     if(this.props.changeFlag){
-
+        // Renders Map icon if user is not on map page
+        // changeFlag = true or false is user is on google maps
       return(
         <img src={GoogleMap} onClick = {()=>{
 
@@ -63,10 +63,10 @@ class NavBarHome extends React.Component {
           <div className={"container-fluid navbarEZ " + this.props.navStyle}>
 
             <div className="row" style={{paddingBottom:"10px"}}>
-
+              // Mobile Navbar component
               <MobileNav  changeURL = {this.props.changeURL} />
 
-
+              // Address Component will all user location data
               <AddressInput
                   zip = {this.state.zip}
                   addressAvailable = {this.state.addressAvailable}
@@ -82,19 +82,22 @@ class NavBarHome extends React.Component {
                   formatted_address = {this.state.formatted_address}
                   />
 
-
                   </div>
+
                   <br />
           </div>
 
         );
     }else{
-    return(
-      <div className={"container-fluid navbarEZ " + this.props.navStyle}>
-        <div className="row">
-          <div className='col-4'>
-            <img className="logoNavBar" src={Logo}/>
-          </div>
+
+      return(
+        <div className={"container-fluid navbarEZ " + this.props.navStyle}>
+          <div className="row">
+            
+            <div className='col-4'>
+              <img className="logoNavBar" src={Logo}/>
+            </div>
+
           <div className='col-4'>
             <AddressInput
                 zip = {this.state.zip}
@@ -110,28 +113,38 @@ class NavBarHome extends React.Component {
                 formatted_address = {this.state.formatted_address}
                 />
           </div>
+
           <div className='col-4'>
             <div className="iconGroup">
               <img src={ProfilePicture}  className="navIcon"/>
+
               <img src="assets/images/search.png"
+
                 onClick = {()=>{
+
                   if(this.props.changeFlag){
                       this.props.changeFlag(false);
+
                     }else{
                       this.props.changeURL("home")
                     }}}
                       className="navIcon"/>
+
                       {this.renderMapIcon()}
+
                       <img src={Cart}  className="navIcon"/>
                     </div>
+
                       <button className="btn logoutNav btn-danger"
                         onClick = {()=>{
                           cookies.remove("account",{path:"/"});
                           cookies.remove("address",{path:"/"});
                           this.props.changeURL("login");
                         }}
-            >Logout</button>
+                        >Logout</button>
+
           </div>
+
         </div>
       </div>
       );

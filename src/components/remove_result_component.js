@@ -3,6 +3,9 @@ import React from "react";
 
 class RemoveResult extends React.Component{
 
+
+  // Showed all the removed items
+  // Loops through all removed items and renders them as list
   renderRemoveMods(){
     return this.props.remove.map((mod)=>{
       return(
@@ -10,7 +13,7 @@ class RemoveResult extends React.Component{
       )
     });
   }
-  
+  //renderer
   render(){
     return this.renderRemoveMods()
   }
