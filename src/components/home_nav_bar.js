@@ -4,7 +4,6 @@ import AddressInput from "./address_input";
 import Logo from "./../images/logo.png";
 import "./../css/home_page.css";
 import cookies from "react-cookies";
-import axios from "axios";
 import ProfilePicture from "./../images/profileIcon.png";
 import GoogleMap from "./../images/googleMap.png";
 import Cart from "./../images/cart.png";
@@ -27,14 +26,11 @@ class NavBarHome extends React.Component {
     this.changeAddressInput = this.changeAddressInput.bind(this);
 
   }
-
   //State Changers//
 //---------------------------------------------------------------------
   changeAddressInput(bool){
     this.setState({addressAvailable:bool})
   }
-
-
 
   //JSX functions//
   //--------------------------------------------------------------------------
@@ -44,16 +40,15 @@ class NavBarHome extends React.Component {
         // Renders Map icon if user is not on map page
         // changeFlag = true or false is user is on google maps
       return(
-        <img src={GoogleMap} onClick = {()=>{
-
+        <img alt="google"src={GoogleMap} onClick = {()=>{
             this.props.changeURL("map");
-
         }} className="navIcon"/>
       );
       }else{
         return null;
       }
   }
+
   //JSX//
 //---------------------------------------------------------------------------
   render(){
@@ -63,10 +58,10 @@ class NavBarHome extends React.Component {
           <div className={"container-fluid navbarEZ " + this.props.navStyle}>
 
             <div className="row" style={{paddingBottom:"10px"}}>
-              // Mobile Navbar component
+
               <MobileNav  changeURL = {this.props.changeURL} />
 
-              // Address Component will all user location data
+
               <AddressInput
                   zip = {this.state.zip}
                   addressAvailable = {this.state.addressAvailable}
@@ -93,9 +88,10 @@ class NavBarHome extends React.Component {
       return(
         <div className={"container-fluid navbarEZ " + this.props.navStyle}>
           <div className="row">
-            
+
             <div className='col-4'>
-              <img className="logoNavBar" src={Logo}/>
+              <img alt="logoNav"className="logoNavBar" src={Logo}/>
+
             </div>
 
           <div className='col-4'>
@@ -116,9 +112,9 @@ class NavBarHome extends React.Component {
 
           <div className='col-4'>
             <div className="iconGroup">
-              <img src={ProfilePicture}  className="navIcon"/>
+              <img  alt="profile"src={ProfilePicture}  className="navIcon"/>
 
-              <img src="assets/images/search.png"
+              <img alt="search" src="assets/images/search.png"
 
                 onClick = {()=>{
 
@@ -132,7 +128,7 @@ class NavBarHome extends React.Component {
 
                       {this.renderMapIcon()}
 
-                      <img src={Cart}  className="navIcon"/>
+                      <img alt="cart"src={Cart}  className="navIcon"/>
                     </div>
 
                       <button className="btn logoutNav btn-danger"

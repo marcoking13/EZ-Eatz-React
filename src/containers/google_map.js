@@ -2,7 +2,7 @@
 import React from "react";
 import {GoogleApiWrapper} from 'google-maps-react';
 import HomePageNav from "./../components/home_nav_bar";
-import {Map, InfoWindow, Marker} from 'google-maps-react';
+import {Map, Marker} from 'google-maps-react';
 import Geocode from "react-geocode";
 import cookies from "react-cookies";
 import axios from 'axios';
@@ -32,10 +32,10 @@ export  class MapContainer extends React.Component {
     }
 
     this.FoodtruckInit();
+
     this.props.SetAddress(cookies.load("address",{path:"/"}));
 
   }
-
   //--------------------Axios Inialization---------------------
   // Gets the info from all foodtrucks
   FoodtruckInit(){
@@ -44,22 +44,24 @@ export  class MapContainer extends React.Component {
       var foodtrucks = response.data;
       // Loop through variable
       foodtrucks.map((foodtruck)=>{
+        if(foodtruck){
         // Get the address from foodtruck object
-      var address = foodtruck.address.street + " "+  foodtruck.address.city + " "+ foodtruck.address.state + " "+  foodtruck.address.zip;
+        var address = foodtruck.address.street + " "+  foodtruck.address.city + " "+ foodtruck.address.state + " "+  foodtruck.address.zip;
         // Put address into the geoCoder to turn into Coordinates
-        Geocode.fromAddress(address).then(
-            response => {
-              const { lat, lng } = response.results[0].geometry.location;
-              foodtruck.coords = {lat:lat,lng:lng};
+          Geocode.fromAddress(address).then(
+              response => {
+                const { lat, lng } = response.results[0].geometry.location;
+                foodtruck.coords = {lat:lat,lng:lng};
               // Set the states for of the foodtruck locations
-              this.setState({ trucks: this.state.trucks.concat(foodtruck) });
-            },
+                this.setState({ trucks: this.state.trucks.concat(foodtruck) });
+              },
             // If error log problem
-            error => {
-              console.error(error,'error');
-            }
-          );
-      });
+              error => {
+                console.error(error,'error');
+              }
+            );
+          }
+          });
     });
   }
 
@@ -124,8 +126,8 @@ export  class MapContainer extends React.Component {
 }
 
 //----------------------------------Exports-----------------------------------
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM",
-
-   LoadingContainer: LoadingMap
-})(MapContainer)
+export default GoogleApiWrapper(
+  {
+    apiKey: "AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM",
+    LoadingContainer: LoadingMap
+  })(MapContainer)

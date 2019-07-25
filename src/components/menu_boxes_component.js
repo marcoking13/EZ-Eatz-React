@@ -16,9 +16,9 @@ class MenuBoxes extends React.Component {
           for(var i=0;i<menu.food.length;i++){
 
             if(window.innerWidth <=800){
-              html.push(<MobileBox  SetItem = {this.props.SetItem} menu = {menu} i = {i} />  )
+              html.push(<MobileBox _id = {i} SetItem = {this.props.SetItem} menu = {menu} i = {i} />  )
             }else if(window.innerWidth >= 800){
-              html.push(  <DesktopBox SetItem = {this.props.SetItem} menu = {menu} i = {i} />  )
+              html.push(  <DesktopBox _id = {i} SetItem = {this.props.SetItem} menu = {menu} i = {i} />  )
             }
 
           }

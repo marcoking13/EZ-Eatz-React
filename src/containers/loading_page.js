@@ -14,7 +14,7 @@ class LoadingPage extends React.Component{
     this.state = {
       delay:3
     }
-    
+
   }
 
   //--------------------------When Components Mount Functions---------------------------------
@@ -69,12 +69,16 @@ class LoadingPage extends React.Component{
     render(){
       return(
         <div className="container-fluid loadingPage lighten" style={{background:"black",height:"1000px"}}>
+
           <div className="row">
           <div className="col-4"></div>
+
           <div className="col-4">
-              <img src="./../logo.png" className="logo"  />
+              <img alt="logo"src="./../logo.png" className="logo"  />
           </div>
+
           <div className="col-4"></div>
+
         </div>
       </div>
       )

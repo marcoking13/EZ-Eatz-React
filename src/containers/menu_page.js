@@ -29,6 +29,7 @@ class MenuPage extends React.Component {
           //Save the currently looped truck into the state
         if(foodtruckID === trucks[i].objectID){
           this.setState({foodtruck:trucks[i]});
+          this.props.SetTruck(trucks[i]);
           break;
         }
       }
@@ -37,9 +38,7 @@ class MenuPage extends React.Component {
 
     this.SetItem = this.SetItem.bind(this);
   }
-
 //-----------------------------------------Saved Selected Item to Cookie and State--------------------------------------
-
   SetItem(item){
     this.setState({item:item});
     cookie.save("currentItem",item);
@@ -49,14 +48,17 @@ class MenuPage extends React.Component {
 //------------------------------------------------Renderer----------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------
   render(){
-
     return(
       <div>
+
         <HomePageNav  PostAddress = {this.props.PostAddress}  changeZip = {this.props.zip} changeAddress = {this.props.changeAddress} SetAddress = {this.props.SetAddress} address = {this.props.address}changeFlag = {this.changeFlag}  changeURL = {this.props.changeURL} googleMap={this.state.flag} navStyle ="white"/>
+
         <ShowBox foodtruck = {this.state.foodtruck} />
+
         <div className="menux">
           <MenuBoxes SetItem={this.SetItem} foodtruck = {this.state.foodtruck} />
         </div>
+
     </div>
     )
   }

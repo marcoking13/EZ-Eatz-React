@@ -1,11 +1,10 @@
 import React from "react";
 
 import "./../css/signup_and_login.css";
-import Foodtruck1 from "./../images/foodtruck1.png";
-import Logo from "./../images/logo.png";
+
 import axios from "axios";
 import cookie from "react-cookies";
-import GoogleLogo from "./../images/googleLogo.png";
+
 
 import LoginSignupMobile from "./../components/login_signup_mobile.js";
 import LoginSignupDesktop from "./../components/login_signup_desktop.js";
@@ -46,9 +45,9 @@ class SignupAndLoginPage extends React.Component {
       event.preventDefault();
         // Save and parse account object
       var account = {username:this.state.username,password:this.state.password};
-      let ata = JSON.stringify(account);
+
         // Create a server to use axios
-      const api = axios.create({baseURL: 'http://localhost:4001'});
+    
         // Gets all the users in database
       axios.get("/api/users").then((response)=>{
           // Looping through each user

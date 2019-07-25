@@ -14,10 +14,10 @@ class Form2 extends React.Component{
           <div className="bubble"style={{background:"#689bed"}}/>
         </div>
 
-        <img src={BackArrow}  className="backArrowLoginPage" />
+        <img alt = "profileImage" src={BackArrow}  className="backArrowLoginPage" />
         <h1 className="profilePicSignupTitle">Upload a Profile Photo</h1>
 
-        <div className="profileBubbleSignup"><img src={ProfileIcon} style={{width:"100%"}}/></div>
+        <div className="profileBubbleSignup"><img alt= "profileIcon"src={ProfileIcon} style={{width:"100%"}}/></div>
         <button className="uploadButton">Upload</button>
         <button className="userButtonSign btn-primary btn"onClick ={()=>{
 

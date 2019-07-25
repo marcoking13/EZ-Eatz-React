@@ -1,0 +1,63 @@
+.pickupContainer{
+  width:50%;
+  margin-left:25%;
+}
+select{
+  float:left;
+  margin-left: 10%;
+  margin-top: 5%;
+  width:35%;
+  border-radius:10px;
+  text-align: center !important;
+}
+.borderR{
+  border-right: 2px solid #f4f4f4 !important;
+  margin-top: 2.5%;
+  padding-right: 10%;
+}
+.pTitleC{
+  text-align: center;
+
+}
+.intructionContainer{
+  margin-top: 15%;
+
+}
+.tipContainer{
+  margin-top: 25%;
+}
+
+.tipBox{
+  background:white;
+  border-radius:5px;
+  border:3px solid #f4f4f4;
+  text-align: center;
+  color:grey;
+  margin-top: 5%;
+  margin-left: 5%;
+  width:100%;
+}
+.intructionTitle{
+  text-align: center;
+  margin-left: 10%;
+  margin-bottom: 20px;
+}
+.instructionForm{
+  width:110%;
+  margin-left: 5%;
+  padding-top: 5px;
+  padding-bottom: 50px;
+}
+.selectedTip{
+  background:DodgerBlue !important;
+  color:white !important;
+
+}
+.tipBox:hover{
+  background:DodgerBlue;
+  color:white;
+
+}
+.ccs{
+  margin-left: 5%;
+}

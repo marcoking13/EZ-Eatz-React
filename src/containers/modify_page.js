@@ -23,6 +23,7 @@ class ModifyPage extends React.Component {
       price:item.price
     }
 
+
     //---------------------Binders----------------------------------
       this.returnPrice = this.returnPrice.bind(this);
       this.addIngredient = this.addIngredient.bind(this);
@@ -40,7 +41,7 @@ class ModifyPage extends React.Component {
   //-------------------------------------Add and Remove Items from State-------------------------------
   addIngredient(mod){
       // If there are no items added then its ok to add items without looping to verify
-    if(this.state.add.length == 0){
+    if(this.state.add.length === 0){
       this.setState({ add: this.state.add.concat(mod),price:this.returnPrice(mod.price)});
     }else if(this.state.add.length >= 1){
       // if more than one mods are selected then loop the added mods allow toggling between it being selected
@@ -65,7 +66,7 @@ class ModifyPage extends React.Component {
 
     removeIngredient(mod){
         // If there are no items removed then its ok to remove items without looping to verify
-        if(this.state.remove.length == 0){
+        if(this.state.remove.length === 0){
           this.setState({ remove: this.state.remove.concat(mod)});
         }else if(this.state.remove.length >= 1){
             // if more than one mods are selected then loop the removed mods allow toggling between it being selected
@@ -88,7 +89,7 @@ class ModifyPage extends React.Component {
     //---------------------------------------Render Labels and Titles-------------------------------------------
     // Renders "Add" text if item has items to add
     renderAddText(){
-      if(this.state.item.add.length >= 1){
+      if(this.state.item.add){
         return   <p className="modTitle ">Add</p>
       }else{
         return null
@@ -96,7 +97,7 @@ class ModifyPage extends React.Component {
     }
     // Renders "Remove" text if item has items to remove
     renderRemoveText(){
-      if(this.state.item.ingredients.length >= 1){
+      if(this.state.item.ingredients){
         return   <p className="modTitle rTM">Remove</p>
       }else{
         return null
@@ -105,54 +106,92 @@ class ModifyPage extends React.Component {
     //Renders the item image and changes the size depending on the pixel width
     renderLabel(){
       if(this.state.remove.length <= 0 || this.state.add.length <=0){
-        return  <img className="itemCornerBig" src = {this.state.item.image} />
+        return  <img alt ="cornerItem"className="itemCornerBig" src = {this.state.item.image} />
       }else{
-          return <img className="itemCorner" src = {this.state.item.image} />
+          return <img alt="corner"className="itemCorner" src = {this.state.item.image} />
       }
     }
+
+    addItem(url){
+      var order = {
+        name:this.state.item.item,
+        price:this.state.price,
+        item:this.state.item,
+        mod:{
+          add:this.state.add,
+          remove:this.state.remove,
+        }
+      }
+      this.props.addToOrder(order);
+      this.props.changeURL(url);
+    }
+
     //----------------------------------------------Renderer---------------------------------------
     //---------------------------------------------------------------------------------------------
   render(){
     return (
       <div>
-          <HomePageNav  PostAddress = {this.props.PostAddress} changeZip = {this.props.zip} changeAddress = {this.props.changeAddress} SetAddress = {this.props.SetAddress} address = {this.props.address}  changeURL = {this.props.changeURL}  navStyle ="white"/>
+        <HomePageNav  PostAddress = {this.props.PostAddress} changeZip = {this.props.zip} changeAddress = {this.props.changeAddress} SetAddress = {this.props.SetAddress} address = {this.props.address}  changeURL = {this.props.changeURL}  navStyle ="white"/>
+
         <div className="row">
           {this.renderLabel()}
           <br />
         </div>
+
         <div className="modContainer">
             {this.renderAddText()}
+
           <div>
-              <Addon add = {this.state.add} addIngredient = {this.addIngredient} item = {this.state.item} />
+            <Addon add = {this.state.add} addIngredient = {this.addIngredient} item = {this.state.item} />
           </div>
+
         </div>
         <div className="modContainer">
+
               {this.renderRemoveText()}
+
           <div>
               <Remover remove = {this.state.remove} removeIngredient = {this.removeIngredient} item = {this.state.item} />
           </div>
+
         </div>
+
         <div className="payContainer bbLL">
             <p className="modTitle rTM">Add Order</p>
+
             <div className="row ">
               <div className="col-3"/>
+
               <div className="col-5">
                   <h6 className="itemName">{this.state.item.item}</h6>
+
                   <ul>
                       <AddResult  add = {this.state.add} />
                       <RemoveResult remove = {this.state.remove}/>
                   </ul>
+
               </div>
+
             </div>
+
           <div className="row">
             <h5 className="totalM">{"Total= $"+ this.state.price}</h5>
           </div>
+
           <div className="row">
+
           <div className="col-12 ">
-            <button className="btn bl btn-danger adder">Add To Cart</button>
-            <button className="btn bll btn-warning startC adder">Add To Cart and Checkout</button>
+            <button className="btn bl btn-danger adder"
+            onClick={()=>{
+              this.addItem("menu")
+            }}>Add To Cart</button>
+            <button  onClick={()=>{
+              this.addItem("checkout")
+              }}  className="btn bll btn-warning startC adder">Add To Cart and Checkout</button>
           </div>
+
           </div>
+
         </div>
 
       </div>

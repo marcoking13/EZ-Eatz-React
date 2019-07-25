@@ -17,9 +17,12 @@ class AddressInput extends React.Component{
       // Returns the JSX of the addressbox with no input
       return (
         <div style={this.props.classer}>
+
           <div className="unAciveInput" style= {this.props.width} onClick = {()=>{
             this.props.changeAddressInput(true);
-          }}>{address}</div>
+            }}>{address}
+          </div>
+
         </div>
         );
 
@@ -30,7 +33,8 @@ class AddressInput extends React.Component{
           <div style={this.props.classer2}>
             <form>
               <input type="text" onChange={(e)=>{this.props.changeAddress(e)}}  className="form-control halfControl " value = {this.props.address}placeholder="Enter street, state and city" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-            <button className={"btn enterAddress btn-primary "} onClick = {(event)=>{
+
+              <button className={"btn enterAddress btn-primary "} onClick = {(event)=>{
 
                 event.preventDefault();
 
@@ -40,10 +44,11 @@ class AddressInput extends React.Component{
                 this.props.changeAddressInput(false);
 
                 this.props.PostAddress(this.props.address,JSON.parse(cookies.load("account",{path:"/"})));
-      
+
                 this.props.SetAddress(this.props.address);
               }}
               >Search</button>
+              
             </form>
             </div>
       );

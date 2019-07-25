@@ -12,9 +12,9 @@ class MobileNavBar extends React.Component{
         profile.profilePhoto = "./../images/profileIcon.png";;
       }
 
-    this.state={
-      profile:profile
-    }
+      this.state={
+        profile:profile
+      }
 
   }
 
@@ -33,12 +33,14 @@ class MobileNavBar extends React.Component{
 
     return(
       <div>
-        <div id="mySidenav" class="sidenav">
-          <a href="javascript:void(0)" class="closebtn" onClick={()=>{this.closeNav()}}>&times;</a>
+        <div id="mySidenav" className="sidenav">
+          <div className="closebtn" onClick={()=>{this.closeNav()}}>&times;</div>
+
           <div className="profileBox">
-            <img className="profileA" src={Stock} />
+            <img alt="profile" className="profileA" src={Stock} />
             <h6 className="profileNM">Welcome Back <br /></h6>
           </div>
+
           <div className="list">
             <p
             onClick={()=>{
@@ -51,18 +53,23 @@ class MobileNavBar extends React.Component{
               }}
               >Locator</p>
             <p href="#">Checkout</p>
+
             <p className="redA"
              onClick={()=>{
                 cookies.remove("account",{path:"/"});
                 cookies.remove("address",{path:"/"});
                 this.props.changeURL("login");
               }}>Logout</p>
+
             </div>
           </div>
+
       <span className="menuIC"onClick={()=>{this.openNav()}}>
+
         <div className="menuBarI"></div>
         <div className="menuBarI"></div>
         <div className="menuBarI"></div>
+
       </span>
         <div id="main"></div>
       </div>

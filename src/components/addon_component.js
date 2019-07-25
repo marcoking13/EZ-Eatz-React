@@ -7,12 +7,15 @@ class Addon extends React.Component {
   decideColor(add,currentAdd){
     // default it false ie white
     var flag = false;
+
     for(var i = 0; i<add.length;i++){
+
       // if they match then make the mod box blue
       if(currentAdd === add[i]){
           flag = true;
           break;
         }
+
       }
       // if true then box is blue else it is white
       if(flag){
@@ -25,28 +28,30 @@ class Addon extends React.Component {
   }
 
   renderAddOn(){
+    var key = 0;
 
     return this.props.item.add.map((addOn)=>{
-
+        key ++;
         var color = this.decideColor(this.props.add,addOn);
 
           return(
 
-            <div className="col-2 modCont">
+            <div key = {key} className="col-2 modCont">
 
               <div className ="modBox" onClick = {(e)=>{  this.props.addIngredient(addOn) }}>
 
-                <div className={color}>  <img className="checkser" src="assets/images/check.png"/></div>
+                <div className={color}>  <img alt="mod" className="checkser" src="assets/images/check.png"/></div>
                   <p className="modName modNamer">{addOn.name}</p>
                   <p className="modName modPrice">{"$ "+addOn.price}</p>
                 </div>
+
               </div>
             );
           });
         }
 
   render(){
-  
+
     if(this.props.item.add){
       return <div className="row rowMod">{this.renderAddOn()}</div>
     }else{

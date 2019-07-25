@@ -1,11 +1,8 @@
 
 import React from "react";
-import Background from "./../images/searchBackground.jpg";
 import ProfileIcon from "./../images/profileIcon.png";
-import cookie from 'react-cookies';
-import axios from "axios";
-import User from "./../images/userChoice.png";
-import Owner from "./../images/ownerChoice.png";
+
+
 import "./../css/signup_page.css";
 
 import Form1 from "./customer_form1";
@@ -61,7 +58,7 @@ export default  class CustomerForms extends React.Component {
 //----------------------------------------------------------------------------------------
   render(){
     // Fist form
-    if(this.state.count == 1 ){
+    if(this.state.count === 1 ){
       // If on first form then render first form with data passed down
       return(
         <Form1
@@ -89,7 +86,7 @@ export default  class CustomerForms extends React.Component {
           />
       )
       // Else render form 2 with same data
-    }else if (this.state.count == 2){
+    }else if (this.state.count === 2){
         return(
           <Form2
             addCount = {this.addCount}

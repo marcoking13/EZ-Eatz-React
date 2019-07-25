@@ -2,8 +2,6 @@ import React from "react";
 
 
 class RemoveResult extends React.Component{
-
-
   // Showed all the removed items
   // Loops through all removed items and renders them as list
   renderRemoveMods(){

@@ -103,6 +103,37 @@
 
   }
 }
+@keyframes enlarge{
+  from{
+    width:inherit;
+  }
+  to {
+    width:50px;
+    height:50px;
+  }
+}
+@keyframes small{
+  from{
+
+    width:50px;
+    height:50px;
+  }
+  to {
+        width:inherit;
+  }
+}
+.navIcon{
+  animation:small .2s ease-in 1;
+  position: relative !important;
+  bottom:0px;
+}
+.navIcon:hover{
+  width:50px;
+  height:50px;
+  animation:enlarge .5s ease-in 1;
+  position: relative !important;
+  bottom:0px;
+}
 .foodTruckShowcase:hover{
   animation:moveUp .2s ease-in 1;
   position: relative;
@@ -223,7 +254,9 @@ height:200px;
 
 }
 
-
+.App{
+  background:white !important;
+}
 @media screen and (max-width:900px) and (min-width:700px){
 
 .iconGroup{
@@ -407,40 +440,6 @@ height:200px;
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media screen and (max-width:590px){
   .logoNavBar{
     width:50% ;
@@ -514,9 +513,6 @@ height:200px;
     margin-top:-20px;
     position: relative;
     left:20px;
-
-
-
   }
   .catagory{
 

@@ -8,10 +8,11 @@ class Remover extends React.Component {
   renderRemovers(){
 
     var color = "modBlue";
+    var key = 0;
     // Loop through all the ingredients
     // then set class based on if user clicked them or not
     return this.props.item.ingredients.map((ing)=>{
-
+      key++;
       for(var i = 0; i<this.props.remove.length;i++){
         if(ing === this.props.remove[i]){
           color = "modBlue blues";
@@ -23,14 +24,18 @@ class Remover extends React.Component {
     // if there are ingredients then render the jsx
     if(ing.display){
       return(
-        <div className="col-2 modCont">
+        <div key = {key} className="col-2 modCont">
+
           <div className ="modBox" onClick = {()=>{
             this.props.removeIngredient(ing);
           }}>
+
             <div className={color}>
-              <img className="checkser" src="assets/images/check.png"/>
+              <img alt="check"className="checkser" src="assets/images/check.png"/>
             </div>
-                <p className="modName modNamer">{"No "+ing.name}</p>
+
+              <p className="modName modNamer">{"No "+ing.name}</p>
+
             </div>
             </div>
           );

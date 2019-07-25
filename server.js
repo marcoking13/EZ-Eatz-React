@@ -6,6 +6,7 @@ const collections = ["foodtrucks","users","currentUser"];
 const database = "eater_db";
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+
 var path = require("path");
 var http = require("http");
 const Cookies = require("cookies");
@@ -35,6 +36,7 @@ app.use(cookieParser());
 
 
 var server = http.createServer(app).listen(port,function(){
+
   mongooseStartup(FoodtruckConfig,null);
 
   console.log("App running on "+port);
@@ -139,12 +141,15 @@ var SignupUser = (req,res)=>{
 
 
 
+
+
+
+
 var UpdateAddress = (req,res)=>{
-  console.log(req.body);
+
   var userData = req.body.userData;
   var address = req.body.address;
-
-
+  console.log(address,userData);
 
   Users.updateOne({"account.username": userData.username}, {$set: { address: address}}, function (err, user) {
        if (err) throw error

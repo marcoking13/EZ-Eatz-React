@@ -8,7 +8,7 @@ class LoginSignupMobile extends React.Component{
       <div className="container-fluid bb">
 
         <div className="row blackNav2">
-            <img className="mobileLoginLogo"src={Logo}/>
+            <img alt="logo" className="mobileLoginLogo"src={Logo}/>
             <button className="btn btn-danger mobileFTLogin">Own a Foodtruck?</button>
           </div>
 

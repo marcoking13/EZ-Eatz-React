@@ -1,18 +1,14 @@
 
 import React from "react";
-import cookie from "react-cookies";
+
 import "./../css/home_page.css";
 import axios from "axios";
-import Geocode from "react-geocode";
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-
+import {Map, Marker, GoogleApiWrapper, google} from 'google-maps-react';
 import HomePageNav from "./../components/home_nav_bar.js";
-
-import Placeholder from "./../images/placeholder.jpg"
-import Star from "./../images/star.png";
-import GoogleMap from "./../images/googleMap.png";
 import FoodBox from "./../components/foodtruck_box_home.js";
-import GoogleMapPage from "./google_map.js"
+
+
+
 
 ///-------------------------Component----------------------//
 class HomePage extends React.Component {
@@ -29,6 +25,7 @@ class HomePage extends React.Component {
       lat: 59.95,
       lng: 30.33,
 
+
     }
 
     //----------------------------Binders----------------------------//
@@ -36,6 +33,8 @@ class HomePage extends React.Component {
 
     this.changeAddressFlag = this.changeAddressFlag.bind(this);
     this.changeFlag = this.changeFlag.bind(this);
+
+
 
     //----------------------Axios Inialization For Foodtrucks-----------------------------
       // Find the foodtrucks then sets them to the state
@@ -46,6 +45,12 @@ class HomePage extends React.Component {
 
   }
 
+  CalculateAddress(origins,destinations){
+      window.google.maps.DistanceMatrixService(origins,destinations,"driving",(err,data)=>{
+        console.log(data);
+      })
+
+  }
 //------------------------------State Changer-------------------------------//
 
   // Used to Toggle Map and Search
@@ -60,8 +65,17 @@ class HomePage extends React.Component {
   //-------------------------Foodtruck Box Component Loop----------------------------
   // Loops through foodtrucks in state then renders them in JSX
   foodTruckLoop(){
+    var key = 0;
     return  this.state.foodtrucks.map((foodtruck)=>{
-        return    <FoodBox foodtruck = {foodtruck} changeURL = {this.props.changeURL} />
+        var address = foodtruck.address.street + " "+ foodtruck.address.city + " "+foodtruck.address.state + " " + foodtruck.address.zip;
+
+          this.props.google.maps.DistanceMatrixService(this.props.address,address,"DRIVING",(err,status)=>{
+            console.log("l");
+            console.log(status);
+          });
+          key ++;
+          return    <FoodBox key = {key} id = {key} ClearOrder = {this.props.ClearOrder} foodtruck = {foodtruck} changeURL = {this.props.changeURL} />
+
     });
   }
 
@@ -96,4 +110,7 @@ class HomePage extends React.Component {
 }
 
 
-export default HomePage;
+export default GoogleApiWrapper(
+  {
+    apiKey: "AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM",
+  })(HomePage)
