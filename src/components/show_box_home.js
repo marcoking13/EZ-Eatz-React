@@ -38,8 +38,8 @@ class ShowBox extends React.Component {
                 <p className="menuTitle mt5 type">All American</p>
 
                 <div className="buttonContainer">
-                  <button className="menuOP btn-danger btn">Checkout</button>
-                  <button className="menuOP btn-primary btn">Location</button>
+                  <button className="menuOP btn-secondary btn">View in Maps</button>
+
                 </div>
 
             </div>

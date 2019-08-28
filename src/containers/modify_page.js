@@ -1,6 +1,7 @@
 import React from "react";
-import "./../css/modify.css";
 import cookie from "react-cookies";
+
+import "./../css/modify.css";
 
 import HomePageNav from "./../components/home_nav_bar.js";
 import Addon from "./../components/addon_component.js";
@@ -28,6 +29,8 @@ class ModifyPage extends React.Component {
       this.returnPrice = this.returnPrice.bind(this);
       this.addIngredient = this.addIngredient.bind(this);
       this.removeIngredient = this.removeIngredient.bind(this);
+
+      window.scrollTo(0,0);
 
   }
 
@@ -106,7 +109,22 @@ class ModifyPage extends React.Component {
     //Renders the item image and changes the size depending on the pixel width
     renderLabel(){
       if(this.state.remove.length <= 0 || this.state.add.length <=0){
-        return  <img alt ="cornerItem"className="itemCornerBig" src = {this.state.item.image} />
+        return (
+          <div className="container-fluid bb6">
+            <div className="row ">
+              <div className="col-3"/>
+              <div className="col-6">
+                <img alt ="cornerItem"className="itemCornerBig" src = {this.state.item.image} />
+                <div className="detailCornerBox">
+                  <p className="nameCorner ccc">{this.state.item.item}</p>
+                  <p className="priceCorner ccc">{"$"+this.state.item.price.toFixed(2)}</p>
+                </div>
+                </div>
+                  <div className="col-3"/>
+
+          </div>
+          </div>
+        )
       }else{
           return <img alt="corner"className="itemCorner" src = {this.state.item.image} />
       }
@@ -122,6 +140,7 @@ class ModifyPage extends React.Component {
           remove:this.state.remove,
         }
       }
+
       this.props.addToOrder(order);
       this.props.changeURL(url);
     }
@@ -129,9 +148,10 @@ class ModifyPage extends React.Component {
     //----------------------------------------------Renderer---------------------------------------
     //---------------------------------------------------------------------------------------------
   render(){
+    var fixedPrice = this.state.price.toFixed(2);
     return (
       <div>
-        <HomePageNav  PostAddress = {this.props.PostAddress} changeZip = {this.props.zip} changeAddress = {this.props.changeAddress} SetAddress = {this.props.SetAddress} address = {this.props.address}  changeURL = {this.props.changeURL}  navStyle ="white"/>
+        <HomePageNav      orders = {this.props.orders} PostAddress = {this.props.PostAddress} changeZip = {this.props.zip} changeAddress = {this.props.changeAddress} SetAddress = {this.props.SetAddress} address = {this.props.address}  changeURL = {this.props.changeURL}  navStyle ="white"/>
 
         <div className="row">
           {this.renderLabel()}
@@ -142,7 +162,7 @@ class ModifyPage extends React.Component {
             {this.renderAddText()}
 
           <div>
-            <Addon add = {this.state.add} addIngredient = {this.addIngredient} item = {this.state.item} />
+            <Addon add = {this.state.add} addIngredient = {this.addIngredient}  price = {fixedPrice} item = {this.state.item} />
           </div>
 
         </div>
@@ -175,7 +195,7 @@ class ModifyPage extends React.Component {
             </div>
 
           <div className="row">
-            <h5 className="totalM">{"Total= $"+ this.state.price}</h5>
+            <h5 className="totalM">{"Total= $"+ fixedPrice}</h5>
           </div>
 
           <div className="row">
@@ -183,9 +203,11 @@ class ModifyPage extends React.Component {
           <div className="col-12 ">
             <button className="btn bl btn-danger adder"
             onClick={()=>{
+
               this.addItem("menu")
             }}>Add To Cart</button>
             <button  onClick={()=>{
+
               this.addItem("checkout")
               }}  className="btn bll btn-warning startC adder">Add To Cart and Checkout</button>
           </div>

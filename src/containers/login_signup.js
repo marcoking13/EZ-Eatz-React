@@ -47,7 +47,7 @@ class SignupAndLoginPage extends React.Component {
       var account = {username:this.state.username,password:this.state.password};
 
         // Create a server to use axios
-    
+
         // Gets all the users in database
       axios.get("/api/users").then((response)=>{
           // Looping through each user
@@ -57,7 +57,10 @@ class SignupAndLoginPage extends React.Component {
           if(account.username === response.data[i].account.username && account.password === response.data[i].account.password){
               cookie.remove("account",{path:"/"});
               cookie.save("account",account,{path:"/"});
-              this.props.changeURL("home");
+              var address = response.data[i].address;
+              cookie.remove("address",{path:"/"});
+              cookie.save("address",address,{path:"/"});
+              this.props.changeURL("map");
             break;
           }
             // If there is no user

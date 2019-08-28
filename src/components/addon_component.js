@@ -33,7 +33,8 @@ class Addon extends React.Component {
     return this.props.item.add.map((addOn)=>{
         key ++;
         var color = this.decideColor(this.props.add,addOn);
-
+        var fixedPrice = addOn.price.toFixed(2);
+      
           return(
 
             <div key = {key} className="col-2 modCont">
@@ -42,7 +43,7 @@ class Addon extends React.Component {
 
                 <div className={color}>  <img alt="mod" className="checkser" src="assets/images/check.png"/></div>
                   <p className="modName modNamer">{addOn.name}</p>
-                  <p className="modName modPrice">{"$ "+addOn.price}</p>
+                  <p className="modName modPrice">{"$ "+fixedPrice}</p>
                 </div>
 
               </div>

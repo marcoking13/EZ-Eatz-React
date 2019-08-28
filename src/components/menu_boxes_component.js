@@ -49,7 +49,7 @@ class MenuBoxes extends React.Component {
         })
 
       }else{
-        console.log("Error");
+      
       }
 
     }

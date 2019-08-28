@@ -3,7 +3,6 @@
   float:left;
   margin-left: 5%;
   margin-top: 5%;
-  border:2px solid #f4f4f4;
 
 }
 body{
@@ -14,21 +13,29 @@ width:15%;
 margin-left:43%;
 border-radius:10px;
 margin-top:5%;
+
+}
+.ccc{
+  text-align: center;
+}
+
+.bb5{
   border:5px solid #f4f4f4;
 }
-@media screen and (max-width:590px){
-
 .itemCornerBig{
   width:25%;
   background:white;
-  border:2px solid #f4f4f4;
+
   margin-left:38%;
+}
+.bb6{
+  border-bottom:2px solid red;
 }
 .modBlue{
   width:20px !important;
   height:20px !important;
 }
-}
+
 #root{
   padding-bottom:20%;
 }
@@ -43,7 +50,7 @@ margin-top:5%;
   font-size: 15px;
 }
 .bbLL{
-  border-top:1px solid black;
+  border-top:2px solid red;
 }
 .totalM{
   text-align: center;

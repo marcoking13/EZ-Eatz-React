@@ -1,11 +1,14 @@
 
 import React from "react";
+import cookie from "react-cookies";
+import {Map, Marker, GoogleApiWrapper, google} from 'google-maps-react';
+import axios from "axios";
 
 import "./../css/home_page.css";
-import axios from "axios";
-import {Map, Marker, GoogleApiWrapper, google} from 'google-maps-react';
+
 import HomePageNav from "./../components/home_nav_bar.js";
 import FoodBox from "./../components/foodtruck_box_home.js";
+
 
 
 
@@ -36,21 +39,19 @@ class HomePage extends React.Component {
 
 
 
+
     //----------------------Axios Inialization For Foodtrucks-----------------------------
       // Find the foodtrucks then sets them to the state
     axios.get("/api/trucks").then((response)=>{
       var  foodtrucks = response.data;
+
       this.setState({foodtrucks:foodtrucks});
     });
 
   }
 
-  CalculateAddress(origins,destinations){
-      window.google.maps.DistanceMatrixService(origins,destinations,"driving",(err,data)=>{
-        console.log(data);
-      })
 
-  }
+
 //------------------------------State Changer-------------------------------//
 
   // Used to Toggle Map and Search
@@ -67,16 +68,38 @@ class HomePage extends React.Component {
   foodTruckLoop(){
     var key = 0;
     return  this.state.foodtrucks.map((foodtruck)=>{
-        var address = foodtruck.address.street + " "+ foodtruck.address.city + " "+foodtruck.address.state + " " + foodtruck.address.zip;
 
-          this.props.google.maps.DistanceMatrixService(this.props.address,address,"DRIVING",(err,status)=>{
-            console.log("l");
-            console.log(status);
-          });
           key ++;
-          return    <FoodBox key = {key} id = {key} ClearOrder = {this.props.ClearOrder} foodtruck = {foodtruck} changeURL = {this.props.changeURL} />
+          // Not working -- Value is out of scope so i can't use the value for the foodtruck
+          // Gets user location and the foodtruck location
+          // Then calculates distance and returns the distance
+          // Then passes down the returned value to the rendered component Food Box
+          var destinations = foodtruck.address.street + " "+ foodtruck.address.city + " "+ foodtruck.address.state + " " + foodtruck.address.zip;
+          var service = new this.props.google.maps.DistanceMatrixService();
+          var address = cookie.load("address",{path:"/"});
+          var distance;
+          service.getDistanceMatrix({
+            origins: [address],
+            destinations: [destinations],
+            travelMode: this.props.google.maps.TravelMode.DRIVING,
+            unitSystem: this.props.google.maps.UnitSystem.METRIC,
+            avoidHighways: false,
+            avoidTolls: false
+          },(data,status)=>{
+
+              if(data.rows[0].elements[0].distance){
+
+
+
+              }else{
+                console.log("Not Found");
+              }
+            });
+
+          return    <FoodBox  address = {this.props.address} key = {key} id = {key} ClearOrder = {this.props.ClearOrder} foodtruck = {foodtruck} changeURL = {this.props.changeURL} />
 
     });
+
   }
 
   //------------------------------Renderer--------------------------------
@@ -84,33 +107,55 @@ class HomePage extends React.Component {
 
   render(){
 
+    if(window.innerWidth > 500){
+        return (
+          <div>
 
-      return (
-        <div>
+            <HomePageNav
+              PostAddress = {this.props.PostAddress}
+                  orders = {this.props.orders}
+              changeZip = {this.props.zip}
+              changeAddress = {this.props.changeAddress} SetAddress = {this.props.SetAddress} address = {this.props.address}changeFlag = {this.changeFlag}  changeURL = {this.props.changeURL}
+              navStyle ="white"
+              />
 
-          <HomePageNav
-            PostAddress = {this.props.PostAddress}
-            changeZip = {this.props.zip}
-            changeAddress = {this.props.changeAddress} SetAddress = {this.props.SetAddress} address = {this.props.address}changeFlag = {this.changeFlag}  changeURL = {this.props.changeURL}
-            navStyle ="white"
-            />
-
-          <div className="divder2"/>
-          <div className="pb5">
-            <h4 className="resultTitle">Food Trucks</h4>
-              {this.foodTruckLoop()}
-          </div>
-            <br />
-            <br />
-        </div>
+              <div className="divder2"/>
+              <div className="pb5">
+              <h4 className="resultTitle">Food Trucks</h4>
+                {this.foodTruckLoop()}
+              </div>
+              <br />
+              <br />
+            </div>
     );
 
 
+  }else{
+    return (
+      <div>
+
+        <HomePageNav
+          PostAddress = {this.props.PostAddress}
+          changeZip = {this.props.zip}
+          changeAddress = {this.props.changeAddress} SetAddress = {this.props.SetAddress} address = {this.props.address}changeFlag = {this.changeFlag}  changeURL = {this.props.changeURL}
+          navStyle ="white"
+          />
+          <div className="divder2"/>
+          <br/>
+          <ul className="list-group ">
+          <h4 className="resultTitle">Food Trucks</h4>
+          <br/>
+            {this.foodTruckLoop()}
+          </ul>
+          <br />
+          <br />
+        </div>
+);
   }
 }
-
+}
 
 export default GoogleApiWrapper(
   {
     apiKey: "AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM",
-  })(HomePage)
+  })(HomePage);

@@ -48,7 +48,7 @@ class AddressInput extends React.Component{
                 this.props.SetAddress(this.props.address);
               }}
               >Search</button>
-              
+
             </form>
             </div>
       );

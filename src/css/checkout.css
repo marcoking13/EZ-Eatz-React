@@ -10,14 +10,113 @@ select{
   border-radius:10px;
   text-align: center !important;
 }
+.jumbotron{
+  padding-top:2.5% !important;
+}
 .borderR{
   border-right: 2px solid #f4f4f4 !important;
-  margin-top: 2.5%;
+
   padding-right: 10%;
 }
 .pTitleC{
   text-align: center;
 
+}
+.totalContainerCheckout{
+  margin-top: 10%;
+  border:4px solid #f4f4f4;
+  margin-left: 7.5%;
+}
+.cc{
+  text-align: center;
+  margin-top:10%;
+
+
+}
+.truckConCheckout{
+  width:40%;
+  float:left;
+  margin-left: 10%;
+}
+.orderImage{
+  width:50px;
+  height:50px;
+  margin-left: 35%;
+
+}
+.orderBox{
+  margin-top: 5%;
+}
+.adders{
+  margin-left:20%;
+  font-size: 12px;
+  list-style-type: circle;
+}
+.truckNameCheckout{
+  float: right;
+  margin-right: 5%;
+  font-size: 13px;
+
+
+  margin-top: 5%;
+  font-weight: bold;
+}
+.orderName{
+  text-align: center;
+    font-style: italic !important;
+}
+.removers{
+  font-size: 12px;
+  margin-left: 25%;
+  list-style-type: none
+}
+.paypal{
+  width:50%;
+
+}
+.orderListTitle{
+  margin-top: 5%;
+  text-align: center;
+}
+.pickupContainerMobile{
+  margin-top: 5%;
+  margin-left: 35%;
+}
+.pickupTitleMobile{
+  margin-left: 10%;
+}
+.tipBoxMobileTitle{
+  margin-top: 15%;
+  text-align: center;
+}
+.tipBoxMobile{
+  margin-top: 5%;
+}
+.pickupTimeMobile{
+  width:25%;
+  float:left;
+  margin-top: 5%;
+  text-align: center;
+}
+.paypalButton{
+  width:100%;
+  margin-left: 5%;
+  background:white;
+  border:2px solid grey;
+  border-radius: 5px;
+}
+.totalTitleCheckout{
+  font-size:20px;
+}
+.paypalButton:hover{
+  background:	#8470ff;
+  border-color:#8470ff;
+}
+.orderRow{
+  margin-top:15%;
+}
+.truckCheckoutImg{
+  width:30%;
 }
 .intructionContainer{
   margin-top: 15%;
@@ -36,6 +135,49 @@ select{
   margin-top: 5%;
   margin-left: 5%;
   width:100%;
+}
+@media screen and (max-width:590px){
+  .tipBox{
+    margin-left:0;
+  }
+  .orderList{
+    margin-top: 1%;
+    float:left;
+    margin-right:25%;
+  }
+  .orderMobileContainer{
+    margin-top: 10px;
+  }
+  .orderImage{
+
+    float:left;
+    margin-left:0;
+  }
+  .orderName{
+    float: left;
+    margin-left: 5%;
+  }
+  .ppr{
+    float:right;
+    margin-right: 5%;
+  }
+  .paypalButton{
+    width:50%;
+    margin-left: 25%;
+    margin-top: 5%;
+  }
+  .payTotalTitle{
+    text-align: center;
+    margin-top: 5%;
+  }
+  .payContainerMobile{
+    border-top:2px solid black;
+    margin-top: 5%;
+  }
+  .totalMobile{
+    text-align: center;;
+  }
+
 }
 .intructionTitle{
   text-align: center;

@@ -2,13 +2,23 @@
   width:20%;
   margin-left: 10%;
 }
+.mt5{
+  margin-top:5% !important;
+}
 .navbarEZ{
   background: white;
+}
+.milesH{
+
+  position: absolute;
+  right:6%;
+  bottom:2.5%;
 }
 .App{
   background:#f4f4f4;
   padding-bottom: 50% !important;
 }
+
 .unAciveInput{
 
   text-align: center;
@@ -19,9 +29,25 @@
 }
 .enterAddress{
   padding-right:60px;
+  padding-left: 24px;
+}
+.listLogoH{
+  width:40px;
+  float: left;
+  height:40px;
+}
+.transparent-1-2{
+  opacity:.4;
 }
 .width{
   width:200px !important;
+}
+.detailB{
+  position: absolute;
+  bottom:0;
+}
+.pb60{
+  padding-bottom:60px;
 }
 .logoutNav{
   position: relative;
@@ -55,6 +81,15 @@
 
   height:40px;
 }
+.navIconMob{
+
+  width:40px;
+position: absolute;
+top:3%;
+right:5%;
+
+  height:40px;
+}
 .switcheGoogleMap:hover{
 
       animation:bigSmall .4s ease-in infinite;
@@ -81,9 +116,9 @@
     height:50px;
   }
   50%{
-    width:52px;
+    width:51px;
 
-    height:52px;
+    height:51px;
 
   }
   100%{
@@ -108,15 +143,15 @@
     width:inherit;
   }
   to {
-    width:50px;
-    height:50px;
+    width:43px;
+    height:43px;
   }
 }
 @keyframes small{
   from{
 
-    width:50px;
-    height:50px;
+    width:43px;
+    height:43px;
   }
   to {
         width:inherit;
@@ -128,8 +163,10 @@
   bottom:0px;
 }
 .navIcon:hover{
-  width:50px;
-  height:50px;
+  width:43px;
+  height:43px;
+  background:#f4f4f4;
+  border-radius:5px;
   animation:enlarge .5s ease-in 1;
   position: relative !important;
   bottom:0px;
@@ -200,8 +237,6 @@ height:200px;
 
 
 
-
-
 .halfControl{
   width:50%;
   margin-top:5%;
@@ -222,7 +257,9 @@ height:200px;
   background:#262626;
   border:2px solid white;
 }
-
+body{
+  background:white !important;
+}
 @media screen and (max-width:1390px) and (min-width:1035px){
 
 
@@ -469,6 +506,7 @@ height:200px;
     text-align: left;
     margin-left: 10px;
     margin-top: 5px;
+    padding-right:100px;
   }
   .resultTitle{
     text-align: center;
@@ -512,7 +550,7 @@ height:200px;
   .starGroup{
     margin-top:-20px;
     position: relative;
-    left:20px;
+    left:30px;
   }
   .catagory{
 
@@ -549,8 +587,14 @@ height:200px;
     position: relative;
     top:10px;
   }
+  .container-fluid{
+    background:white !important;
+  }
   .switcheGoogleMap{
     width:45px;height:45px;position:absolute;top:15%;left:5%
+  }
+  body{
+    background:white !important;
   }
   .foodTruckContainer{
     width:200px;
@@ -637,4 +681,5 @@ height:200px;
     width:0;
     height:0;
   }
+
 }

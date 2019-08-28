@@ -1,5 +1,5 @@
 import React from "react";
-import cookies from "react-cookies";
+import cookie from "react-cookies";
 
 import "./../css/loading.css";
 
@@ -37,7 +37,7 @@ class LoadingPage extends React.Component{
         // Stops the countdown
         clearInterval(this.interval);
         // Checks to see what cookies the user has to see what page user needs to go to
-        this.CookieCheck();
+        this.DelayCheck();
       }
       // Countdown by 1 for the delay value
       this.setState({delay:this.state.delay-1});
@@ -48,16 +48,9 @@ class LoadingPage extends React.Component{
   //-----------------------------Checks Cookies-------------------
   // If cookie with user account true then log them in
   // If User has item in cart take them to the modify page
-  CookieCheck(){
-    // If user has account: Send them to Home page
-    // If user has account and was ordering: Send them to Modify page
-    // If user does not have account: Send them to Login page
-    // If countdown is still in progress: Do Nothing
-    if(cookies.load("account",{path:"/"}) && !cookies.load("currentItem",{path:"/"})){
-        this.props.changeURL("home");
-    }else if(cookies.load("account",{path:"/"}) && cookies.load("currentItem",{path:"/"})){
-        this.props.changeURL("modify");
-    }else if(this.state.delay <=0 ){
+  DelayCheck(){
+
+    if(this.state.delay <=0 ){
         this.props.changeURL("login");
     }else{
       console.log("Loading");

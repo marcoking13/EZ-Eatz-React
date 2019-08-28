@@ -1,13 +1,16 @@
 import React from "react";
 
-import AddressInput from "./address_input";
-import Logo from "./../images/logo.png";
-import "./../css/home_page.css";
 import cookies from "react-cookies";
+
+import AddressInput from "./address_input";
+
+import "./../css/home_page.css";
+
+
 import ProfilePicture from "./../images/profileIcon.png";
 import GoogleMap from "./../images/googleMap.png";
 import Cart from "./../images/cart.png";
-
+import Logo from "./../images/logo.png";
 import MobileNav from "./mobile_nav_bar.js";
 
 class NavBarHome extends React.Component {
@@ -34,16 +37,33 @@ class NavBarHome extends React.Component {
 
   //JSX functions//
   //--------------------------------------------------------------------------
+  renderCheckoutIcon(){
+    console.log(this.props.orders,this.props.orders);
+    if(this.props.orders.length > 0){
 
+      return  <img alt="cart"src={Cart}  onClick = {()=>{this.props.changeURL("checkout")}}className="navIcon"/>
+    }else{
+          return  <img alt="cart"src={Cart} className="navIcon transparent-1-2"/>
+    }
+  }
   renderMapIcon(){
     if(this.props.changeFlag){
         // Renders Map icon if user is not on map page
         // changeFlag = true or false is user is on google maps
-      return(
-        <img alt="google"src={GoogleMap} onClick = {()=>{
-            this.props.changeURL("map");
-        }} className="navIcon"/>
-      );
+        if(window.innerWidth > 500){
+          return(
+            <img alt="google"src={GoogleMap} onClick = {()=>{
+              this.props.changeURL("map");
+            }} className="navIcon"/>
+          );
+        }else{
+          console.log("LOP");
+          return(
+            <img alt="google"src={GoogleMap} onClick = {()=>{
+              this.props.changeURL("map");
+            }} className="navIconMob"/>
+          );
+        }
       }else{
         return null;
       }
@@ -60,7 +80,7 @@ class NavBarHome extends React.Component {
             <div className="row" style={{paddingBottom:"10px"}}>
 
               <MobileNav  changeURL = {this.props.changeURL} />
-
+                {this.renderMapIcon()}
 
               <AddressInput
                   zip = {this.state.zip}
@@ -97,6 +117,7 @@ class NavBarHome extends React.Component {
           <div className='col-4'>
             <AddressInput
                 zip = {this.state.zip}
+
                 addressAvailable = {this.state.addressAvailable}
                 address = {this.props.address}
                 changeAddressInput = {this.changeAddressInput}
@@ -127,8 +148,7 @@ class NavBarHome extends React.Component {
                       className="navIcon"/>
 
                       {this.renderMapIcon()}
-
-                      <img alt="cart"src={Cart}  className="navIcon"/>
+                      {this.renderCheckoutIcon()}
                     </div>
 
                       <button className="btn logoutNav btn-danger"

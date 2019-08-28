@@ -1,12 +1,12 @@
 
 import React from "react";
 import {GoogleApiWrapper} from 'google-maps-react';
-import HomePageNav from "./../components/home_nav_bar";
 import {Map, Marker} from 'google-maps-react';
 import Geocode from "react-geocode";
 import cookies from "react-cookies";
 import axios from 'axios';
 
+import HomePageNav from "./../components/home_nav_bar";
 import LoadingMap from "./../components/loading_map";
 
 import "./../css/loadingMap.css";
@@ -80,16 +80,17 @@ export  class MapContainer extends React.Component {
                       cookies.remove("foodtruckCurrent",{path:"/"});
                       cookies.save("foodtruckCurrent",trucks.objectID,{path:"/"});
                       // Changes URL to Menu
+                      this.props.ClearOrder();
                       this.props.changeURL("menu");
                     }}
-                    icon = {{url:trucks.mapLogo,scaledSize: new google.maps.Size(45,45)}} position={{lat:trucks.coords.lat, lng: trucks.coords.lng}} />
+                    icon = {{url:trucks.mapLogo,scaledSize: new this.props.google.maps.Size(45,45)}} position={{lat:trucks.coords.lat, lng: trucks.coords.lng}} />
                   );
                 });
               }
 
     // Renders Marker where user is located
   renderUserMarker(){
-    return <Marker icon = {{url:"assets/images/ringer.gif",scaledSize: new google.maps.Size(50,50)}} position={{lat:this.props.lat, lng: this.props.lng}} />
+    return <Marker icon = {{url:"assets/images/ringer.gif",scaledSize: new this.props.google.maps.Size(50,50)}} position={{lat:this.props.lat, lng: this.props.lng}} />
   }
 
   //---------------------------------Render Map ------------------------//
@@ -112,6 +113,7 @@ export  class MapContainer extends React.Component {
       <div>
         <HomePageNav
           PostAddress = {this.props.PostAddress}
+          orders = {this.props.orders}
           changeZip = {this.props.zip}
           changeAddress = {this.props.changeAddress} SetAddress = {this.props.SetAddress} address = {this.props.address}changeFlag = {this.changeFlag}  changeURL = {this.props.changeURL}
           navStyle ="white"

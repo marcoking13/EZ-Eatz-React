@@ -1,11 +1,13 @@
 import React from "react";
-import "./../css/menuPage.css";
+
 import cookie from "react-cookies";
 import axios from "axios";
 
 import HomePageNav from "./../components/home_nav_bar";
 import ShowBox from "./../components/show_box_home";
 import MenuBoxes from "./../components/menu_boxes_component";
+
+import "./../css/menuPage.css";
 
 //--------------------------Component -----------------------------------------
 class MenuPage extends React.Component {
@@ -37,6 +39,8 @@ class MenuPage extends React.Component {
     //----------------------Binders---------------------------------------------------------------------------------
 
     this.SetItem = this.SetItem.bind(this);
+
+    window.scrollTo(0,0);
   }
 //-----------------------------------------Saved Selected Item to Cookie and State--------------------------------------
   SetItem(item){
@@ -51,7 +55,7 @@ class MenuPage extends React.Component {
     return(
       <div>
 
-        <HomePageNav  PostAddress = {this.props.PostAddress}  changeZip = {this.props.zip} changeAddress = {this.props.changeAddress} SetAddress = {this.props.SetAddress} address = {this.props.address}changeFlag = {this.changeFlag}  changeURL = {this.props.changeURL} googleMap={this.state.flag} navStyle ="white"/>
+        <HomePageNav      orders = {this.props.orders} PostAddress = {this.props.PostAddress}  changeZip = {this.props.zip} changeAddress = {this.props.changeAddress} SetAddress = {this.props.SetAddress} address = {this.props.address}changeFlag = {this.changeFlag}  changeURL = {this.props.changeURL} googleMap={this.state.flag} navStyle ="white"/>
 
         <ShowBox foodtruck = {this.state.foodtruck} />
 

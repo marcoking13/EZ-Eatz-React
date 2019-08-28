@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from  "axios";
 import cookie from "react-cookies";
 import Geocode from "react-geocode";
+
 import './css/Fonts.css';
 
 import SignupAndLoginPage from "./containers/login_signup";
@@ -21,7 +22,12 @@ class App extends Component {
     super(props);
     var orders = [];
     var truck;
+    var urlCookie = cookie.load("url",{path:"/"});
+    if(!cookie.load("currentItem",{path:"/"})){
+      urlCookie = "menu";
+    }
     var foodtruckID  = cookie.load("foodtruckCurrent",{path:"/"});
+    cookie.remove("currentItem",{path:"/"});
 
     axios.get("/api/trucks").then((response)=>{
       var trucks = response.data;
@@ -44,7 +50,7 @@ class App extends Component {
     }
 
     this.state = {
-      url:"loading",
+      url:urlCookie,
       item:{},
       zip:"",
       account:"",
@@ -74,15 +80,43 @@ class App extends Component {
   componentWillMount(){
 
       if(cookie.load("account",{path:"/"})){
-        this.Initialization()
+        this.Initialization();
+
       }
+          this.ClearCookieTimer();
+  }
+
+  componentDidUpdate(){
+    cookie.save("orders",this.state.orders,{path:"/"});
 
   }
+
 
   SetTruck(truck){
 
     this.setState({truck:truck})
   }
+
+  ClearCookieTimer(){
+
+    var seconds = 0;
+    var minutes;
+    this.cookieIntervals = setInterval(()=>{
+      minutes = seconds / 60;
+
+      seconds ++;
+
+      if(minutes >= 60){
+        seconds = 0;
+        minutes = 0;
+        cookie.remove("currentItem",{path:"/"});
+        cookie.remove("foodtruckCurrent",{path:"/"});
+        cookie.remove("account",{path:"/"});
+      }
+
+    },1000);
+  }
+
   Initialization(){
 
       axios.get("/api/users").then((res)=>{
@@ -91,19 +125,17 @@ class App extends Component {
         var savedUser = JSON.parse(cookie.load("account",{path:"/"}));
         for(var i = 0; i<= users.length; i++){
           var loopedUsername = users[i].account.username;
+
           if(loopedUsername === savedUser.username){
             this.SetAddress(cookie.load("address",{path:"/"}));
             break;
           }
+
         }
     });
 
   }
 
-  componentDidUpdate(){
-    cookie.save("orders",this.state.orders,{path:"/"});
-    console.log(this.state.address);
-  }
 
   addToOrder(order){
     cookie.remove("orders",{path:"/"});
@@ -123,8 +155,8 @@ class App extends Component {
               break;
             }
           }
-        });
 
+        });
 
   }
 //----------------------------State Changer-----------------------------
@@ -144,6 +176,12 @@ class App extends Component {
   }
 
   changeURL(url){
+        cookie.remove("url",{path:"/"});
+        if(url !== "modify"){
+          cookie.save("url",url,{path:"/"});
+        }
+      
+
         this.setState({url:url});
   }
   //-----------------------------------------------------------------------
@@ -171,22 +209,22 @@ class App extends Component {
                return  <div className="App">    <LoadingPage  PostAddress = {this.PostAddress}  changeURL={this.changeURL} />   </div>
          }
          if(this.state.url === "checkout"){
-                return  <div className="App">    <CheckoutPage changeURL={this.changeURL} />   </div>
+                return  <div className="App">    <CheckoutPage orders = {this.state.orders} changeURL={this.changeURL} />   </div>
           }
          if(this.state.url === "map"){
-                return  <div className="App">    <GoogleMap   PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />   </div>
+                return  <div className="App">    <GoogleMap  orders= {this.state.orders}  ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />   </div>
           }
          if(this.state.url === "modify"){
-                return  <div className="App">    <ModifyPage addToOrder = {this.addToOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} item = {this.state.item}changeURL={this.changeURL} />   </div>
+                return  <div className="App">    <ModifyPage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} addToOrder = {this.addToOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} item = {this.state.item}changeURL={this.changeURL} />   </div>
           }
          if(this.state.url === "menu"){
-               return  <div className="App">    <MenuPage SetTruck = {this.SetTruck} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} SetItem = {this.SetItem} changeURL={this.changeURL} />   </div>
+               return  <div className="App">    <MenuPage orders= {this.state.orders}  SetTruck = {this.SetTruck} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} SetItem = {this.SetItem} changeURL={this.changeURL} />   </div>
           }
           if(this.state.url === "login"){
                return  <div className="App">    <SignupAndLoginPage  PostAddress = {this.PostAddress} changeURL={this.changeURL} />   </div>
           }
           if(this.state.url === "home"){
-               return  <div className="App">    <HomePage  ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />   </div>
+               return  <div className="App">    <HomePage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />   </div>
            }
           if(this.state.url === "usersign"){
                return   <div className="App">    <SignupForm  PostAddress = {this.PostAddress} changeURL={this.changeURL} type="user" />  </div>
@@ -194,7 +232,7 @@ class App extends Component {
           if(this.state.url === "ownersign"){
                return   <div className="App">    <SignupForm   PostAddress = {this.PostAddress} changeURL={this.changeURL} type="user" />  </div>
             }else{
-              return "Error";
+               return  <div className="App">    <LoadingPage  PostAddress = {this.PostAddress}  changeURL={this.changeURL} />   </div>
             }
       }
 

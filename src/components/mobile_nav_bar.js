@@ -3,21 +3,7 @@ import "./../css/mobileNav.css";
 import cookies from "react-cookies";
 import Stock from "./../images/profileIcon.png";
 class MobileNavBar extends React.Component{
-  constructor(props){
-    super(props);
-
-      var profile = JSON.parse(cookies.load("account",{path:"/"}));
-
-      if(profile.profilePhoto === ""){
-        profile.profilePhoto = "./../images/profileIcon.png";;
-      }
-
-      this.state={
-        profile:profile
-      }
-
-  }
-
+  
  openNav() {
      document.getElementById("mySidenav").style.width = "175px";
   }
