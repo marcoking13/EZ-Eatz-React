@@ -180,7 +180,7 @@ class App extends Component {
         if(url !== "modify"){
           cookie.save("url",url,{path:"/"});
         }
-      
+
 
         this.setState({url:url});
   }
@@ -218,7 +218,7 @@ class App extends Component {
                 return  <div className="App">    <ModifyPage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} addToOrder = {this.addToOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} item = {this.state.item}changeURL={this.changeURL} />   </div>
           }
          if(this.state.url === "menu"){
-               return  <div className="App">    <MenuPage orders= {this.state.orders}  SetTruck = {this.SetTruck} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} SetItem = {this.SetItem} changeURL={this.changeURL} />   </div>
+               return  <div className="App">    <MenuPage truck = {this.state.truck} orders= {this.state.orders}  SetTruck = {this.SetTruck} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} SetItem = {this.SetItem} changeURL={this.changeURL} />   </div>
           }
           if(this.state.url === "login"){
                return  <div className="App">    <SignupAndLoginPage  PostAddress = {this.PostAddress} changeURL={this.changeURL} />   </div>

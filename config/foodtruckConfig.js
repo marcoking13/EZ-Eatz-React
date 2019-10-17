@@ -12,6 +12,7 @@ const FoodTrucks =  [{
     state:"AZ",
     zip: 85251
   },
+  stars:3,
   background:"./assets/images/samplebanner2.jpg",
   display:"./assets/images/smoothie.jpg",
   mapLogo:"./assets/images/smoothieKingMap.png",
@@ -246,6 +247,7 @@ const FoodTrucks =  [{
       },
 
     ],
+
     id:"nvovbn3ovnojevfcmwofdcmwiocmwoicwocamn222",
     ingredients:[{name:"chocolate ice cream",display:false},{name:"strawberries",display:true},{name:"fudge",display:true}],
     calories:2000,
@@ -364,6 +366,7 @@ image:"./assets/images/samplebanner2.jpg"
   name:"Pita Jungle",
   mapLogo:"./assets/images/pitaJungleMap.png",
   routes:routes,
+    stars:5,
   logo:"./assets/images/pita.png",
   background:"./assets/images/samplebanner.jpg",
   display:"./assets/images/pitajungle.jpg",
@@ -1206,6 +1209,7 @@ image:"./assets/images/samplebanner2.jpg"
 ],
 
 images:["image2p.png","image3p.png","image4p.png"],
+  stars:3,
 address:{
 
   street:"7th and Mill Ave ",
@@ -1778,6 +1782,7 @@ address:{
 },
 {
   ownerID:"12345678webgfhurfi3ufin43uifb4ivn4uivgbdj328jd389omss",
+  stars:2,
   objectID:"sjkdxm33103vub3i4vbu4f 34uif5474578455785478457845784578542dn992d201ks1",
   name:"Acai Shop",
   mapLogo:"./assets/images/acaiMap.png",
@@ -2766,6 +2771,7 @@ address:{
 },
 {
   ownerID:"xn1mi9fdm2ntuibt4ugn4tjign4tjibnt9jfcm20q1sj120392029",
+  stars:3,
   objectID:"210e91320irnvrgunov45uibt4nuivbnt4uibnt4ui3280ei129ei30i09ei1ddxcx",
   name:"Salad Go",
   mapLogo:"./assets/images/saladBarMap.png",
@@ -3903,6 +3909,7 @@ address:{
 },
 {
   ownerID:"39384rh4rfngu4igbi81w1cexjouqcchsk290d2edj8m",
+  stars:3,
   objectID:"y543u8dn3uirvbr3vgui3ng34ubg3gf329dxdn2i1ocd2ocmwco100eal",
   name:"China Bowl",
   mapLogo:"./assets/images/chinaMap.png",
@@ -4264,6 +4271,8 @@ address:{
 {
   ownerID:"39384rh48hdj8m000sss",
   objectID:"102293edk92kfdc4900ecm2020209",
+  stars:3,
+
   name:"Johnny Rocket",
   routes:routes,
   mapLogo:"./assets/images/johnnyMap.png",
@@ -4833,6 +4842,7 @@ address:{
 },
 {
   ownerID:"39384rh48nfrvurivgrn8gh54n9g579ghhdj8mfj230f08",
+    stars:3,
   objectID:"102293edntuivb4fvgn45gu4n39vfng54ug8b34bgk92kfdc4900ecmceroinveiu",
   name:"The Stand",
   mapLogo:"./assets/images/burgerMap2.png",
@@ -5758,6 +5768,7 @@ address:{
 ],
 
 images:["image2p.png","image3p.png","image4p.png"],
+  stars:3,
 address:{
   zip:85014,
   street:"5505 N 7th St",

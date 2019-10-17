@@ -8,14 +8,21 @@ var distance;
 class FoodBox extends React.Component {
 
   renderStar(){
-    var stars = [];
+    var stars;
+    var html = [];
+    if(!this.props.foodtruck.stars){
+      stars = 3;
+    }else{
+      stars = this.props.foodtruck.stars;
+    }
+
     var k =0;
 
-    for(var i = 0; i< Math.floor(Math.random() * 2)+3;i++){
+    for(var i = 0; i<stars;i++){
         k++;
-        stars.push(<img alt="star"key = {k} src={Star} className="starIcon"/>);
+        html.push(<img alt="star"key = {k} src={Star} className="starIcon"/>);
     }
-    return stars;
+    return html;
   }
 
 

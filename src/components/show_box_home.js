@@ -7,6 +7,19 @@ import "./../css/home_page.css";
 class ShowBox extends React.Component {
     // JSX for the menu showcase
     // Shows the background image, name, rating, and checkout button
+    renderStars(){
+      var html = [];
+      var stars;
+      if(!this.props.foodtruck.stars){
+        stars = 3;
+      }else{
+        stars = this.props.foodtruck.stars;
+      }
+      for(var i =0; i < stars; i++){
+        html.push(<img alt="star" className="starL" src="assets/images/star.png"/>)
+      }
+      return html;
+    }
   render(){
     // background of foodtruck
     var background = this.props.foodtruck.background;
@@ -26,11 +39,7 @@ class ShowBox extends React.Component {
                   <div className="col-4"/>
 
                   <div className="col-4">
-                    <img alt="star" className="starL" src="assets/images/star.png"/>
-                    <img alt="star" className="starL" src="assets/images/star.png"/>
-                    <img alt="star" className="starL" src="assets/images/star.png"/>
-                    <img alt="star" className="starL" src="assets/images/star.png"/>
-                    <img alt="star" className="starL" src="assets/images/star.png"/>
+                      {this.renderStars()}
                   </div>
 
                   <div className="col-4"/>
@@ -38,7 +47,16 @@ class ShowBox extends React.Component {
                 <p className="menuTitle mt5 type">All American</p>
 
                 <div className="buttonContainer">
-                  <button className="menuOP btn-secondary btn">View in Maps</button>
+                  <button className="menuOP btn-secondary btn"
+                    onClick = {()=>{
+                      var formattedAddress = this.props.truck.address.street + "," + this.props.truck.address.state + "," + this.props.truck.address.zip
+                      this.props.SetAddress(formattedAddress);
+                      this.props.changeURL("map");
+                      console.log(formattedAddress);
+
+                    }}
+
+                  >View in Maps</button>
 
                 </div>
 

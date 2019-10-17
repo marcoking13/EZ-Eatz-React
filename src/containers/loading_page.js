@@ -19,9 +19,6 @@ class LoadingPage extends React.Component{
 
   //--------------------------When Components Mount Functions---------------------------------
     // If user is logged in skip the mount and direct user
-  componentWillMount(){
-    this.CookieCheck();
-  }
     // If loading page mounted, start the countdown then direct user
   componentDidMount(){
       this.Countdown();
