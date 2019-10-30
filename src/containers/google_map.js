@@ -99,7 +99,7 @@ export  class MapContainer extends React.Component {
   renderMap(){
 
       return (
-            <Map google={this.props.google}  center={{lat:this.props.lat,lng:this.props.lng}}zoom={14}>
+            <Map google={this.props.google}  center={{lat:this.props.lat,lng:this.props.lng}} zoom={14}>
                 {this.markerLoop()}
                 {this.renderUserMarker()}
             </Map>
@@ -127,9 +127,11 @@ export  class MapContainer extends React.Component {
 
 }
 
+
+
 //----------------------------------Exports-----------------------------------
 export default GoogleApiWrapper(
   {
     apiKey: "AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM",
-    LoadingContainer: LoadingMap
+    LoadingContainer: <div />
   })(MapContainer)
