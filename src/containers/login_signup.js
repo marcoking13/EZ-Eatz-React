@@ -60,7 +60,7 @@ class SignupAndLoginPage extends React.Component {
               var address = response.data[i].address;
               cookie.remove("address",{path:"/"});
               cookie.save("address",address,{path:"/"});
-              this.props.changeURL("map");
+              this.props.changeURL("home");
             break;
           }
             // If there is no user

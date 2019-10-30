@@ -6,7 +6,8 @@ const collections = ["foodtrucks","users","currentUser"];
 const database = "eater_db";
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-
+const MongoClient = require("mongodb").MongoClient;
+var url = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/eater_db" ;
 var path = require("path");
 var http = require("http");
 const Cookies = require("cookies");
@@ -37,7 +38,7 @@ app.use(cookieParser());
 
 var server = http.createServer(app).listen(port,function(){
 
-  mongooseStartup(FoodtruckConfig,null);
+  mongooseStartup();
 
   console.log("App running on "+port);
 
@@ -101,16 +102,24 @@ var PostUsersToAPI= (req,res) =>{
   });
 }
 var PostFoodtrucksToAPI= (req,res) =>{
-  db.foodtrucks.find({},(err,data)=>{
-    res.json(data);
+  MongoClient.connect(url,(err,db)=>{
+    var dbO = db.db("heroku_9tlg8v4r");
+    dbO.collection("foodtrucks").find({}).toArray((err, result) => {
+      res.json(result);
+    });
   });
 }
 
 var PostCurrentUserToAPI = (req,res)=>{
-  db.currentUser.find({},(err,rep)=>{
-    res.json(rep[0]);
-  })
-}
+
+  MongoClient.connect(url,(err,db)=>{
+    var dbO = db.db("heroku_9tlg8v4r");
+    dbO.collection("currentUser").find({}).toArray((err, result) => {
+        res.json(result[0]);
+      });
+    });
+};
+
 
 var SignupUser = (req,res)=>{
 
@@ -149,7 +158,6 @@ var UpdateAddress = (req,res)=>{
 
   var userData = req.body.userData;
   var address = req.body.address;
-  console.log(address,userData);
 
   Users.updateOne({"account.username": userData.username}, {$set: { address: address}}, function (err, user) {
        if (err) throw error
@@ -163,7 +171,7 @@ var UpdateAddress = (req,res)=>{
 
 
 var VerifyUsername = (req,res)=>{
-  var i =0;
+  var i = 0;
   Users.find({}).exec((err,datas)=>{
     for(var k =0; k<datas.length;k++){
         i++;
@@ -176,7 +184,6 @@ var VerifyUsername = (req,res)=>{
             db.currentUser.find({},(er,re)=>{console.log(re)});
             break;
 
-
       }else if(i>=datas.length){
 
           console.log("Cannot Find User");
@@ -188,24 +195,29 @@ var VerifyUsername = (req,res)=>{
 
 }
 
-var  mongooseStartup = (trucks,users)=>{
+var  mongooseStartup = () => {
 
-    // verify to see if trucks are not already in the database
-      db.foodtrucks.find({},(err,data)=>{
-        console.log(data.length);
-        // if trucks are already inserted do not execute function and return log below
-        if(data.length > 0){
-           console.log("Trucks are already in the database");
+    MongoClient.connect(url,(err,db)=>{
+      if(err) throw err;
 
-        }
+      var dbO = db.db("heroku_9tlg8v4r");
+      dbO.createCollection("foodtrucks");
 
-        else{
-            db.foodtrucks.insert(FoodtruckConfig,(err,data)=>{
-              console.log("Foodtrucks Entered");
-            });
+      dbO.collection("foodtrucks").find({}).toArray(function(err, result) {
+          if (err) throw err;
 
-        }
+          if(result.length < 0){
+            dbO.collection("foodtrucks").insertMany(FoodtruckConfig,(err,data)=>{console.log(data)});
+          }else{
+            console.log("Trucks already in Db");
+          }
 
-});
+      });
+
+      dbO.createCollection("users");
+
+      dbO.createCollection("currentUser");
+
+    });
 
 }

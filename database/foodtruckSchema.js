@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-mongoose.connect("mongodb://127.0.0.1:27017/eater_db",()=>{
+var url = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/eater_db";
+mongoose.connect(url,()=>{
     console.log("foodtrucks colletion connected");
   });
 var TruckSchema = new Schema({
