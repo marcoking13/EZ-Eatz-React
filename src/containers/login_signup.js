@@ -46,11 +46,13 @@ class SignupAndLoginPage extends React.Component {
         // Save and parse account object
       var account = {username:this.state.username,password:this.state.password};
 
+
         // Create a server to use axios
 
         // Gets all the users in database
       axios.get("/api/users").then((response)=>{
           // Looping through each user
+
         for(var i =0; i<response.data.length;i++){
           //If the user info matches with the info submitted
             // Log user in

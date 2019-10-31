@@ -34,64 +34,40 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 
 const proxy = require("http-proxy-middleware");
-
-
-  app.use(proxy(["/api", , "/otherApi"], { target: "http://localhost:"+port }));
+app.use(proxy(["/api/currentUser","/api/foodtrucks","/api/users"], { target: "http://localhost:4001","secure": false,
+"changeOrigin": true }));
 
 var server = http.createServer(app).listen(port,function(){
 
   mongooseStartup();
-
-  console.log(Users);
-
   console.log("App running on "+port);
 
 });
 
-
-
 app.post("/api/signupUser",(req,res)=>{
-
   SignupUser(req,res);
-
 });
 
-
-
 app.get("/api/currentUser",(req,res)=>{
-
   PostFoodtrucksToAPI(req,res);
-
 });
 
 app.get("/api/trucks",(req,res)=>{
-
   PostFoodtrucksToAPI(req,res);
-
 });
 
 app.post("/api/login",(req,res)=>{
-
   delete req.body.__v
-
   VerifyUsername(req,res);
-
 });
 
-
 app.get("/api/users",(req,res)=>{
-
   PostUsersToAPI(req,res);
-
 });
 
 app.post("/api/updateUserAddress",(req,res)=>{
-
     UpdateAddress(req,res);
-
 });
-
-
 
 // End of Express
 
@@ -101,10 +77,16 @@ app.post("/api/updateUserAddress",(req,res)=>{
 
 
 var PostUsersToAPI= (req,res) =>{
-  Users.find({}).exec((err,data)=>{
-    res.json(data);
+  MongoClient.connect(url,(err,db)=>{
+    if(err) throw err;
+
+    var dbO = db.db("heroku_9tlg8v4r");
+    dbO.collection("users").find({}).toArray((err,result)=>{
+      res.json(result);
+    });
   });
 }
+
 var PostFoodtrucksToAPI= (req,res) =>{
   MongoClient.connect(url,(err,db)=>{
     var dbO = db.db("heroku_9tlg8v4r");
@@ -126,8 +108,12 @@ var PostCurrentUserToAPI = (req,res)=>{
 
 
 var SignupUser = (req,res)=>{
+  MongoClient.connect(url,(err,db)=>{
+    if(err) throw err;
 
-    Users.find({},(err,data)=>{
+    var dbO = db.db("heroku_9tlg8v4r");
+
+    dbO.collection("users").find({},(err,data)=>{
       var found = false;
       for(var i =0; i<data.length; i++){
         if(data[i].account.username === req.body.username){
@@ -137,7 +123,7 @@ var SignupUser = (req,res)=>{
         }
       }
       if(!found){
-        Users.create({
+        dbO.collection("users").insert({
           name:req.body.first + " " + req.body.last,
           address:"",
           profilePhoto:"",
@@ -148,15 +134,9 @@ var SignupUser = (req,res)=>{
           }
         });
       }
-
-      });
+    });
+  });
 }
-
-
-
-
-
-
 
 var UpdateAddress = (req,res)=>{
 
@@ -172,20 +152,24 @@ var UpdateAddress = (req,res)=>{
 
 }
 
-
-
 var VerifyUsername = (req,res)=>{
   var i = 0;
-  Users.find({}).exec((err,datas)=>{
+  console.log("verify");
+  MongoClient.connect(url,(err,db)=>{
+    if(err) throw err;
+
+    var dbO = db.db("heroku_9tlg8v4r");
+
+  dbO.collection("users").find({}).exec((err,datas)=>{
     for(var k =0; k<datas.length;k++){
         i++;
         console.log(i,datas.length);
         if(datas[k].account.username == req.body.username || datas[k].account.password == req.body.password){
             loginFlag = true;
 
-            db.currentUser.remove({},(err,rep)=>{console.log(rep)});
-            db.currentUser.insert(datas[k],(err,rep)=>{console.log(rep)});
-            db.currentUser.find({},(er,re)=>{console.log(re)});
+            dbO.collection("currentUser").remove({},(err,rep)=>{console.log(rep)});
+            dbO.collection("currentUser").insert(datas[k],(err,rep)=>{console.log(rep)});
+            dbO.collection("currentUser").find({},(er,re)=>{console.log(re)});
             break;
 
       }else if(i>=datas.length){
@@ -196,7 +180,7 @@ var VerifyUsername = (req,res)=>{
 
     };
   });
-
+});
 }
 
 var  mongooseStartup = () => {
