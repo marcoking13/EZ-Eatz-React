@@ -33,12 +33,16 @@ app.use(session({secret:"njerenve",saveUnintialized:true,resave:true,httpOnly:fa
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 
+const proxy = require("http-proxy-middleware");
 
 
+  app.use(proxy(["/api", , "/otherApi"], { target: "http://localhost:5000" }));
 
 var server = http.createServer(app).listen(port,function(){
 
   mongooseStartup();
+
+  console.log(Users);
 
   console.log("App running on "+port);
 
