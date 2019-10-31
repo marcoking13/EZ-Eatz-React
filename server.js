@@ -36,7 +36,7 @@ app.use(cookieParser());
 const proxy = require("http-proxy-middleware");
 
 
-  app.use(proxy(["/api", , "/otherApi"], { target: "http://localhost:5000" }));
+  app.use(proxy(["/api", , "/otherApi"], { target: "http://localhost:"+port }));
 
 var server = http.createServer(app).listen(port,function(){
 
