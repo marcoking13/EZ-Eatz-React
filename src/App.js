@@ -24,7 +24,7 @@ class App extends Component {
     var truck;
     var urlCookie = cookie.load("url",{path:"/"});
     if(!cookie.load("currentItem",{path:"/"})){
-      urlCookie = "menu";
+      urlCookie = "home";
     }
     var foodtruckID  = cookie.load("foodtruckCurrent",{path:"/"});
     cookie.remove("currentItem",{path:"/"});

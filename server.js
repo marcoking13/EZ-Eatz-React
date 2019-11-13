@@ -203,9 +203,7 @@ var  mongooseStartup = () => {
 
       });
 
-      dbO.createCollection("users");
-      dbO.createCollection("currentUser");
-
+    
     });
 
     app.get('/*', (req, res) => {
