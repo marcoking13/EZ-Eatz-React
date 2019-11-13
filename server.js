@@ -23,8 +23,8 @@ const geocoder = require("node-geocoder");
 
 const app = express();
 
-const port = 4001;
-var loginFlag = false;
+const port = process.env.PORT || 4001;
+var loginFlag = false;''
 
 app.set("port",process.env.PORT || port);
 
@@ -33,9 +33,9 @@ app.use(session({secret:"njerenve",saveUnintialized:true,resave:true,httpOnly:fa
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 
-const proxy = require("http-proxy-middleware");
-app.use(proxy(["/api/currentUser","/api/foodtrucks","/api/users"], { target: "http://localhost:4001","secure": false,
-"changeOrigin": true }));
+
+app.use(express.static('build'));
+
 
 var server = http.createServer(app).listen(port,function(){
 
@@ -113,7 +113,7 @@ var SignupUser = (req,res)=>{
 
     var dbO = db.db("heroku_9tlg8v4r");
 
-    dbO.collection("users").find({},(err,data)=>{
+    dbO.collection("users").find({}).toArray(err,data)=>{
       var found = false;
       for(var i =0; i<data.length; i++){
         if(data[i].account.username === req.body.username){
@@ -123,7 +123,7 @@ var SignupUser = (req,res)=>{
         }
       }
       if(!found){
-        dbO.collection("users").insert({
+        dbO.collection("users").insertOne({
           name:req.body.first + " " + req.body.last,
           address:"",
           profilePhoto:"",
@@ -168,7 +168,7 @@ var VerifyUsername = (req,res)=>{
             loginFlag = true;
 
             dbO.collection("currentUser").remove({},(err,rep)=>{console.log(rep)});
-            dbO.collection("currentUser").insert(datas[k],(err,rep)=>{console.log(rep)});
+            dbO.collection("currentUser").insertOne(datas[k],(err,rep)=>{console.log(rep)});
             dbO.collection("currentUser").find({},(er,re)=>{console.log(re)});
             break;
 
@@ -189,7 +189,7 @@ var  mongooseStartup = () => {
       if(err) throw err;
 
       var dbO = db.db("heroku_9tlg8v4r");
-      dbO.createCollection("foodtrucks");
+
 
       dbO.collection("foodtrucks").find({}).toArray(function(err, result) {
           if (err) throw err;
@@ -203,9 +203,13 @@ var  mongooseStartup = () => {
       });
 
       dbO.createCollection("users");
-
       dbO.createCollection("currentUser");
 
+    });
+
+    app.get('/*', (req, res) => {
+
+      res.sendFile(__dirname + '/build/index.html');
     });
 
 }
