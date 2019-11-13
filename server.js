@@ -26,7 +26,7 @@ const app = express();
 const port = process.env.PORT || 4001;
 var loginFlag = false;''
 
-app.set("port",process.env.PORT || port);
+
 
 app.use(bodyParser());
 app.use(session({secret:"njerenve",saveUnintialized:true,resave:true,httpOnly:false}));
@@ -37,9 +37,10 @@ app.use(cookieParser());
 app.use(express.static('build'));
 
 
-var server = http.createServer(app).listen(port,function(){
+app.listen(port,function(){
 
   mongooseStartup();
+  console.log(port,url);
   console.log("App running on "+port);
 
 });
