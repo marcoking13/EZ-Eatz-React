@@ -24,7 +24,7 @@ const geocoder = require("node-geocoder");
 const app = express();
 
 const port = process.env.PORT || 4001;
-var loginFlag = false;''
+var loginFlag = false;
 
 
 
@@ -168,9 +168,9 @@ var VerifyUsername = (req,res)=>{
         if(datas[k].account.username == req.body.username || datas[k].account.password == req.body.password){
             loginFlag = true;
 
-            dbO.collection("currentUser").remove({},(err,rep)=>{console.log(rep)});
-            dbO.collection("currentUser").insertOne(datas[k],(err,rep)=>{console.log(rep)});
-            dbO.collection("currentUser").find({},(er,re)=>{console.log(re)});
+            dbO.collection("currentUser").remove({});
+            dbO.collection("currentUser").insertOne(datas[k]);
+
             break;
 
       }else if(i>=datas.length){
