@@ -194,8 +194,8 @@ var  mongooseStartup = () => {
 
       dbO.collection("foodtrucks").find({}).toArray(function(err, result) {
           if (err) throw err;
-
-          if(result.length < 0){
+          console.log(result);
+          if(result.length <= 0){
             dbO.collection("foodtrucks").insertMany(FoodtruckConfig,(err,data)=>{console.log(data)});
           }else{
             console.log("Trucks already in Db");
@@ -203,7 +203,7 @@ var  mongooseStartup = () => {
 
       });
 
-    
+
     });
 
     app.get('/*', (req, res) => {
