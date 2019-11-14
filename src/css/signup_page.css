@@ -17,6 +17,19 @@
   font-weight: 500;
 
 }
+.halfControl{
+  width:50%;
+  margin-top:5%;
+  float:left;
+}
+.quarterControl{
+  width:25%;
+  margin-top:6%;
+  margin-top:5%;
+  float:left;
+}
+
+
 
 .appear{
   animation:.5s 1 ease-in appear;

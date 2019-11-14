@@ -1,14 +1,14 @@
 /* The side navigation menu */
 .sidenav {
-  height: 100%; /* 100% Full-height */
   width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
-  opacity:1;
-  background-color: black; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
+  position: fixed;
+  opacity: 1;
+  background: black;
+  z-index: 1;
+  height: 100%;
+  overflow-x: hidden;
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
@@ -16,22 +16,6 @@
   background:#f4f4f4;
   color:black !important;
 }
-.profileNM{
-  color:white;
-  text-align: center;
-  margin-top:5%;
-}
-.redA{
-  color:red !important;
-}
-.list{
-  margin-top:15%;
-}
-.profileA{
-  width:50%;
-  margin-left:25%;
-}
-
 /* The navigation menu links */
 .sidenav p {
   padding: 8px 8px 8px 32px;
@@ -41,12 +25,10 @@
   display: block;
   transition: 0.3s;
 }
-
 /* When you mouse over the navigation links, change their color */
 .sidenav p:hover {
   color: #f1f1f1;
 }
-
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
   position: absolute;
@@ -60,20 +42,14 @@
   color: #f6f6f6;
   text-align: center;
   padding:5px;
-
-
 }
-
 .searchM{
   width:100%;
-
   background:black;
   color:white;
-
   border-color:none;
 }
 .adM{
-
   width:90%;
   margin-left:5%;
   color:white;
@@ -82,7 +58,6 @@
   border-bottom:1px solid white;
   background:black;
   text-align: center;
-
 }
 .zipM{
   width:35%;
@@ -95,12 +70,9 @@
   left:5%;
 }
 .menuBarI{
-
   width: 25px;
   height: 4px;
-  background-color: black;
   margin: 6px 0;
-
 }
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {

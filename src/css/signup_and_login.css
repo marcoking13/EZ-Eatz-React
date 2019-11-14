@@ -6,7 +6,6 @@
 .container-fluid{
   animation:appear .5s ease-in 1;
 }
-
 @keyframes appear{
   0%{
     opacity:0
@@ -15,7 +14,6 @@
     opacity:1
   }
 }
-
 .loginSignupButton{
   float:right;
   border:2px solid white;
@@ -25,19 +23,14 @@
   background:none;
   margin-top:2.5%;
 }
-
 .loginSignupTitle{
   margin-top: 2%;
   color:red;
   float:left;
   margin-left: 5%;
 }
-
 .loginBox{
   margin-top:5%;
-}
-.container-fluid{
-  padding:0;
 }
 .blackNav2{
   width:110%;
@@ -59,40 +52,10 @@
   top:2.5%;
   float: right;
 }
-.bb{
-  background:url("./../images/b.jpg");
-  padding-bottom: 20%;
-}
 .mobileFTLogin:hover{
   border:2px groove red;
   color:white;
   background:none !important;
-}
-.accountMaker{
-  text-align: center;
-  font-size: 12px;
-}
-.otherLoginContainer{
-  width:100%;
-  margin-top: 15%;
-}
-.accountMaker:hover{
-  color:blue;
-}
-.googleLoginMobile{
-  float:left;
-  font-size: 14px;
-  background:white;
-  color:black;
-  border:transparent 2px solid;
-}
-.loginMobileS{
-  width: 50%;
-  background:transparent;
-  margin-top: 5%;
-  margin-left: 25%;
-  color: black;
-  border: 2px solid black;
 }
 .inputLoginSignupLogin{
   text-align: center;
@@ -107,14 +70,9 @@
 .redLineInput{
   border-right: 1px transparent solid;
   border-left: 1px transparent solid;
-  width:100%;
-  margin-top: 5%;
-  margin-bottom: 5%;
   padding-bottom:10px;
   border-bottom: 2px black solid;
   border-top: 1px white solid;
-  text-align: center;
-
 }
 .googleLogoButton{
   width:20px;

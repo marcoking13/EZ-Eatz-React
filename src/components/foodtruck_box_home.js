@@ -15,7 +15,6 @@ class FoodBox extends React.Component {
     }else{
       stars = this.props.foodtruck.stars;
     }
-
     var k =0;
 
     for(var i = 0; i<stars;i++){
@@ -25,12 +24,10 @@ class FoodBox extends React.Component {
           <img alt="star"key = {k} src={Star} className="w100"/>
         </div>
         );
-    }
+      }
+
     return html;
   }
-
-
-
 
   render(){
     // Renders the Foodtruck Box for the home page;
@@ -78,7 +75,7 @@ class FoodBox extends React.Component {
             }}>
               <div classaName="row">
                 <div className="col-2">
-                  <img src={this.props.foodtruck.logo} className="listLogoH"/>
+                  <img src={this.props.foodtruck.logo} className="fl listLogoH"/>
                 </div>
 
                 <div className="col-5 fl">

@@ -7,7 +7,7 @@ class Remover extends React.Component {
   // Same as addon_component
   renderRemovers(){
 
-    var color = "modBlue";
+    var color = "bw br10px fl ml5 mr5 BBd4 turnd4 w20px h20px";
     var key = 0;
     // Loop through all the ingredients
     // then set class based on if user clicked them or not
@@ -15,29 +15,29 @@ class Remover extends React.Component {
       key++;
       for(var i = 0; i<this.props.remove.length;i++){
         if(ing === this.props.remove[i]){
-          color = "modBlue blues";
+          color = "bw br10px fl ml5 mr5 BBd4 turnd4 w20px h20px bd44";
           break;
         }else{
-          color = "modBlue";
+          color = "bw br10px fl ml5 mr5 BBd4 turnd4 w20px h20px";
         }
     }
     // if there are ingredients then render the jsx
     if(ing.display){
       return(
-        <div key = {key} className="col-2 modCont">
+        <div key = {key} className="col-2 ml5 modCont">
 
-          <div className ="modBox" onClick = {()=>{
+          <div className ="mt5 modBox" onClick = {()=>{
             this.props.removeIngredient(ing);
           }}>
 
             <div className={color}>
-              <img alt="check"className="checkser" src="assets/images/check.png"/>
+              <img alt="check"className="ml15 posRel checkser" src="assets/images/check.png"/>
             </div>
 
-              <p className="modName modNamer">{"No "+ing.name}</p>
+              <p className="ml5 f15px modName modNamer">{"No "+ing.name}</p>
 
             </div>
-            </div>
+          </div>
           );
         }
   });
@@ -46,7 +46,7 @@ class Remover extends React.Component {
 
   // renderer for jsx
   render(){
-      return <div className="row rowMod">{this.renderRemovers()}</div>
+      return <div className="row pb2_5 pl7_5 BBbf4 pt2_5 rowMod pr5">{this.renderRemovers()}</div>
   }
 
 }

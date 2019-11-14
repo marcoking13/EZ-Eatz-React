@@ -7,7 +7,7 @@ class RemoveResult extends React.Component{
   renderRemoveMods(){
     return this.props.remove.map((mod)=>{
       return(
-        <li  key={mod.name} className="modListR">{"- No "+mod.name}</li>
+        <li  key={mod.name} className="none mt2_5">{"- No "+mod.name}</li>
       )
     });
   }

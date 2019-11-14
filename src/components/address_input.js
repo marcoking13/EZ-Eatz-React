@@ -25,7 +25,6 @@ class AddressInput extends React.Component{
 
         </div>
         );
-
         // if address box is active then show JSX of input and search button
       }else{
 
@@ -39,7 +38,7 @@ class AddressInput extends React.Component{
                 </div>
                 <div className="col-5">
                   <br />
-                  <button className="button ui  mt2_5 black w100 fl" onClick = {(event)=>{
+                  <button className="button ui mt2_5 black w100 fl" onClick = {(event)=>{
                     event.preventDefault();
                     cookies.remove("address",{path:"/"});
                     cookies.save("address",this.props.address,{path:"/"});

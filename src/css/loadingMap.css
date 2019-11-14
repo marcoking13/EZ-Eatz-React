@@ -1,22 +1,19 @@
 @media screen and (max-width:490px) {
-.loaderMap{
-  width:95%;
-  position: absolute;
-  top:25%;
-  left:0%;
+  .loaderMap{
+    width:95%;
+    position: absolute;
+    top:25%;
+    left:0%;
 
+  }
 }
-}
-.loaderMap{
-  background:white;width:100%;
-}
+
 @media screen and (min-width:1090px) {
   .loaderMap{
     width:50%;
     position: absolute;
     top:20%;
     left:25%;
-
   }
 
 }

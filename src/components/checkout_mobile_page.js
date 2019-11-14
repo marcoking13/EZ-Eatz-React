@@ -25,11 +25,11 @@ class MobileCheckout extends React.Component {
           var fixedPrice = this.props.orders[i].price.toFixed(2);
           html.push(
             <li className="list-group-item">
-              <img className="orderImage" src={this.props.orders[i].item.image}/>
-              <p className="orderName">{this.props.orders[i].name}</p>
-              <p className="orderName ppr">{"$ "+fixedPrice}</p>
+              <img className="fl orderImage" src={this.props.orders[i].item.image}/>
+              <p className="text-center italic fl ml5 orderName">{this.props.orders[i].name}</p>
+              <p className="text-center italic fl ml5 orderName ppr">{"$ "+fixedPrice}</p>
 
-              <ul className="orderList">
+              <ul className="mt2_5 fl mr25 orderList">
                 {this.addLoop(i)}
 
                 {this.removeLoop(i)}
@@ -49,31 +49,31 @@ class MobileCheckout extends React.Component {
       return(
         <div className="container-fluid checkoutPageMobile">
           <Navbar changeURL = {this.props.changeURL} orders= {this.props.orders}/>
-          <div className="pickupContainerMobile">
-              <h6 className="pickupTitleMobile"> Pickup Time </h6>
-              <input type="number" placeholder = "Hours" className="pickupTimeMobile"/>
-              <input type="number" placeholder = "Minutes" className="pickupTimeMobile"/>
+          <div className="ml35 mt5 pickupContainerMobile">
+              <h6 className="ml10 pickupTitleMobile"> Pickup Time </h6>
+              <input type="number" placeholder = "Hours" className="w25 fl mt5 text-center pickupTimeMobile"/>
+              <input type="number" placeholder = "Minutes" className="w25 fl mt5 text-center pickupTimeMobile"/>
           </div>
 
-          <div className="tipBoxMobile">
-              <h6 className="tipBoxMobileTitle"> Tip Amount </h6>
+          <div className="mt5 tipBoxMobile">
+              <h6 className="mt15 text-center tipBoxMobileTitle"> Tip Amount </h6>
               <TipBoxes changeTip = {this.props.changeTip} tip = {this.props.tip} />
           </div>
 
-          <div className="orderMobileContainer">
+          <div className="mt2_5 orderMobileContainer ">
 
             <ul className="list-group">
-                <h6 className="orderListTitle"> Your Order </h6>
+                <h6 className="mt5 text-center orderListTitle"> Your Order </h6>
                 {this.ordersLoop()}
             </ul>
 
 
           </div>
 
-          <div className="payContainerMobile">
-            <h6 className="payTotalTitle">Total</h6>
-            <p className="totalMobile">{"$"+this.props.totalTip.toFixed(2)}</p>
-            <button className="paypalButton"><img className="paypal" src="assets/images/paypal.png"/></button>
+          <div className="mt5 BBB payContainerMobile">
+            <h6 className="mt5 text-center payTotalTitle">Total</h6>
+            <p className="text-center totalMobile">{"$"+this.props.totalTip.toFixed(2)}</p>
+            <button className="w50 ml25 mt5 bw br10px paypalButton"><img className="w50 paypal" src="assets/images/paypal.png"/></button>
           </div>
 
         </div>

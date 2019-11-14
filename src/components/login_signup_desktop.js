@@ -77,15 +77,12 @@ class LoginSignupDesktop extends React.Component{
               <p className="text-center">Your EZ account</p>
 
               <div>
-
                 <div>
                   <input className="bottomLine ml5 mt10 bNone w90"  style={{borderBottomColor:this.props.className}}  onChange = {(event)=>{this.props.changeUsername(event)}} value = {this.props.username}/>
                   <input className="bottomLine ml5 mt10 bNone w90"  style={{borderBottomColor:this.props.className2}} type="password"onChange = {(event)=>{this.props.changePassword(event)}} value = {this.props.password}/>
                 </div>
-
                 <button className="w50 ml25 mt10 btn btn-info" onClick  = {(event)=>{this.props.handleSubmit(event)}}>Login</button>
                 <p className="mt1 bold f15px text-center hoverBlue" onClick = {(e)=>{this.props.changeURL("usersign")}}>Create account here</p>
-
               </div>
 
               <div className="mt15">

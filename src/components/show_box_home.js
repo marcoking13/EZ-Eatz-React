@@ -2,7 +2,7 @@ import React from "react";
 
 import "./../css/home_page.css";
 
-
+import Star from "./../images/star.png"
 
 class ShowBox extends React.Component {
     // JSX for the menu showcase
@@ -16,44 +16,49 @@ class ShowBox extends React.Component {
         stars = this.props.foodtruck.stars;
       }
       for(var i =0; i < stars; i++){
-        html.push(<img alt="star" className="starL" src="assets/images/star.png"/>)
+        html.push(
+          <div className="col-1 p0">
+            <img alt="star" className="w100" src={Star}/>
+          </div>
+        );
       }
       return html;
     }
   render(){
     // background of foodtruck
     var background = this.props.foodtruck.background;
+
     return(
-      <div className="showCaseBox">
+      <div className="container-fluid">
 
-        <img alt="banner" className="banner"src={background}/>
+        <img alt="banner" className="banner w100 cover"src={background}/>
 
-          <div className="row menuBoxB">
+          <div className="row posAb w100 menuBoxB">
             <div className="col-3"/>
 
-            <div className="col-6 jumbotron">
-                <img  alt = "logo"src={this.props.foodtruck.logo}className="logoMenu"/>
-                <h4 className="menuTitle">{this.props.foodtruck.name}</h4>
+            <div className="col-6 jumbotron bw pt5">
+                <img alt="logo" src={this.props.foodtruck.logo} className="w10 posAb logoMenu"/>
+                <h4 className="text-center">{this.props.foodtruck.name}</h4>
 
                 <div className="row">
                   <div className="col-4"/>
-
                   <div className="col-4">
+                    <div className="row">
+                      <div className="col-4"/>
                       {this.renderStars()}
+                    </div>
                   </div>
-
                   <div className="col-4"/>
                 </div>
-                <p className="menuTitle mt5 type">All American</p>
 
-                <div className="buttonContainer">
-                  <button className="menuOP btn-secondary btn"
+                <p className="text-center bw w50 cb ml25 br10px cg">All American</p>
+
+                <div className="buttonContainer ml25">
+                  <button className="menuOP bw fl cb ml10 mt2_5 fl br10px BWW ml10 w50 btn-secondary btn"
                     onClick = {()=>{
                       var formattedAddress = this.props.truck.address.street + "," + this.props.truck.address.state + "," + this.props.truck.address.zip
                       this.props.SetAddress(formattedAddress);
                       this.props.changeURL("map");
-                      console.log(formattedAddress);
-
                     }}
 
                   >View in Maps</button>

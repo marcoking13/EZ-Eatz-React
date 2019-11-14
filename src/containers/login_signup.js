@@ -65,7 +65,7 @@ class SignupAndLoginPage extends React.Component {
               this.props.changeURL("home");
             break;
           }
-            // If there is no user
+          
             // User will stay in same page and nothing will submit
           if(i >= response.data.length -1){
             console.log("cannot find user");

@@ -7,7 +7,7 @@ class AddResult extends React.Component{
   renderAddMods(){
     return this.props.add.map((mod)=>{
       return(
-        <li  key={mod.name} style={{listStyleType:"circle"}}className="modListR">{mod.name}</li>
+        <li  key={mod.name} className="modListR circle mt2_5">{mod.name}</li>
       )
     });
   }

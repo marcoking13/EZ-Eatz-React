@@ -207,33 +207,33 @@ class App extends Component {
   render() {
 
         if(this.state.url === "loading"){
-               return  <div className="App">    <LoadingPage  PostAddress = {this.PostAddress}  changeURL={this.changeURL} />   </div>
+               return <LoadingPage  PostAddress = {this.PostAddress}  changeURL={this.changeURL} />
          }
          if(this.state.url === "checkout"){
-                return  <div className="App">    <CheckoutPage orders = {this.state.orders} changeURL={this.changeURL} />   </div>
+                return <CheckoutPage orders = {this.state.orders} changeURL={this.changeURL} />
           }
          if(this.state.url === "map"){
-                return  <div className="App">    <GoogleMap  orders= {this.state.orders}  ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />   </div>
+                return <GoogleMap  orders= {this.state.orders}  ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />
           }
          if(this.state.url === "modify"){
-                return  <div className="App">    <ModifyPage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} addToOrder = {this.addToOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} item = {this.state.item}changeURL={this.changeURL} />   </div>
+                return <ModifyPage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} addToOrder = {this.addToOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} item = {this.state.item}changeURL={this.changeURL} /> 
           }
          if(this.state.url === "menu"){
-               return  <div className="App">    <MenuPage truck = {this.state.truck} orders= {this.state.orders}  SetTruck = {this.SetTruck} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} SetItem = {this.SetItem} changeURL={this.changeURL} />   </div>
+               return <MenuPage truck = {this.state.truck} orders= {this.state.orders}  SetTruck = {this.SetTruck} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} SetItem = {this.SetItem} changeURL={this.changeURL} />
           }
           if(this.state.url === "login"){
-               return  <div className="App">    <SignupAndLoginPage  PostAddress = {this.PostAddress} changeURL={this.changeURL} />   </div>
+               return <SignupAndLoginPage  PostAddress = {this.PostAddress} changeURL={this.changeURL} />
           }
           if(this.state.url === "home"){
-               return  <div className="App">    <HomePage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />   </div>
+               return  <HomePage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />
            }
           if(this.state.url === "usersign"){
-               return   <div className="App">    <SignupForm  PostAddress = {this.PostAddress} changeURL={this.changeURL} type="user" />  </div>
+               return <SignupForm  PostAddress = {this.PostAddress} changeURL={this.changeURL} type="user" />
             }
           if(this.state.url === "ownersign"){
-               return   <div className="App">    <SignupForm   PostAddress = {this.PostAddress} changeURL={this.changeURL} type="user" />  </div>
+               return <SignupForm   PostAddress = {this.PostAddress} changeURL={this.changeURL} type="user" />
             }else{
-               return  <div className="App">    <LoadingPage  PostAddress = {this.PostAddress}  changeURL={this.changeURL} />   </div>
+               return <LoadingPage  PostAddress = {this.PostAddress}  changeURL={this.changeURL} />
             }
       }
 

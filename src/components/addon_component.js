@@ -20,10 +20,10 @@ class Addon extends React.Component {
       // if true then box is blue else it is white
       if(flag){
         // blue
-        return "modBlue blues";
+        return "bw br10px fl ml5 mr5 BBd4 turnd4 w20px h20px bd44";
       }else{
         // white
-        return "modBlue";
+        return "bw br10px fl ml5 mr5 BBd4 turnd4 w20px h20px ";
       }
   }
 
@@ -34,16 +34,16 @@ class Addon extends React.Component {
         key ++;
         var color = this.decideColor(this.props.add,addOn);
         var fixedPrice = addOn.price.toFixed(2);
-      
+
           return(
 
-            <div key = {key} className="col-2 modCont">
+            <div key = {key} className="col-2 modCont ml5">
 
-              <div className ="modBox" onClick = {(e)=>{  this.props.addIngredient(addOn) }}>
+              <div className ="mt5 modBox" onClick = {(e)=>{  this.props.addIngredient(addOn) }}>
 
-                <div className={color}>  <img alt="mod" className="checkser" src="assets/images/check.png"/></div>
-                  <p className="modName modNamer">{addOn.name}</p>
-                  <p className="modName modPrice">{"$ "+fixedPrice}</p>
+                <div className={color}>  <img alt="mod" className="checkser ml15 posRel" src="assets/images/check.png"/></div>
+                  <p className=" ml5 f15px modNamer modName">{addOn.name}</p>
+                  <p className="  ml5 f15px modPrice mt5 modName">{"$ "+fixedPrice}</p>
                 </div>
 
               </div>
@@ -54,7 +54,7 @@ class Addon extends React.Component {
   render(){
 
     if(this.props.item.add){
-      return <div className="row rowMod">{this.renderAddOn()}</div>
+      return <div className="row pb2_5 pl7_5 BBbf4 pt2_5 rowMod pr5">{this.renderAddOn()}</div>
     }else{
       return null;
     }

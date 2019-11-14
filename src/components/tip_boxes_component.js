@@ -17,7 +17,7 @@ class TipBoxes extends React.Component {
               this.props.changeTip(e.target.attributes.num.value);
             }}
             num = {tipVal}
-            className="tipBox selectedTip">{tipVal+"%"}</div>);
+            className="bw br10px text-center mt5 ml5 w100 cw B4pxf4f4 tipBox selectedTip">{tipVal+"%"}</div>);
         }else{
           tipBoxes.push(
             <div
@@ -25,7 +25,7 @@ class TipBoxes extends React.Component {
             onClick = {(e)=>{
               this.props.changeTip(e.target.attributes.num.value);
             }}
-            className="tipBox">{tipVal+"%"}</div>
+            className="bw br10px text-center mt5 ml5 w100 cgg B4pxf4f4 tipBox">{tipVal+"%"}</div>
           );
         }
           tipVal += 10;

@@ -10,22 +10,17 @@ class LoadingPage extends React.Component{
   //---------------------Constructor-------------------------------
   constructor(props){
     super(props);
-
     this.state = {
       delay:3
     }
-
   }
-
   //--------------------------When Components Mount Functions---------------------------------
     // If user is logged in skip the mount and direct user
     // If loading page mounted, start the countdown then direct user
   componentDidMount(){
       this.Countdown();
   }
-
   //-----------------------Timer Functions---------------------------
-
   Countdown(){
 
     this.interval = setInterval(()=>{
@@ -64,7 +59,7 @@ class LoadingPage extends React.Component{
           <div className="col-4"></div>
 
           <div className="col-4">
-              <img alt="logo"src="./../logo.png" className="logo"  />
+              <img alt="logo" src="./../logo.png" className="logo"  />
           </div>
 
           <div className="col-4"></div>
@@ -74,7 +69,5 @@ class LoadingPage extends React.Component{
       )
     }
   }
-
-
 
 export default LoadingPage;

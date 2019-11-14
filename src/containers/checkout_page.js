@@ -28,8 +28,10 @@ class CheckoutPage extends React.Component {
   }
 
   changeTip(tip){
-
-    this.setState({tip:tip,totalTip:this.state.total + this.state.total * tip /100});
+    this.setState({
+      tip:tip,
+      totalTip:this.state.total + this.state.total * tip /100
+    });
   }
 
   componentWillMount(){
@@ -62,11 +64,29 @@ class CheckoutPage extends React.Component {
   render(){
     if(window.innerWidth >= 580){
       return(
-          <CheckoutDesktop  orders = {this.props.orders} truck = {this.state.truck} tip = {this.state.tip} changeTip = {this.changeTip} totalTip = {this.state.totalTip} total = {this.state.total} changeURL = {this.props.changeURL} />
-    )
+          <CheckoutDesktop
+             orders = {this.props.orders}
+             truck = {this.state.truck}
+             tip = {this.state.tip}
+             changeTip = {this.changeTip}
+             totalTip = {this.state.totalTip}
+             total = {this.state.total}
+             changeURL = {this.props.changeURL}
+           />
+        )
   }else {
 
-      return <CheckoutMobile orders = {this.props.orders} truck = {this.state.truck} tip = {this.state.tip} changeTip = {this.changeTip} totalTip = {this.state.totalTip} total = {this.state.total} changeURL = {this.props.changeURL} />
+      return (
+          <CheckoutMobile
+            orders = {this.props.orders}
+            truck = {this.state.truck}
+            tip = {this.state.tip}
+            changeTip = {this.changeTip}
+            totalTip = {this.state.totalTip}
+            total = {this.state.total}
+            changeURL = {this.props.changeURL}
+          />
+        );
     }
   }
 }

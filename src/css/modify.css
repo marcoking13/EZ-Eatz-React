@@ -1,142 +1,8 @@
-.itemCorner{
-  width:5%;
-  float:left;
-  margin-left: 5%;
-  margin-top: 5%;
-
-}
-body{
-  background:#f6f6f6;
-}
-.itemCornerBig{
-width:15%;
-margin-left:43%;
-border-radius:10px;
-margin-top:5%;
-
-}
-.ccc{
-  text-align: center;
-}
-
-.bb5{
-  border:5px solid #f4f4f4;
-}
-.itemCornerBig{
-  width:25%;
-  background:white;
-
-  margin-left:38%;
-}
-.bb6{
-  border-bottom:2px solid red;
-}
-.modBlue{
-  width:20px !important;
-  height:20px !important;
-}
-
-#root{
-  padding-bottom:20%;
-}
-
-.rTM{
-  margin-top: 2.5%;
-}
 .checkser{
-  width:70%;margin-left:15%;position:relative;bottom:5px;
+  width:70%;
+  bottom:5px;
 }
-.modName{
-  font-size: 15px;
-}
-.bbLL{
-  border-top:2px solid red;
-}
-.totalM{
-  text-align: center;
-  width:100%;
-  margin-top: 5% !important;
-}
-.modPrice{
-  margin-top: 5%;
-}
-.btn{
-  margin-top: 4%;
-
-}
-.adder{
-  float: left;
-  margin-left: 25%;
-  width:50%;
-
-}
-.bl{
-  border:2px solid red;
-  background:white;
-  color:black;
-}
-.bll{
-  border:2px solid green;
-  background:white;
-  color:black;
-}
-
-.blues{
-  background: #4d94ff !important;
-}
-.modList{
-  list-style-type: circle;
-  margin-top: 2%;
-}
-.modListR{
-  list-style-type: none;
-  margin-top: 2%;
-}
-
-.modBlue{
-  width:30px;
-  height:30px;
-  border-radius: 5px;
-  background:white;
-  border:2px solid #4d94ff;
-  float: left;
-  margin-left: 5%;
-  margin-right: 5%;
-}
-  .modBlue:hover{
-  background:#4d94ff !important;
-}
-.rowMod{
-  padding-right: 5%;
-  padding-left:7.5%;
-  border-bottom: 1px solid  #f4f4f4;
-  padding-bottom: 2.5%;
-  padding-top: 2.5%;
-  margin-top: 2.5%;
-}
-.modCont{
-  margin-left: 5%;
-
-}
-.modBox{
-  margin-top: 5%;
-}
-.modName{
-  margin-left: 5%;
-}
-.modTitle{
-  text-align: center;
-  font-family: monospace;
-  font-size: 18px;
-  margin-top: 4%;
-}
-
 @media screen and (max-width:580px){
-  .itemCorner{
-      width:10%;
-      margin-left: 10%;
-      margin-top: 10%;
-  }
   .modName{
     font-size: 12px;
     width:100px;
@@ -144,31 +10,25 @@ margin-top:5%;
     margin-top: 10%;
     position: relative;
     left:10px;
-
-
   }
-.startC{
-  width:80%;
-  margin-left: 9%;
-
-}
-.modPrice{
-  position: relative;
-  left:-6px;
-}
-.modNamer{
-  position: relative;
-  top:25px;
-  left:-25px;
-  margin-bottom: 35px;
-
-}
+  .startC{
+    width:80%;
+    margin-left: 9%;
+  }
+  .modPrice{
+    position: relative;
+    left:-6px;
+  }
+  .modNamer{
+    position: relative;
+    top:25px;
+    left:-25px;
+    margin-bottom: 35px;
+  }
   .modBox{
     margin-left: 5%;
   }
   .modCon{
     padding-right: 30px !important;
   }
-
-
 }

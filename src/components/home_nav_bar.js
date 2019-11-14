@@ -32,16 +32,13 @@ class NavBarHome extends React.Component {
   changeAddressInput(bool){
     this.setState({addressAvailable:bool})
   }
-
-
   //---------------------------------Rendering Icons---------------------------------//
   renderCheckoutIcon(){
 
     if(this.props.orders.length > 0){
-
-      return  <img alt="cart"src={Cart}  onClick = {()=>{this.props.changeURL("checkout")}}className="navIcon"/>
+      return  <img alt="cart"src={Cart}  onClick = {()=>{this.props.changeURL("checkout")}}className="w100 mt2_5"/>
     }else{
-          return  <img alt="cart"src={Cart} className="w100 mt2_5"/>
+      return  <img alt="cart"src={Cart} className="w100 o_5 mt2_5"/>
     }
 
   }
@@ -152,16 +149,17 @@ class NavBarHome extends React.Component {
                       />
                   </div>
 
-                    <div className="col-2">
-                        <br />
-                        {this.renderMapIcon()}
-                    </div>
+
 
                     <div className="col-2">
                         <br />
                         {this.renderCheckoutIcon()}
                     </div>
 
+                    <div className="col-2">
+                        <br />
+                        {this.renderMapIcon()}
+                    </div>
 
                     <div className="col-3">
                       <br />
@@ -180,25 +178,6 @@ class NavBarHome extends React.Component {
               </div>
       );
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   //JSX//

@@ -1,6 +1,8 @@
 import React from "react";
+
 import MobileBox from "./mobile_menu_box_component.js";
 import DesktopBox from "./desktop_menu_box_component.js";
+
 class MenuBoxes extends React.Component {
 
   renderMenuBoxes(){
@@ -27,7 +29,7 @@ class MenuBoxes extends React.Component {
         if(window.innerWidth <=800){
           return(
           <div>
-            <h5 className="menuTitleC">{menu.catagory}</h5>
+            <h5 className="menuTitleC ml5 mb2_5 mt2_5">{menu.catagory}</h5>
             <ul className="list-group">
               {html}
             </ul>
@@ -39,7 +41,7 @@ class MenuBoxes extends React.Component {
         else{
           return(
           <div>
-            <h5 className="menuTitleC">{menu.catagory}</h5>
+            <h5 className="menuTitleC  ml5 mb2_5 mt2_5">{menu.catagory}</h5>
             <div className="row">
               {html}
             </div>
@@ -48,10 +50,7 @@ class MenuBoxes extends React.Component {
         }
         })
 
-      }else{
-      
       }
-
     }
     // Renderer
   render(){

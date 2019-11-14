@@ -1,8 +1,5 @@
 import React from "react";
 
-import "./../../css/footnote.css";
-
-
 export default class Footnote extends React.Component {
 
   render(){

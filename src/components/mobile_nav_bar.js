@@ -1,20 +1,22 @@
 import React from "react";
-import "./../css/mobileNav.css";
 import cookies from "react-cookies";
+
+import "./../css/mobileNav.css";
+
 import Stock from "./../images/profileIcon.png";
+
 class MobileNavBar extends React.Component{
-  
+
  openNav() {
      document.getElementById("mySidenav").style.width = "175px";
+
   }
 /* Set the width of the side navigation to 0 */
  closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenav").style.width = "0px";
+
   }
-  // Navbar JSX
-  // Icons will redirect user to the pages
-  // When not clicked will show as 3 bars
-  // When clicked expand by 500 pixels and menu will show
+
   render(){
 
     return(
@@ -23,24 +25,26 @@ class MobileNavBar extends React.Component{
           <div className="closebtn" onClick={()=>{this.closeNav()}}>&times;</div>
 
           <div className="profileBox">
-            <img alt="profile" className="profileA" src={Stock} />
-            <h6 className="profileNM">Welcome Back <br /></h6>
+            <img alt="profile" className="ml25 w50 profileA" src={Stock} />
+            <h6 className="mt5 text-center cw profileNM">Welcome Back <br /></h6>
           </div>
 
-          <div className="list">
+          <div className="mt15 list">
             <p
-            onClick={()=>{
-              this.props.changeURL("home");
-            }}>Home</p>
-            <p href="#">Profile</p>
+              className="turnG"
+              onClick={()=>{
+                this.props.changeURL("home");
+              }}>Home</p>
+            <p   className="turnG" href="#">Profile</p>
             <p
+              className="turnG"
               onClick={()=>{
                 this.props.changeURL("map");
               }}
               >Locator</p>
-            <p href="#">Checkout</p>
+            <p className="turnG" href="#">Checkout</p>
 
-            <p className="redA"
+            <p className="turnG cr"
              onClick={()=>{
                 cookies.remove("account",{path:"/"});
                 cookies.remove("address",{path:"/"});
@@ -52,9 +56,9 @@ class MobileNavBar extends React.Component{
 
       <span className="menuIC"onClick={()=>{this.openNav()}}>
 
-        <div className="menuBarI"></div>
-        <div className="menuBarI"></div>
-        <div className="menuBarI"></div>
+        <div className="bb menuBarI"></div>
+        <div className="bb menuBarI"></div>
+        <div className="bb menuBarI"></div>
 
       </span>
         <div id="main"></div>

@@ -9,10 +9,6 @@ import "./../css/home_page.css";
 import HomePageNav from "./../components/home_nav_bar.js";
 import FoodBox from "./../components/foodtruck_box_home.js";
 
-
-
-
-
 ///-------------------------Component----------------------//
 class HomePage extends React.Component {
   //---------------------------Constructor------------------------------
@@ -118,7 +114,7 @@ class HomePage extends React.Component {
               />
 
               <h4 className="ml5 mb1 text-center posRel resultTitle">Food Trucks</h4>
-              <div className="divder2"/>
+              <div className="divder2 mt2_5"/>
 
               <div className="pb5 row">
                 {this.foodTruckLoop()}

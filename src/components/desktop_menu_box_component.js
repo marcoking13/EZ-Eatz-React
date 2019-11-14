@@ -9,14 +9,17 @@ class DesktopBox extends React.Component {
     // Whe clicked SetItem will set that item to the state and save it cookie
     return(
 
-      <div className="boxItem" key ={this.props._id} onClick = {()=>{this.props.SetItem(this.props.menu.food[this.props.i])}}>
+      <div className="fl turnF4 bw br10px ml5 BB2 mt2_5 w25" key ={this.props._id} onClick = {()=>{this.props.SetItem(this.props.menu.food[this.props.i])}}>
+        <div className="row">
+          <div className="textBoxMenu col-5 fl">
+            <p className="detailMenu w100 ml10 fl ml5 mt5">{this.props.menu.food[this.props.i].item}</p>
+            <p className="detailMenu w100 ml10 fl ml5 mt5">{"$ "+fixedPrice}</p>
+          </div>
 
-        <div className="textBoxMenu">
-          <p className="detailMenu">{this.props.menu.food[this.props.i].item}</p>
-          <p className="detailMenu">{"$ "+fixedPrice}</p>
+          <div className="col-5">
+            <img alt="foodImage" className="menuItemImage mt2_5 w100 fr"src={this.props.menu.food[this.props.i].image}/>
+          </div>
         </div>
-
-        <img alt="foodImage" className="menuItemImage"src={this.props.menu.food[this.props.i].image}/>
       </div>
 
     );
