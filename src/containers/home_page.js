@@ -27,31 +27,18 @@ class HomePage extends React.Component {
       changedAddress:false,
       lat: 59.95,
       lng: 30.33,
-
-
     }
-
     //----------------------------Binders----------------------------//
     // this.postAddress = this.postAddress.bind(this);
-
     this.changeAddressFlag = this.changeAddressFlag.bind(this);
     this.changeFlag = this.changeFlag.bind(this);
-
-
-
-
     //----------------------Axios Inialization For Foodtrucks-----------------------------
       // Find the foodtrucks then sets them to the state
     axios.get("/api/trucks").then((response)=>{
       var  foodtrucks = response.data;
-
       this.setState({foodtrucks:foodtrucks});
     });
-
   }
-
-
-
 //------------------------------State Changer-------------------------------//
 
   // Used to Toggle Map and Search
@@ -88,15 +75,22 @@ class HomePage extends React.Component {
           },(data,status)=>{
 
               if(data.rows[0].elements[0].distance){
-
-
-
+                console.log("Found");
               }else{
                 console.log("Not Found");
               }
             });
 
-          return    <FoodBox  address = {this.props.address} key = {key} id = {key} ClearOrder = {this.props.ClearOrder} foodtruck = {foodtruck} changeURL = {this.props.changeURL} />
+          return (
+            <FoodBox
+              address = {this.props.address}
+              key = {key}
+              id = {key}
+              ClearOrder = {this.props.ClearOrder}
+              foodtruck = {foodtruck}
+              changeURL = {this.props.changeURL}
+            />
+          );
 
     });
 
@@ -109,21 +103,27 @@ class HomePage extends React.Component {
 
     if(window.innerWidth > 500){
         return (
-          <div>
+          <div className="container-fluid pb5">
 
             <HomePageNav
               PostAddress = {this.props.PostAddress}
-                  orders = {this.props.orders}
+              orders = {this.props.orders}
               changeZip = {this.props.zip}
-              changeAddress = {this.props.changeAddress} SetAddress = {this.props.SetAddress} address = {this.props.address}changeFlag = {this.changeFlag}  changeURL = {this.props.changeURL}
+              changeAddress = {this.props.changeAddress}
+              SetAddress = {this.props.SetAddress}
+              address = {this.props.address}
+              changeFlag = {this.changeFlag}
+              changeURL = {this.props.changeURL}
               navStyle ="white"
               />
 
+              <h4 className="ml5 mb1 text-center posRel resultTitle">Food Trucks</h4>
               <div className="divder2"/>
-              <div className="pb5">
-              <h4 className="resultTitle">Food Trucks</h4>
+
+              <div className="pb5 row">
                 {this.foodTruckLoop()}
               </div>
+
               <br />
               <br />
             </div>
@@ -135,24 +135,29 @@ class HomePage extends React.Component {
       <div>
 
         <HomePageNav
-          PostAddress = {this.props.PostAddress}
-          changeZip = {this.props.zip}
-          changeAddress = {this.props.changeAddress} SetAddress = {this.props.SetAddress} address = {this.props.address}changeFlag = {this.changeFlag}  changeURL = {this.props.changeURL}
-          navStyle ="white"
+            PostAddress = {this.props.PostAddress}
+            changeZip = {this.props.zip}
+            changeAddress = {this.props.changeAddress}
+            SetAddress = {this.props.SetAddress}
+            address = {this.props.address}
+            changeFlag = {this.changeFlag}
+            changeURL = {this.props.changeURL}
+            navStyle ="white"
           />
           <div className="divder2"/>
           <br/>
           <ul className="list-group ">
-          <h4 className="resultTitle">Food Trucks</h4>
+          <h4 className="ml5 resultTitle text-center posRel mb1">Food Trucks</h4>
           <br/>
             {this.foodTruckLoop()}
           </ul>
           <br />
           <br />
+
         </div>
-);
+      );
+    }
   }
-}
 }
 
 export default GoogleApiWrapper(

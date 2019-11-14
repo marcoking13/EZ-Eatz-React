@@ -1,0 +1,202 @@
+.mt5{
+  margin-top:5% !important;
+}
+
+.mb20px{
+    margin-bottom: 20px;
+}
+
+.mb15{
+  margin-bottom: 15%;
+}
+.w100{
+  width:100%;
+}
+.w30{
+  width:30%;
+}
+.w10{
+  width:10%;
+}
+.cr{
+  color:red;
+}
+.ml5{
+  margin-left: 5%;
+}
+.mt2{
+  margin-top: 2%;
+}
+.f40px{
+  font-size: 40px;
+}
+.normal-font{
+  font-weight: normal;
+}
+
+.bf9{
+  background:#f9f9f9;
+}
+.br10px{
+    border-radius: 10px;
+}
+.p1{
+  padding:1%;
+}
+.Bf220px{
+  border:20px #f2f2f2 solid;
+}
+
+
+
+.p1{
+  padding:1%
+}
+
+.br20px{
+  border-radius: 20px;
+}
+
+.BBf220{
+  border:20px #f2f2f2 solid;
+}
+
+.bf9{
+    background:#f9f9f9;
+}
+
+.nunito{
+  font-family: "Nunito";
+}
+.ml25{
+  margin-left: 25%;
+}
+.bw{
+  background:white;
+}
+
+.w90{
+  width:90%;
+}
+.footer{
+  position: absolute;
+  width:100%;
+  left:0;
+  right:0;
+  bottom:-30%;
+  height:200px;
+  background:black;
+}
+.h100px{
+  height:100px;
+}
+
+.b26{
+  background:#262626 !important;
+}
+.mt15{
+  margin-top: 15%;
+}
+
+body{
+  overflow-x: hidden;
+}
+.f15px{
+  font-size: 15px;
+}
+.bNone{
+  background: none;
+}
+.hoverBlue:hover{
+  color:blue;
+}
+.ml5{
+  margin-left: 5%;
+}
+.mt10{
+  margin-top: 10%;
+}
+
+.pb10px{
+  padding-bottom: 10px;
+}
+.BBBff4{
+    border-bottom:4px solid #ff4444;
+}
+.b26{
+  background:#262626;
+}
+.ml2_5{
+  margin-left: 2.5%;
+}
+.posAb{
+  position: absolute;
+}
+.posRight{
+  right:1%;
+  top:5%;
+}
+.fr{
+  float:right;
+}
+.w25{
+  width:25%;
+}
+.mt7_5{
+  margin-top:7.5%;
+}
+.p5px{
+  padding:5px;
+}
+.text-center{
+  text-align: center;
+}
+.BBf4{
+    border: 2px solid #f4f4f4;
+}
+.mt2_5{
+  margin-top:2.5%;
+}
+.pb5{
+  padding-bottom:5%;
+}
+.h100px{
+  height:200px;
+}
+.mt5{
+  margin-top:5%;
+}
+.bold{
+  font-weight:bold;
+}
+.w50{
+  width:50%;
+}
+.br10px{
+  border-radius:10px !important;
+}
+.ml2_5{
+  margin-left:2.5%;
+}
+.p0{
+  padding:0 !important;
+}
+.text-left{
+  text-align: left;
+}
+.text-center{
+  text-align: center;
+}
+.posRel{
+  position: relative;
+}
+
+.mt1{
+  margin-top:1%;
+}
+.ml1{
+    margin-left:1%;
+}
+.pr100{
+  padding-right:100px;
+}

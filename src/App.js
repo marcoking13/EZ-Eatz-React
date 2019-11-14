@@ -4,6 +4,7 @@ import cookie from "react-cookies";
 import Geocode from "react-geocode";
 
 import './css/Fonts.css';
+import "./css/utility.css";
 
 import SignupAndLoginPage from "./containers/login_signup";
 import LoadingPage from "./containers/loading_page";

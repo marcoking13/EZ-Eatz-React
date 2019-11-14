@@ -18,7 +18,7 @@ class AddressInput extends React.Component{
       return (
         <div style={this.props.classer}>
 
-          <div className="unAciveInput" style= {this.props.width} onClick = {()=>{
+          <div className="p5px text-center mt7_5 BBf4" style= {this.props.width} onClick = {()=>{
             this.props.changeAddressInput(true);
             }}>{address}
           </div>
@@ -30,27 +30,28 @@ class AddressInput extends React.Component{
       }else{
 
         return(
-          <div style={this.props.classer2}>
+          <div style={this.props.classer2} className="container-fluid">
             <form>
-              <input type="text" onChange={(e)=>{this.props.changeAddress(e)}}  className="form-control halfControl " value = {this.props.address}placeholder="Enter street, state and city" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-
-              <button className={"btn enterAddress btn-primary "} onClick = {(event)=>{
-
-                event.preventDefault();
-
-                cookies.remove("address",{path:"/"});
-                cookies.save("address",this.props.address,{path:"/"});
-
-                this.props.changeAddressInput(false);
-
-                this.props.PostAddress(this.props.address,JSON.parse(cookies.load("account",{path:"/"})));
-
-                this.props.SetAddress(this.props.address);
-              }}
-              >Search</button>
-
+              <div className="row">
+                <div className="col-5">
+                  <br />
+                  <input type="text" onChange={(e)=>{this.props.changeAddress(e)}}  className="form-control mt2_5 " value = {this.props.address}placeholder="Enter street, state and city" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                </div>
+                <div className="col-5">
+                  <br />
+                  <button className="button ui  mt2_5 black w100 fl" onClick = {(event)=>{
+                    event.preventDefault();
+                    cookies.remove("address",{path:"/"});
+                    cookies.save("address",this.props.address,{path:"/"});
+                    this.props.changeAddressInput(false);
+                    this.props.PostAddress(this.props.address,JSON.parse(cookies.load("account",{path:"/"})));
+                    this.props.SetAddress(this.props.address);
+                  }}
+                  >Search</button>
+                </div>
+              </div>
             </form>
-            </div>
+          </div>
       );
 
     }

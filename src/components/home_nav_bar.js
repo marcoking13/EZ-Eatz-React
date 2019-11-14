@@ -8,6 +8,7 @@ import "./../css/home_page.css";
 
 
 import ProfilePicture from "./../images/profileIcon.png";
+import Search from "./../images/userChoice.png";
 import GoogleMap from "./../images/googleMap.png";
 import Cart from "./../images/cart.png";
 import Logo from "./../images/logo.png";
@@ -24,28 +25,27 @@ class NavBarHome extends React.Component {
       zip:""
 
     }
-
-
     this.changeAddressInput = this.changeAddressInput.bind(this);
-
   }
-  //State Changers//
-//---------------------------------------------------------------------
+
+//---------------------------------  //State Changers//------------------------------------
   changeAddressInput(bool){
     this.setState({addressAvailable:bool})
   }
 
-  //JSX functions//
-  //--------------------------------------------------------------------------
+
+  //---------------------------------Rendering Icons---------------------------------//
   renderCheckoutIcon(){
-    console.log(this.props.orders,this.props.orders);
+
     if(this.props.orders.length > 0){
 
       return  <img alt="cart"src={Cart}  onClick = {()=>{this.props.changeURL("checkout")}}className="navIcon"/>
     }else{
-          return  <img alt="cart"src={Cart} className="navIcon transparent-1-2"/>
+          return  <img alt="cart"src={Cart} className="w100 mt2_5"/>
     }
+
   }
+
   renderMapIcon(){
     if(this.props.changeFlag){
         // Renders Map icon if user is not on map page
@@ -54,14 +54,13 @@ class NavBarHome extends React.Component {
           return(
             <img alt="google"src={GoogleMap} onClick = {()=>{
               this.props.changeURL("map");
-            }} className="navIcon"/>
+            }} className="w100 mt2_5"/>
           );
         }else{
-          console.log("LOP");
           return(
             <img alt="google"src={GoogleMap} onClick = {()=>{
               this.props.changeURL("map");
-            }} className="navIconMob"/>
+            }} className="w10 posAb posRight fr"/>
           );
         }
       }else{
@@ -69,74 +68,78 @@ class NavBarHome extends React.Component {
       }
   }
 
-  //JSX//
-//---------------------------------------------------------------------------
-  render(){
-    var innerWidth = window.innerWidth;
-    if(innerWidth <= 600){
-      return (
-          <div className={"container-fluid navbarEZ " + this.props.navStyle}>
+//--------------------------------Render JSX function------------------------------------
 
-            <div className="row" style={{paddingBottom:"10px"}}>
+  renderMobileJSX(){
+    return(
+      <div className="row" style={{paddingBottom:"10px"}}>
 
-              <MobileNav  changeURL = {this.props.changeURL} />
-                {this.renderMapIcon()}
+        <MobileNav  changeURL = {this.props.changeURL} />
+          {this.renderMapIcon()}
 
-              <AddressInput
-                  zip = {this.state.zip}
-                  addressAvailable = {this.state.addressAvailable}
-                  address = {this.props.address}
-                  changeAddressInput = {this.changeAddressInput}
-                  changeZip = {this.props.changeZip}
-                  changeAddress = {this.props.changeAddress}
-                  SetAddress = {this.props.SetAddress}
-                  width = {{width:"200px"}}
-                  classer={{position:"absolute",top:"-2.5%",left:"35%"}}
-                  classer2={{position:"absolute",top:"1%",left:"30%"}}
-                  PostAddress = {this.props.PostAddress}
-                  formatted_address = {this.state.formatted_address}
-                  />
+        <AddressInput
+            zip = {this.state.zip}
+            addressAvailable = {this.state.addressAvailable}
+            address = {this.props.address}
+            changeAddressInput = {this.changeAddressInput}
+            changeZip = {this.props.changeZip}
+            changeAddress = {this.props.changeAddress}
+            SetAddress = {this.props.SetAddress}
+            width = {{width:"200px"}}
+            classer={{position:"absolute",top:"-2.5%",left:"35%"}}
+            classer2={{position:"absolute",top:"1%",left:"30%"}}
+            PostAddress = {this.props.PostAddress}
+            formatted_address = {this.state.formatted_address}
+            />
 
-                  </div>
+        </div>
 
-                  <br />
+
+    )
+  }
+
+
+
+  renderDesktopJSX(){
+      return(
+        <div className="row">
+
+          <div className='col-4'>
+            <div className="row">
+              <div className="col-2"/>
+              <div className="col-4">
+                <img alt="logoNav"className="w100" src={Logo}/>
+              </div>
+            </div>
           </div>
 
-        );
-    }else{
+        <div className='col-4'>
+          <AddressInput
+              zip = {this.state.zip}
+              addressAvailable = {this.state.addressAvailable}
+              address = {this.props.address}
+              changeAddressInput = {this.changeAddressInput}
+              changeZip = {this.props.changeZip}
+              changeAddress = {this.props.changeAddress}
+              SetAddress = {this.props.SetAddress}
+              width = {null}
+              classer={{opacity:1}}
+              PostAddress = {this.props.PostAddress}
+              formatted_address = {this.state.formatted_address}
+              />
+        </div>
 
-      return(
-        <div className={"container-fluid navbarEZ " + this.props.navStyle}>
+        <div className='col-4'>
           <div className="row">
 
-            <div className='col-4'>
-              <img alt="logoNav"className="logoNavBar" src={Logo}/>
-
+            <div className="col-2">
+              <br />
+              <img  alt="profile"src={ProfilePicture}  className="w100 mt2_5"/>
             </div>
 
-          <div className='col-4'>
-            <AddressInput
-                zip = {this.state.zip}
-
-                addressAvailable = {this.state.addressAvailable}
-                address = {this.props.address}
-                changeAddressInput = {this.changeAddressInput}
-                changeZip = {this.props.changeZip}
-                changeAddress = {this.props.changeAddress}
-                SetAddress = {this.props.SetAddress}
-                width = {null}
-                classer={{opacity:1}}
-                PostAddress = {this.props.PostAddress}
-                formatted_address = {this.state.formatted_address}
-                />
-          </div>
-
-          <div className='col-4'>
-            <div className="iconGroup">
-              <img  alt="profile"src={ProfilePicture}  className="navIcon"/>
-
-              <img alt="search" src="assets/images/search.png"
-
+            <div className="col-2">
+              <br />
+              <img alt="search"  src={Search}
                 onClick = {()=>{
 
                   if(this.props.changeFlag){
@@ -145,24 +148,76 @@ class NavBarHome extends React.Component {
                     }else{
                       this.props.changeURL("home")
                     }}}
-                      className="navIcon"/>
+                      className="w100 mt2_5"
+                      />
+                  </div>
 
-                      {this.renderMapIcon()}
-                      {this.renderCheckoutIcon()}
+                    <div className="col-2">
+                        <br />
+                        {this.renderMapIcon()}
                     </div>
 
-                      <button className="btn logoutNav btn-danger"
+                    <div className="col-2">
+                        <br />
+                        {this.renderCheckoutIcon()}
+                    </div>
+
+
+                    <div className="col-3">
+                      <br />
+                      <button className="btn mt2_5 w100 btn-danger"
                         onClick = {()=>{
                           cookies.remove("account",{path:"/"});
                           cookies.remove("address",{path:"/"});
                           this.props.changeURL("login");
                         }}
                         >Logout</button>
+                    </div>
 
+                  </div>
+
+                </div>
+              </div>
+      );
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //JSX//
+//---------------------------------------------------------------------------
+  render(){
+    var innerWidth = window.innerWidth;
+    if(innerWidth <= 600){
+      return (
+          <div className={"container-fluid navbarEZ " + this.props.navStyle}>
+            {this.renderMobileJSX()}
           </div>
 
+        );
+    }else{
+
+      return(
+        <div className={"container-fluid navbarEZ " + this.props.navStyle}>
+          {this.renderDesktopJSX()}
         </div>
-      </div>
       );
     }
   }

@@ -20,46 +20,52 @@ class FoodBox extends React.Component {
 
     for(var i = 0; i<stars;i++){
         k++;
-        html.push(<img alt="star"key = {k} src={Star} className="starIcon"/>);
+        html.push(
+        <div className="col-1 p0">
+          <img alt="star"key = {k} src={Star} className="w100"/>
+        </div>
+        );
     }
     return html;
   }
 
 
+
+
   render(){
     // Renders the Foodtruck Box for the home page;
     if(window.innerWidth >= 600){
-      return(
-        <div className="foodTruckContainer" key ={this.props.id} onClick = {(e)=>{
-          var foodtruckID = this.props.foodtruck.objectID;
+         return (
+           <div className="col-3  pb5 ml5" key ={this.props.id} onClick = {(e)=>{
+             var foodtruckID = this.props.foodtruck.objectID;
 
-          cookie.remove("foodtruckCurrent",{path:"/"});
-          cookie.remove("orders",{path:"/"});
-          cookie.save("foodtruckCurrent",foodtruckID,{path:"/"});
+             cookie.remove("foodtruckCurrent",{path:"/"});
+             cookie.remove("orders",{path:"/"});
+             cookie.save("foodtruckCurrent",foodtruckID,{path:"/"});
 
-          this.props.ClearOrder();
-          this.props.changeURL("menu");
+             this.props.ClearOrder();
+             this.props.changeURL("menu");
 
-        }}>
+           }}>
 
-          <img alt="showcase" className="foodTruckShowcase"  src={this.props.foodtruck.background}/>
-
-          <div className="paraGroup">
-            <p className="details foodtruckName"><strong>{this.props.foodtruck.name}</strong></p>
-            <p className="details">{this.props.foodtruck.address.street + "," + this.props.foodtruck.address.state+","+this.props.foodtruck.address.zip}</p>
-            <p className=" details miles">{this.props.distance}</p>
-
-            <div className="starGroup">
-              {this.renderStar()}
-              </div>
-
-              </div>
-
-            </div>
-          );
+             <img alt="showcase" className="w100 br10px h100px"  src={this.props.foodtruck.background}/>
+             <div className="row">
+               <div className="col-12 pb5 fl">
+                 <p className="bold text-left "><strong>{this.props.foodtruck.name}</strong></p>
+                 <p className="text-left ml1">{this.props.foodtruck.address.street + "," + this.props.foodtruck.address.state+","+this.props.foodtruck.address.zip}</p>
+                 <p className=" text-left  ml1 text-left">{this.props.distance}</p>
+               </div>
+               <div className="col-12 ">
+                 <div className="row">
+                   {this.renderStar()}
+                 </div>
+             </div>
+           </div>
+         </div>
+         )
         }else{
           return(
-            <li className="list-group-item pb60" key ={this.props.id} onClick = {(e)=>{
+            <li className="list-group-item container-fluid" key ={this.props.id} onClick = {(e)=>{
               var foodtruckID = this.props.foodtruck.objectID;
 
               cookie.remove("foodtruckCurrent",{path:"/"});
@@ -70,20 +76,34 @@ class FoodBox extends React.Component {
               this.props.changeURL("menu");
 
             }}>
-              <img src={this.props.foodtruck.logo} className="listLogoH"/>
-                <p className="detailB">{this.props.foodtruck.address.street + "," + this.props.foodtruck.address.state+","+this.props.foodtruck.address.zip}</p>
-              <div className="paraGroup">
-                <p className="details foodtruckName"><strong>{this.props.foodtruck.name}</strong></p>
+              <div classaName="row">
+                <div className="col-2">
+                  <img src={this.props.foodtruck.logo} className="listLogoH"/>
+                </div>
 
+                <div className="col-5 fl">
+                    <p className="text-center bold"><strong>{this.props.foodtruck.name}</strong></p>
+                </div>
 
-                <div className="starGroup">
-                  {this.renderStar()}
-                  </div>
-                    <p className="  milesH">{(Math.floor(Math.random() * 10) + 1)+" miles"}</p>
+                <div className="col-5 fl">
+                  <p className="text-center ">{this.props.foodtruck.address.street + "," + this.props.foodtruck.address.state+","+this.props.foodtruck.address.zip}</p>
+                </div>
+              </div>
+
+                  <div className="row">
+                    <div className="col-6">
+                      <div className="row">
+                        <div className="col-2"/>
+                        {this.renderStar()}
+                      </div>
+                    </div>
+                    <div className="col-6">
+                        <p className="text-center">{(Math.floor(Math.random() * 10) + 1)+" miles"}</p>
+                    </div>
                   </div>
 
                 </li>
-              );
+          )
         }
       }
 }
