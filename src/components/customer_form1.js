@@ -14,8 +14,8 @@ class Form1 extends React.Component{
                 <div  className="sheet"/>
 
                 <div className="bubbles">
-                  <div className="bubble"/>
                   <div className="bubble"style={{background:"#689bed"}}/>
+                  <div className="bubble"/>
                 </div>
 
                 <img alt="arrow" src={BackArrow}  className="backArrowLoginPage" />

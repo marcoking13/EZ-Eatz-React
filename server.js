@@ -108,36 +108,35 @@ var PostCurrentUserToAPI = (req,res)=>{
 };
 
 
-// var SignupUser = (req,res)=>{
-//   MongoClient.connect(url,(err,db)=>{
-//     if(err) throw err;
-//     console.log(err);
-//     var dbO = db.db("heroku_9tlg8v4r");
-//
-//     dbO.collection("users").find({}).toArray(err,data)=>{
-//       var found = false;
-//       for(var i =0; i<data.length; i++){
-//         if(data[i].account.username === req.body.username){
-//           console.log("Error: Name already Taken");
-//           found = true;
-//           break;
-//         }
-//       }
-//       if(!found){
-//         dbO.collection("users").insertOne({
-//           name:req.body.first + " " + req.body.last,
-//           address:"",
-//           profilePhoto:"",
-//           orders:[],
-//           account:{
-//             username:req.body.username,
-//             password:req.body.password
-//           }
-//         });
-//       }
-//     });
-//   });
-// }
+var SignupUser = (req,res)=>{
+  MongoClient.connect(url,(err,db)=>{
+
+    var dbO = db.db("heroku_9tlg8v4r");
+
+    dbO.collection("users").find({}).toArray((err,data)=>{
+      var found = false;
+      for(var i =0; i<data.length; i++){
+        if(data[i].account.username === req.body.username){
+          console.log("Error: Name already Taken");
+          found = true;
+          break;
+        }
+      }
+      if(!found){
+        dbO.collection("users").insertOne({
+          name:req.body.first + " " + req.body.last,
+          address:"",
+          profilePhoto:"",
+          orders:[],
+          account:{
+            username:req.body.username,
+            password:req.body.password
+          }
+        });
+      }
+    });
+  });
+}
 
 var UpdateAddress = (req,res)=>{
 

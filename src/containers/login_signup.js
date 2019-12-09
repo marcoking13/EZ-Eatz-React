@@ -46,13 +46,13 @@ class SignupAndLoginPage extends React.Component {
         // Save and parse account object
       var account = {username:this.state.username,password:this.state.password};
 
-
+        console.log(account);
         // Create a server to use axios
 
         // Gets all the users in database
       axios.get("/api/users").then((response)=>{
           // Looping through each user
-
+          console.log(response);
         for(var i =0; i<response.data.length;i++){
           //If the user info matches with the info submitted
             // Log user in
@@ -65,7 +65,7 @@ class SignupAndLoginPage extends React.Component {
               this.props.changeURL("home");
             break;
           }
-          
+
             // User will stay in same page and nothing will submit
           if(i >= response.data.length -1){
             console.log("cannot find user");
