@@ -70,12 +70,11 @@ class NavBarHome extends React.Component {
 
   renderMobileJSX(){
     return(
-      <div className="container-fluid" style={{paddingBottom:"10px"}}>
+      <div className="container-fluid">
         <MobileNav  changeURL = {this.props.changeURL} />
         <div className="row">
           <div className="col-3"/>
-          <div className="col-6">
-
+          <div className="col-6 moveUpInput">
             <AddressInput
               zip = {this.state.zip}
               addressAvailable = {this.state.addressAvailable}
