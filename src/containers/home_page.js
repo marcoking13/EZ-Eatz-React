@@ -116,7 +116,7 @@ class HomePage extends React.Component {
               />
               <br />
               <br />
-              
+              <br />
 
               <h4 className="ml5 mb1 text-center posRel resultTitle">Food Trucks</h4>
               <div className="divder2 mt2_5"/>

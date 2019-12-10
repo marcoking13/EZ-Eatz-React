@@ -34,8 +34,13 @@
 }
 @media screen and(max-width:480px){
   .moveDownNav{
-    position: absolute;
-    top:-30px;
+    position: relative !important;
+    top:30px !important;
+
+  }
+  .moveUpNav{
+    position: relative !important;
+    top:-30px !important;
   }
 
 

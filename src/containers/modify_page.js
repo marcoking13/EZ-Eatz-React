@@ -118,7 +118,7 @@ class ModifyPage extends React.Component {
                         this.addItem("checkout")
                       }}
                         className="button ui green f13px inverted w100">
-                        Order and Checkout
+                         Checkout
                       </button>
                     </div>
 
