@@ -72,9 +72,9 @@ class NavBarHome extends React.Component {
     return(
       <div className="container-fluid">
         <MobileNav  changeURL = {this.props.changeURL} />
-        <div className="row">
+        <div className="row ">
           <div className="col-3"/>
-          <div className="col-6 moveUpInput">
+          <div className="col-6 ">
             <AddressInput
               zip = {this.state.zip}
               addressAvailable = {this.state.addressAvailable}

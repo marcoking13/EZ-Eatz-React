@@ -18,7 +18,7 @@ class AddressInput extends React.Component{
       return (
         <div style={this.props.classer} className="moveDownNav">
 
-          <div className="p5px text-center mt7_5 BBf4" style= {this.props.width} onClick = {()=>{
+          <div className="p5px text-center  BBf4" style= {this.props.width} onClick = {()=>{
             this.props.changeAddressInput(true);
             }}>{address}
           </div>
