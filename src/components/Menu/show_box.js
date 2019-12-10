@@ -76,6 +76,13 @@ class ShowBox extends React.Component {
             {this.renderDesktopShowbox()}
           </div>
         );
+    }else{
+      return(
+        <div className="container-fluid">
+          <img className="imageSheet" src={this.props.foodtruck.background}/>
+          {this.renderDesktopShowbox()}
+        </div>
+      );
     }
 }
 }
