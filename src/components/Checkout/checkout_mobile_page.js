@@ -3,7 +3,7 @@ import React from "react";
 import TipBoxes from "./tip_boxes_component.js";
 import Dropdown from "./drop_down_component.js";
 import Navbar from "./../Navbar/home_nav_bar.js";
-import Footer from "./../Footer/footnote.js";
+import Footer from "./../Footer/footnote_mobile.js";
 
 class MobileCheckout extends React.Component {
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "./../../images/logo.png";
-import Footer from "./../Footer/footnote.js";
+import Footer from "./../Footer/footnote_mobile.js";
 
 class LoginSignupMobile extends React.Component{
   //JSX for the login and signup page mobile

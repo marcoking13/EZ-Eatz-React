@@ -9,6 +9,7 @@ import Remover from "./../components/Modify/remover_component.js";
 import RemoveResult from "./../components/Modify/remove_result_component.js";
 import AddResult from "./../components/Modify/add_result_component.js";
 import Footer from "./../components/Footer/footnote.js";
+import FooterMobile from "./../components/Footer/footnote_mobile.js";
 //-------------------------------Constructor-------------------------------------
 class ModifyPage extends React.Component {
   //----------------------------Constructor--------------------------------
@@ -184,6 +185,16 @@ class ModifyPage extends React.Component {
       this.props.changeURL(url);
     }
 
+    //----------------Footnote--------------------------
+
+    renderFooter(width){
+      if(width < 480){
+        return <FooterMobile />
+      }else{
+        return <Footer />
+      }
+    }
+
     //----------------------------------------------Renderer---------------------------------------
     //---------------------------------------------------------------------------------------------
   render(){
@@ -230,7 +241,7 @@ class ModifyPage extends React.Component {
           </div>
 
         </div>
-          <Footer />
+          {this.renderFooter(window.innerWidth)}
       </div>
     )
   }

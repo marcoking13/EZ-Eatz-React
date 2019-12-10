@@ -50,6 +50,14 @@ class MenuPage extends React.Component {
     this.props.changeURL("modify");
   }
 
+  renderFooter(width){
+    if(width < 480){
+      return <FooterMobile />
+    }else{
+      return <Footer />
+    }
+  }
+
 //------------------------------------------------Renderer----------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------
   render(){
@@ -81,7 +89,7 @@ class MenuPage extends React.Component {
             foodtruck = {this.state.foodtruck}
           />
         </div>
-        <Footer />
+        {this.renderFooter(window.innerWidth)}
     </div>
     )
   }

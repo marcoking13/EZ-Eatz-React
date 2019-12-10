@@ -9,6 +9,7 @@ import "./../css/home_page.css";
 import HomePageNav from "./../components/Navbar/home_nav_bar.js";
 import FoodBox from "./../components/Home/foodtruck_box_home.js";
 import Footer from "./../components/Footer/footnote.js";
+import FooterMobile from "./../components/Footer/footnote_mobile.js";
 
 ///-------------------------Component----------------------//
 class HomePage extends React.Component {
