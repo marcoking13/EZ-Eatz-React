@@ -35,7 +35,7 @@
 @media screen and(max-width:480px){
   .moveDownNav{
     position: relative;
-    top:10px;
+    top:-10px;
   }
   .moveUpInput{
     position: relative;
