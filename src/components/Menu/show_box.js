@@ -33,11 +33,10 @@ class ShowBox extends React.Component {
         <div className="col-8 moveDownShowMenu jumbotron bw">
 
           <div className="row">
-            <div className="col-5">
+            <div className="col-4">
                 <img className="w100" src = {this.props.foodtruck.logo} />
             </div>
-
-            <div className="col-5">
+            <div className="col-6">
               <h5>{this.props.foodtruck.name}</h5>
             </div>
           </div>
@@ -55,8 +54,8 @@ class ShowBox extends React.Component {
           </div>
           <br />
           <div className="row">
-              <div className="col-3"/>
-              <div className="col-6">
+              <div className="col-2"/>
+              <div className="col-8">
                 <button className="button w100 ui inverted blue">Current Location</button>
               </div>
           </div>
@@ -88,7 +87,7 @@ class ShowBox extends React.Component {
           <br />
           <div className="row">
             <div className="col-4"/>
-            <div classNAme="col-3">
+            <div classNAme="col-2">
                 <div className="row">
 
                   <div className="col-5"/>
