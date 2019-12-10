@@ -71,25 +71,30 @@ class NavBarHome extends React.Component {
   renderMobileJSX(){
     return(
       <div className="row" style={{paddingBottom:"10px"}}>
+        <div className="col-3">
+          <MobileNav  changeURL = {this.props.changeURL} />
+        </div>
 
-        <MobileNav  changeURL = {this.props.changeURL} />
-          {this.renderMapIcon()}
 
-        <AddressInput
-            zip = {this.state.zip}
-            addressAvailable = {this.state.addressAvailable}
-            address = {this.props.address}
-            changeAddressInput = {this.changeAddressInput}
-            changeZip = {this.props.changeZip}
-            changeAddress = {this.props.changeAddress}
-            SetAddress = {this.props.SetAddress}
-            width = {{width:"200px"}}
-            classer={{position:"absolute",top:"-2.5%",left:"35%"}}
-            classer2={{position:"absolute",top:"1%",left:"30%"}}
-            PostAddress = {this.props.PostAddress}
-            formatted_address = {this.state.formatted_address}
+          <div className="col-6">
+            <AddressInput
+              zip = {this.state.zip}
+              addressAvailable = {this.state.addressAvailable}
+              address = {this.props.address}
+              changeAddressInput = {this.changeAddressInput}
+              changeZip = {this.props.changeZip}
+              changeAddress = {this.props.changeAddress}
+              SetAddress = {this.props.SetAddress}
+              width = {{width:"200px"}}
+              classer={{position:"absolute",top:"-2.5%",left:"35%"}}
+              classer2={{position:"absolute",top:"1%",left:"30%"}}
+              PostAddress = {this.props.PostAddress}
+              formatted_address = {this.state.formatted_address}
             />
-
+          </div>
+          <div className="col-3">
+              {this.renderMapIcon()}
+          </div>
         </div>
 
 
