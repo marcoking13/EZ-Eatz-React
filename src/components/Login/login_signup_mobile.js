@@ -13,16 +13,16 @@ class LoginSignupMobile extends React.Component{
             <button className="btn btn-danger mobileFTLogin">Own a Foodtruck?</button>
           </div>
 
-        <div className="row loginBox">
+        <div className="row loginBox ">
           <div className="col-2"></div>
 
-          <div className="col-10 ml7_5 jumbotron">
-            <h6 className="cw">Sign In</h6>
-            <p className="cw">To your EZ account</p>
+          <div className="col-10 ml7_5 bw jumbotron">
+            <h6 className="cb text-center">Sign In</h6>
+            <p className="cb text-center">To your EZ account</p>
 
-          <div className="inputBox">
-              <input className="redLineInput w100 mt5 mb5 text-center"  style={{borderBottomColor:this.props.className}} onChange = {(event)=>{this.props.changeUsername(event)}} value = {this.props.username}placeholder = "Type Username" />
-              <input className="redLineInput w100 mt5 mb5 text-center"  style={{borderBottomColor:this.props.className2}} onChange = {(event)=>{this.props.changePassword(event)}} value = {this.props.password} type="password" placeholder = " Type  Password" />
+          <div className="inputBox ">
+              <input className="redLineInput w100 mt5 mb5 text-center" style={{borderBottomColor:this.props.className}} onChange = {(event)=>{this.props.changeUsername(event)}} value = {this.props.username}placeholder = "Type Username" />
+              <input className="redLineInput w100 mt5 mb5 text-center" style={{borderBottomColor:this.props.className2}} onChange = {(event)=>{this.props.changePassword(event)}} value = {this.props.password} type="password" placeholder = " Type  Password" />
               <p className="text-center turnBlue f12px" onClick = {(e)=>{this.props.changeURL("usersign")}}>Create account here</p>
           </div>
 
