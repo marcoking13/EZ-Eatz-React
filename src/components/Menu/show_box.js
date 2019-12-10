@@ -29,7 +29,7 @@ class ShowBox extends React.Component {
     var background = this.props.foodtruck.background;
 
     return(
-      <div className="container-fluid moveUpMobile">
+      <div className="container-fluid moveUpMobileShowBox">
 
         <img alt="banner" className="banner w100 cover"src={background}/>
 
