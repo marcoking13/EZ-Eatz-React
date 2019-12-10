@@ -93,7 +93,7 @@ class ModifyPage extends React.Component {
         return null
       }
     }
-    renderItems(width){
+    renderButtons(width){
       if(width >= 580){
         return (
           <div className="row">
