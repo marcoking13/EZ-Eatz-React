@@ -6,7 +6,7 @@ class LoginSignupMobile extends React.Component{
   //JSX for the login and signup page mobile
   render(){
     return(
-      <div className="container-fluid bGeo pb200px">
+      <div className="container-fluid bGeo pb400px">
 
         <div className="row blackNav2">
             <img alt="logo" className="mobileLoginLogo"src={Logo}/>
