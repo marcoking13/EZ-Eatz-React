@@ -87,8 +87,8 @@ class LoginSignupDesktop extends React.Component{
               {this.renderErrorMessage(this.props.err)}
               <div>
                 <div>
-                  <input className="bottomLine bwwp text-center ml5 mt10 w90" style={{borderBottomColor:this.props.className}}  onChange = {(event)=>{this.props.changeUsername(event)}} value = {this.props.username}/>
-                  <input className="bottomLine  bwwp transparent text-center ml5 mt10 w90"  style={{borderBottomColor:this.props.className2}} type="password"onChange = {(event)=>{this.props.changePassword(event)}} value = {this.props.password}/>
+                  <input className="bottomLine transparent text-center ml5 mt10 w90" style={{borderBottomColor:this.props.className}}  onChange = {(event)=>{this.props.changeUsername(event)}} value = {this.props.username}/>
+                  <input className="bottomLine   transparent text-center ml5 mt10 w90"  style={{borderBottomColor:this.props.className2}} type="password"onChange = {(event)=>{this.props.changePassword(event)}} value = {this.props.password}/>
                 </div>
                 <button className="w50 ml25 mt10 btn btn-info" onClick  = {(event)=>{this.props.handleSubmit(event)}}>Login</button>
                 <p className="mt1 bold f15px text-center hoverBlue" onClick = {(e)=>{this.props.changeURL("usersign")}}>Create account here</p>
