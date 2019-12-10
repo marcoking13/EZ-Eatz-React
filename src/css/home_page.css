@@ -35,10 +35,11 @@
 @media screen and(max-width:480px){
   .moveDownNav{
     position: relative;
-    top:-30px;
+    top:30px;
   }
-  .moveUpIn{
-    position: absolute !important;
-    top:0% !important;
+  .moveUpNav{
+    position: relative;
+    top:-10px;
   }
+
 }

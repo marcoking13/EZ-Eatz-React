@@ -18,7 +18,7 @@ class AddressInput extends React.Component{
       return (
         <div style={this.props.classer}>
 
-          <div className="p5px text-center" style= {this.props.width} onClick = {()=>{
+          <div className="p5px text-center moveDownNav" style= {this.props.width} onClick = {()=>{
             this.props.changeAddressInput(true);
             }}>{address}
           </div>
@@ -29,7 +29,7 @@ class AddressInput extends React.Component{
       }else{
 
         return(
-          <div style={this.props.classer2} className=" container-fluid">
+          <div style={this.props.classer2} className="moveUpNav container-fluid">
             <form>
               <div className="row ">
                 <div className="col-5 p0">
