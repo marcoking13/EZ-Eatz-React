@@ -72,7 +72,8 @@ class NavBarHome extends React.Component {
     return(
       <div className="container-fluid">
         <MobileNav  changeURL = {this.props.changeURL} />
-
+          <br />
+          <br />
             <AddressInput
               zip = {this.state.zip}
               addressAvailable = {this.state.addressAvailable}
