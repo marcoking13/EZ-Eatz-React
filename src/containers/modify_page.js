@@ -94,7 +94,7 @@ class ModifyPage extends React.Component {
       }
     }
     renderItems(width){
-      if(width >= 580px){
+      if(width >= 580){
         return (
           <div className="row">
             <div className="col-4"/>
@@ -125,7 +125,8 @@ class ModifyPage extends React.Component {
                   </div>
 
                 </div>
-        )
+        </div>
+      )
       }else{
         return(
             <div className="row">
