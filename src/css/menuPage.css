@@ -11,12 +11,12 @@
   height:400px;
 }
 
-@media screen and (max-width: 480px){
-  .moveUpMobileShowBox{
-    position: relative !important;
-    bottom:10px !important;
+@media screen and (max-width:480px){
+  .menux{
+    margin-top: 35%;
   }
 }
+
 @media screen and (max-width:580px){
 
   .menuOP{

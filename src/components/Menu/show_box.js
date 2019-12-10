@@ -29,14 +29,14 @@ class ShowBox extends React.Component {
     var background = this.props.foodtruck.background;
 
     return(
-      <div className="container-fluid moveUpMobileShowBox">
+      <div className="container-fluid ">
 
         <img alt="banner" className="banner w100 cover"src={background}/>
 
           <div className="row posAb w100 menuBoxB">
             <div className="col-3"/>
 
-            <div className="col-6 jumbotron bw pt5">
+            <div className="col-6 moveShowBoxUpMobile jumbotron bw pt5">
                 <img alt="logo" src={this.props.foodtruck.logo} className="w10 posAb logoMenu"/>
                 <h4 className="text-center">{this.props.foodtruck.name}</h4>
 
