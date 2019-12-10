@@ -44,7 +44,7 @@ class MenuPage extends React.Component {
      this.SetItem = this.SetItem.bind(this);
 
      window.scrollTo(0,0);
-     
+
   }
 //-----------------------------------------Saved Selected Item to Cookie and State--------------------------------------
   SetItem(item){
@@ -93,6 +93,9 @@ class MenuPage extends React.Component {
             foodtruck = {this.state.foodtruck}
           />
         </div>
+        <br />
+        <br />
+        <br />
         {this.renderFooter(window.innerWidth)}
     </div>
     )
