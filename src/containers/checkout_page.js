@@ -2,8 +2,9 @@ import React from "react";
 import cookies from "react-cookies";
 import axios from "axios";
 
-import CheckoutMobile from "./../components/checkout_mobile_page";
-import CheckoutDesktop from "./../components/checkout_desktop_page";
+import CheckoutMobile from "./../components/Checkout/checkout_mobile_page";
+import Footer from "./../components/Footer/footnote.js";
+import CheckoutDesktop from "./../components/Checkout/checkout_desktop_page";
 
 import "./../css/checkout.css";
 

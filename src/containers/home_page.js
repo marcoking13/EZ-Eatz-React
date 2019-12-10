@@ -6,8 +6,9 @@ import axios from "axios";
 
 import "./../css/home_page.css";
 
-import HomePageNav from "./../components/home_nav_bar.js";
-import FoodBox from "./../components/foodtruck_box_home.js";
+import HomePageNav from "./../components/Navbar/home_nav_bar.js";
+import FoodBox from "./../components/Home/foodtruck_box_home.js";
+import Footer from "./../components/Footer/footnote.js";
 
 ///-------------------------Component----------------------//
 class HomePage extends React.Component {
@@ -122,6 +123,7 @@ class HomePage extends React.Component {
 
               <br />
               <br />
+              <Footer />
             </div>
     );
 
@@ -149,7 +151,7 @@ class HomePage extends React.Component {
           </ul>
           <br />
           <br />
-
+          <Footer />
         </div>
       );
     }

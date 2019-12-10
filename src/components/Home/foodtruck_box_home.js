@@ -1,7 +1,7 @@
 import React from "react";
 import cookie from "react-cookies";
-import "./../css/home_page.css";
-import Star from "./../images/star.png";
+import "./../../css/home_page.css";
+import Star from "./../../images/star.png";
 
 var distance;
 
@@ -45,9 +45,11 @@ class FoodBox extends React.Component {
 
            }}>
 
-             <img alt="showcase" className="w100 br10px h100px"  src={this.props.foodtruck.background}/>
+             <img alt="showcase" className="w100 moveUpDown br10px h100px"  src={this.props.foodtruck.background}/>
+
              <div className="row">
                <div className="col-12 pb5 fl">
+                 <br />
                  <p className="bold text-left "><strong>{this.props.foodtruck.name}</strong></p>
                  <p className="text-left ml1">{this.props.foodtruck.address.street + "," + this.props.foodtruck.address.state+","+this.props.foodtruck.address.zip}</p>
                  <p className=" text-left  ml1 text-left">{this.props.distance}</p>
@@ -58,6 +60,7 @@ class FoodBox extends React.Component {
                  </div>
              </div>
            </div>
+
          </div>
          )
         }else{

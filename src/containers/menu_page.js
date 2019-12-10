@@ -3,9 +3,10 @@ import React from "react";
 import cookie from "react-cookies";
 import axios from "axios";
 
-import HomePageNav from "./../components/home_nav_bar";
-import ShowBox from "./../components/show_box_home";
-import MenuBoxes from "./../components/menu_boxes_component";
+import HomePageNav from "./../components/Navbar/home_nav_bar";
+import ShowBox from "./../components/Login/show_box_home";
+import MenuBoxes from "./../components/Menu/menu_boxes_component";
+import Footer from "./../components/Footer/footnote.js";
 
 import "./../css/menuPage.css";
 
@@ -80,7 +81,7 @@ class MenuPage extends React.Component {
             foodtruck = {this.state.foodtruck}
           />
         </div>
-
+        <Footer />
     </div>
     )
   }

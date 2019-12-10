@@ -3,11 +3,12 @@ import cookie from "react-cookies";
 
 import "./../css/modify.css";
 
-import HomePageNav from "./../components/home_nav_bar.js";
-import Addon from "./../components/addon_component.js";
-import Remover from "./../components/remover_component.js";
-import RemoveResult from "./../components/remove_result_component.js";
-import AddResult from "./../components/add_result_component.js";
+import HomePageNav from "./../components/Navbar/home_nav_bar.js";
+import Addon from "./../components/Modify/addon_component.js";
+import Remover from "./../components/Modify/remover_component.js";
+import RemoveResult from "./../components/Modify/remove_result_component.js";
+import AddResult from "./../components/Modify/add_result_component.js";
+import Footer from "./../components/Footer/footnote.js";
 //-------------------------------Constructor-------------------------------------
 class ModifyPage extends React.Component {
   //----------------------------Constructor--------------------------------
@@ -229,7 +230,7 @@ class ModifyPage extends React.Component {
           </div>
 
         </div>
-
+          <Footer />
       </div>
     )
   }

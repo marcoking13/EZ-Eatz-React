@@ -1,8 +1,61 @@
 import React from "react";
 import axios from "axios";
-import BackArrow from "./../images/backArrow.png"
+import BackArrow from "./../../images/backArrow.png"
 
 class Form1 extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      errUser:false,
+      errPassword:false
+    }
+  }
+  renderPassword(err){
+    if(err){
+      return(
+
+        <input className="form-control brr2" value={this.props.account.password} onChange={(event)=>{this.props.changers.changePassword(event.target.value)}} type="email"/>
+
+      );
+    }else{
+      return(
+          <input className="form-control " value={this.props.account.password} onChange={(event)=>{this.props.changers.changePassword(event.target.value)}} type="password"/>
+      )
+    }
+  }
+
+  renderConfirm(err){
+    if(err){
+      return(
+        <div>
+          <p className="text-center cr">Passwords Do Not Match</p>
+          <input className="form-control brr2" value={this.props.account.confirm} onChange={(event)=>{this.props.changers.changeConfirm(event.target.value)}} type="password"/>
+        </div>
+        );
+    }else{
+      return(
+          <input className="form-control " value={this.props.account.confirm} onChange={(event)=>{this.props.changers.changeConfirm(event.target.value)}} type="password"/>
+      )
+    }
+  }
+
+  renderUsername(err){
+    if(err){
+      return(
+        <div>
+          <p className="text-center cr">Please Enter Another Username</p>
+          <input className="form-control brr2" value={this.props.account.username} onChange={(event)=>{this.props.changers.changeUsername(event.target.value)}} type="password"/>
+        </div>
+      );
+    }else{
+      return(
+          <input className="form-control " value={this.props.account.username} onChange={(event)=>{this.props.changers.changeUsername(event.target.value)}} type="password"/>
+      )
+    }
+  }
+
+
+
   render(){
     return(
       <div className="container-fluid loginpage" style={{background:`#f4f4f4`}}>
@@ -38,7 +91,7 @@ class Form1 extends React.Component{
 
                 <div className="col-10">
                   <p className="formTitleSignup">Enter Username</p>
-                  <input className="form-control " value={this.props.account.username} onChange={(event)=>{this.props.changers.changeUsername(event.target.value)}}/>
+                  {this.renderUsername(this.state.errUser)}
                 </div>
 
                 <div className="co1-1"/>
@@ -49,7 +102,7 @@ class Form1 extends React.Component{
 
                 <div className="col-10">
                   <p className="formTitleSignup">Enter Password</p>
-                  <input className="form-control " value={this.props.account.password} onChange={(event)=>{this.props.changers.changePassword(event.target.value)}} type="password"/>
+                    {this.renderPassword(this.state.errPassword)}
                 </div>
 
                 <div className="co1-1"/>
@@ -60,8 +113,7 @@ class Form1 extends React.Component{
 
                 <div className="col-10">
                   <p className="formTitleSignup">Confirm Password</p>
-                  <input className="form-control " value={this.props.account.confirm} onChange={(event)=>{this.props.changers.changeConfirm(event.target.value)}} type="password"/>
-                </div>
+                  {this.renderConfirm(this.state.errPassword)}
 
                 <div className="co1-1"/>
               </div>
@@ -75,8 +127,11 @@ class Form1 extends React.Component{
                           if(resp){
                             var flag = true;
                             resp.data.map((user)=>{
-                              if(user.account.username === this.props.account.username || this.props.account.confirm !== this.props.account.password){
-                                  console.log("Error either password doesnt confirm or the user");
+                              if(user.account.username === this.props.account.username || this.props.account.username === ""){
+                                  this.setState({errUser:true});
+                                  flag = false;
+                              }else if(this.props.account.confirm !== this.props.account.password || this.props.account.password === "" && this.props.account.confirm === ""){
+                                  this.setState({errPassword:true})
                                   flag = false;
                                 }
                               });
@@ -93,8 +148,11 @@ class Form1 extends React.Component{
                </div>
             </div>
         </div>
-          <div className="col-1"/>
+
       </div>
+
+      </div>
+
 
     )
   }

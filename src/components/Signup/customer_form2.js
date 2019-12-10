@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import BackArrow from "./../images/backArrow.png";
-import ProfileIcon from "./../images/profileIcon.png";
+import BackArrow from "./../../images/backArrow.png";
+import ProfileIcon from "./../../images/profileIcon.png";
 import cookie from 'react-cookies';
 
 class Form2 extends React.Component{

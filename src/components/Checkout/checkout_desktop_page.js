@@ -1,8 +1,9 @@
 import React from "react";
 
 import TipBoxes from "./tip_boxes_component.js";
-import Navbar from "./home_nav_bar.js";
+import Navbar from "./../Navbar/home_nav_bar.js";
 import Dropdown from "./drop_down_component.js";
+import Footer from "./../Footer/footnote.js";
 
 class MobileCheckout extends React.Component {
 
@@ -107,6 +108,8 @@ class MobileCheckout extends React.Component {
                   </div>
 
                 </div>
+
+                <Footer />
 
             </div>
       );

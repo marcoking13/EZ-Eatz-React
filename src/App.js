@@ -23,12 +23,13 @@ class App extends Component {
     super(props);
     var orders = [];
     var truck;
-    var urlCookie = cookie.load("url",{path:"/"});
-    if(!cookie.load("currentItem",{path:"/"})){
+    var urlCookie = "login"
+    if(cookie.load("account",{path:"/"})){
       urlCookie = "home";
     }
     var foodtruckID  = cookie.load("foodtruckCurrent",{path:"/"});
     cookie.remove("currentItem",{path:"/"});
+    cookie.remove("foodtruck",{path:"/"});
 
     axios.get("/api/trucks").then((response)=>{
       var trucks = response.data;
@@ -45,10 +46,8 @@ class App extends Component {
     });
 
     if(cookie.load("orders",{path:"/"}) && cookie.load("foodtruck",{path:"/"})){
-
         orders= JSON.parse(cookie.load("orders",{path:"/"}));
-
-    }
+      }
 
     this.state = {
       url:urlCookie,
@@ -63,8 +62,6 @@ class App extends Component {
 
     }
 
-
-
     this.PostAddress = this.PostAddress.bind(this);
     this.SetAddress = this.SetAddress.bind(this);
     this.changeZip = this.changeZip.bind(this);
@@ -74,17 +71,14 @@ class App extends Component {
     this.SetTruck = this.SetTruck.bind(this);
     this.ClearOrder = this.ClearOrder.bind(this);
 
-
-
   }
 
   componentWillMount(){
 
       if(cookie.load("account",{path:"/"})){
         this.Initialization();
-
       }
-          this.ClearCookieTimer();
+        this.ClearCookieTimer();
   }
 
   componentDidUpdate(){
@@ -92,9 +86,7 @@ class App extends Component {
 
   }
 
-
   SetTruck(truck){
-
     this.setState({truck:truck})
   }
 
@@ -102,6 +94,7 @@ class App extends Component {
 
     var seconds = 0;
     var minutes;
+
     this.cookieIntervals = setInterval(()=>{
       minutes = seconds / 60;
 
@@ -116,6 +109,7 @@ class App extends Component {
       }
 
     },1000);
+
   }
 
   Initialization(){
@@ -124,6 +118,7 @@ class App extends Component {
 
         var users = res.data;
         var savedUser = JSON.parse(cookie.load("account",{path:"/"}));
+
         for(var i = 0; i<= users.length; i++){
           var loopedUsername = users[i].account.username;
 
@@ -133,7 +128,8 @@ class App extends Component {
           }
 
         }
-    });
+
+     });
 
   }
 
@@ -216,7 +212,7 @@ class App extends Component {
                 return <GoogleMap  orders= {this.state.orders}  ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />
           }
          if(this.state.url === "modify"){
-                return <ModifyPage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} addToOrder = {this.addToOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} item = {this.state.item}changeURL={this.changeURL} /> 
+                return <ModifyPage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} addToOrder = {this.addToOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} item = {this.state.item}changeURL={this.changeURL} />
           }
          if(this.state.url === "menu"){
                return <MenuPage truck = {this.state.truck} orders= {this.state.orders}  SetTruck = {this.SetTruck} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} SetItem = {this.SetItem} changeURL={this.changeURL} />

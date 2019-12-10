@@ -1,9 +1,9 @@
 
 import React from "react";
-import ProfileIcon from "./../images/profileIcon.png";
 
+import ProfileIcon from "./../../images/profileIcon.png";
 
-import "./../css/signup_page.css";
+import "./../../css/signup_page.css";
 
 import Form1 from "./customer_form1";
 import Form2 from "./customer_form2";

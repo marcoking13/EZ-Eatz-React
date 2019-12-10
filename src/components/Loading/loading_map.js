@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./../css/loadingMap.css";
+import "./../../css/loadingMap.css";
 
 export default class LoadingMap extends React.Component {
   // Loading map animation

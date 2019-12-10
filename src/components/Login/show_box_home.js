@@ -1,8 +1,8 @@
 import React from "react";
 
-import "./../css/home_page.css";
+import "./../../css/home_page.css";
 
-import Star from "./../images/star.png"
+import Star from "./../../images/star.png"
 
 class ShowBox extends React.Component {
     // JSX for the menu showcase

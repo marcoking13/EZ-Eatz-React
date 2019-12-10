@@ -7,6 +7,17 @@
 .BRR{
   border:2px solid red;
 }
+.brr2{
+  border:2px solid red;
+}
+.logins
+{
+    background: transparent !important;
+}
+.container-fluid{
+  padding-left:0;
+  padding-right:0;
+}
 .pb60px{
   padding-bottom:60px;
 }
@@ -182,11 +193,17 @@
 .w100{
   width:100%;
 }
+input:focus{
+  background:white;
+}
 .w30{
   width:30%;
 }
 .w10{
   width:10%;
+}
+.lightBlue{
+  background:#b3d9ff;
 }
 .cr{
   color:red;
@@ -200,8 +217,38 @@
 .f40px{
   font-size: 40px;
 }
+.moveUpDown{
+  position: relative;
+  top:5px;
+  animation: moveDown .5s ease-in 1;
+}
+.moveUpDown:hover{
+  top:0px;
+  animation: moveUp .5s ease-out 1;
+  border:5px solid red;
+}
+
+@keyframes moveUp{
+  0%{
+    top:5px;
+  }
+  100%{
+    top:0px
+  }
+}
+@keyframes moveDown{
+  0%{
+    top:0px;
+  }
+  100%{
+    top:5px
+  }
+}
 .normal-font{
   font-weight: normal;
+}
+.f20px{
+  font-size:20px;
 }
 .bf9{
   background:#f9f9f9;
@@ -214,6 +261,7 @@
 }
 .Bf220px{
   border:20px #f2f2f2 solid;
+  background:white !important;
 }
 .turnW:hover{
   color:white;

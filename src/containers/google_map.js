@@ -6,8 +6,8 @@ import Geocode from "react-geocode";
 import cookies from "react-cookies";
 import axios from 'axios';
 
-import HomePageNav from "./../components/home_nav_bar";
-import LoadingMap from "./../components/loading_map";
+import HomePageNav from "./../components/Navbar/home_nav_bar";
+import LoadingMap from "./../components/Loading/loading_map";
 
 import "./../css/loadingMap.css";
 

@@ -2,17 +2,18 @@ import React from "react";
 
 import cookies from "react-cookies";
 
-import AddressInput from "./address_input";
+import MobileNav from "./../Navbar/mobile_nav_bar.js";
+import AddressInput from "./../Navbar/address_input";
 
-import "./../css/home_page.css";
+import "./../../css/home_page.css";
+
+import ProfilePicture from "./../../images/profileIcon.png";
+import Search from "./../../images/userChoice.png";
+import GoogleMap from "./../../images/googleMap.png";
+import Cart from "./../../images/cart.png";
+import Logo from "./../../images/logo.png";
 
 
-import ProfilePicture from "./../images/profileIcon.png";
-import Search from "./../images/userChoice.png";
-import GoogleMap from "./../images/googleMap.png";
-import Cart from "./../images/cart.png";
-import Logo from "./../images/logo.png";
-import MobileNav from "./mobile_nav_bar.js";
 
 class NavBarHome extends React.Component {
   constructor(props){

@@ -5,9 +5,9 @@ import "./../css/signup_and_login.css";
 import axios from "axios";
 import cookie from "react-cookies";
 
+import LoginSignupMobile from "./../components/Login/login_signup_mobile.js";
+import LoginSignupDesktop from "./../components/Login/login_signup_desktop.js";
 
-import LoginSignupMobile from "./../components/login_signup_mobile.js";
-import LoginSignupDesktop from "./../components/login_signup_desktop.js";
 
 
 //-----------------------------------Component----------------------------------
@@ -18,6 +18,7 @@ class SignupAndLoginPage extends React.Component {
     super(props);
     this.state ={
       className:"black",
+      err:false,
       className2:"black",
       username : "",
       password: "",
@@ -46,9 +47,7 @@ class SignupAndLoginPage extends React.Component {
         // Save and parse account object
       var account = {username:this.state.username,password:this.state.password};
 
-        console.log(account);
         // Create a server to use axios
-
         // Gets all the users in database
       axios.get("/api/users").then((response)=>{
           // Looping through each user
@@ -68,7 +67,7 @@ class SignupAndLoginPage extends React.Component {
 
             // User will stay in same page and nothing will submit
           if(i >= response.data.length -1){
-            console.log("cannot find user");
+              this.setState({err:true});
           }
 
         }
@@ -79,9 +78,9 @@ class SignupAndLoginPage extends React.Component {
   render(){
 
     if (window.innerWidth >= 590 ) {
-        return  <LoginSignupDesktop  changeURL= {this.props.changeURL} username={this.state.username} password = {this.state.password} changeUsername= {this.changeUsername} changePassword={this.changePassword} handleSubmit  = {this.handleSubmit}/>
+        return  <LoginSignupDesktop  err = {this.state.err } changeURL= {this.props.changeURL} username={this.state.username} password = {this.state.password} changeUsername= {this.changeUsername} changePassword={this.changePassword} handleSubmit  = {this.handleSubmit}/>
       }else{
-        return  <LoginSignupMobile changeURL= {this.props.changeURL} username={this.state.username} password = {this.state.password} changeUsername= {this.changeUsername} changePassword={this.changePassword} handleSubmit  = {this.handleSubmit}/>
+        return  <LoginSignupMobile err = {this.state.err } changeURL= {this.props.changeURL} username={this.state.username} password = {this.state.password} changeUsername= {this.changeUsername} changePassword={this.changePassword} handleSubmit  = {this.handleSubmit}/>
     }
 
   }
