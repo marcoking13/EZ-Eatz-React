@@ -38,8 +38,8 @@
     top:30px;
   }
   .moveUpNav{
-    position: relative;
-    top:-10px;
+    position: absolute;
+    top:-30px;
   }
 
 }
