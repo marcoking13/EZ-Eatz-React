@@ -37,8 +37,8 @@
     position: relative;
     top:-30px;
   }
-  .moveUpInput{
-    position: relative;
-    bottom:25px;
+  .moveUpIn{
+    position: relative !important;
+    bottom:25px !important;
   }
 }
