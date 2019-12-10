@@ -9,6 +9,7 @@
   float:left;
 }
 
+
 @keyframes moveUp{
   0%{
 
@@ -29,5 +30,11 @@
   100%{
     bottom:0px;
 
+  }
+}
+@media screen and(max-width:480px){
+  .moveDownNav{
+    position: relative;
+    top:10px;
   }
 }

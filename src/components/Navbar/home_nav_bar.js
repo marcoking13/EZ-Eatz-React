@@ -77,6 +77,7 @@ class NavBarHome extends React.Component {
 
 
           <div className="col-6">
+            
             <AddressInput
               zip = {this.state.zip}
               addressAvailable = {this.state.addressAvailable}
