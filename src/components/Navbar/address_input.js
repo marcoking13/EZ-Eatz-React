@@ -16,7 +16,7 @@ class AddressInput extends React.Component{
       }
       // Returns the JSX of the addressbox with no input
       return (
-        <div style={this.props.classer + "moveDownNav"}>
+        <div style={this.props.classer} className="moveDownNav">
 
           <div className="p5px text-center mt7_5 BBf4" style= {this.props.width} onClick = {()=>{
             this.props.changeAddressInput(true);
