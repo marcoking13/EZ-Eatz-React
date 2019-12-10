@@ -39,6 +39,6 @@
   }
   .moveUpIn{
     position: absolute !important;
-    top:2.5% !important;
+    top:0% !important;
   }
 }
