@@ -18,7 +18,7 @@ class AddressInput extends React.Component{
       return (
         <div style={this.props.classer} className="moveUpIn">
 
-          <div className="p5px text-center moveUpIn" style= {this.props.width} onClick = {()=>{
+          <div className="p5px text-center" style= {this.props.width} onClick = {()=>{
             this.props.changeAddressInput(true);
             }}>{address}
           </div>
@@ -31,7 +31,7 @@ class AddressInput extends React.Component{
         return(
           <div style={this.props.classer2} className=" moveUpIn container-fluid">
             <form>
-              <div className="row  moveUpIn">
+              <div className="row ">
                 <div className="col-5 p0">
                   <br />
                   <input type="text" onChange={(e)=>{this.props.changeAddress(e)}}  className="form-control moveUpIn " value = {this.props.address}placeholder="Enter street, state and city" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
@@ -39,7 +39,7 @@ class AddressInput extends React.Component{
                 <div className="col-1"/>
                 <div className="col-5 p0">
                   <br />
-                  <button className="button ui moveUpIn black w100 fl" onClick = {(event)=>{
+                  <button className="button ui  black w100 fl" onClick = {(event)=>{
                     event.preventDefault();
                     cookies.remove("address",{path:"/"});
                     cookies.save("address",this.props.address,{path:"/"});
