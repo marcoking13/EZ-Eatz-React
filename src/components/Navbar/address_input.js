@@ -16,7 +16,7 @@ class AddressInput extends React.Component{
       }
       // Returns the JSX of the addressbox with no input
       return (
-        <div style={this.props.classer} className="moveUpIn">
+        <div style={this.props.classer}>
 
           <div className="p5px text-center" style= {this.props.width} onClick = {()=>{
             this.props.changeAddressInput(true);
@@ -29,7 +29,7 @@ class AddressInput extends React.Component{
       }else{
 
         return(
-          <div style={this.props.classer2} className=" moveUpIn container-fluid">
+          <div style={this.props.classer2} className=" container-fluid">
             <form>
               <div className="row ">
                 <div className="col-5 p0">
