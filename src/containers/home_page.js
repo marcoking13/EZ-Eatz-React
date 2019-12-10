@@ -152,7 +152,7 @@ class HomePage extends React.Component {
           </ul>
           <br />
           <br />
-          <Footer />
+          <FooterMobile />
         </div>
       );
     }

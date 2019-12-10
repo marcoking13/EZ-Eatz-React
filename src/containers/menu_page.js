@@ -4,9 +4,11 @@ import cookie from "react-cookies";
 import axios from "axios";
 
 import HomePageNav from "./../components/Navbar/home_nav_bar";
-import ShowBox from "./../components/Login/show_box_home";
+import ShowBox from "./../components/Menu/show_box";
 import MenuBoxes from "./../components/Menu/menu_boxes_component";
 import Footer from "./../components/Footer/footnote.js";
+import FooterMobile from "./../components/Footer/footnote_mobile.js";
+
 
 import "./../css/menuPage.css";
 
@@ -51,7 +53,7 @@ class MenuPage extends React.Component {
   }
 
   renderFooter(width){
-    if(width < 480){
+    if(width <= 580){
       return <FooterMobile />
     }else{
       return <Footer />

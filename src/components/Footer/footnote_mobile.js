@@ -7,11 +7,11 @@ export default class Footnote extends React.Component {
     return(
       <div className="container-fluid bb">
         <div>
-
+          <br />
           <div className="row">
               <div className="col-2">
                 <br />
-                <img className="w100" src="images/avatar.png"/>
+
               </div>
             </div>
 
@@ -57,15 +57,15 @@ export default class Footnote extends React.Component {
                 <div className="col-12">
 
                     <div className="row">
-                        <div className="col-6"/>
-                        <div className="col-2">
-                          <img src= "./images/inst.png" className="w100"/>
+                        <div className="col-3"/>
+                        <div className="col-3 ">
+                          <img src= "./assets/images/insta.png" className="w50 ml25"/>
                         </div>
-                        <div className="col-2">
-                          <img src= "./images/linkd.png" className="w100"/>
+                        <div className="col-3">
+                          <img src= "./assets/images/linked.png" className="w50 ml25"/>
                         </div>
-                        <div className="col-2">
-                          <img src= "./images/face.png" className="w100"/>
+                        <div className="col-3">
+                          <img src= "./assets/images/face.png" className="w50 ml25"/>
                         </div>
 
                       </div>

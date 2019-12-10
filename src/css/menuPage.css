@@ -11,7 +11,14 @@
   height:400px;
 }
 
+@media screen and (max-width: 480px){
+  .moveUpMobile{
+    position: relative !important;
+    bottom:10px !important;
+  }
+}
 @media screen and (max-width:580px){
+
   .menuOP{
     width:50% !important;
     margin-left:25% !important;
