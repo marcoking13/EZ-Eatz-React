@@ -17,7 +17,7 @@ class ShowBox extends React.Component {
       }
       for(var i =0; i < stars; i++){
         html.push(
-          <div className="col-1">
+          <div className="col-2">
             <img alt="star" className="w100" src={Star}/>
           </div>
         );
@@ -43,10 +43,10 @@ class ShowBox extends React.Component {
           <br />
           <div className="row">
             <div className="col-3"/>
-            <div classNAme="col-6">
+            <div classNAme="col-5">
                 <div className="row">
 
-                  <div className="col-5"/>
+                  <div className="col-3"/>
                   {this.renderStars()}
                 </div>
             </div>
