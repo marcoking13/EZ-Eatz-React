@@ -64,6 +64,9 @@ class ShowBox extends React.Component {
         </div>
 
         <div className="col-2"/>
+        <br />
+        <br />
+        <br />
       </div>
     )
   }
