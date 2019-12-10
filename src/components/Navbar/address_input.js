@@ -16,9 +16,9 @@ class AddressInput extends React.Component{
       }
       // Returns the JSX of the addressbox with no input
       return (
-        <div style={this.props.classer} className="moveDownNav">
+        <div style={this.props.classer}>
 
-          <div className="p5px text-center  BBf4" style= {this.props.width} onClick = {()=>{
+          <div className="p5px text-center  className="moveDownNav"  BBf4" style= {this.props.width} onClick = {()=>{
             this.props.changeAddressInput(true);
             }}>{address}
           </div>
@@ -31,7 +31,7 @@ class AddressInput extends React.Component{
         return(
           <div style={this.props.classer2} className="container-fluid">
             <form>
-              <div className="row">
+              <div className="row  moveDownNav">
                 <div className="col-5 p0">
                   <br />
                   <input type="text" onChange={(e)=>{this.props.changeAddress(e)}}  className="form-control mt2_5 " value = {this.props.address}placeholder="Enter street, state and city" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
