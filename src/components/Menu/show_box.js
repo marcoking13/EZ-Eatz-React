@@ -33,11 +33,12 @@ class ShowBox extends React.Component {
         <div className="col-8 moveDownShowMenu jumbotron bw">
 
           <div className="row">
-            <div className="col-4">
+            <div className="col-5">
                 <img className="w100" src = {this.props.foodtruck.logo} />
             </div>
+            <div className="col-1"/>
             <div className="col-6">
-              <h5 className="text-center">{this.props.foodtruck.name}</h5>
+              <h5 className="">{this.props.foodtruck.name}</h5>
             </div>
           </div>
           <br />
