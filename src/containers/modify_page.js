@@ -93,6 +93,74 @@ class ModifyPage extends React.Component {
         return null
       }
     }
+    renderItems(width){
+      if(width >= 580px){
+        return (
+          <div className="row">
+            <div className="col-4"/>
+            <div className="col-4 ">
+
+              <div className="row">
+
+                <div className="col-6">
+                  <button
+                      className="button ui red f13px inverted w100"
+                      onClick={()=>{
+                        this.addItem("menu")
+                        }}>
+                      Add To Cart
+                      </button>
+                    </div>
+
+                    <div className="col-6">
+                      <button
+                        onClick={()=>{
+                        this.addItem("checkout")
+                      }}
+                        className="button ui green f13px inverted w100">
+                        Order and Checkout
+                      </button>
+                    </div>
+
+                  </div>
+
+                </div>
+        )
+      }else{
+        return(
+            <div className="row">
+              <div className="col-2"/>
+              <div className="col-10 ">
+
+                <div className="row">
+
+                  <div className="col-6">
+                    <button
+                      className="button ui red f13px inverted w100"
+                        onClick={()=>{
+                          this.addItem("menu")
+                        }}>
+                        Add To Cart
+                        </button>
+                      </div>
+
+                      <div className="col-6">
+                        <button
+                          onClick={()=>{
+                            this.addItem("checkout")
+                          }}
+                          className="button ui green f13px inverted w100">
+                          Order and Checkout
+                        </button>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              );
+      }
+    }
     // Renders "Remove" text if item has items to remove
     renderRemoveText(){
         if(this.state.item.ingredients.length > 0){
@@ -135,38 +203,12 @@ class ModifyPage extends React.Component {
             <br />
 
             <div className="row">
-              <div className="col-4"/>
-              <div className="col-4 ">
 
-                <div className="row">
+              {this.renderButtons(window.innerWidth)}
 
-                  <div className="col-6">
-                    <button
-                        className="button ui red f13px inverted w100"
-                        onClick={()=>{
-                          this.addItem("menu")
-                          }}>
-                          Add To Cart
-                        </button>
-                      </div>
+            </div>
 
-                    <div className="col-6">
-                      <button
-                        onClick={()=>{
-                          this.addItem("checkout")
-                          }}
-                          className="button ui green f13px inverted w100">
-                          Order and Checkout
-                        </button>
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
+        </div>
       );
 
     }
@@ -214,7 +256,6 @@ class ModifyPage extends React.Component {
         <br />
         <div className="row pb20px">
           {this.renderJumbotron()}
-
         </div>
           <br />
         <div className="modContainer BTR">
