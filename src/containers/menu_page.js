@@ -41,9 +41,10 @@ class MenuPage extends React.Component {
     });
     //----------------------Binders---------------------------------------------------------------------------------
 
-    this.SetItem = this.SetItem.bind(this);
+     this.SetItem = this.SetItem.bind(this);
 
-    window.scrollTo(0,0);
+     window.scrollTo(0,0);
+     
   }
 //-----------------------------------------Saved Selected Item to Cookie and State--------------------------------------
   SetItem(item){
@@ -78,14 +79,15 @@ class MenuPage extends React.Component {
           googleMap={this.state.flag}
           navStyle ="white"
         />
-
+        <br />
         <ShowBox
           truck = {this.props.truck}
           SetAddress = {this.props.SetAddress}
           changeURL = {this.props.changeURL}
           foodtruck = {this.state.foodtruck}
           />
-        <div className="mt2_5 menux">
+          <br />
+        <div className="mt5 menux">
           <MenuBoxes
             SetItem={this.SetItem}
             foodtruck = {this.state.foodtruck}

@@ -24,56 +24,59 @@ class ShowBox extends React.Component {
       }
       return html;
     }
+
+  renderDesktopShowbox(){
+    return(
+      <div className="row">
+        <div className="col-3"/>
+
+        <div className="col-6 jumbotron bw">
+
+          <div className="row">
+            <div className="col-2">
+                <img className="w100" src = {this.props.foodtruck.logo} />
+            </div>
+            <div className="col-10">
+              <h5 className="text-center">{this.props.foodtruck.name}</h5>
+            </div>
+          </div>
+          <br />
+          <div className="row">
+            <div className="col-4"/>
+            <div classNAme="col-4">
+                <div className="row">
+                  <div className="col-4"/>
+                  {this.renderStars()}
+                </div>
+            </div>
+            <div className="col-4"/>
+          </div>
+          <br />
+          <div className="row">
+              <div className="col-3"/>
+              <div className="col-6">
+                <button className="button w100 ui inverted blue">Current Location</button>
+              </div>
+          </div>
+
+        </div>
+
+        <div className="col-3"/>
+      </div>
+    )
+  }
   render(){
     // background of foodtruck
     var background = this.props.foodtruck.background;
 
-    return(
-      <div className="container-fluid ">
-
-        <img alt="banner" className="banner w100 cover"src={background}/>
-
-          <div className="row posAb w100 menuBoxB">
-            <div className="col-3"/>
-
-            <div className="col-6 moveShowBoxUpMobile jumbotron bw pt5">
-                <img alt="logo" src={this.props.foodtruck.logo} className="w10 posAb logoMenu"/>
-                <h4 className="text-center">{this.props.foodtruck.name}</h4>
-
-                <div className="row">
-                  <div className="col-4"/>
-                  <div className="col-4">
-                    <div className="row">
-                      <div className="col-4"/>
-                      {this.renderStars()}
-                    </div>
-                  </div>
-                  <div className="col-4"/>
-                </div>
-
-                <p className="text-center bw w50 cb ml25 br10px cg">All American</p>
-
-                <div className="buttonContainer ml25">
-                  <button className="menuOP bw fl cb ml10 mt2_5 fl br10px BWW ml10 w50 btn-secondary btn"
-                    onClick = {()=>{
-                      var formattedAddress = this.props.truck.address.street + "," + this.props.truck.address.state + "," + this.props.truck.address.zip
-                      this.props.SetAddress(formattedAddress);
-                      this.props.changeURL("map");
-                    }}
-
-                  >View in Maps</button>
-
-                </div>
-
-            </div>
-
-            <div className="col-3"/>
-
+    if(window.innerWidth >= 480){
+        return(
+          <div className="container-fluid">
+            <img className="imageSheet" src={this.props.foodtruck.background}/>
+            {this.renderDesktopShowbox()}
           </div>
-
-    </div>
-  );
-  }
+        );
+    }
 }
-
-export default ShowBox;
+}
+export default ShowBox
