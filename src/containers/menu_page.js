@@ -80,6 +80,7 @@ class MenuPage extends React.Component {
           navStyle ="white"
         />
         <br />
+          <br />
         <ShowBox
           truck = {this.props.truck}
           SetAddress = {this.props.SetAddress}

@@ -210,7 +210,8 @@ class ModifyPage extends React.Component {
           address = {this.props.address}
           changeURL = {this.props.changeURL}
           navStyle ="white"/>
-
+        <br />
+        <br />
         <div className="row pb20px">
           {this.renderJumbotron()}
 

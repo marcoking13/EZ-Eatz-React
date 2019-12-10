@@ -32,11 +32,12 @@ class AddressInput extends React.Component{
           <div style={this.props.classer2} className="container-fluid">
             <form>
               <div className="row">
-                <div className="col-5">
+                <div className="col-5 p0">
                   <br />
                   <input type="text" onChange={(e)=>{this.props.changeAddress(e)}}  className="form-control mt2_5 " value = {this.props.address}placeholder="Enter street, state and city" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
                 </div>
-                <div className="col-5">
+                <div className="col-1"/>
+                <div className="col-5 p0">
                   <br />
                   <button className="button ui mt2_5 black w100 fl" onClick = {(event)=>{
                     event.preventDefault();
