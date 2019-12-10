@@ -71,13 +71,13 @@ class NavBarHome extends React.Component {
   renderMobileJSX(){
     return(
       <div className="row" style={{paddingBottom:"10px"}}>
+        <div className="col-1"/>
         <div className="col-3">
           <MobileNav  changeURL = {this.props.changeURL} />
         </div>
 
+        <div className="col-5">
 
-          <div className="col-6">
-            
             <AddressInput
               zip = {this.state.zip}
               addressAvailable = {this.state.addressAvailable}
@@ -93,9 +93,7 @@ class NavBarHome extends React.Component {
               formatted_address = {this.state.formatted_address}
             />
           </div>
-          <div className="col-3">
-              {this.renderMapIcon()}
-          </div>
+
         </div>
 
 
