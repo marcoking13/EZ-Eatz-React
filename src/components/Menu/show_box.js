@@ -25,6 +25,48 @@ class ShowBox extends React.Component {
       return html;
     }
 
+  renderMobileShowbox(){
+    return(
+      <div className="row">
+        <div className="col-2"/>
+
+        <div className="col-8 jumbotron bw">
+
+          <div className="row">
+            <div className="col-4">
+                <img className="w100" src = {this.props.foodtruck.logo} />
+            </div>
+            <div className="col-6">
+              <h5 className="text-center">{this.props.foodtruck.name}</h5>
+            </div>
+          </div>
+          <br />
+          <div className="row">
+            <div className="col-3"/>
+            <div classNAme="col-6">
+                <div className="row">
+
+                  <div className="col-3"/>
+                  {this.renderStars()}
+                </div>
+            </div>
+            <div className="col-3"/>
+          </div>
+          <br />
+          <div className="row">
+              <div className="col-3"/>
+              <div className="col-6">
+                <button className="button w100 ui inverted blue">Current Location</button>
+              </div>
+          </div>
+
+        </div>
+
+        <div className="col-2"/>
+      </div>
+    )
+  }
+
   renderDesktopShowbox(){
     return(
       <div className="row">
@@ -36,16 +78,18 @@ class ShowBox extends React.Component {
             <div className="col-2">
                 <img className="w100" src = {this.props.foodtruck.logo} />
             </div>
-            <div className="col-10">
-              <h5 className="text-center">{this.props.foodtruck.name}</h5>
+            <div className="col-2"/>
+            <div className="col-8">
+              <h5>{this.props.foodtruck.name}</h5>
             </div>
           </div>
           <br />
           <div className="row">
             <div className="col-4"/>
-            <div classNAme="col-4">
+            <div classNAme="col-3">
                 <div className="row">
-                  <div className="col-4"/>
+
+                  <div className="col-5"/>
                   {this.renderStars()}
                 </div>
             </div>
@@ -65,6 +109,7 @@ class ShowBox extends React.Component {
       </div>
     )
   }
+
   render(){
     // background of foodtruck
     var background = this.props.foodtruck.background;
@@ -80,7 +125,7 @@ class ShowBox extends React.Component {
       return(
         <div className="container-fluid">
           <img className="imageSheet" src={this.props.foodtruck.background}/>
-          {this.renderDesktopShowbox()}
+          {this.renderMobileShowbox()}
         </div>
       );
     }
