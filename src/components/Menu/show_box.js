@@ -30,7 +30,7 @@ class ShowBox extends React.Component {
       <div className="row">
         <div className="col-2"/>
 
-        <div className="col-8 jumbotron bw">
+        <div className="col-8 moveDownShowMenu jumbotron bw">
 
           <div className="row">
             <div className="col-4">
@@ -46,11 +46,11 @@ class ShowBox extends React.Component {
             <div classNAme="col-6">
                 <div className="row">
 
-                  <div className="col-3"/>
+                  <div className="col-5"/>
                   {this.renderStars()}
                 </div>
             </div>
-            <div className="col-3"/>
+            <div className="col-2"/>
           </div>
           <br />
           <div className="row">
@@ -114,7 +114,7 @@ class ShowBox extends React.Component {
     // background of foodtruck
     var background = this.props.foodtruck.background;
 
-    if(window.innerWidth >= 480){
+    if(window.innerWidth > 580){
         return(
           <div className="container-fluid">
             <img className="imageSheet" src={this.props.foodtruck.background}/>

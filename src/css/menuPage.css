@@ -20,7 +20,10 @@
 
 
 @media screen and (max-width:580px){
-
+  .moveDownShowMenu{
+    position: relative;
+    top:40px;
+  }
   .menuOP{
     width:50% !important;
     margin-left:25% !important;
