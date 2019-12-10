@@ -22,7 +22,7 @@
 @media screen and (max-width:580px){
   .moveDownShowMenu{
     position: relative;
-    top:100px;
+    top:30px;
   }
   .menuOP{
     width:50% !important;
@@ -50,7 +50,7 @@
     margin-left: 5%;
   }
   .menuBoxB{
-    top:30%;
+    top:50%;
     position: absolute;
   }
   .buttonContainer{
