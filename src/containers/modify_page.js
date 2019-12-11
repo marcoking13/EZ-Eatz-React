@@ -178,8 +178,8 @@ class ModifyPage extends React.Component {
               <p className="modTitle text-center mono f18px mt2_5">Add Order</p>
 
               <div className="row">
-                <div className="col-10"/>
-                <div className="col-1">
+                <div className="col-9"/>
+                <div className="col-2">
                   <img className="w100" src = {this.state.item.image} />
                 </div>
               </div>
