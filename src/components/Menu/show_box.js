@@ -30,7 +30,7 @@ class ShowBox extends React.Component {
       <div className="row">
         <div className="col-2"/>
 
-        <div className="col-8 moveDownShowMenu jumbotron bw">
+        <div className="col-8 moveDownShowMenu BB44 jumbotron bw">
 
           <div className="row">
             <div className="col-4">

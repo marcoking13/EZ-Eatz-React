@@ -84,7 +84,7 @@ class NavBarHome extends React.Component {
               SetAddress = {this.props.SetAddress}
               width = {{width:"200px"}}
               classer={{opacity:1}}
-              classer2={{position:"absolute",top:"3%",left:"-4%"}}
+              classer2={{position:"absolute",top:"3%",left:"-5%"}}
               PostAddress = {this.props.PostAddress}
               formatted_address = {this.state.formatted_address}
             />
