@@ -111,7 +111,7 @@ class ModifyPage extends React.Component {
                       Add To Cart
                       </button>
                     </div>
-
+                    <br />
                     <div className="col-6">
                       <button
                         onClick={()=>{
