@@ -33,10 +33,10 @@ class AddressInput extends React.Component{
           <div style={this.props.classer2} className="container-fluid">
             <form>
               <div className="row ">
-                <div className="col-2"/>
-                <div className="col-6 p0">
+                <div className="col-1"/>
+                <div className="col-5 p0">
                   <br />
-                  <input type="text" onChange={(e)=>{this.props.changeAddress(e)}}  className="form-control  moveUpNav" value = {this.props.address}placeholder="Enter street, state and city" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                  <input type="text" onChange={(e)=>{this.props.changeAddress(e)}}  className="form-control " value = {this.props.address}placeholder="Enter street, state and city" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
                 </div>
 
                 <div className="col-4 p0">

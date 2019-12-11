@@ -128,7 +128,7 @@ class ModifyPage extends React.Component {
     }else{
         return(
             <div className="row">
-              <div className='col-4'/>
+              <div className='col-3'/>
               <div className="col-6">
                     <br />
                     <button
@@ -141,7 +141,7 @@ class ModifyPage extends React.Component {
                       </div>
                 <div className='col-2'/>
                   <br />
-                <div className='col-4'/>
+                <div className='col-3'/>
                     <br />
                       <div className="col-6">
                       <br />
@@ -165,7 +165,7 @@ class ModifyPage extends React.Component {
         if(this.state.item.ingredients.length > 0){
           return   <p className="modTitle mt2_5 text-center mono f18px">Remove</p>
         }else{
-          return null
+          return <div />
         }
       }
     //Renders the item image and changes the size depending on the pixel width
