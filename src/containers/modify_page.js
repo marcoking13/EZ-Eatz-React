@@ -130,12 +130,10 @@ class ModifyPage extends React.Component {
       }else{
         return(
             <div className="row">
+              <div className='col-3'/>
+              <div className="col-6">
 
-              <div className="col-12 ">
 
-                <div className="row">
-
-                  <div className="col-6">
                     <button
                       className="button ui red f13px inverted w100"
                         onClick={()=>{
@@ -144,7 +142,8 @@ class ModifyPage extends React.Component {
                         Add To Cart
                         </button>
                       </div>
-
+                <div className='col-3'/>
+                <div className='col-3'/>
                       <div className="col-6">
                         <button
                           onClick={()=>{
@@ -157,8 +156,7 @@ class ModifyPage extends React.Component {
 
                     </div>
 
-                  </div>
-                </div>
+
               );
       }
     }
