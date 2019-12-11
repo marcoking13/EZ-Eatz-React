@@ -17,12 +17,20 @@ class ShowBox extends React.Component {
         stars = this.props.foodtruck.stars;
       }
       for(var i =0; i < stars; i++){
-        html.push(
-          <div className="col-1">
-            <img alt="star" className="w100" src={Star}/>
-          </div>
-        );
-      }
+        if(window.innerWidth >= 580){
+          html.push(
+              <div className="col-1">
+                <img alt="star" className="w100" src={Star}/>
+              </div>
+            );
+          }else{
+            html.push(
+                <div className="col-3">
+                  <img alt="star" className="w100" src={Star}/>
+                </div>
+              );
+          }
+        }
       return html;
     }
 
@@ -50,7 +58,7 @@ class ShowBox extends React.Component {
         </div>
 
 
-        <br />
+
 
           <div className="row">
               <div className="col-2"/>
@@ -88,7 +96,7 @@ class ShowBox extends React.Component {
             <div classNAme="col-3">
                 <div className="row">
 
-                  <div className="col-4"/>
+                  <div className="col-2"/>
                   {this.renderStars()}
                 </div>
             </div>
