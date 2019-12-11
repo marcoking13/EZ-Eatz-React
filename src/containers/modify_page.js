@@ -142,8 +142,8 @@ class ModifyPage extends React.Component {
                         Add To Cart
                         </button>
                       </div>
-                <div className='col-3'/>
-                <div className='col-3'/>
+                <div className='col-2'/>
+                <div className='col-4'/>
                       <div className="col-6">
                         <button
                           onClick={()=>{
