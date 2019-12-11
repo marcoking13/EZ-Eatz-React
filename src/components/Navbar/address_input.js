@@ -30,7 +30,7 @@ class AddressInput extends React.Component{
       }else{
 
         return(
-          <div style={this.props.classer2}>
+          <div style={this.props.classer2} className="container-fluid">
             <form>
               <div className="row ">
                 <div className="col-2"/>
