@@ -87,8 +87,8 @@ class MenuPage extends React.Component {
           changeURL = {this.props.changeURL}
           foodtruck = {this.state.foodtruck}
           />
-        <br />
-        <div className="mt5 menux">
+
+        <div className="mt2_5 menux">
           <MenuBoxes
             SetItem={this.SetItem}
             foodtruck = {this.state.foodtruck}

@@ -15,11 +15,13 @@
   height:400px;
   width:100%;
   position: absolute;
-  top:15%;
+  top:18%;
 }
-
+.jumbotron{
+    border:5px solid grey !important;
+}
 .BB44{
-  border:2px solid #f4f4f4;
+  border:5px solid grey !important;
 }
 @media screen and (max-width:580px){
   .moveDownShowMenu{

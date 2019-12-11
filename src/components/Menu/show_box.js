@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./../../css/home_page.css";
+import "./../../css/menuPage.css";
 
 import Star from "./../../images/star.png"
 
@@ -72,7 +73,7 @@ class ShowBox extends React.Component {
       <div className="row">
         <div className="col-3"/>
 
-        <div className="col-6 jumbotron bw">
+        <div className="col-6 BB44 jumbotron bw">
 
           <div className="row">
             <div className="col-2">
