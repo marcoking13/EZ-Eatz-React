@@ -142,10 +142,11 @@ class ModifyPage extends React.Component {
                         </button>
                       </div>
                 <div className='col-2'/>
-
+                  <br />
                 <div className='col-4'/>
                     <br />
                       <div className="col-6">
+                      <br />
                         <button
                           onClick={()=>{
                             this.addItem("checkout")
