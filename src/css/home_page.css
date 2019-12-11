@@ -9,7 +9,7 @@
   float:left;
 }
 .moveUpNav{
-  top:3%;
+  top:3.5% !important;
   position: absolute;
   left: 15%;
 
