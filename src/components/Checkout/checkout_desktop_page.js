@@ -90,7 +90,7 @@ class MobileCheckout extends React.Component {
                       </div>
 
                       <div className="mt15 intructionContainer">
-                        <button className="w100 paypalButton"><img className="w50 paypal" src="assets/images/paypal.png"/></button>
+                        <button className="w100 ml5 paypalButton"><img className="w50 paypal" src="assets/images/paypal.png"/></button>
                       </div>
 
                     </div>
