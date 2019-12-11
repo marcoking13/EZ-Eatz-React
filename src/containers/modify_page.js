@@ -123,7 +123,7 @@ class ModifyPage extends React.Component {
                   </div>
 
 
-    
+
       )
     }else{
         return(
@@ -201,12 +201,11 @@ class ModifyPage extends React.Component {
             </div>
             <br />
 
-            <div className="row">
+
 
               {this.renderButtons(window.innerWidth)}
 
-            </div>
-
+            
         </div>
       );
 
