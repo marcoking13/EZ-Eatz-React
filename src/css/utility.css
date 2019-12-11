@@ -103,6 +103,9 @@
 .bBBR{
   border-bottom:2px solid red;
 }
+.BBR{
+    border-bottom:2px solid red;
+}
 .w150{
   width:150%;
 }

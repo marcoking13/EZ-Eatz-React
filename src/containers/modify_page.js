@@ -269,7 +269,7 @@ class ModifyPage extends React.Component {
           </div>
 
         </div>
-        <div className="modContainer BTR">
+        <div className="modContainer BTR BBR">
 
             {this.renderRemoveText()}
 
@@ -279,6 +279,9 @@ class ModifyPage extends React.Component {
                   removeIngredient = {this.removeIngredient}
                   item = {this.state.item} />
           </div>
+
+          <br />
+
 
         </div>
           {this.renderFooter(window.innerWidth)}
