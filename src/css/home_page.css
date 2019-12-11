@@ -8,6 +8,12 @@
   margin-bottom: 2%;
   float:left;
 }
+.moveUpNav{
+  top:2.5%;
+  position: absolute;
+
+
+}
 
 
 @keyframes moveUp{
@@ -33,14 +39,11 @@
   }
 }
 @media screen and(max-width:480px){
-  .moveDownNav{
-    position: relative !important;
-    top:30px !important;
-
-  }
   .moveUpNav{
-    position: relative !important;
-    top:-30px !important;
+    top:2.5%;
+    position: absolute;
+    width:200px;
+
   }
 
 
