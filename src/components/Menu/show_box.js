@@ -42,11 +42,11 @@ class ShowBox extends React.Component {
           </div>
           <br />
           <div className="row">
-            <div className="col-3"/>
-            <div classNAme="col-3">
+            <div className="col-2"/>
+            <div classNAme="col-5">
                 <div className="row">
 
-                  <div className="col-3"/>
+                  <div className="col-2"/>
                   {this.renderStars()}
                 </div>
             </div>
