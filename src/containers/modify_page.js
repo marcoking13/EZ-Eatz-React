@@ -119,11 +119,7 @@ class ModifyPage extends React.Component {
                          Checkout
                       </button>
                     </div>
-
                   </div>
-
-
-
       )
     }else{
         return(
@@ -153,10 +149,7 @@ class ModifyPage extends React.Component {
                            Checkout
                         </button>
                       </div>
-
                     </div>
-
-
               );
       }
     }
@@ -201,11 +194,7 @@ class ModifyPage extends React.Component {
             </div>
             <br />
 
-
-
-              {this.renderButtons(window.innerWidth)}
-
-
+            {this.renderButtons(window.innerWidth)}
         </div>
       );
 
@@ -220,13 +209,10 @@ class ModifyPage extends React.Component {
           remove:this.state.remove,
         }
       }
-
       this.props.addToOrder(order);
       this.props.changeURL(url);
     }
-
     //----------------Footnote--------------------------
-
     renderFooter(width){
       if(width < 480){
         return <FooterMobile />
@@ -268,7 +254,7 @@ class ModifyPage extends React.Component {
           </div>
 
         </div>
-        <div className="modContainer BTR BBR">
+        <div className="modContainer BTR ">
 
             {this.renderRemoveText()}
 
@@ -278,9 +264,6 @@ class ModifyPage extends React.Component {
                   removeIngredient = {this.removeIngredient}
                   item = {this.state.item} />
           </div>
-
-        
-
 
         </div>
           {this.renderFooter(window.innerWidth)}
