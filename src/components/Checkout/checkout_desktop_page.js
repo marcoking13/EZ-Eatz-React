@@ -73,7 +73,7 @@ class MobileCheckout extends React.Component {
                 <div className="pickupInputContainer">
                       <Dropdown drops = {12}/>
                       <Dropdown drops = {60}/>
-                      </div>
+                </div>
 
                       </div>
 

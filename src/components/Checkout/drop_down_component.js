@@ -12,7 +12,7 @@ class DropDown extends React.Component {
       }
 
         return(
-          <select className="fl w35 ml10 mt5 text-center br10px selecter">
+          <select className="fl w50  mt5 text-center br10px selecter">
             {dropArray}
           </select>
         )

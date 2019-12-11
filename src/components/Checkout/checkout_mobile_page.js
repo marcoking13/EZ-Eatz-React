@@ -50,6 +50,8 @@ class MobileCheckout extends React.Component {
       return(
         <div className="container-fluid checkoutPageMobile">
           <Navbar changeURL = {this.props.changeURL} orders= {this.props.orders}/>
+          <br />
+          <br />
           <div className="ml35 mt5 pickupContainerMobile">
               <h6 className="ml10 pickupTitleMobile"> Pickup Time </h6>
               <input type="number" placeholder = "Hours" className="w25 fl mt5 text-center pickupTimeMobile"/>
