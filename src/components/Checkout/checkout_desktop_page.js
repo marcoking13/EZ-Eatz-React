@@ -65,7 +65,7 @@ class MobileCheckout extends React.Component {
           <div className="row">
 
             <div className="col-1" />
-            <div className="col-4 bw borderR pt2_5 jumbotron">
+            <div className="col-3 bw borderR pt2_5 jumbotron">
 
               <div className="w50 ml25 pickupContainer">
                 <h6 className="text-center">Pick Up Time</h6>
@@ -95,7 +95,7 @@ class MobileCheckout extends React.Component {
 
                     </div>
 
-                    <div className="col-6 bw jumbotron">
+                    <div className="col-5 bw jumbotron">
                       {this.renderFoodtruckData()}
                     <div className="container-fluid">
 
