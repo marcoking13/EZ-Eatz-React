@@ -80,14 +80,14 @@ class MenuPage extends React.Component {
           navStyle ="white"
         />
         <br />
-          <br />
+        <br />
         <ShowBox
           truck = {this.props.truck}
           SetAddress = {this.props.SetAddress}
           changeURL = {this.props.changeURL}
           foodtruck = {this.state.foodtruck}
           />
-          <br />
+        <br />
         <div className="mt5 menux">
           <MenuBoxes
             SetItem={this.SetItem}
