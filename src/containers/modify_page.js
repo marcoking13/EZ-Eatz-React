@@ -111,7 +111,7 @@ class ModifyPage extends React.Component {
                       Add To Cart
                       </button>
                     </div>
-                    <br />
+
                     <div className="col-6">
                       <button
                         onClick={()=>{
@@ -132,8 +132,7 @@ class ModifyPage extends React.Component {
             <div className="row">
               <div className='col-4'/>
               <div className="col-6">
-
-
+                    <br />
                     <button
                       className="button ui red f13px inverted w100"
                         onClick={()=>{
@@ -143,7 +142,9 @@ class ModifyPage extends React.Component {
                         </button>
                       </div>
                 <div className='col-2'/>
+
                 <div className='col-4'/>
+                    <br />
                       <div className="col-6">
                         <button
                           onClick={()=>{
