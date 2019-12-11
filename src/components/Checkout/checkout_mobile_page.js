@@ -55,12 +55,12 @@ class MobileCheckout extends React.Component {
               <input type="number" placeholder = "Hours" className="w25 fl mt5 text-center pickupTimeMobile"/>
               <input type="number" placeholder = "Minutes" className="w25 fl mt5 text-center pickupTimeMobile"/>
           </div>
-
+          <br />
           <div className="mt5 tipBoxMobile">
               <h6 className="mt15 text-center tipBoxMobileTitle"> Tip Amount </h6>
               <TipBoxes changeTip = {this.props.changeTip} tip = {this.props.tip} />
           </div>
-
+          <br />
           <div className="mt2_5 orderMobileContainer ">
 
             <ul className="list-group">
@@ -70,7 +70,7 @@ class MobileCheckout extends React.Component {
 
 
           </div>
-
+              <br />
           <div className="mt5 BBB payContainerMobile">
             <h6 className="mt5 text-center payTotalTitle">Total</h6>
             <p className="text-center totalMobile">{"$"+this.props.totalTip.toFixed(2)}</p>

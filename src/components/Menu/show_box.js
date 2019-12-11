@@ -50,7 +50,7 @@ class ShowBox extends React.Component {
             </div>
           </div>
 
-        
+
 
         <div className="row">
           <div className="col-4"/>
@@ -90,13 +90,13 @@ class ShowBox extends React.Component {
               <h5>{this.props.foodtruck.name}</h5>
             </div>
           </div>
-          <br />
+        
           <div className="row">
             <div className="col-4"/>
             <div classNAme="col-3">
                 <div className="row">
 
-                  <div className="col-2"/>
+                  <div className="col-4"/>
                   {this.renderStars()}
                 </div>
             </div>
