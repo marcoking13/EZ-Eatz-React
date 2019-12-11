@@ -41,7 +41,7 @@ class AddressInput extends React.Component{
 
                 <div className="col-4 p0">
                   <br />
-                  <button className="button ui  black w100 fl moveUpNav" onClick = {(event)=>{
+                  <button className="button ui  black w100 fl " onClick = {(event)=>{
                     event.preventDefault();
                     cookies.remove("address",{path:"/"});
                     cookies.save("address",this.props.address,{path:"/"});
