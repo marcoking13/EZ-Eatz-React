@@ -98,7 +98,7 @@ class ModifyPage extends React.Component {
         return (
           <div className="row">
 
-                <div className="col-2"/>
+                <div className="col-1"/>
 
                 <div className="col-4">
                   <button
