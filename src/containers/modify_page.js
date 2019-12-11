@@ -97,12 +97,10 @@ class ModifyPage extends React.Component {
       if(width >= 580){
         return (
           <div className="row">
-            <div className="col-4"/>
-            <div className="col-4 ">
 
-              <div className="row">
+                <div className="col-3"/>
 
-                <div className="col-6">
+                <div className="col-4">
                   <button
                       className="button ui red f13px inverted w100"
                       onClick={()=>{
@@ -112,7 +110,7 @@ class ModifyPage extends React.Component {
                       </button>
                     </div>
 
-                    <div className="col-6">
+                    <div className="col-4">
                       <button
                         onClick={()=>{
                         this.addItem("checkout")
@@ -124,10 +122,10 @@ class ModifyPage extends React.Component {
 
                   </div>
 
-                </div>
-        </div>
+
+    
       )
-      }else{
+    }else{
         return(
             <div className="row">
               <div className='col-4'/>
@@ -178,12 +176,12 @@ class ModifyPage extends React.Component {
               <p className="modTitle text-center mono f18px mt2_5">Add Order</p>
 
               <div className="row">
-                <div className="col-9"/>
-                <div className="col-2">
+                <div className="col-10"/>
+                <div className="col-1 p0">
                   <img className="w100" src = {this.state.item.image} />
                 </div>
               </div>
-
+              <br />
               <div className="row">
                 <div className="col-4"/>
                 <div className="col-6">
