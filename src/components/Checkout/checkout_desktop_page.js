@@ -63,7 +63,7 @@ class MobileCheckout extends React.Component {
         <div className="container-fluid">
           <Navbar changeURL = {this.props.changeURL} orders= {this.props.orders}/>
           <div className="row">
-
+            <br />
             <div className="col-1" />
             <div className="col-3 bw borderR pt2_5 jumbotron">
 
@@ -76,7 +76,7 @@ class MobileCheckout extends React.Component {
                 </div>
 
                       </div>
-
+                      <br />
                       <div className="mt25 tipContainer">
                         <h6 className="text-center ml5 ">Choose Tip Amount</h6>
                         <div className="tipBoxContainer">
