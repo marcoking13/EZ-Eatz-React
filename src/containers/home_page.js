@@ -115,7 +115,7 @@ class HomePage extends React.Component {
               navStyle ="white"
               />
               <br />
-          
+
               <h4 className="ml5 mb1 text-center posRel resultTitle">Food Trucks</h4>
               <div className="divder2 mt2_5"/>
 
@@ -130,26 +130,26 @@ class HomePage extends React.Component {
     );
 
 
-  }else{
-    return (
-      <div>
+    }else{
+      return (
+        <div>
 
-        <HomePageNav
-            PostAddress = {this.props.PostAddress}
-            changeZip = {this.props.zip}
-            changeAddress = {this.props.changeAddress}
-            SetAddress = {this.props.SetAddress}
-            address = {this.props.address}
-            changeFlag = {this.changeFlag}
-            changeURL = {this.props.changeURL}
-            navStyle ="white"
-          />
-          <div className="divder2"/>
-          <br/>
-          <ul className="list-group ">
-          <h4 className="ml5 resultTitle text-center posRel mb1">Food Trucks</h4>
-          <br/>
-            {this.foodTruckLoop()}
+          <HomePageNav
+              PostAddress = {this.props.PostAddress}
+              changeZip = {this.props.zip}
+              changeAddress = {this.props.changeAddress}
+              SetAddress = {this.props.SetAddress}
+              address = {this.props.address}
+              changeFlag = {this.changeFlag}
+              changeURL = {this.props.changeURL}
+              navStyle ="white"
+            />
+            <div className="divder2"/>
+            <br/>
+            <ul className="list-group ">
+              <h4 className="ml5 resultTitle text-center posRel mb1">Food Trucks</h4>
+              <br/>
+              {this.foodTruckLoop()}
           </ul>
           <br />
           <br />

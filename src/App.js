@@ -12,7 +12,7 @@ import ModifyPage from "./containers/modify_page";
 import CheckoutPage from "./containers/checkout_page.js";
 import HomePage from "./containers/home_page.js";
 import MenuPage from "./containers/menu_page.js";
-import GoogleMap from "./containers/google_map.js";
+import GooglePage from "./containers/google_page.js";
 import SignupForm from "./containers/signup_form.js";
 
 
@@ -21,13 +21,17 @@ import SignupForm from "./containers/signup_form.js";
 class App extends Component {
   constructor(props){
     super(props);
+
     var orders = [];
     var truck;
-    var urlCookie = "login"
+    var urlCookie = "login";
+
     if(cookie.load("account",{path:"/"})){
       urlCookie = "home";
     }
+
     var foodtruckID  = cookie.load("foodtruckCurrent",{path:"/"});
+
     cookie.remove("currentItem",{path:"/"});
     cookie.remove("foodtruck",{path:"/"});
 
@@ -42,7 +46,9 @@ class App extends Component {
 
           break;
         }
+
       }
+
     });
 
     if(cookie.load("orders",{path:"/"}) && cookie.load("foodtruck",{path:"/"})){
@@ -78,12 +84,12 @@ class App extends Component {
       if(cookie.load("account",{path:"/"})){
         this.Initialization();
       }
-        this.ClearCookieTimer();
+      this.ClearCookieTimer();
+
   }
 
   componentDidUpdate(){
     cookie.save("orders",this.state.orders,{path:"/"});
-
   }
 
   SetTruck(truck){
@@ -209,7 +215,7 @@ class App extends Component {
                 return <CheckoutPage orders = {this.state.orders} changeURL={this.changeURL} />
           }
          if(this.state.url === "map"){
-                return <GoogleMap  orders= {this.state.orders}  ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />
+                return <GooglePage  orders= {this.state.orders}  ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />
           }
          if(this.state.url === "modify"){
                 return <ModifyPage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} addToOrder = {this.addToOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} item = {this.state.item}changeURL={this.changeURL} />

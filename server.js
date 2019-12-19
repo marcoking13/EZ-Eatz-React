@@ -62,6 +62,10 @@ app.post("/api/login",(req,res)=>{
   VerifyUsername(req,res);
 });
 
+app.post("/api/address",(req,res)=>{
+  PostAddressToUser(req,res);
+})
+
 app.get("/api/users",(req,res)=>{
   PostUsersToAPI(req,res);
 });
@@ -97,6 +101,26 @@ var PostFoodtrucksToAPI= (req,res) =>{
   });
 }
 
+var PostAddressToUser = (req,res) => {
+  MongoClient.connect(url,(err,db)=>{
+      var dbO = db.db("heroku_9tlg8v4r");
+      console.log(req.body);
+
+      dbO.collection("users").remove({"account.username":req.body.account.username}).then((response)=>{console.log(response.result)});
+
+      dbO.collection("users").insertOne({
+        name:req.body.account.username,
+        profilePhoto:"",
+        address:req.body.address,
+        orders:[],
+        account:{
+          username:req.body.account.username,
+          password:req.body.account.password
+        }
+      }).then((resp)=>{console.log("L")});
+    });
+}
+
 var PostCurrentUserToAPI = (req,res)=>{
 
   MongoClient.connect(url,(err,db)=>{
@@ -124,9 +148,9 @@ var SignupUser = (req,res)=>{
       }
       if(!found){
         dbO.collection("users").insertOne({
-          name:req.body.first + " " + req.body.last,
-          address:"",
+          name:req.body.username,
           profilePhoto:"",
+          address:"United States of America",
           orders:[],
           account:{
             username:req.body.username,
@@ -145,7 +169,6 @@ var UpdateAddress = (req,res)=>{
 
   Users.updateOne({"account.username": userData.username}, {$set: { address: address}}, function (err, user) {
        if (err) throw error
-       console.log(user);
        console.log("update user complete");
 
    });
@@ -190,7 +213,7 @@ var  mongooseStartup = () => {
 
       var dbO = db.db("heroku_9tlg8v4r");
 
-
+    
       dbO.collection("foodtrucks").find({}).toArray(function(err, result) {
           if (err) throw err;
           console.log(result);

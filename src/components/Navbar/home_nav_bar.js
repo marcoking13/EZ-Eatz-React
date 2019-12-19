@@ -108,17 +108,7 @@ class NavBarHome extends React.Component {
           </div>
 
         <div className='col-4'>
-          <AddressInput
-              zip = {this.state.zip}
-              addressAvailable = {this.state.addressAvailable}
-              address = {this.props.address}
-              changeAddressInput = {this.changeAddressInput}
-              changeZip = {this.props.changeZip}
-              changeAddress = {this.props.changeAddress}
-              SetAddress = {this.props.SetAddress}
-              PostAddress = {this.props.PostAddress}
-              formatted_address = {this.state.formatted_address}
-              />
+      
         </div>
 
         <div className='col-4'>
