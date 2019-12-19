@@ -34,7 +34,7 @@ const MyMapComponent = compose(
         lat:props.lat,
         lng:props.lng
       }}
-
+      key = {props.id}
       icon= {{
         url:Ringer,
         scaledSize: new window.google.maps.Size(25,25)
@@ -45,6 +45,16 @@ const MyMapComponent = compose(
 
             position={{ lat: marker.lat, lng: marker.lng }}
             icon = {{url:marker.url, scaledSize: new window.google.maps.Size(25,25)}}
+
+            onClick = {()=>{
+              console.log(marker);
+              var foodtruckID = marker.id;
+              cookies.remove("foodtruckCurrent",{path:"/"});
+              cookies.remove("orders",{path:"/"});
+              cookies.save("foodtruckCurrent",foodtruckID,{path:"/"});
+              props.ClearOrder();
+              props.changeURL("menu");
+            }}
 
           />
 
@@ -97,7 +107,7 @@ export default class Maps extends React.Component {
               var lat = trucks[i].lat;
               var lng = trucks[i].lng;
 
-              markers.push({lat:lat,lng:lng,url:trucks[i].mapLogo});
+              markers.push({lat:lat,lng:lng,url:trucks[i].mapLogo,id:trucks[i].objectID});
             }
             console.log(markers);
             this.setState({markers:markers})
@@ -201,7 +211,7 @@ export default class Maps extends React.Component {
               <br />
 
               <div style={{width:"100vw",height:"100vh"}}>
-                <MyMapComponent  markers = {this.state.markers} lat = {this.state.lat} lng = {this.state.lng}/>
+                <MyMapComponent  changeURL = {this.props.changeURL} ClearOrder = {this.props.ClearOrder} markers = {this.state.markers} lat = {this.state.lat} lng = {this.state.lng}/>
               </div>
 
             </div>

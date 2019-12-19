@@ -1789,7 +1789,7 @@ address:{
 {
   ownerID:"12345678webgfhurfi3ufin43uifb4ivn4uivgbdj328jd389omss",
   stars:2,
-  objectID:"sjkdxm33103vub3i4vbu4f 34uif5474578455785478457845784578542dn992d201ks1",
+  objectID:"sjkdxm33103vub3i4vbu4f34uif5474578455785478457845784578542dn992d201ks1",
   name:"Acai Shop",
   lat:33.585430,
   lng:-111.922610,
