@@ -163,9 +163,9 @@ export default class Maps extends React.Component {
             <div className="row">
               <br />
 
-              <div className="col-2"/>
+              <div className="col-1"/>
 
-              <div className="col-5">
+              <div className="col-6">
                 <br />
 
                   <input  value = {this.state.place} className="form-control bb text-center cw "
