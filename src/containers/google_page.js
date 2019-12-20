@@ -165,24 +165,26 @@ export default class Maps extends React.Component {
 
               <div className="col-5">
                 <br />
-                <input  value = {this.state.place} className="form-control bb text-center cw "
-                  onChange = {(e)=>{
-                    e.preventDefault();
-                    var value = e.target.value;
-                    this.changePlace(value);
-                  }}
+                <form>
+                  <input  value = {this.state.place} className="form-control bb text-center cw "
+                    onChange = {(e)=>{
+                      e.preventDefault();
+                      var value = e.target.value;
+                      this.changePlace(value);
+                    }}
                     placeholder = " Enter Address"/>
-                </div>
+                  </div>
 
                   <div className="col-3 p0">
                     <br />
-                    <button className="ui button inverted w100 blue" onClick = {
-                      ()=>{
+                    <button className="ui button inverted o0 blue" onClick = {
+                      (e)=>{
+                        e.preventDefault();
                         this.ConvertToCoords(this.state.place);
                       }
                     }>Search</button>
                   </div>
-
+                </form>
 
 
                 <div className="col-1 p0">
