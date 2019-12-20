@@ -37,14 +37,14 @@ const MyMapComponent = compose(
       key = {props.id}
       icon= {{
         url:Ringer,
-        scaledSize: new window.google.maps.Size(25,25)
+        scaledSize: new window.google.maps.Size(35,35)
       }}
       />
       {props.markers.map(marker => (
           <Marker
 
             position={{ lat: marker.lat, lng: marker.lng }}
-            icon = {{url:marker.url, scaledSize: new window.google.maps.Size(25,25)}}
+            icon = {{url:marker.url, scaledSize: new window.google.maps.Size(40,40)}}
 
             onClick = {()=>{
               console.log(marker);
