@@ -104,6 +104,7 @@ export default class Maps extends React.Component {
 
           for(var i = 0 ; i <trucks.length; i ++){
               var address = trucks[i].address.street +  "," + trucks[i].address.city + "," +trucks[i].address.state;
+              console.log(trucks[i]);
               var lat = trucks[i].lat;
               var lng = trucks[i].lng;
 
