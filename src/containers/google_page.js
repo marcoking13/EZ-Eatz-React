@@ -159,13 +159,15 @@ export default class Maps extends React.Component {
     console.log(this.state.markers);
       return (
         <div className="container-fluid">
-          <div className="row">
+          <form>
+            <div className="row">
               <br />
 
+              <div className="col-3"/>
 
-              <div className="col-5">
+              <div className="col-4">
                 <br />
-                <form>
+
                   <input  value = {this.state.place} className="form-control bb text-center cw "
                     onChange = {(e)=>{
                       e.preventDefault();
@@ -175,16 +177,16 @@ export default class Maps extends React.Component {
                     placeholder = " Enter Address"/>
                   </div>
 
-                  <div className="col-3 p0">
+                  <div className="col-1 p0">
                     <br />
-                    <button className="ui button inverted o0 blue" onClick = {
+                    <button className="ui button inverted o0  w0 blue" onClick = {
                       (e)=>{
                         e.preventDefault();
                         this.ConvertToCoords(this.state.place);
                       }
                     }>Search</button>
                   </div>
-                </form>
+
 
 
                 <div className="col-1 p0">
@@ -218,6 +220,7 @@ export default class Maps extends React.Component {
                 <MyMapComponent  changeURL = {this.props.changeURL} ClearOrder = {this.props.ClearOrder} markers = {this.state.markers} lat = {this.state.lat} lng = {this.state.lng}/>
               </div>
 
+                </form>
             </div>
       );
     }
