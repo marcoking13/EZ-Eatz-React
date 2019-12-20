@@ -122,7 +122,7 @@ class Form1 extends React.Component{
               <div className="row mr6">
                   <div className="col-1"/>
                   <div className="col-10">
-                      <button className="userButtonSign btn-secondary btn"onClick ={()=>{
+                      <button className="userButtonSign w100 btn-secondary btn"onClick ={()=>{
                         axios.get("/api/users").then((resp)=>{
                           if(resp){
                             var flag = true;
