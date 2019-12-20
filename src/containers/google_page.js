@@ -147,9 +147,9 @@ export default class Maps extends React.Component {
   renderCheckoutIcon(){
 
     if(this.props.orders.length > 0){
-      return  <img alt="cart"src={Cart}  onClick = {()=>{this.props.changeURL("checkout")}}className="w100 mt2_5 " style = {{width:"50px",height:"50px",marginTop:"2.5%"}}/>
+      return  <img alt="cart"src={Cart}  onClick = {()=>{this.props.changeURL("checkout")}}className="w100 mt2_5 iconG" />
     }else{
-      return  <img alt="cart"src={Cart} className="w100 o_5 mt2_5" style = {{width:"50px",height:"50px",marginTop:"2.5%"}}/>
+      return  <img alt="cart"src={Cart} className="w100 o_5 mt2_5 iconG" />
     }
 
   }
@@ -161,7 +161,7 @@ export default class Maps extends React.Component {
         <div className="container-fluid">
           <div className="row">
               <br />
-              <div className="col-3"/>
+
 
               <div className="col-3">
                 <br />
@@ -174,7 +174,7 @@ export default class Maps extends React.Component {
                     placeholder = " Enter Address"/>
                 </div>
 
-                  <div className="col-1 p0">
+                  <div className="col-2">
                     <br />
                     <button className="ui button inverted w100 blue" onClick = {
                       ()=>{
@@ -183,7 +183,7 @@ export default class Maps extends React.Component {
                     }>Search</button>
                   </div>
 
-                <div className="col-1"/>
+                <div className="col-2"/>
 
                 <div className="col-1">
                   <br />
@@ -191,15 +191,15 @@ export default class Maps extends React.Component {
                     onClick = {()=>{
                         this.props.changeURL("home")
                       }}
-                      className="w100 mt2_5"
-                      style = {{width:"50px",height:"50px"}}
+                      className="w100 mt2_5 iconG"
+
                     />
                 </div>
 
 
                 <div className="col-1">
                     <br />
-                    <img alt="search"  src={ProfilePicture} className="w100 mt2_5"   style = {{width:"50px",height:"50px"}}/>
+                    <img alt="search"  src={ProfilePicture} className="w100 mt2_5 iconG"  />
                 </div>
 
                 <div className="col-1">

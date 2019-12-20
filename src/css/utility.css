@@ -17,6 +17,11 @@
 .pt20px{
   padding-top:20px;
 }
+.iconG{
+  width:50px;
+  height:50px;
+
+}
 .p0{
   padding:0;
 }
@@ -500,4 +505,13 @@ body{
 }
 .pr100{
   padding-right:100px;
+}
+
+
+@media screen (max-width:480px){
+  .iconG{
+    width:25px;
+    height:25px;
+
+  }
 }
