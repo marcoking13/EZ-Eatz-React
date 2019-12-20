@@ -163,7 +163,7 @@ export default class Maps extends React.Component {
               <br />
 
 
-              <div className="col-3">
+              <div className="col-5">
                 <br />
                 <input  value = {this.state.place} className="form-control bb text-center cw "
                   onChange = {(e)=>{
@@ -174,7 +174,7 @@ export default class Maps extends React.Component {
                     placeholder = " Enter Address"/>
                 </div>
 
-                  <div className="col-2">
+                  <div className="col-2 p0">
                     <br />
                     <button className="ui button inverted w100 blue" onClick = {
                       ()=>{
@@ -183,9 +183,9 @@ export default class Maps extends React.Component {
                     }>Search</button>
                   </div>
 
-                <div className="col-2"/>
+                <div className="col-1"/>
 
-                <div className="col-1">
+                <div className="col-1 p0">
                   <br />
                   <img alt="search"  src={Search}
                     onClick = {()=>{
@@ -197,12 +197,13 @@ export default class Maps extends React.Component {
                 </div>
 
 
-                <div className="col-1">
+                <div className="col-1 p0">
                     <br />
                     <img alt="search"  src={ProfilePicture} className="w100 mt2_5 iconG"  />
                 </div>
 
-                <div className="col-1">
+
+                <div className="col-1 p0">
                   <br />
                     {this.renderCheckoutIcon()}
                 </div>
