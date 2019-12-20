@@ -174,7 +174,7 @@ export default class Maps extends React.Component {
                     placeholder = " Enter Address"/>
                 </div>
 
-                  <div className="col-2 p0">
+                  <div className="col-3 p0">
                     <br />
                     <button className="ui button inverted w100 blue" onClick = {
                       ()=>{
@@ -183,7 +183,7 @@ export default class Maps extends React.Component {
                     }>Search</button>
                   </div>
 
-                <div className="col-1"/>
+
 
                 <div className="col-1 p0">
                   <br />
