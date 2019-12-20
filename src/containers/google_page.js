@@ -29,7 +29,7 @@ const MyMapComponent = compose(
   withScriptjs,
   withGoogleMap
 )((props) =>
-     <GoogleMap  zoom={8} center = {{lat:props.lat,lng:props.lng}} >
+     <GoogleMap  zoom={12} center = {{lat:props.lat,lng:props.lng}} >
       <Marker position = {{
         lat:props.lat,
         lng:props.lng
