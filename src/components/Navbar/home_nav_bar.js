@@ -74,18 +74,7 @@ class NavBarHome extends React.Component {
         <MobileNav  changeURL = {this.props.changeURL} />
           <br />
           <br />
-            <AddressInput
-              zip = {this.state.zip}
-              addressAvailable = {this.state.addressAvailable}
-              address = {this.props.address}
-              changeAddressInput = {this.changeAddressInput}
-              changeZip = {this.props.changeZip}
-              changeAddress = {this.props.changeAddress}
-              SetAddress = {this.props.SetAddress}
-              width = {{width:"200px"}}
-              PostAddress = {this.props.PostAddress}
-              formatted_address = {this.state.formatted_address}
-            />
+          
           </div>
 
 
@@ -108,7 +97,7 @@ class NavBarHome extends React.Component {
           </div>
 
         <div className='col-4'>
-      
+
         </div>
 
         <div className='col-4'>

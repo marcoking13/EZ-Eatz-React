@@ -212,6 +212,9 @@ export default class Maps extends React.Component {
                     {this.renderCheckoutIcon()}
                 </div>
 
+
+
+
               </div>
 
               <br />
