@@ -74,7 +74,7 @@ class NavBarHome extends React.Component {
         <MobileNav  changeURL = {this.props.changeURL} />
           <br />
           <br />
-          
+
           </div>
 
 
@@ -149,6 +149,8 @@ class NavBarHome extends React.Component {
                   </div>
 
                 </div>
+                <br />
+                <br />
               </div>
       );
   }
