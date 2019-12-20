@@ -213,10 +213,10 @@ var  mongooseStartup = () => {
 
       var dbO = db.db("heroku_9tlg8v4r");
 
-    
+
       dbO.collection("foodtrucks").find({}).toArray(function(err, result) {
           if (err) throw err;
-          console.log(result);
+          console.log(result,"l");
           if(result.length <= 0){
             dbO.collection("foodtrucks").insertMany(FoodtruckConfig,(err,data)=>{console.log(data)});
           }else{
