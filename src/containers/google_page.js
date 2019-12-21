@@ -5,6 +5,8 @@ import Geocode from "react-geocode";
 import axios from 'axios';
 import cookies from "react-cookies";
 
+import NavbarMobile from "./../components/Navbar/mobile_nav_bar";
+
 import ProfilePicture from "./../images/profileIcon.png";
 import Search from "./../images/userChoice.png";
 import Cart from "./../images/cart.png";
@@ -13,11 +15,9 @@ import Logo from "./../images/logo.png";
 
 import "./../css/utility.css";
 
-
-
-
 Geocode.setApiKey("AIzaSyDT3CvnaTo7AnBgi4XRNHPrf0_hDTrF0EE");
 Geocode.enableDebug();
+
 //----------------------------------------Wrapper Component--------------------------------------------------------//
 const MyMapComponent = compose(
   withProps({
@@ -30,36 +30,43 @@ const MyMapComponent = compose(
   withGoogleMap
 )((props) =>
      <GoogleMap  zoom={12} center = {{lat:props.lat,lng:props.lng}} >
-      <Marker position = {{
-        lat:props.lat,
-        lng:props.lng
-      }}
-      key = {props.id}
-      icon= {{
-        url:Ringer,
-        scaledSize: new window.google.maps.Size(35,35)
-      }}
-      />
-      {props.markers.map(marker => (
-          <Marker
 
+      <Marker
+        position = {{
+          lat:props.lat,
+          lng:props.lng
+        }}
+        key = {props.id}
+        icon= {{
+          url:Ringer,
+          scaledSize: new window.google.maps.Size(35,35)
+        }}
+
+      />
+
+      {props.markers.map(marker => (
+
+          <Marker
             position={{ lat: marker.lat, lng: marker.lng }}
             icon = {{url:marker.url, scaledSize: new window.google.maps.Size(40,40)}}
 
             onClick = {()=>{
-              console.log(marker);
+
               var foodtruckID = marker.id;
+
               cookies.remove("foodtruckCurrent",{path:"/"});
               cookies.remove("orders",{path:"/"});
               cookies.save("foodtruckCurrent",foodtruckID,{path:"/"});
+
               props.ClearOrder();
               props.changeURL("menu");
+
             }}
 
           />
 
-
         ))}
+
      </GoogleMap>
 )
 //--------------------------------------Map Component----------------------------------------------------------//
@@ -82,11 +89,12 @@ export default class Maps extends React.Component {
       var accounts = response.data;
       var accountCookie = JSON.parse(cookies.load("account",{path:"/"}));
       for(var i = 0; i <= accounts.length; i++){
-        console.log(accounts[i].account);
+
         if(accounts[i].account.username == accountCookie.username){
-          console.log("found");
+
           this.setState({place:accounts[i].address});
           this.ConvertToCoords(this.state.place);
+
         }
       }
     });
@@ -103,21 +111,20 @@ export default class Maps extends React.Component {
           var i = 0;
 
           for(var i = 0 ; i <trucks.length; i ++){
+
               var address = trucks[i].address.street +  "," + trucks[i].address.city + "," +trucks[i].address.state;
-              console.log(trucks[i]);
+
               var lat = trucks[i].lat;
               var lng = trucks[i].lng;
 
               markers.push({lat:lat,lng:lng,url:trucks[i].mapLogo,id:trucks[i].objectID});
+
             }
-            console.log(markers);
-            this.setState({markers:markers})
+
+            this.setState({markers:markers});
+
           });
 
-  }
-
-  componentDidMount(){
-    console.log(this.state.markers);
   }
 
   ConvertToCoords(address){
@@ -144,14 +151,124 @@ export default class Maps extends React.Component {
     });
   }
 
+  renderMobileBar(){
+    return(
+      <div>
+        <NavbarMobile changeURL = {this.props.changeURL} />
+        <form>
+            <div className="row">
+
+              <div className="col-3"/>
+
+              <div className="col-4">
+                <br />
+                <input  value = {this.state.place} className="form-control bb text-center cw "
+                  onChange = {(e)=>{
+                    e.preventDefault();
+                    var value = e.target.value;
+                    this.changePlace(value);
+                  }}
+                  placeholder = " Enter Address"/>
+                </div>
+
+                <div className="col-3 p0">
+                  <br />
+                    <button className="ui button inverted   w100 blue" onClick = {
+                      (e)=>{
+                        e.preventDefault();
+                        this.ConvertToCoords(this.state.place);
+                        }
+                      }>Search
+                    </button>
+                  </div>
+
+              </div>
+
+            </form>
+
+        </div>
+      )
+  }
+
+  renderDesktopBar(){
+    return(
+      <form>
+        <div className="row">
+        <br />
+
+
+
+        <div className="col-5">
+          <br />
+
+            <input  value = {this.state.place} className="form-control bb text-center cw "
+              onChange = {(e)=>{
+                e.preventDefault();
+                var value = e.target.value;
+                this.changePlace(value);
+              }}
+              placeholder = " Enter Address"/>
+            </div>
+
+            <div className="col-1 p0">
+              <br />
+              <button className="ui button inverted o0  w0 blue" onClick = {
+                (e)=>{
+                  e.preventDefault();
+                  this.ConvertToCoords(this.state.place);
+                }
+              }>Search</button>
+            </div>
+
+
+
+          <div className="col-2 p0 ">
+            <br />
+            <img alt="search"  src={Search}
+              onClick = {()=>{
+                  this.props.changeURL("home")
+                }}
+                className="w100 mt2_5 iconG"
+
+              />
+          </div>
+
+
+          <div className="col-2 p0 ">
+              <br />
+              <img alt="search"  src={ProfilePicture} className="w100 mt2_5 iconG"  />
+          </div>
+
+
+          <div className="col-2 p0">
+            <br />
+              {this.renderCheckoutIcon()}
+          </div>
+
+
+
+
+          </div>
+        </form>
+      )
+  }
+
   renderCheckoutIcon(){
 
     if(this.props.orders.length > 0){
-      return  <img alt="cart"src={Cart}  onClick = {()=>{this.props.changeURL("checkout")}}className="w100 mt2_5 iconG" />
+      return  <img alt="cart"src={Cart}  onClick = {()=>{this.props.changeURL("checkout")}} className="w100 mt2_5 iconG" />
     }else{
       return  <img alt="cart"src={Cart} className="w100 o_5 mt2_5 iconG" />
     }
 
+  }
+
+  renderBar(){
+    if(window.innerWidth <= 590){
+      return <div> {this.renderMobileBar()}</div>
+    }else{
+      return <div>{this.renderDesktopBar()}</div>
+    }
   }
 
   render(){
@@ -159,71 +276,14 @@ export default class Maps extends React.Component {
     console.log(this.state.markers);
       return (
         <div className="container-fluid">
-          <form>
-            <div className="row">
-              <br />
+          {this.renderBar()}
+          <br />
+
+          <div style={{width:"100vw",height:"100vh"}}>
+            <MyMapComponent  changeURL = {this.props.changeURL} ClearOrder = {this.props.ClearOrder} markers = {this.state.markers} lat = {this.state.lat} lng = {this.state.lng}/>
+          </div>
 
 
-
-              <div className="col-5">
-                <br />
-
-                  <input  value = {this.state.place} className="form-control bb text-center cw "
-                    onChange = {(e)=>{
-                      e.preventDefault();
-                      var value = e.target.value;
-                      this.changePlace(value);
-                    }}
-                    placeholder = " Enter Address"/>
-                  </div>
-
-                  <div className="col-1 p0">
-                    <br />
-                    <button className="ui button inverted o0  w0 blue" onClick = {
-                      (e)=>{
-                        e.preventDefault();
-                        this.ConvertToCoords(this.state.place);
-                      }
-                    }>Search</button>
-                  </div>
-
-
-
-                <div className="col-2 p0 ">
-                  <br />
-                  <img alt="search"  src={Search}
-                    onClick = {()=>{
-                        this.props.changeURL("home")
-                      }}
-                      className="w100 mt2_5 iconG"
-
-                    />
-                </div>
-
-
-                <div className="col-2 p0 ">
-                    <br />
-                    <img alt="search"  src={ProfilePicture} className="w100 mt2_5 iconG"  />
-                </div>
-
-
-                <div className="col-2 p0">
-                  <br />
-                    {this.renderCheckoutIcon()}
-                </div>
-
-
-
-
-              </div>
-
-              <br />
-
-              <div style={{width:"100vw",height:"100vh"}}>
-                <MyMapComponent  changeURL = {this.props.changeURL} ClearOrder = {this.props.ClearOrder} markers = {this.state.markers} lat = {this.state.lat} lng = {this.state.lng}/>
-              </div>
-
-                </form>
             </div>
       );
     }

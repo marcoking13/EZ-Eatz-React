@@ -3,7 +3,7 @@ import cookies from "react-cookies";
 
 import "./../../css/mobileNav.css";
 
-import Stock from "./../../images/profileIcon.png";
+import Stock from "./../../images/logo.png";
 
 class MobileNavBar extends React.Component{
 
