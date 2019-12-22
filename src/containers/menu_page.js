@@ -93,9 +93,7 @@ class MenuPage extends React.Component {
             foodtruck = {this.state.foodtruck}
           />
         </div>
-        <br />
-        <br />
-        <br />
+      
         {this.renderFooter(window.innerWidth)}
     </div>
     )

@@ -5,7 +5,8 @@ import Geocode from "react-geocode";
 import axios from 'axios';
 import cookies from "react-cookies";
 
-import NavbarMobile from "./../components/Navbar/mobile_nav_bar";
+import MobileBar from "./../components/Maps/mobile_bar";
+import DesktopBar from "./../components/Maps/desktop_bar";
 
 import ProfilePicture from "./../images/profileIcon.png";
 import Search from "./../images/userChoice.png";
@@ -84,7 +85,6 @@ export default class Maps extends React.Component {
     this.changePlace = this.changePlace.bind(this);
     this.ConvertToCoords = this.ConvertToCoords.bind(this);
 
-
     axios.get("/api/users").then((response)=>{
       var accounts = response.data;
       var accountCookie = JSON.parse(cookies.load("account",{path:"/"}));
@@ -99,9 +99,7 @@ export default class Maps extends React.Component {
       }
     });
 
-
   }
-
 
   componentWillMount(){
 
@@ -120,12 +118,10 @@ export default class Maps extends React.Component {
               markers.push({lat:lat,lng:lng,url:trucks[i].mapLogo,id:trucks[i].objectID});
 
             }
-
             this.setState({markers:markers});
 
           });
-
-  }
+    }
 
   ConvertToCoords(address){
 
@@ -139,7 +135,6 @@ export default class Maps extends React.Component {
       error => {
         console.error(error);
       }
-
     );
 
   }
@@ -150,139 +145,48 @@ export default class Maps extends React.Component {
     });
   }
 
-  renderMobileBar(){
-    return(
-      <div className="bb ">
-        <img src = {Logo} className="mobileNavHMG" />
-        <NavbarMobile changeURL = {this.props.changeURL} />
-        <form className="bb ">
-            <div className="row bb">
-              <div className="col-1"/>
-              <div className="col-1 p0">
-              </div>
-              <div className="col-1"/>
-              <div className="col-4">
-                <br />
-                <input  value = {this.state.place} className="form-control bb text-center cw "
-                  onChange = {(e)=>{
-                    e.preventDefault();
-                    var value = e.target.value;
-                    this.changePlace(value);
-                  }}
-                  placeholder = " Enter Address"/>
-                </div>
-                <div className="col-3 p0">
-                  <br />
-                    <button className="ui button inverted   w100 blue" onClick = {
-                      (e)=>{
-                        e.preventDefault();
-                        this.ConvertToCoords(this.state.place);
-                        }
-                      }>Search
-                    </button>
-                  </div>
-                  <div className="col-1"/>
-              </div>
-            </form>
-        </div>
-      )
-  }
-
-  renderDesktopBar(){
-    return(
-      <form>
-        <div className="row">
-        <br />
-
-
-
-        <div className="col-6">
-          <br />
-
-            <input  value = {this.state.place} className="form-control bb text-center cw "
-              onChange = {(e)=>{
-                e.preventDefault();
-                var value = e.target.value;
-                this.changePlace(value);
-              }}
-              placeholder = " Enter Address"/>
-            </div>
-
-            <div className="col-1 p0">
-              <br />
-              <button className="ui button inverted o0  w0 blue" onClick = {
-                (e)=>{
-                  e.preventDefault();
-                  this.ConvertToCoords(this.state.place);
-                }
-              }>Search</button>
-            </div>
-
-
-
-          <div className="col-1 p0 ">
-            <br />
-            <img alt="search"  src={Search}
-              onClick = {()=>{
-                  this.props.changeURL("home")
-                }}
-                className="w100 mt2_5 "
-
-              />
-          </div>
-
-
-          <div className="col-1 p0 ">
-              <br />
-              <img alt="search"  src={ProfilePicture} className="w100 mt2_5 "  />
-          </div>
-
-
-          <div className="col-1 p0">
-            <br />
-              {this.renderCheckoutIcon()}
-          </div>
-
-
-
-
-          </div>
-        </form>
-      )
-  }
-
-  renderCheckoutIcon(){
-
-    if(this.props.orders.length > 0){
-      return  <img alt="cart"src={Cart}  onClick = {()=>{this.props.changeURL("checkout")}} className="w100 mt2_5 iconG" />
-    }else{
-      return  <img alt="cart"src={Cart} className="w100 o_5 mt2_5 iconG" />
-    }
-
-  }
 
   renderBar(){
+
     if(window.innerWidth <= 590){
-      return <div> {this.renderMobileBar()}</div>
+      return (
+          <MobileBar
+            place = {this.state.place}
+            ConvertToCoords = {this.ConvertToCoords}
+            orders = {this.props.orders}
+            changePlace = {this.changePlace }
+            changeURL = {this.props.changeURL}
+          />
+        )
     }else{
-      return <div>{this.renderDesktopBar()}</div>
+      return (
+        <DesktopBar
+          place = {this.state.place}
+          ConvertToCoords = {this.ConvertToCoords}
+          orders = {this.props.orders}
+          changePlace = {this.changePlace }
+          changeURL = {this.props.changeURL}
+        />
+      )
     }
+
   }
 
   render(){
-
-    console.log(this.state.markers);
       return (
         <div className="container-fluid bb">
-          {this.renderBar()}
-          <br />
-
-          <div style={{width:"100vw",height:"100vh"}}>
-            <MyMapComponent  changeURL = {this.props.changeURL} ClearOrder = {this.props.ClearOrder} markers = {this.state.markers} lat = {this.state.lat} lng = {this.state.lng}/>
-          </div>
-
-
+            {this.renderBar()}
+            <br />
+            <div style={{width:"100vw",height:"100vh"}}>
+              <MyMapComponent
+                changeURL = {this.props.changeURL}
+                ClearOrder = {this.props.ClearOrder}
+                markers = {this.state.markers}
+                lat = {this.state.lat}
+                lng = {this.state.lng}
+              />
             </div>
+          </div>
       );
     }
   }

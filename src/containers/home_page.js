@@ -126,7 +126,7 @@ class HomePage extends React.Component {
               </div>
 
               <br />
-              <br />
+          
               <Footer />
             </div>
     );
@@ -154,8 +154,7 @@ class HomePage extends React.Component {
               <br/>
               {this.foodTruckLoop()}
           </ul>
-          <br />
-          <br />
+
           <FooterMobile />
         </div>
       );
