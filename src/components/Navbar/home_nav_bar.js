@@ -13,8 +13,6 @@ import GoogleMap from "./../../images/googleMap.png";
 import Cart from "./../../images/cart.png";
 import Logo from "./../../images/logo.png";
 
-
-
 class NavBarHome extends React.Component {
   constructor(props){
     super(props);
@@ -24,9 +22,10 @@ class NavBarHome extends React.Component {
       addressAvailable:false,
       address:"",
       zip:""
-
     }
+
     this.changeAddressInput = this.changeAddressInput.bind(this);
+
   }
 
 //---------------------------------  //State Changers//------------------------------------
@@ -72,12 +71,10 @@ class NavBarHome extends React.Component {
     return (
       <div className="container-fluid bb">
         <MobileNav  changeURL = {this.props.changeURL} />
-          <br />
-        </div>
-      )
+        <br />
+      </div>
+    );
   }
-
-
 
   renderDesktopJSX(){
       return(
@@ -87,39 +84,34 @@ class NavBarHome extends React.Component {
             <div className="row">
               <div className="col-2"/>
               <div className="col-4">
-                <img alt="logoNav"className="w100" src={Logo}/>
+                <img alt="logoNav" className="w100" src={Logo}/>
               </div>
             </div>
           </div>
 
-        <div className='col-4'>
-
-        </div>
+        <div className='col-4'/>
 
         <div className='col-4'>
           <div className="row">
 
             <div className="col-2">
               <br />
-              <img  alt="profile"src={ProfilePicture}  className="w100 mt2_5"/>
+              <img  alt="profile" src={ProfilePicture}  className="w100 mt2_5"/>
             </div>
 
             <div className="col-2">
               <br />
               <img alt="search"  src={Search}
                 onClick = {()=>{
-
                   if(this.props.changeFlag){
                       this.props.changeFlag(false);
-
                     }else{
                       this.props.changeURL("home")
                     }}}
                       className="w100 mt2_5"
-                      />
+                  />
+
                   </div>
-
-
 
                     <div className="col-2">
                         <br />

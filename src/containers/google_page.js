@@ -88,15 +88,17 @@ export default class Maps extends React.Component {
     axios.get("/api/users").then((response)=>{
       var accounts = response.data;
       var accountCookie = JSON.parse(cookies.load("account",{path:"/"}));
-      for(var i = 0; i <= accounts.length; i++){
+      if(accounts.length > 0){
+        for(var i = 0; i <= accounts.length; i++){
 
-        if(accounts[i].account.username == accountCookie.username){
+          if(accounts[i].account.username == accountCookie.username){
 
-          this.setState({place:accounts[i].address});
-          this.ConvertToCoords(this.state.place);
+            this.setState({place:accounts[i].address});
+            this.ConvertToCoords(this.state.place);
 
+          }
         }
-      }
+    }
     });
 
   }

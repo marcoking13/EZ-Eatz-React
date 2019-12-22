@@ -10,7 +10,6 @@ class AddressInput extends React.Component{
     if(!this.props.addressAvailable){
         // Cookie of address
       var address = cookies.load("address",{path:"/"});
-      console.log(address);
       // if there is no cookie then make address default text say Enter Address
       if(!address || address === undefined){
         address = "Enter Address";

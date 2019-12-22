@@ -12,7 +12,7 @@ class MobileBar extends React.Component {
         <div className="bb ">
           <img src = {Logo} className="mobileNavHMG" />
           <NavbarMobile changeURL = {this.props.changeURL} />
-          <form className="bb ">
+
               <div className="row bb">
                 <div className="col-1"/>
                 <div className="col-1 p0">
@@ -22,7 +22,7 @@ class MobileBar extends React.Component {
                   <br />
                   <input  value = {this.props.place} className="form-control bb text-center cw "
                     onChange = {(e)=>{
-                      e.preventDefault();
+
                       var value = e.target.value;
                       this.props.changePlace(value);
                     }}
@@ -32,7 +32,7 @@ class MobileBar extends React.Component {
                     <br />
                       <button className="ui button inverted   w100 blue" onClick = {
                         (e)=>{
-                          e.preventDefault();
+                        
                           this.props.ConvertToCoords(this.props.place);
                           }
                         }>Search
@@ -40,7 +40,7 @@ class MobileBar extends React.Component {
                     </div>
                     <div className="col-1"/>
                 </div>
-              </form>
+
           </div>
     )
   }
