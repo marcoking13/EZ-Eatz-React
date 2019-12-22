@@ -25,6 +25,7 @@ class MobileBar extends React.Component {
 
                       var value = e.target.value;
                       this.props.changePlace(value);
+                      this.props.ConvertToCoords(this.props.place);
                     }}
                     placeholder = " Enter Address"/>
                   </div>
@@ -32,7 +33,7 @@ class MobileBar extends React.Component {
                     <br />
                       <button className="ui button inverted   w100 blue" onClick = {
                         (e)=>{
-                        
+
                           this.props.ConvertToCoords(this.props.place);
                           }
                         }>Search
