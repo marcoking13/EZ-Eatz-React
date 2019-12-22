@@ -11,6 +11,8 @@ import FoodBox from "./../components/Home/foodtruck_box_home.js";
 import Footer from "./../components/Footer/footnote.js";
 import FooterMobile from "./../components/Footer/footnote_mobile.js";
 
+import Logo from "./../images/logo.png";
+
 ///-------------------------Component----------------------//
 class HomePage extends React.Component {
   //---------------------------Constructor------------------------------
@@ -145,6 +147,7 @@ class HomePage extends React.Component {
               navStyle ="white"
             />
             <div className="divder2"/>
+            <img src = {Logo} className="logoHM"/>
             <br/>
             <ul className="list-group ">
               <h4 className="ml5 resultTitle text-center posRel mb1">Food Trucks</h4>

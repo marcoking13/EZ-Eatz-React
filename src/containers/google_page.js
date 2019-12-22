@@ -144,7 +144,6 @@ export default class Maps extends React.Component {
 
   }
 
-
   changePlace(place){
     this.setState({
       place:place
@@ -153,13 +152,15 @@ export default class Maps extends React.Component {
 
   renderMobileBar(){
     return(
-      <div>
+      <div className="bb ">
+        <img src = {Logo} className="mobileNavHMG" />
         <NavbarMobile changeURL = {this.props.changeURL} />
-        <form>
-            <div className="row">
-
-              <div className="col-3"/>
-
+        <form className="bb ">
+            <div className="row bb">
+              <div className="col-1"/>
+              <div className="col-1 p0">
+              </div>
+              <div className="col-1"/>
               <div className="col-4">
                 <br />
                 <input  value = {this.state.place} className="form-control bb text-center cw "
@@ -170,7 +171,6 @@ export default class Maps extends React.Component {
                   }}
                   placeholder = " Enter Address"/>
                 </div>
-
                 <div className="col-3 p0">
                   <br />
                     <button className="ui button inverted   w100 blue" onClick = {
@@ -181,11 +181,9 @@ export default class Maps extends React.Component {
                       }>Search
                     </button>
                   </div>
-
+                  <div className="col-1"/>
               </div>
-
             </form>
-
         </div>
       )
   }
@@ -198,7 +196,7 @@ export default class Maps extends React.Component {
 
 
 
-        <div className="col-5">
+        <div className="col-6">
           <br />
 
             <input  value = {this.state.place} className="form-control bb text-center cw "
@@ -222,25 +220,25 @@ export default class Maps extends React.Component {
 
 
 
-          <div className="col-2 p0 ">
+          <div className="col-1 p0 ">
             <br />
             <img alt="search"  src={Search}
               onClick = {()=>{
                   this.props.changeURL("home")
                 }}
-                className="w100 mt2_5 iconG"
+                className="w100 mt2_5 "
 
               />
           </div>
 
 
-          <div className="col-2 p0 ">
+          <div className="col-1 p0 ">
               <br />
-              <img alt="search"  src={ProfilePicture} className="w100 mt2_5 iconG"  />
+              <img alt="search"  src={ProfilePicture} className="w100 mt2_5 "  />
           </div>
 
 
-          <div className="col-2 p0">
+          <div className="col-1 p0">
             <br />
               {this.renderCheckoutIcon()}
           </div>
@@ -275,7 +273,7 @@ export default class Maps extends React.Component {
 
     console.log(this.state.markers);
       return (
-        <div className="container-fluid">
+        <div className="container-fluid bb">
           {this.renderBar()}
           <br />
 

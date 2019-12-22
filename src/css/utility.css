@@ -14,8 +14,22 @@
 {
     background: transparent !important;
 }
+.mobileNavHMG{
+  width:40px;
+  height:40px;
+  position: absolute;
+  top:1.5%;
+  right:1.5%;
+}
+.bw{
+  background:white !important;
+}
 .pt20px{
   padding-top:20px;
+}
+.moveUp20px{
+  position: relative;
+  bottom:20px;
 }
 .w0{
   width:0 !important;

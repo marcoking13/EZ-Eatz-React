@@ -13,6 +13,15 @@
   position: absolute;
   left: 15%;
 
+
+}
+.logoHM{
+  width:60px;
+  height:60px;
+
+  position: absolute;
+top:11%;
+left:5%;
 }
 .w200px{
   width:200px;

@@ -56,9 +56,9 @@ class MobileNavBar extends React.Component{
 
       <span className="menuIC"onClick={()=>{this.openNav()}}>
 
-        <div className="bb menuBarI"></div>
-        <div className="bb menuBarI"></div>
-        <div className="bb menuBarI"></div>
+        <div className="bw menuBarI "></div>
+        <div className="bw menuBarI "></div>
+        <div className="bw menuBarI "></div>
 
       </span>
         <div id="main"></div>

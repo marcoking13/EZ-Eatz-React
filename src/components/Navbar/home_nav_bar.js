@@ -69,16 +69,12 @@ class NavBarHome extends React.Component {
 //--------------------------------Render JSX function------------------------------------
 
   renderMobileJSX(){
-    return(
-      <div className="container-fluid">
+    return (
+      <div className="container-fluid bb">
         <MobileNav  changeURL = {this.props.changeURL} />
           <br />
-          <br />
-
-          </div>
-
-
-    )
+        </div>
+      )
   }
 
 
@@ -162,7 +158,7 @@ class NavBarHome extends React.Component {
     var innerWidth = window.innerWidth;
     if(innerWidth <= 600){
       return (
-          <div className={"container-fluid navbarEZ " + this.props.navStyle}>
+          <div className={"container-fluid bb navbarEZ " + this.props.navStyle}>
             {this.renderMobileJSX()}
           </div>
 
@@ -170,7 +166,7 @@ class NavBarHome extends React.Component {
     }else{
 
       return(
-        <div className={"container-fluid navbarEZ " + this.props.navStyle}>
+        <div className={"container-fluid bw navbarEZ " + this.props.navStyle}>
           {this.renderDesktopJSX()}
         </div>
       );
