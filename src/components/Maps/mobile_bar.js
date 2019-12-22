@@ -14,23 +14,28 @@ class MobileBar extends React.Component {
           <NavbarMobile changeURL = {this.props.changeURL} />
 
               <div className="row bb">
-
-                <div className="col-3">
-
-                <div className="col-6">
+                <div className="col-1"/>
+                <div className="col-1 p0">
+                </div>
+                <div className="col-1"/>
+                <div className="col-4">
                   <br />
                   <input  value = {this.props.place} className="form-control bb text-center cw "
                     onChange = {(e)=>{
 
                       var value = e.target.value;
-
-                      this.props.ConvertToCoords(value);
+                      this.props.changePlace(value);
+                    }}
+                    onKeyUp = {(e)=>{
+                      if(e.keyCode==13){
+                        alert('enter');
+                      }
                     }}
                     placeholder = " Enter Address"/>
-
-                  <div className="p0">
+                  </div>
+                  <div className="col-3 p0">
                     <br />
-                      <button className="ui button inverted w0 blue" onClick = {
+                      <button className="ui button inverted   w100 blue" onClick = {
                         (e)=>{
 
                           this.props.ConvertToCoords(this.props.place);
@@ -38,8 +43,7 @@ class MobileBar extends React.Component {
                         }>Search
                       </button>
                     </div>
-                  </div>
-                    <div className="col-3"/>
+                    <div className="col-1"/>
                 </div>
 
           </div>
