@@ -1,0 +1,58 @@
+
+.ez_title{
+  font-family:"Nunito";
+  color:black;
+  font-size:40px;
+}
+.nuniko{
+  font-family: "Nunito"
+}
+.ez_title_end{
+  font-family:"Fredoka One";
+  font-size:40px;
+  color:#ff3333;
+  font-weight: none !important;
+}
+.slogan_landing{
+  font-size:40px;
+  font-weight: bold;
+  font-family:"Fredoka One";
+
+}
+.bold{
+  font-weight: bold;
+}
+.sub_slogan_landing{
+  font-size:30px;
+  letter-spacing: 0px;
+
+
+}
+.reward_slogan{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.btn_landing{
+  border-radius:20px;
+  transition:all .2s 1 ease-out;
+}
+.btn_landing:hover{
+  background:#E86201 !important;
+  border-color:#E86201;
+  transition:all .2s 1 ease-in;
+  color:white;
+}
+.white-background{
+  background:white;
+}
+.black-background{
+  background:black;
+}
+.white{
+  color:white;
+}
+.icon{
+  float:left;
+  width:15%;
+}

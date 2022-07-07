@@ -7,7 +7,7 @@ const database = "eater_db";
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const MongoClient = require("mongodb").MongoClient;
-var url = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/eater_db" ;
+var url = process.env.MONGODB_URI || "mongodb://localhost:27017/heroku_9tlg8v4r" ;
 var path = require("path");
 var http = require("http");
 const Cookies = require("cookies");
@@ -45,33 +45,45 @@ app.listen(port,function(){
 
 });
 
-app.post("/api/signupUser",(req,res)=>{
-  SignupUser(req,res);
-});
+ MongoClient.connect(url, async (err,db)=>{
+  var dbO = db.db("heroku_9tlg8v4r");
+  console.log("Database is working")
 
-app.get("/api/currentUser",(req,res)=>{
-  PostFoodtrucksToAPI(req,res);
-});
+  app.post("/api/signup",(req,res)=>{
+    var data = SignupUser(req,res,dbO);
+    console.log(data);
+    res.json({data:data});
+  });
 
-app.get("/api/trucks",(req,res)=>{
-  PostFoodtrucksToAPI(req,res);
-});
+  app.get("/api/currentUser",(req,res)=>{
+    PostFoodtrucksToAPI(req,res);
+  });
 
-app.post("/api/login",(req,res)=>{
-  delete req.body.__v
-  VerifyUsername(req,res);
-});
+  app.get("/api/trucks",(req,res)=>{
+    PostFoodtrucksToAPI(req,res);
+  });
 
-app.post("/api/address",(req,res)=>{
-  PostAddressToUser(req,res);
-})
+  app.post("/api/login", async (req,res)=>{
 
-app.get("/api/users",(req,res)=>{
-  PostUsersToAPI(req,res);
-});
+    const search = await dbO.collection("users").findOne({password:req.body.password,username:req.body.username});
+    console.log(search);
+    console.log("Data",search);
+    res.json(search);
 
-app.post("/api/updateUserAddress",(req,res)=>{
-    UpdateAddress(req,res);
+  });
+
+  app.post("/api/address",(req,res)=>{
+    PostAddressToUser(req,res);
+  })
+
+  app.get("/api/users",(req,res)=>{
+    PostUsersToAPI(req,res);
+  });
+
+  app.post("/api/updateUserAddress",(req,res)=>{
+      UpdateAddress(req,res);
+  });
+
 });
 
 // End of Express
@@ -132,34 +144,34 @@ var PostCurrentUserToAPI = (req,res)=>{
 };
 
 
-var SignupUser = (req,res)=>{
-  MongoClient.connect(url,(err,db)=>{
+var SignupUser = (req,res,db)=>{
+    var found = false;
+    db.collection("users").find({}).toArray((err,data)=>{
 
-    var dbO = db.db("heroku_9tlg8v4r");
-
-    dbO.collection("users").find({}).toArray((err,data)=>{
-      var found = false;
       for(var i =0; i<data.length; i++){
-        if(data[i].account.username === req.body.username){
+        if(data[i].username === req.body.username){
           console.log("Error: Name already Taken");
           found = true;
           break;
         }
       }
       if(!found){
-        dbO.collection("users").insertOne({
-          name:req.body.username,
+        db.collection("users").insertOne({
+          name:req.body.name,
           profilePhoto:"",
-          address:"United States of America",
+          address:req.body.address,
           orders:[],
-          account:{
-            username:req.body.username,
-            password:req.body.password
-          }
+          username:req.body.username,
+          password:req.body.password
+
         });
       }
-    });
+
+
   });
+  console.log("Found "+found);
+  return found;
+
 }
 
 var UpdateAddress = (req,res)=>{
@@ -175,48 +187,17 @@ var UpdateAddress = (req,res)=>{
 
 }
 
-var VerifyUsername = (req,res)=>{
-  var i = 0;
-  console.log("verify");
-  MongoClient.connect(url,(err,db)=>{
-    if(err) throw err;
 
-    var dbO = db.db("heroku_9tlg8v4r");
-
-  dbO.collection("users").find({}).exec((err,datas)=>{
-    for(var k =0; k<datas.length;k++){
-        i++;
-        console.log(i,datas.length);
-        if(datas[k].account.username == req.body.username || datas[k].account.password == req.body.password){
-            loginFlag = true;
-
-            dbO.collection("currentUser").remove({});
-            dbO.collection("currentUser").insertOne(datas[k]);
-
-            break;
-
-      }else if(i>=datas.length){
-
-          console.log("Cannot Find User");
-          loginFlag = false;
-      }
-
-    };
-  });
-});
-}
-
-var  mongooseStartup = () => {
+var mongooseStartup = () => {
 
     MongoClient.connect(url,(err,db)=>{
       if(err) throw err;
 
       var dbO = db.db("heroku_9tlg8v4r");
 
-
       dbO.collection("foodtrucks").find({}).toArray(function(err, result) {
           if (err) throw err;
-          console.log(result,"l");
+
           if(result.length <= 0){
             dbO.collection("foodtrucks").insertMany(FoodtruckConfig,(err,data)=>{console.log(data)});
           }else{

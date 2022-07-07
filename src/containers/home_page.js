@@ -36,6 +36,7 @@ class HomePage extends React.Component {
       // Find the foodtrucks then sets them to the state
     axios.get("/api/trucks").then((response)=>{
       var  foodtrucks = response.data;
+      console.log(foodtrucks);
       this.setState({foodtrucks:foodtrucks});
     });
   }
@@ -126,7 +127,7 @@ class HomePage extends React.Component {
               </div>
 
               <br />
-          
+
               <Footer />
             </div>
     );

@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./../css/signup_and_login.css";
+import "./../css/landing_page.css";
 
 import axios from "axios";
 import cookie from "react-cookies";
@@ -11,7 +12,7 @@ import LoginSignupDesktop from "./../components/Login/login_signup_desktop.js";
 
 
 //-----------------------------------Component----------------------------------
-class SignupAndLoginPage extends React.Component {
+class LandingPage extends React.Component {
 
   //-------------------------------Constructor--------------------------------
   constructor(props){
@@ -87,4 +88,4 @@ class SignupAndLoginPage extends React.Component {
 
 }
 
-export default SignupAndLoginPage;
+export default LandingPage;

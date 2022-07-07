@@ -5,8 +5,17 @@ import Geocode from "react-geocode";
 
 import './css/Fonts.css';
 import "./css/utility.css";
+import "./css/authentication.css";
 
-import SignupAndLoginPage from "./containers/login_signup";
+import "./css/landing_page.css";
+import "./css/layout.css";
+
+import LoginConfig from "./config/login_info.js";
+import SignupConfig from "./config/signup_info.js";
+
+import LandingPage from "./containers/landing_page";
+import AuthenticationPage from "./containers/authentication_page";
+
 import LoadingPage from "./containers/loading_page";
 import ModifyPage from "./containers/modify_page";
 import CheckoutPage from "./containers/checkout_page.js";
@@ -24,7 +33,7 @@ class App extends Component {
 
     var orders = [];
     var truck;
-    var urlCookie = "login";
+    var urlCookie = "landing";
 
     if(cookie.load("account",{path:"/"})){
       urlCookie = "home";
@@ -226,20 +235,20 @@ class App extends Component {
          if(this.state.url === "menu"){
                return <MenuPage truck = {this.state.truck} orders= {this.state.orders}  SetTruck = {this.SetTruck} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} SetItem = {this.SetItem} changeURL={this.changeURL} />
           }
-          if(this.state.url === "login"){
-               return <SignupAndLoginPage  PostAddress = {this.PostAddress} changeURL={this.changeURL} />
+          if(this.state.url === "landing"){
+               return <LandingPage  PostAddress = {this.PostAddress} changeURL={this.changeURL} />
           }
           if(this.state.url === "home"){
                return  <HomePage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />
            }
-          if(this.state.url === "usersign"){
-               return <SignupForm  PostAddress = {this.PostAddress} changeURL={this.changeURL} type="user" />
-            }
-          if(this.state.url === "ownersign"){
-               return <SignupForm   PostAddress = {this.PostAddress} changeURL={this.changeURL} type="user" />
-            }else{
-               return <LoadingPage  PostAddress = {this.PostAddress}  changeURL={this.changeURL} />
-            }
+          if(this.state.url === "usersign")
+          {
+               return <AuthenticationPage  config = {SignupConfig} PostAddress = {this.PostAddress} changeURL={this.changeURL} type="user" />
+          }
+          if(this.state.url === "userlogin")
+          {
+              return <AuthenticationPage  config = {LoginConfig} PostAddress = {this.PostAddress} changeURL={this.changeURL} type="user" />
+          }
       }
 
 }
