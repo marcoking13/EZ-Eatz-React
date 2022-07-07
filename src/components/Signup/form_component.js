@@ -22,6 +22,14 @@ class FormComponent extends React.Component {
         this.errorRef.current.innerHTML = "*Must Enter a Value!";
         return;
       }
+      if(this.props.type == "signup" && this.state.key == "password" && this.state.input.length <= 10){
+        this.errorRef.current.innerHTML = "*Password must be 10 characters or longer";
+        return;
+      }
+      if(this.props.type == "signup" && this.state.key == "username" && this.state.input.length <= 7){
+        this.errorRef.current.innerHTML = "*Username must be 7 characters or longer";
+        return;
+      }
 
       this.errorRef.current.innerHTML = "";
 
@@ -68,7 +76,7 @@ class FormComponent extends React.Component {
                   <img className="form_icon " src = {FormIcon} />
                   Submit
               </button>
-              
+
             </div>
 
             <p className="error_text text-center" ref={this.errorRef}></p>

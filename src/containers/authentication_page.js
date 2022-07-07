@@ -115,6 +115,7 @@ class AuthenticationPage extends React.Component {
         <FormComponent
           ChangeInput = {this.ChangeInput}
           dataKey = {dataItem.key}
+          type = {this.state.key}
           placeholder={dataItem.placeholder}
           title = {dataItem.title}
           directions = {dataItem.directions}
