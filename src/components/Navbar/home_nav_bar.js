@@ -2,6 +2,8 @@ import React from "react";
 
 import cookies from "react-cookies";
 
+import axios from "axios";
+
 import MobileNav from "./../Navbar/mobile_nav_bar.js";
 import AddressInput from "./../Navbar/address_input";
 
@@ -9,8 +11,9 @@ import "./../../css/home_page.css";
 
 import ProfilePicture from "./../../images/profileIcon.png";
 import Search from "./../../images/userChoice.png";
-import GoogleMap from "./../../images/googleMap.png";
-import Cart from "./../../images/cart.png";
+import GoogleMap from "./../../images/map_icon.svg";
+import Cart from "./../../images/cart_icon.svg";
+import MapIcon2 from "./../../images/map_icon_2.svg";
 import Logo from "./../../images/logo.png";
 
 class NavBarHome extends React.Component {
@@ -20,13 +23,15 @@ class NavBarHome extends React.Component {
     this.state = {
       formatted_address:"Enter Address",
       addressAvailable:false,
-      address:"",
+      address:this.props.address,
       zip:""
     }
 
     this.changeAddressInput = this.changeAddressInput.bind(this);
 
   }
+
+
 
 //---------------------------------  //State Changers//------------------------------------
   changeAddressInput(bool){
@@ -78,68 +83,56 @@ class NavBarHome extends React.Component {
 
   renderDesktopJSX(){
       return(
-        <div className="row">
+        <div className="container-fluid navbar_home">
 
-          <div className='col-4'>
+          <div className="col-11 margin-left-5">
             <div className="row">
-              <div className="col-2"/>
-              <div className="col-4">
-                <img alt="logoNav" className="w100" src={Logo}/>
+              <div className="col-2">
+                <p className="ez_title margin-top-0  relative adjust_up">EZ<strong className="ez_title">Eatz</strong></p>
               </div>
-            </div>
-          </div>
+              <div className="col-2">
+              <button className="btn ez_button e6-background float-left">
+                <img className="ez_button_icon_small invert_svg" src={MapIcon2}/>
+                  Address
+               </button>
+              </div>
+              <div className="col-5">
+                <form onSubmit = {(e)=>{
+                  e.preventDefault();
+                  this.props.ChangeAddress(this.state.address);
+                }}>
+                <input className="form-control ez_home_input" onChange = {(e)=>{
+                  this.setState({address:e.target.value});
+                }}  value = {this.state.address} placeholder="Enter Address"/>
+                </form>
+              </div>
 
-        <div className='col-4'/>
-
-        <div className='col-4'>
-          <div className="row">
-
-            <div className="col-2">
-              <br />
-              <img  alt="profile" src={ProfilePicture}  className="w100 mt2_5"/>
-            </div>
-
-            <div className="col-2">
-              <br />
-              <img alt="search"  src={Search}
-                onClick = {()=>{
-                  if(this.props.changeFlag){
-                      this.props.changeFlag(false);
-                    }else{
-                      this.props.changeURL("home")
-                    }}}
-                      className="w100 mt2_5"
-                  />
-
+              <div className="col-3">
+                <div className="row">
+                  <div className="col-4">
+                    <button className="width-100 btn ez_button black-background white_text">
+                      <img className="ez_button_icon" src={Cart}/>
+                      Cart
+                     </button>
                   </div>
-
-                    <div className="col-2">
-                        <br />
-                        {this.renderCheckoutIcon()}
-                    </div>
-
-                    <div className="col-2">
-                        <br />
-                        {this.renderMapIcon()}
-                    </div>
-
-                    <div className="col-3">
-                      <br />
-                      <button className="btn mt2_5 w100 btn-danger"
-                        onClick = {()=>{
-                          cookies.remove("account",{path:"/"});
-                          cookies.remove("address",{path:"/"});
-                          this.props.changeURL("login");
-                        }}
-                        >Logout</button>
-                    </div>
-
+                  <div className="col-4">
+                    <button className="width-100 btn ez_button black-background white_text" onClick = {()=>{this.props.changeURL("map")}}>
+                      <img className="ez_button_icon " src={GoogleMap}/>
+                       Map
+                     </button>
                   </div>
+                  <div className="col-4">
+                    <button className="width-100 btn ez_button black-background white_text">
 
+                      Logout
+                     </button>
+                  </div>
                 </div>
-                <br />
-                <br />
-              </div>
+                </div>
+            </div>
+
+          </div>
+        </div>
       );
   }
 

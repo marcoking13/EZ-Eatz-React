@@ -1,7 +1,7 @@
 import React from "react";
 
 
-class DesktopBox extends React.Component {
+class  DesktopBox extends React.Component {
   render(){
       var fixedPrice = this.props.menu.food[this.props.i].price.toFixed(2);
     // Returns the Box for the menu

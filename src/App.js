@@ -31,49 +31,49 @@ class App extends Component {
   constructor(props){
     super(props);
 
-    var orders = [];
-    var truck;
-    var urlCookie = "landing";
-
-    if(cookie.load("account",{path:"/"})){
-      urlCookie = "home";
-    }
-
-    var foodtruckID  = cookie.load("foodtruckCurrent",{path:"/"});
-
-    cookie.remove("currentItem",{path:"/"});
-    cookie.remove("foodtruck",{path:"/"});
-
-    axios.get("/api/trucks").then((response)=>{
-      var trucks = response.data;
-        // Loop through each truck object
-      for(var i = 0; i<trucks.length;i++){
-        // If the selected truck's id matches the looped trucks
-          //Save the currently looped truck into the state
-        if(foodtruckID === trucks[i].objectID){
-          truck = trucks[i];
-
-          break;
-        }
-
-      }
-
-    });
-
-    if(cookie.load("orders",{path:"/"}) && cookie.load("foodtruck",{path:"/"})){
-        orders= JSON.parse(cookie.load("orders",{path:"/"}));
-      }
+    // var orders = [];
+    // var truck;
+    // var urlCookie = "landing";
+    //
+    // if(cookie.load("account",{path:"/"})){
+    //   urlCookie = "home";
+    // }
+    //
+    // var foodtruckID  = cookie.load("foodtruckCurrent",{path:"/"});
+    //
+    // cookie.remove("currentItem",{path:"/"});
+    // cookie.remove("foodtruck",{path:"/"});
+    //
+    // axios.get("/api/trucks").then((response)=>{
+    //   var trucks = response.data;
+    //     // Loop through each truck object
+    //   for(var i = 0; i<trucks.length;i++){
+    //     // If the selected truck's id matches the looped trucks
+    //       //Save the currently looped truck into the state
+    //     if(foodtruckID === trucks[i].objectID){
+    //       truck = trucks[i];
+    //
+    //       break;
+    //     }
+    //
+    //   }
+    //
+    // });
+    //
+    // if(cookie.load("orders",{path:"/"}) && cookie.load("foodtruck",{path:"/"})){
+    //     orders= JSON.parse(cookie.load("orders",{path:"/"}));
+    //   }
 
     this.state = {
-      url:urlCookie,
+      url:"landing",
       item:{},
       zip:"",
       account:"",
-      address:"Enter Address",
+      address:"Phoenix",
       lat:33.4255104 ,
       lng:-111.9400054,
-      orders:orders,
-      truck:truck
+      orders:[],
+      truck:null
 
     }
 
@@ -175,10 +175,8 @@ class App extends Component {
 
   }
 //----------------------------State Changer-----------------------------
-  changeAddress(e){
-    this.setState({address:e.target.value});
-    cookie.remove("address",{path:"/"});
-    cookie.save("address",this.state.formatted_address,{path:"/"});
+  changeAddress(value){
+    this.setState({address:value});
   }
 
   PostAddress(address,user){
@@ -219,7 +217,7 @@ class App extends Component {
 
 // JSX will return component depending on url state
   render() {
-
+    console.log(this.state.truck)
         if(this.state.url === "loading"){
                return <LoadingPage  PostAddress = {this.PostAddress}  changeURL={this.changeURL} />
          }
@@ -227,19 +225,19 @@ class App extends Component {
                 return <CheckoutPage orders = {this.state.orders} changeURL={this.changeURL} />
           }
          if(this.state.url === "map"){
-                return <GooglePage  orders= {this.state.orders}  ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />
+                return <GooglePage  orders= {this.state.orders}  ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} ChangeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />
           }
          if(this.state.url === "modify"){
                 return <ModifyPage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} addToOrder = {this.addToOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} item = {this.state.item}changeURL={this.changeURL} />
           }
          if(this.state.url === "menu"){
-               return <MenuPage truck = {this.state.truck} orders= {this.state.orders}  SetTruck = {this.SetTruck} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} SetItem = {this.SetItem} changeURL={this.changeURL} />
+               return <MenuPage truck = {this.state.truck} orders= {this.state.orders} SetTruck = {this.SetTruck} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} SetItem = {this.SetItem} changeURL={this.changeURL} />
           }
           if(this.state.url === "landing"){
                return <LandingPage  PostAddress = {this.PostAddress} changeURL={this.changeURL} />
           }
           if(this.state.url === "home"){
-               return  <HomePage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />
+               return  <HomePage SetTruck = {this.SetTruck}  orders= {this.state.orders} ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} ChangeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />
            }
           if(this.state.url === "usersign")
           {

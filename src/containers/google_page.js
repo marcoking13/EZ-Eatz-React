@@ -6,7 +6,7 @@ import axios from 'axios';
 import cookies from "react-cookies";
 
 import MobileBar from "./../components/Maps/mobile_bar";
-import DesktopBar from "./../components/Maps/desktop_bar";
+import DesktopBar from "./../components/Navbar/home_nav_bar";
 
 import ProfilePicture from "./../images/profileIcon.png";
 import Search from "./../images/userChoice.png";
@@ -54,11 +54,6 @@ const MyMapComponent = compose(
             onClick = {()=>{
 
               var foodtruckID = marker.id;
-
-              cookies.remove("foodtruckCurrent",{path:"/"});
-              cookies.remove("orders",{path:"/"});
-              cookies.save("foodtruckCurrent",foodtruckID,{path:"/"});
-
               props.ClearOrder();
               props.changeURL("menu");
 
@@ -77,6 +72,7 @@ export default class Maps extends React.Component {
     super(props);
     this.state = {
       lat:-34.397,
+      address:this.props.address,
       lng:150.644,
       place:"",
       markers:[]
@@ -85,53 +81,62 @@ export default class Maps extends React.Component {
     this.changePlace = this.changePlace.bind(this);
     this.ConvertToCoords = this.ConvertToCoords.bind(this);
 
-    axios.get("/api/users").then((response)=>{
-      var accounts = response.data;
-      var accountCookie = JSON.parse(cookies.load("account",{path:"/"}));
-      if(accounts.length > 0){
-        for(var i = 0; i <= accounts.length; i++){
-
-          if(accounts[i].account.username == accountCookie.username){
-
-            this.setState({place:accounts[i].address});
-            this.ConvertToCoords(this.state.place);
-
-          }
-        }
-    }
-    });
+    // axios.get("/api/users").then((response)=>{
+    //   var accounts = response.data;
+    //   // var accountCookie = JSON.parse(cookies.load("account",{path:"/"}));
+    // //   if(accounts.length > 0){
+    // //     for(var i = 0; i <= accounts.length; i++){
+    // //
+    // //       if(accounts[i].account.username == accountCookie.username){
+    // //
+    // //         this.setState({place:accounts[i].address});
+    // //         this.ConvertToCoords(this.state.place);
+    // //
+    // //       }
+    // //     }
+    // // }
+    // });
 
   }
 
   componentWillMount(){
+    console.log(this.state.address);
+    this.ConvertToCoords(this.state.address);
+    this.SetMarkersOnMap();
 
-      axios.get("/api/trucks").then((response)=>{
-          var markers = [];
-          var trucks = response.data;
-          var i = 0;
+  }
 
-          for(var i = 0 ; i <trucks.length; i ++){
 
-              var address = trucks[i].address.street +  "," + trucks[i].address.city + "," +trucks[i].address.state;
+  SetMarkersOnMap = async() =>{
+    const foodtrucks =  await axios.post("/api/trucks",null);
 
-              var lat = trucks[i].lat;
-              var lng = trucks[i].lng;
+    var markers = [];
+    var trucks = foodtrucks.data;
 
-              markers.push({lat:lat,lng:lng,url:trucks[i].mapLogo,id:trucks[i].objectID});
+    var i = 0;
 
-            }
-            this.setState({markers:markers});
+    for(var i = 0 ; i <trucks.length; i ++){
 
-          });
-    }
+        var address = trucks[i].address.street +  "," + trucks[i].address.city + "," +trucks[i].address.state;
+
+        var lat = trucks[i].lat;
+        var lng = trucks[i].lng;
+
+        markers.push({lat:lat,lng:lng,url:trucks[i].mapLogo,id:trucks[i].objectID});
+
+      }
+      console.log(markers);
+      this.setState({markers:markers});
+
+  }
 
   ConvertToCoords(address){
 
     Geocode.fromAddress(address).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
-        var accountCookie = JSON.parse(cookies.load("account",{path:"/"}));
-        axios.post("/api/address",{address:address,account:accountCookie});
+        //var accountCookie = JSON.parse(cookies.load("account",{path:"/"}));
+        //axios.post("/api/address",{address:address,account:accountCookie});
         this.setState({lat:lat,lng:lng,place:address});
       },
       error => {
@@ -164,6 +169,8 @@ export default class Maps extends React.Component {
       return (
         <DesktopBar
           place = {this.state.place}
+          ChangeAddress = {this.props.ChangeAddress}
+          address = {this.props.address}
           ConvertToCoords = {this.ConvertToCoords}
           orders = {this.props.orders}
           changePlace = {this.changePlace }

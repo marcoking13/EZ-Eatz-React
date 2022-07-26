@@ -4,6 +4,12 @@
   color:black;
   font-size:40px;
 }
+.relative{
+  position: relative;
+}
+.adjust_up{
+  bottom:20px;
+}
 .nuniko{
   font-family: "Nunito"
 }

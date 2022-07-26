@@ -15,6 +15,49 @@
 
 
 }
+.ez_button{
+  border-radius:40px;
+  border-color:none;
+}
+.ez_button:hover{
+  color:white;
+
+  background:red;
+  border-color:red;
+}
+.e6-background{
+  background: #e6e6e6;
+}
+.navbar_home{
+ margin-top:2.5%;
+}
+.black-background{
+  background: black;
+}
+.ez_button_icon{
+  width:40%;
+    float:left;
+    margin-left:2%;
+}
+.ez_home_input{
+  width:100%;
+  border-radius:40px;
+  background:#e6e6e6;
+  text-align:center;
+
+
+}
+.margin-top-0{
+  margin-top:0 !important;
+}
+.ez_button_icon_small{
+  float:left;
+  width:15%;
+  margin-left:5%;
+}
+.foodtruck_image{
+  height:110px;
+}
 .logoHM{
   width:60px;
   height:60px;
@@ -32,23 +75,23 @@ left:5%;
 
 
 @keyframes moveUp{
-  0%{
+  from{
 
     bottom:0px;
 
   }
-  100%{
-    bottom:10px;
+  to{
+    bottom:20px;
 
   }
 }
 
 @keyframes moveDown{
-  0%{
+  from{
 
-    bottom:10px;
+    bottom:20px;
   }
-  100%{
+  to{
     bottom:0px;
 
   }
@@ -62,5 +105,105 @@ left:5%;
 
   }
 
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.rotate-180{
+  transform:rotate(180deg);
+}
+.truck_row_toggle_icon:hover{
+  filter: invert(84%) sepia(21%) saturate(3012%) hue-rotate(318deg) brightness(99%) contrast(86%);
+}
+.truck_row_title{
+  font-weight: bold;
+  font-size:25px;
+}
+.hyperlink{
+  color:#404040;
+  border-bottom:1px solid #404040;
+  font-family: sans-serif;
+  text-align: center;
+
+}
+.moveUpDown{
+  animation-name: moveDown !important;
+  animation-duration: .5s !important;
+  animation-iteration-count: 1 !important;
+  animation-timing-function: ease-in-out !important;
+  bottom:0px;
+}
+.foodtruck_box_price{
+  color:green;
+  font-family: monospace;
+  font-weight: bolder;
+  font-size:15px;
+}
+.moveUpDown:hover{
+  border:0px none solid !important;
+  animation-name: moveUp !important;
+  animation-duration: .5s !important;
+  animation-iteration-count: 1 !important;
+  animation-timing-function: ease-in-out !important;
+  bottom:20px;
+}
+.foodtruck_line_box{
+  width:0px;
+  height:2px;
+  background:black;
+  position: relative;
+  bottom:5px;
+  transition:all;
+}
+@keyframes expand_line {
+  from{
+    width:0px;
+  }
+  to{
+    width:100px;
+  }
+}
+.moveUpDown:hover + .foodtruck_info_row  .foodtruck_info  .foodtruck_line_box{
+
+  width:100px;
+  animation:.2s ease-in 1 expand_line;
+  background:black;
+  transition:all;
+}
+
+.moveUpDown:hover + .foodtruck_info_row  .foodtruck_info  .foodtruck_box_title{
+  color:red;
+}
+.no-padding-no-margin{
+  padding:0 !important;
+  margin:0 !important;
+}
+.hyperlink:hover{
+  color:blue;
+  border-color:blue;
 
 }

@@ -7,8 +7,17 @@
 .BRR{
   border:2px solid red;
 }
+.h75px{
+  height:75px;
+}
 .brr2{
   border:2px solid red;
+}
+.green-font{
+  color:green;
+}
+.white_text{
+  color:white;
 }
 .logins
 {
@@ -39,6 +48,12 @@
   width:45px !important;
   height:40px !important;
 
+}
+.medium-font{
+  font-size:15px;
+}
+.invert_svg{
+  filter:invert(180);
 }
 .p0{
   padding:0 !important;

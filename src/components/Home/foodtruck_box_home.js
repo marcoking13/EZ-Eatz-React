@@ -1,29 +1,32 @@
 import React from "react";
 import cookie from "react-cookies";
 import "./../../css/home_page.css";
-import Star from "./../../images/star.png";
+import FullStar from "./../../images/full_star.png";
+import EmptyStar from "./../../images/empty_star.png";
+
 
 var distance;
 
 class FoodBox extends React.Component {
 
   renderStar(){
-    var stars;
+    var stars = 3;
+    var starLimit = 5;
     var html = [];
-    if(!this.props.foodtruck.stars){
-      stars = 3;
-    }else{
-      stars = this.props.foodtruck.stars;
-    }
-    var k =0;
-
-    for(var i = 0; i<stars;i++){
-        k++;
+    for(var i = 0; i<starLimit;i++){
+      if(stars > i){
         html.push(
-        <div className="col-1 p0">
-          <img alt="star"key = {k} src={Star} className="w100"/>
-        </div>
-        );
+          <div className={"no-padding-no-margin col-2"}>
+            <img alt="star"key = {i} src={FullStar} className="w100"/>
+          </div>
+          );
+        }else{
+          html.push(
+            <div className={"no-padding-no-margin col-2"}>
+              <img alt="star"key = {i} src={EmptyStar} className="w100"/>
+            </div>
+            );
+        }
       }
 
     return html;
@@ -33,33 +36,39 @@ class FoodBox extends React.Component {
     // Renders the Foodtruck Box for the home page;
     if(window.innerWidth >= 600){
          return (
-           <div className="col-3  pb5 ml5" key ={this.props.id} onClick = {(e)=>{
-             var foodtruckID = this.props.foodtruck.objectID;
-
-             cookie.remove("foodtruckCurrent",{path:"/"});
-             cookie.remove("orders",{path:"/"});
-             cookie.save("foodtruckCurrent",foodtruckID,{path:"/"});
+           <div className="col-3" key ={this.props.id} onClick = {(e)=>{
+             var foodtruck = this.props.foodtruck;
 
              this.props.ClearOrder();
              this.props.changeURL("menu");
+             this.props.SetTruck(foodtruck);
 
            }}>
+            <div className="w90 ml5">
+               <img alt="showcase" className="w100 relative moveUpDown h100px foodtruck_image"  src={this.props.foodtruck.background}/>
 
-             <img alt="showcase" className="w100 moveUpDown br10px h100px"  src={this.props.foodtruck.background}/>
-
-             <div className="row">
-               <div className="col-12 pb5 fl">
-                 <br />
-                 <p className="bold text-left "><strong>{this.props.foodtruck.name}</strong></p>
-                 <p className="text-left ml1">{this.props.foodtruck.address.street + "," + this.props.foodtruck.address.state+","+this.props.foodtruck.address.zip}</p>
-                 <p className=" text-left  ml1 text-left">{this.props.distance}</p>
-               </div>
-               <div className="col-12 ">
-                 <div className="row">
-                   {this.renderStar()}
+               <div className="row foodtruck_info_row">
+                 <div className="col-12 fl foodtruck_info">
+                   <br />
+                   <p className="bold text-left foodtruck_box_title"><strong>{this.props.foodtruck.name}</strong></p>
+                   <div className="foodtruck_line_box" />
+                   <p className="text-left ml1">{this.props.foodtruck.address.street + "," + this.props.foodtruck.address.state+","+this.props.foodtruck.address.zip}</p>
+                   <p className=" text-left  ml1 text-left">{this.props.distance}</p>
                  </div>
+
+                 <div className="col-5 margin-left-5">
+                   <div className="row">
+                     {this.renderStar()}
+                   </div>
+               </div>
+               <div className="col-2">
+                <p className="foodtruck_box_price">$$$$</p>
+               </div>
+               <div className="col-4">
+                <p className="medium-font">3.2 miles</p>
+               </div>
              </div>
-           </div>
+            </div>
 
          </div>
          )
@@ -67,33 +76,30 @@ class FoodBox extends React.Component {
           return(
             <li className="list-group-item container-fluid" key ={this.props.id} onClick = {(e)=>{
               var foodtruckID = this.props.foodtruck.objectID;
-
-              cookie.remove("foodtruckCurrent",{path:"/"});
-              cookie.remove("orders",{path:"/"});
-              cookie.save("foodtruckCurrent",foodtruckID,{path:"/"});
-
               this.props.ClearOrder();
               this.props.changeURL("menu");
 
             }}>
-              <div classaName="row">
+              <div classNameaName="row">
                 <div className="col-2">
                   <img src={this.props.foodtruck.logo} className="fl listLogoH"/>
                 </div>
 
                 <div className="col-5 fl">
-                    <p className="text-center bold"><strong>{this.props.foodtruck.name}</strong></p>
+                    <span> <p className="text-center bold"><strong>{this.props.foodtruck.name}</strong></p></span>
+                    <span> <p className="text-center ">{this.props.foodtruck.address.street + "," + this.props.foodtruck.address.state+","+this.props.foodtruck.address.zip}</p></span>
                 </div>
 
                 <div className="col-5 fl">
-                  <p className="text-center ">{this.props.foodtruck.address.street + "," + this.props.foodtruck.address.state+","+this.props.foodtruck.address.zip}</p>
+                  <span><p className="text-center ">Wait: 20-30 min</p></span>
+                  <span><p className="text-center green-font ">$$</p></span>
                 </div>
               </div>
 
                   <div className="row">
                     <div className="col-6">
                       <div className="row">
-                        <div className="col-2"/>
+                        <div className="col-3"/>
                         {this.renderStar()}
                       </div>
                     </div>

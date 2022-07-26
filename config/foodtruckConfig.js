@@ -15,7 +15,7 @@ const FoodTrucks =  [{
     zip: 85251
   },
   stars:3,
-  background:"./assets/images/samplebanner2.jpg",
+  background:"./assets/images/smoothie_box.png",
   display:"./assets/images/smoothie.jpg",
   mapLogo:"./assets/images/smoothieKingMap.png",
   type:["dessert","all-american"],
@@ -118,7 +118,7 @@ const FoodTrucks =  [{
       image:"./assets/images/tollhouse.png",
       calories:1000,
       price:4.50,
-      description:"Classic ice cream sandwich"
+      description:"classNameic ice cream sandwich"
     }]
 },
 {
@@ -368,11 +368,18 @@ image:"./assets/images/samplebanner2.jpg"
   name:"Pita Jungle",
   lat:33.377630,
   lng:-111.939360,
-  mapLogo:"./assets/images/pitaJungleMap.png",
+  address:{
+
+    street:"4005 N Scottsdale Rd",
+    city:"Scottsdale",
+    state:"AZ",
+    zip: 85251
+  },
+  mapLogo:"./assets/images/pita_box.png",
   routes:routes,
     stars:5,
   logo:"./assets/images/pita.png",
-  background:"./assets/images/samplebanner.jpg",
+  background:"./assets/images/pita_box.png",
   display:"./assets/images/pitajungle.jpg",
   type:["all-american","greek"],
   priceAverage:total,
@@ -446,7 +453,7 @@ image:"./assets/images/samplebanner2.jpg"
     ],
       calories:870,
       price:4.50,
-      description:"A classic gyro"
+      description:"A classNameic gyro"
     }]
 },
 {
@@ -648,7 +655,7 @@ image:"./assets/images/samplebanner2.jpg"
 
     calories:400,
     price:4.99,
-    description:"A classic pesto pizza"
+    description:"A classNameic pesto pizza"
   }]
 },
 {
@@ -1251,6 +1258,13 @@ address:{
   ownerID:"39384rh393939393939393939393939393939348hdj8m",
   objectID:"102293ednfuvb4tuig4tuivbt4uivb4utfnu4k92kfdc4900ecm",
   name:"Burger Joint",
+  address:{
+
+    street:"4005 N Scottsdale Rd",
+    city:"Scottsdale",
+    state:"AZ",
+    zip: 85251
+  },
   lat:31.759910,
   lng:-106.132280,
   mapLogo:"./assets/images/burgerMap.png",
@@ -1330,7 +1344,7 @@ address:{
     ],
       calories:870,
       price:6.50,
-      description:"A classic burger with a side of fries"
+      description:"A classNameic burger with a side of fries"
     }]
 },
 {
@@ -1516,7 +1530,7 @@ address:{
 
     calories:400,
     price:4.99,
-    description:"A classic greek salad"
+    description:"A classNameic greek salad"
   }]
 },
 {
@@ -1556,7 +1570,7 @@ address:{
 
   ],
   food:[{
-    item:"Classic Cheese",
+    item:"classNameic Cheese",
         image:"./assets/images/cheesepizza.png",
     id:"19292929229384567438920394857",
     ingredients:[{
@@ -1793,10 +1807,17 @@ address:{
   name:"Acai Shop",
   lat:33.585430,
   lng:-111.922610,
-  mapLogo:"./assets/images/acaiMap.png",
+  address:{
+
+    street:"4005 N Scottsdale Rd",
+    city:"Scottsdale",
+    state:"AZ",
+    zip: 85251
+  },
+  mapLogo:"./assets/images/acai_box.png",
   routes:routes,
   logo:"./assets/images/acaishop.png",
-  background:"./assets/images/acaishopbanner.jpg",
+  background:"./assets/images/acai_box.png",
   display:"./assets/images/acai02.jpg",
   type:["all-american","burgers"],
   priceAverage:total,
@@ -1938,7 +1959,7 @@ address:{
       description:""
     },
     {
-      item:"Classic Acai Bowl",
+      item:"classNameic Acai Bowl",
       add:[
         {
           name:"blueberries",
@@ -2160,7 +2181,7 @@ address:{
 
     calories:400,
     price:4.99,
-    description:"A classic greek salad"
+    description:"A classNameic greek salad"
   }]
 },
 {
@@ -2250,7 +2271,7 @@ address:{
   lng:-111.879360,
   routes:routes,
   logo:"./assets/images/rotatingchicken.png",
-  background:"./assets/images/rotatingchickenbanner.jpg",
+  background:"./assets/images/chicken_box.png",
   display:"./assets/images/chicken2029.jpg",
   type:["all-american","burgers"],
   priceAverage:total,
@@ -2260,7 +2281,7 @@ address:{
     food:[
 
     {
-      item:"Classic Chicken Burger",
+      item:"classNameic Chicken Burger",
       buns:["leaf","gluten-free"],
       id:"2ewjsdxme2dcxk203x29m8292298",
       image:"./assets/images/burger1.png",
@@ -2426,9 +2447,9 @@ address:{
     buns:["leaf","gluten-free"],
     image:"./assets/images/meal2.png",
     ingredients:[{
-      name:"Classic Chicken Burger",
+      name:"classNameic Chicken Burger",
       flag:true,
-      catagory:"Classic Chicken Burger",
+      catagory:"classNameic Chicken Burger",
       display:true
     },
     {
@@ -2508,7 +2529,7 @@ address:{
     calories:400,
     price:4.99,
     image:"./assets/images/salad2.png",
-    description:"A classic greek salad"
+    description:"A classNameic greek salad"
   }]
 },
 {
@@ -2516,7 +2537,7 @@ address:{
   id:"nojdmi0ednemide",
 
   food:[{
-    item:"Classic Cheese",
+    item:"classNameic Cheese",
     add:[
       {
         name:"A1 sauce",
@@ -2786,8 +2807,15 @@ address:{
   name:"Salad Go",
   mapLogo:"./assets/images/saladBarMap.png",
   routes:routes,
+  address:{
+
+    street:"4005 N Scottsdale Rd",
+    city:"Scottsdale",
+    state:"AZ",
+    zip: 85251
+  },
   logo:"./assets/images/saladgo.png",
-  background:"./assets/images/saladgobanner.jpg",
+  background:"./assets/images/salad_box.png",
   display:"./assets/images/salad999.jpg",
   lat:33.579990,
   lng:-112.013620,
@@ -3340,12 +3368,19 @@ address:{
   ownerID:"39384rfhu34h45tfh478th89rht78ty7t8t548tg4578gh48hdj8m",
   objectID:"10229ifgn4utgn49ug5u9h54ug54hgub5t4hg93h98ht49gh5gh3493edk92kfdc4900ecm",
   name:"Steak Truck",
+  address:{
+
+    street:"4005 N Scottsdale Rd",
+    city:"Scottsdale",
+    state:"AZ",
+    zip: 85251
+  },
   lat:33.511530,
   lng:-111.986730,
   mapLogo:"./assets/images/steakMap.png",
   routes:routes,
   logo:"./assets/images/firegrill.png",
-  background:"./assets/images/steaktruckbanner.jpg",
+  background:"./assets/images/steak_box.png",
   display:"./assets/images/steak498.jpg",
   type:["all-american","burgers"],
   priceAverage:total,
@@ -3420,7 +3455,7 @@ address:{
     ],
       calories:1070,
       price:9.99,
-      description:"A classic double cheeseburger with a side of fries"
+      description:"A classNameic double cheeseburger with a side of fries"
     }]
 },
 {
@@ -3566,7 +3601,7 @@ address:{
   catagory:"Pizzas",
   id:"nojdmi0ednemide",
   food:[{
-    item:"Classic Cheese",
+    item:"classNameic Cheese",
     add:[
       {
         name:"tzakiki",
@@ -3929,9 +3964,16 @@ address:{
   mapLogo:"./assets/images/chinaMap.png",
   routes:routes,
   lat:33.598920,
+  address:{
+
+    street:"4005 N Scottsdale Rd",
+    city:"Scottsdale",
+    state:"AZ",
+    zip: 85251
+  },
   lng:-111.982830,
   logo:"./assets/images/chinabowl.png",
-  background:"./assets/images/chinabowlbanner.jpg",
+  background:"./assets/images/asian_box.png",
   display:"./assets/images/china9292.jpg",
   type:["all-american","burgers","chinese"],
   priceAverage:total,
@@ -4288,7 +4330,13 @@ address:{
   ownerID:"39384rh48hdj8m000sss",
   objectID:"102293edk92kfdc4900ecm2020209",
   stars:3,
+  address:{
 
+    street:"4005 N Scottsdale Rd",
+    city:"Scottsdale",
+    state:"AZ",
+    zip: 85251
+  },
   name:"Johnny Rocket",
   routes:routes,
   lat:33.3630,
@@ -4369,7 +4417,7 @@ address:{
     ],
       calories:870,
       price:6.50,
-      description:"A classic burger with a side of fries"
+      description:"A classNameic burger with a side of fries"
     }]
 },
 {
@@ -4588,7 +4636,7 @@ address:{
 
     calories:400,
     price:4.99,
-    description:"A classic greek salad"
+    description:"A classNameic greek salad"
   }]
 },
 {
@@ -4596,7 +4644,7 @@ address:{
   id:"nojdmi0ednemide",
 
   food:[{
-    item:"Classic Cheese",
+    item:"classNameic Cheese",
     add:[
       {
         name:"tzakiki",
@@ -4864,11 +4912,18 @@ address:{
   objectID:"102293edntuivb4fvgn45gu4n39vfng54ug8b34bgk92kfdc4900ecmceroinveiu",
   name:"The Stand",
   lat:33.3477630,
+  address:{
+
+    street:"4005 N Scottsdale Rd",
+    city:"Scottsdale",
+    state:"AZ",
+    zip: 85251
+  },
   lng:-111.959360,
   mapLogo:"./assets/images/burgerMap2.png",
   routes:routes,
   logo:"./assets/images/thestand.png",
-  background:"./assets/images/thestandbanner.jpg",
+  background:"./assets/images/burger_box.png",
   display:"./assets/images/burger339.jpg",
   type:["all-american","burgers","dessert","healthy","chinese"],
   priceAverage:total,
@@ -4909,7 +4964,7 @@ address:{
     ],
       calories:870,
       price:6.50,
-      description:"A classic burger with a side of fries"
+      description:"A classNameic burger with a side of fries"
     }]
 },
 {
@@ -4973,14 +5028,14 @@ address:{
 
     calories:400,
     price:4.99,
-    description:"A classic greek salad"
+    description:"A classNameic greek salad"
   }]
 },
 {
   catagory:"Pizzas",
   id:"nojdmi0ednemide",
   food:[{
-    item:"Classic Cheese",
+    item:"classNameic Cheese",
         image:"./assets/images/cheesepizza.png",
     id:"19292929229384567438920394857",
     ingredients:[{
@@ -5151,8 +5206,15 @@ address:{
   name:"Pizza Town",
   mapLogo:"./assets/images/pizzaMap.png",
   routes:routes,
+  address:{
+
+    street:"4005 N Scottsdale Rd",
+    city:"Scottsdale",
+    state:"AZ",
+    zip: 85251
+  },
   logo:"./assets/images/pizzatown.png",
-  background:"./assets/images/pizzatownbanner.jpg",
+  background:"./assets/images/pizza_box.png",
   display:"./assets/images/pizza45.jpg",
   type:["all-american","pizza"],
   lat:33.377630,
@@ -5353,7 +5415,7 @@ address:{
   ],
     calories:870,
     price:7.95,
-    description:"A classic pizza with tomato on top"
+    description:"A classNameic pizza with tomato on top"
   },
   {
     item:"Townstyle Pizza",
@@ -5543,7 +5605,7 @@ address:{
 
     calories:500,
     price:4.99,
-    description:"A classic veggie pizza"
+    description:"A classNameic veggie pizza"
   }]
 },
 {
@@ -5583,7 +5645,7 @@ address:{
   ],
   id:"nojdmi0ednemide33",
   food:[{
-    item:"Classic Cheese",
+    item:"classNameic Cheese",
         image:"./assets/images/cheesepizza.png",
     id:"1929292922938456743338920394857",
     ingredients:[{

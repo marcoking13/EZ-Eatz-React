@@ -10,7 +10,7 @@ class Remover extends React.Component {
     var color = "bw br10px fl ml5 mr5 BBd4 turnd4 w20px h20px";
     var key = 0;
     // Loop through all the ingredients
-    // then set class based on if user clicked them or not
+    // then set className based on if user clicked them or not
     return this.props.item.ingredients.map((ing)=>{
       key++;
       for(var i = 0; i<this.props.remove.length;i++){

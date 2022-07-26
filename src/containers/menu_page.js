@@ -2,9 +2,11 @@ import React from "react";
 
 import cookie from "react-cookies";
 import axios from "axios";
-
+import "./../css/new_menu.css";
 import HomePageNav from "./../components/Navbar/home_nav_bar";
 import ShowBox from "./../components/Menu/show_box";
+import CatagoryListings from "./../components/Menu/catagory_listings";
+import MenuRows from "./../components/Menu/menu_row";
 import MenuBoxes from "./../components/Menu/menu_boxes_component";
 import Footer from "./../components/Footer/footnote.js";
 import FooterMobile from "./../components/Footer/footnote_mobile.js";
@@ -26,6 +28,7 @@ class MenuPage extends React.Component {
     var foodtruckID  = cookie.load("foodtruckCurrent",{path:"/"});
     //------------------------------Axios Foodtruck Inialization-----------------------------
       // Find all foodtrucks in database and save into variable
+
     axios.get("/api/trucks").then((response)=>{
       var trucks = response.data;
         // Loop through each truck object
@@ -82,18 +85,24 @@ class MenuPage extends React.Component {
         <br />
         <br />
         <ShowBox
-          truck = {this.props.truck}
+
           SetAddress = {this.props.SetAddress}
           changeURL = {this.props.changeURL}
-          foodtruck = {this.state.foodtruck}
-          />
-        <div className="menux">
-          <MenuBoxes
-            SetItem={this.SetItem}
-            foodtruck = {this.state.foodtruck}
-          />
+          truck = {this.props.truck}
+        />
+        <div className="container-fluid menu_container">
+        <div className="row">
+        <div style={{marginLeft:"3.5%"}}/>
+        <div clasName="col-4 catagory_listings">
+          <CatagoryListings truck = {this.props.truck}/>
         </div>
-      
+        </div>
+
+          <div className="menux">
+            <MenuRows truck = {this.props.truck}/>
+          </div>
+        </div>
+
         {this.renderFooter(window.innerWidth)}
     </div>
     )

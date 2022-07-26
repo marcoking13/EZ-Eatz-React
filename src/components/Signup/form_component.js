@@ -11,53 +11,59 @@ class FormComponent extends React.Component {
       input : "",
       key: this.props.key
     }
+
     this.formRef = React.createRef();
     this.errorRef = React.createRef();
 
   }
 
   EnterInformation = (event) =>{
-
+      console.log(this.props.type,this.props.dataKey,this.state.input.length);
       if(!this.state.input){
         this.errorRef.current.innerHTML = "*Must Enter a Value!";
         return;
       }
-      if(this.props.type == "signup" && this.state.key == "password" && this.state.input.length <= 10){
+      else if(this.props.type == "signup" && this.props.dataKey == "password" && this.state.input.length < 10){
         this.errorRef.current.innerHTML = "*Password must be 10 characters or longer";
         return;
       }
-      if(this.props.type == "signup" && this.state.key == "username" && this.state.input.length <= 7){
+      else if(this.props.type == "signup" && this.props.dataKey == "username" && this.state.input.length < 7){
         this.errorRef.current.innerHTML = "*Username must be 7 characters or longer";
         return;
-      }
+      }else{
 
-      this.errorRef.current.innerHTML = "";
-
-      if(this.formRef){
-        this.formRef.current.classList.remove("add_form");
-        this.formRef.current.classList.add("remove_form");
-      }
-
-     setTimeout(()=>{
-
-        this.props.ChangeInput(this.state.input,this.props.dataKey);
+        this.errorRef.current.innerHTML = "";
 
         if(this.formRef){
-          this.formRef.current.classList.add("add_form");
-          this.formRef.current.classList.remove("remove_form");
-         }
+          this.formRef.current.classList.remove("add_form");
+          this.formRef.current.classList.add("remove_form");
+        }
 
-        this.setState({input:"",key:""});
+       setTimeout(()=>{
 
-      },500);
+          this.props.ChangeInput(this.state.input,this.props.dataKey);
 
+          if(this.formRef){
+            this.formRef.current.classList.add("add_form");
+            this.formRef.current.classList.remove("remove_form");
+           }
+
+          this.setState({input:"",key:""});
+
+        },500);
+      }
   }
+
+ CapitalizeFirstLetter = (word) => {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
 
   render(){
 
     return(
       <div className="container-fluid form_component padding-top-5"style = {{background:`url(${LandingBackground})`,height:"1080px",paddingBottom:"100%"}}>
         <p className="ez_title margin-left-5">EZ<strong className="ez_title_end">Eatz</strong></p>
+        <p className="type">{this.CapitalizeFirstLetter(this.props.type)}</p>
         <div className="row add_form  " ref ={this.formRef}>
           <div className="col-4"/>
           <div className="col-4 form_container jumbotron "style={{background:"white",borderRadius:"5px"}}>

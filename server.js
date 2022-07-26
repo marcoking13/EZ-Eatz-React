@@ -49,25 +49,46 @@ app.listen(port,function(){
   var dbO = db.db("heroku_9tlg8v4r");
   console.log("Database is working")
 
-  app.post("/api/signup",(req,res)=>{
-    var data = SignupUser(req,res,dbO);
-    console.log(data);
-    res.json({data:data});
+  app.post("/api/signup",async (req,res)=>{
+    var found = false;
+    const data = await dbO.collection("users").find({}).toArray();
+
+      for(var i =0; i<data.length; i++){
+        if(data[i].username === req.body.username){
+          found = true;
+          break;
+        }
+      }
+      if(!found){
+        dbO.collection("users").insertOne({
+          name:req.body.name,
+          profilePhoto:"",
+          address:req.body.address,
+          orders:[],
+          username:req.body.username,
+          password:req.body.password
+
+        });
+      }
+
+    res.json(!found);
+
   });
 
   app.get("/api/currentUser",(req,res)=>{
     PostFoodtrucksToAPI(req,res);
   });
 
-  app.get("/api/trucks",(req,res)=>{
-    PostFoodtrucksToAPI(req,res);
+  app.post("/api/trucks", async (req,res)=>{
+
+      const data = await dbO.collection("foodtrucks").find({}).toArray();
+      res.json(data);
+
   });
 
   app.post("/api/login", async (req,res)=>{
 
     const search = await dbO.collection("users").findOne({password:req.body.password,username:req.body.username});
-    console.log(search);
-    console.log("Data",search);
     res.json(search);
 
   });
@@ -93,25 +114,14 @@ app.listen(port,function(){
 // Database Functions
 
 
-var PostUsersToAPI= (req,res) =>{
-  MongoClient.connect(url,(err,db)=>{
-    if(err) throw err;
+var PostUsersToAPI= (req,res,db) =>{
+    //
+    // db.collection("users").find({}).toArray((err,result)=>{
+    //   res.json(result);
+    // });
 
-    var dbO = db.db("heroku_9tlg8v4r");
-    dbO.collection("users").find({}).toArray((err,result)=>{
-      res.json(result);
-    });
-  });
 }
 
-var PostFoodtrucksToAPI= (req,res) =>{
-  MongoClient.connect(url,(err,db)=>{
-    var dbO = db.db("heroku_9tlg8v4r");
-    dbO.collection("foodtrucks").find({}).toArray((err, result) => {
-      res.json(result);
-    });
-  });
-}
 
 var PostAddressToUser = (req,res) => {
   MongoClient.connect(url,(err,db)=>{
@@ -144,35 +154,6 @@ var PostCurrentUserToAPI = (req,res)=>{
 };
 
 
-var SignupUser = (req,res,db)=>{
-    var found = false;
-    db.collection("users").find({}).toArray((err,data)=>{
-
-      for(var i =0; i<data.length; i++){
-        if(data[i].username === req.body.username){
-          console.log("Error: Name already Taken");
-          found = true;
-          break;
-        }
-      }
-      if(!found){
-        db.collection("users").insertOne({
-          name:req.body.name,
-          profilePhoto:"",
-          address:req.body.address,
-          orders:[],
-          username:req.body.username,
-          password:req.body.password
-
-        });
-      }
-
-
-  });
-  console.log("Found "+found);
-  return found;
-
-}
 
 var UpdateAddress = (req,res)=>{
 
@@ -190,11 +171,13 @@ var UpdateAddress = (req,res)=>{
 
 var mongooseStartup = () => {
 
-    MongoClient.connect(url,(err,db)=>{
+    MongoClient.connect(url,async(err,db)=>{
       if(err) throw err;
 
       var dbO = db.db("heroku_9tlg8v4r");
-
+      const foodtrucks = dbO.collection("foodtrucks");
+      const result = await foodtrucks.deleteMany({});
+      console.log("Deleted " + result.deletedCount + " documents");
       dbO.collection("foodtrucks").find({}).toArray(function(err, result) {
           if (err) throw err;
 

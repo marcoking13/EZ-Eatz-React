@@ -1,0 +1,121 @@
+.filter_text{
+  font-family: "Roboto";
+  font-size:20px;
+  margin-left:10%;
+  font-weight:bold;
+
+}
+.margin-top-20{
+  margin-top:20%;
+}
+.margin-top-25{
+  margin-top:25%;
+}
+.sort_container{
+  width:100%;
+
+  margin-top:5%;
+}
+.filter_list{
+  list-style-type: none;
+  margin-top:1%;
+  clear:both;
+  width:100%;
+}
+.filter-center{
+  width:50%;
+  margin-left:25%;
+  border-radius:50%;
+  padding:10%;
+  border:2px solid black;
+  background:black;
+}
+.toggle_deals{
+  width:80%;
+  margin-left:10%;
+  border:2px solid #e6e6e6;
+  color:black;
+  text-align:center;
+
+}
+.margin-left-10{
+  margin-left: 10%;
+}
+.filter_heading{
+  margin-top:15%;
+  margin-left:5%;
+  font-size:25px;
+  font-weight: bold;
+
+}
+.switch{
+  height:24.5px;
+  z-index:0;
+  float:left;
+  width:2%;
+  background:red;
+  position:relative;
+}
+.margin-top-5{
+  margin-top:5%;
+}
+.margin-top-10{
+  margin-top:10%;
+}
+.price_tag{
+  border-radius:10px;
+  background:#e6e6e6;
+  text-align:center;
+  margin-top:2.5%;
+  font-size:15px;
+}
+.price_tag:hover{
+  background:black;
+  color:white;
+}
+.active_price_tag{
+  background:black;
+  color:white;
+}
+.on_switch{
+  float:right;
+}
+.off_switch{
+  float:left;
+}
+.on_toggle{
+
+  background:black;
+  color:white;
+}
+.off_toggle{
+
+  background:white;
+  color:black;
+}
+.filter_bubble{
+  width:10%;
+  padding:5%;
+  float:left;
+
+  border-radius:50%;
+  background:none;
+  border:2px solid #e6e6e6;
+}
+
+.filter_bubble:hover{
+  background:black;
+  border-color:black;
+  transition: all;
+}
+.filter_bubble:hover .filter_center{
+  background:white;
+  border-color:white;
+  transition: all;
+}
+.filter_item{
+  width:50%;
+  margin-left:5%;
+  float:left;
+
+}

@@ -1,0 +1,95 @@
+.menu_showcase{
+  width:100%;
+  height:300px;
+  background-size:cover;
+}
+
+.foodtruck_menu_name{
+  font-size: 30px;
+  font-weight: bold;
+  margin-top:2.5%;
+  font-family: "Roboto";
+  margin-left:5%;
+}
+.foodtruck_menu_details{
+  margin-left: 5%;
+  color:grey;
+  font-size:13px;
+}
+.menu_catagory_list_text{
+ font-size: 20px;
+font-weight: bold;
+ font-family: "Roboto";
+}
+.menu_catagory_list:hover .underline{
+  animation: underline .2s 1 ease-in;
+  width:100%;
+}
+.underline{
+  height:1px;
+  width:0px;
+  position: relative;
+  bottom:5px;
+  background:black;
+
+}
+.active_menu_catagory_list{
+  background:#e6e6e6;
+}
+.active_menu_catagory_list .underline{
+  width:40px
+}
+.menu_catagory_list{
+  list-style-type: none;
+  margin-top:2.5%;
+}
+.foodtruck_menu_name{
+  font-size: 30px;
+  font-weight: bold;
+  display:inline !important;
+  margin-top:1%;
+  font-family: "Roboto";
+  width:100%;
+  color:black;
+
+}
+.menu_subheading{
+  margin-top:5%;
+  margin-left: 5%;
+  font-size: 25px;
+  font-weight: normal;
+  font-family: "Roboto";
+}
+.foodtruck_logo_menu{
+  width:80%;
+  margin-left:10%;
+  margin-top:2.5%;
+}
+
+
+@keyframes underline {
+  0%{
+    width:0px
+  }
+  100%{
+    width:100%;
+  }
+}
+.menu_row_title{
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Roboto";
+  margin-top:1%;
+}
+
+.menu_item_image{
+  width:100%;
+  height:300px;
+}
+
+.menu_item_description{
+  font-family: "Roboto";
+  font-size:15px;
+  text-align:center;
+  margin-top:1%;
+}

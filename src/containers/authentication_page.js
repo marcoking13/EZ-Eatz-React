@@ -50,25 +50,26 @@ class AuthenticationPage extends React.Component {
 
   }
 
-  CheckInputs = (data)=>{
+  CheckInputs = (data,alertValue)=>{
 
+    console.log(data);
     if(data){
 
       this.props.changeURL("home");
 
     }else{
 
-      alert("Wrong Username or Password!");
+      alert(alertValue);
       this.Reset();
 
     }
 
   }
 
-  Verify = async(info,url)=>{
+  Verify = async(info,url,alertValue)=>{
 
     const {data} = await axios.post(url,info);
-    this.CheckInputs(data);
+    this.CheckInputs(data,alertValue);
 
   }
 
@@ -76,6 +77,7 @@ class AuthenticationPage extends React.Component {
 
     var info = {};
     var url = "";
+    var alertValue = "";
 
     if(this.state.key == "login"){
 
@@ -85,6 +87,7 @@ class AuthenticationPage extends React.Component {
       }
 
       url = "/api/login";
+      alertValue = "Wrong Username or Password!";
 
     }else{
 
@@ -96,11 +99,13 @@ class AuthenticationPage extends React.Component {
         }
 
         url = "/api/signup";
+        alertValue = "Username Already Taken!";
+
 
     }
 
 
-    this.Verify(info,url);
+    this.Verify(info,url,alertValue);
 
   }
 

@@ -9,6 +9,18 @@
   border-color:none;
   padding:5%;
 }
+.type{
+  text-align: center;
+  right:5%;
+  width:10%;
+  background:none;
+  position: absolute;
+  top:5%;
+  box-shadow: 1px 1px 1px 1px black;
+  border-radius:1px;
+  font-size:30px;
+  color:black;
+}
 .form_text{
   font-size:20px;
 
