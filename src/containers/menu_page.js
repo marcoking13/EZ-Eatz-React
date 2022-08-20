@@ -8,6 +8,7 @@ import ShowBox from "./../components/Menu/show_box";
 import CatagoryListings from "./../components/Menu/catagory_listings";
 import MenuRows from "./../components/Menu/menu_row";
 import MenuBoxes from "./../components/Menu/menu_boxes_component";
+import ModifyModal from "./../components/Menu/modify_modal.js";
 import Footer from "./../components/Footer/footnote.js";
 import FooterMobile from "./../components/Footer/footnote_mobile.js";
 
@@ -22,7 +23,8 @@ class MenuPage extends React.Component {
 
     this.state = {
       foodtruck:{},
-      currentItem:{}
+      currentItem:{},
+      item:null
     }
     // Save foodtruck in cookie to variable
     var foodtruckID  = cookie.load("foodtruckCurrent",{path:"/"});
@@ -50,10 +52,8 @@ class MenuPage extends React.Component {
 
   }
 //-----------------------------------------Saved Selected Item to Cookie and State--------------------------------------
-  SetItem(item){
-    this.setState({item:item});
-    cookie.save("currentItem",item);
-    this.props.changeURL("modify");
+  SetItem = (item) =>{
+    this.setState({item:item})
   }
 
   renderFooter(width){
@@ -67,6 +67,7 @@ class MenuPage extends React.Component {
 //------------------------------------------------Renderer----------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------
   render(){
+
     return(
       <div>
 
@@ -85,7 +86,6 @@ class MenuPage extends React.Component {
         <br />
         <br />
         <ShowBox
-
           SetAddress = {this.props.SetAddress}
           changeURL = {this.props.changeURL}
           truck = {this.props.truck}
@@ -93,20 +93,23 @@ class MenuPage extends React.Component {
         <div className="container-fluid menu_container">
         <div className="row">
         <div style={{marginLeft:"3.5%"}}/>
-        <div clasName="col-4 catagory_listings">
+        <div clasName="col-3 catagory_listings">
           <CatagoryListings truck = {this.props.truck}/>
         </div>
+        <div style={{marginLeft:"10%"}}/>
+        <div className="menux col-8 margin-left-5">
+          <MenuRows truck = {this.props.truck} SetItem = {this.props.SetItem}/>
         </div>
+        </div>
+          <ModifyModal item = {this.state.item} />
 
-          <div className="menux">
-            <MenuRows truck = {this.props.truck}/>
-          </div>
         </div>
 
         {this.renderFooter(window.innerWidth)}
     </div>
     )
   }
+
 }
 
 

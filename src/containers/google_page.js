@@ -1,12 +1,11 @@
 import React from "react";
 import {GoogleMap, withScriptjs,withGoogleMap,Marker} from "react-google-maps";
 import { compose, withProps } from "recompose"
-import Geocode from "react-geocode";
 import axios from 'axios';
 import cookies from "react-cookies";
-
+import NoResults from "./../components/no_results"
 import MobileBar from "./../components/Maps/mobile_bar";
-import DesktopBar from "./../components/Navbar/home_nav_bar";
+import Navbar from "./../components/Navbar/home_nav_bar";
 
 import ProfilePicture from "./../images/profileIcon.png";
 import Search from "./../images/userChoice.png";
@@ -16,8 +15,7 @@ import Logo from "./../images/logo.png";
 
 import "./../css/utility.css";
 
-Geocode.setApiKey("AIzaSyDT3CvnaTo7AnBgi4XRNHPrf0_hDTrF0EE");
-Geocode.enableDebug();
+
 
 //----------------------------------------Wrapper Component--------------------------------------------------------//
 const MyMapComponent = compose(
@@ -30,7 +28,7 @@ const MyMapComponent = compose(
   withScriptjs,
   withGoogleMap
 )((props) =>
-     <GoogleMap  zoom={12} center = {{lat:props.lat,lng:props.lng}} >
+     <GoogleMap  zoom={12} center = {{lat:props.lat,lng:props.lng}} key = {props.lat.toString()}>
 
       <Marker
         position = {{
@@ -71,15 +69,15 @@ export default class Maps extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      lat:-34.397,
+      lat:this.props.lat,
       address:this.props.address,
-      lng:150.644,
+      lng:this.props.lng,
       place:"",
       markers:[]
     }
 
-    this.changePlace = this.changePlace.bind(this);
-    this.ConvertToCoords = this.ConvertToCoords.bind(this);
+  //  this.changeAddress = this.changeAddress.bind(this);
+
 
     // axios.get("/api/users").then((response)=>{
     //   var accounts = response.data;
@@ -100,8 +98,8 @@ export default class Maps extends React.Component {
   }
 
   componentWillMount(){
-    console.log(this.state.address);
-    this.ConvertToCoords(this.state.address);
+
+
     this.SetMarkersOnMap();
 
   }
@@ -125,33 +123,24 @@ export default class Maps extends React.Component {
         markers.push({lat:lat,lng:lng,url:trucks[i].mapLogo,id:trucks[i].objectID});
 
       }
-      console.log(markers);
+
       this.setState({markers:markers});
 
   }
 
-  ConvertToCoords(address){
 
-    Geocode.fromAddress(address).then(
-      response => {
-        const { lat, lng } = response.results[0].geometry.location;
-        //var accountCookie = JSON.parse(cookies.load("account",{path:"/"}));
-        //axios.post("/api/address",{address:address,account:accountCookie});
-        this.setState({lat:lat,lng:lng,place:address});
-      },
-      error => {
-        console.error(error);
-      }
-    );
 
-  }
-
-  changePlace(place){
-    this.setState({
-      place:place
-    });
-  }
-
+  // changeAddress(address,lat,lng){
+  //
+  //   this.setState({
+  //     address:place,
+  //     lat:lat,
+  //     lng:lng
+  //
+  //   });
+  //
+  // }
+  //
 
   renderBar(){
 
@@ -159,42 +148,52 @@ export default class Maps extends React.Component {
       return (
           <MobileBar
             place = {this.state.place}
-            ConvertToCoords = {this.ConvertToCoords}
             orders = {this.props.orders}
-            changePlace = {this.changePlace }
+            changePlace = {this.changePlace}
             changeURL = {this.props.changeURL}
           />
         )
     }else{
       return (
-        <DesktopBar
+        <Navbar
           place = {this.state.place}
-          ChangeAddress = {this.props.ChangeAddress}
+          account = {this.props.account}
+          changeAddress = {this.props.changeAddress}
           address = {this.props.address}
-          ConvertToCoords = {this.ConvertToCoords}
+          isMap = {true}
           orders = {this.props.orders}
-          changePlace = {this.changePlace }
+          changePlace = {this.changePlace}
           changeURL = {this.props.changeURL}
         />
       )
     }
 
   }
-
+  renderMap(){
+    if(this.state.lat && this.state.lng){
+      return(
+        <div style={{width:"100vw",height:"100vh"}}>
+          <MyMapComponent
+            key = {this.state.lat.toString()}
+            changeURL = {this.props.changeURL}
+            ClearOrder = {this.props.ClearOrder}
+            markers = {this.state.markers}
+            lat = {this.props.lat}
+            lng = {this.props.lng}
+          />
+        </div>
+      )
+    }else{
+      return <NoResults text = "Enter Your Address to View Map!"/>
+    }
+  }
   render(){
+    console.log(this.props);
       return (
-        <div className="container-fluid bb">
+        <div className="container-fluid" >
             {this.renderBar()}
             <br />
-            <div style={{width:"100vw",height:"100vh"}}>
-              <MyMapComponent
-                changeURL = {this.props.changeURL}
-                ClearOrder = {this.props.ClearOrder}
-                markers = {this.state.markers}
-                lat = {this.state.lat}
-                lng = {this.state.lng}
-              />
-            </div>
+            {this.renderMap()}
           </div>
       );
     }

@@ -3,14 +3,17 @@ import React from "react";
 import cookie from "react-cookies";
 import {Map, Marker, GoogleApiWrapper, google} from 'google-maps-react';
 import axios from "axios";
+import NoResults from "./../components/no_results"
+
 import ToggleIcon from "./../images/arrow_row_icon.svg";
 import "./../css/home_page.css";
-
+import GeoDistance from "geo-distance";
 import HomePageNav from "./../components/Navbar/home_nav_bar.js";
 import FoodBox from "./../components/Home/foodtruck_box_home.js";
 import Filter from "./../components/Home/filter.js";
 import Footer from "./../components/Footer/footnote.js";
 import FooterMobile from "./../components/Footer/footnote_mobile.js";
+
 
 import Logo from "./../images/logo.png";
 
@@ -20,31 +23,21 @@ class HomePage extends React.Component {
 
   constructor(props){
     super(props);
-
     this.state={
       cookie:"",
-      foodtrucks:[],
       currentFoodTruck:{},
+      nearbyFoodtrucks:[],
+      radius:20,
       changedAddress:false,
-      lat: 59.95,
-      lng: 30.33,
+
     }
 
+console.log(this.props.account);
+
 
   }
 
 
-  componentDidMount(){
-    // Find the foodtrucks then sets them to the state
-    this.GetFoodTruckData();
-  }
-
-  GetFoodTruckData = async () =>{
-
-    const {data} = await axios.post("/api/trucks",null);
-    this.setState({foodtrucks:data});
-
-  }
 //------------------------------State Changer-------------------------------//
 
   // Used to Toggle Map and Search
@@ -56,24 +49,85 @@ class HomePage extends React.Component {
     this.setState({changedAddress:true});
   }
 
+  // GetFoodTruckData = async () =>{
+  //
+  //   const {data} = await axios.post("/api/trucks",null);
+  //   return data;
+  //
+  // }
+
+
+  IntializePage = async()=>{
+    const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.account.address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
+
+    console.log(response);
+    if(response.data.results.length > 0){
+
+      const { lat, lng } = response.data.results[0].geometry.location;
+
+      var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng };
+      console.log(location);
+      this.FoodtrucksNearMe(lat,lng);
+    }
+  }
+
+  componentDidMount(){
+    this.IntializePage();
+  }
+
+
+  FoodtrucksNearMe = async (lat,lng) => {
+
+    const {data} = await axios.post("/api/trucks",null);
+    const nearbyFoodtrucks = [];
+
+    data.map(async(foodtruck)=>{
+
+
+      var foodtruckLocation = {
+        lat:foodtruck.lat,
+        lng:foodtruck.lng
+      }
+      var userLocation = {
+        lat:lat,
+        lng: lng
+      }
+      console.log(userLocation,foodtruckLocation);
+
+      var body = {
+        foodtruckLocation:foodtruckLocation,
+        userLocation:userLocation,
+        radius:this.state.radius
+      }
+
+      const response = await axios.post("/api/distance-calculator",body);
+
+      foodtruck.distance = response.data.distance.toString() +""+response.data.unit;
+      nearbyFoodtrucks.push(foodtruck);
+      this.setState({nearbyFoodtrucks:nearbyFoodtrucks});
+
+
+    });
+
+  }
+
 
   CreateFoodtruckBoxes = () => {
     var limit = 4;
-    const foodtrucks = this.state.foodtrucks.map((foodtruck,i)=>{
-      var randomCounter = Math.floor(Math.random() * this.state.foodtrucks.length);
-      console.log(randomCounter,this.state.foodtrucks[randomCounter]);
+    const foodtrucks = this.state.nearbyFoodtrucks.map((foodtruck,i)=>{
+    var randomCounter = Math.floor(Math.random() * this.state.nearbyFoodtrucks.length);
 
       if(i >= limit){
         return false;
       }
       return(
         <FoodBox
-          address = {this.state.foodtrucks[randomCounter].address}
+          address = {this.state.nearbyFoodtrucks[randomCounter].address}
           key = {i}
           id = {i}
           ClearOrder = {this.props.ClearOrder}
           SetTruck = {this.props.SetTruck}
-          foodtruck = {this.state.foodtrucks[randomCounter]}
+          foodtruck = {this.state.nearbyFoodtrucks[randomCounter]}
           changeURL = {this.props.changeURL}
         />
         )
@@ -118,7 +172,7 @@ class HomePage extends React.Component {
   // Loops through foodtrucks in state then renders them in JSX
   foodTruckLoop(){
     var key = 0;
-    return  this.state.foodtrucks.map((foodtruck)=>{
+    return  this.state.nearbyFoodtrucks.map((foodtruck)=>{
 
           key ++;
           // Not working -- Value is out of scope so i can't use the value for the foodtruck
@@ -144,7 +198,7 @@ class HomePage extends React.Component {
                 console.log("Not Found");
               }
             });
-
+            console.log(foodtruck);
           return (
             <FoodBox
               address = {this.props.address}
@@ -161,44 +215,59 @@ class HomePage extends React.Component {
 
   }
 
+  renderFoodtruckSection(){
+    if(this.state.nearbyFoodtrucks.length > 0){
+    return(
+      <div className='row'>
+        <div className="col-2">
+           <Filter radius = {this.state.radius}/>
+        </div>
+      <div className="foodtruck_container col-10">
+      {this.CreateFoodtruckRow("Most Popular Brands")}
+      {this.CreateFoodtruckRow("Closest To You")}
+      {this.CreateFoodtruckRow("Most Affordable")}
+      {this.CreateFoodtruckRow("Hot Deals")}
+      {this.CreateFoodtruckRow("Vegan Trucks")}
+      {this.CreateFoodtruckRow("Try Something New")}
+      </div>
+      </div>
+    )
+  }else{
+    return <NoResults text = "There are no Trucks in Radius Yet"/>
+  }
+  }
+
   //------------------------------Renderer--------------------------------
   //-----------------------------------------------------------------------
 
   render(){
 
     if(window.innerWidth > 500){
+
         return (
-          <div className="container-fluid pb5">
+          <div className="container-fluid pb5" key = {this.props.lat}>
 
             <HomePageNav
               PostAddress = {this.props.PostAddress}
               orders = {this.props.orders}
+              account = {this.props.account}
+              isMap = {false}
+              FoodtrucksNearMe = {this.FoodtrucksNearMe}
+              changeAddressFormat = {this.props.changeAddressFormat}
               changeZip = {this.props.zip}
-              ChangeAddress = {this.props.changeAddress}
-              SetAddress = {this.props.SetAddress}
+              ConvertAddress = {this.props.ConvertAddress}
+              changeAddress = {this.props.changeAddress}
               address = {this.props.address}
               changeFlag = {this.changeFlag}
               changeURL = {this.props.changeURL}
               navStyle ="white"
               />
-              <div className='row'>
-                <div className="col-2">
-                   <Filter />
-                </div>
 
-                <div className="foodtruck_container col-10">
-                  {this.CreateFoodtruckRow("Most Popular Brands")}
-                  {this.CreateFoodtruckRow("Closest To You")}
-                  {this.CreateFoodtruckRow("Most Affordable")}
-                  {this.CreateFoodtruckRow("Hot Deals")}
-                  {this.CreateFoodtruckRow("Vegan Trucks")}
-                  {this.CreateFoodtruckRow("Try Something New")}
 
-                </div>
+              {this.renderFoodtruckSection()}
 
-              </div>
 
-              <Footer />
+
 
             </div>
     );
@@ -211,6 +280,7 @@ class HomePage extends React.Component {
           <HomePageNav
               PostAddress = {this.props.PostAddress}
               changeZip = {this.props.zip}
+              account = {this.props.account}
               changeAddress = {this.props.changeAddress}
               SetAddress = {this.props.SetAddress}
               address = {this.props.address}

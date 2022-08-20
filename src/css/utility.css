@@ -10,8 +10,22 @@
 .h75px{
   height:75px;
 }
+.width-50{
+  width:50%;
+}
+.fl{
+  float:left;
+}
 .brr2{
+
   border:2px solid red;
+}
+.width-80{
+  width:80%;
+  float:left;
+}
+.float-left{
+  float:left;
 }
 .green-font{
   color:green;

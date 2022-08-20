@@ -16,6 +16,24 @@
   color:grey;
   font-size:13px;
 }
+.normal-anchor{
+
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+
+}
+.normal-anchor:focus{
+
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+
+}
+.normal-anchor:hover{
+
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+
+}
 .menu_catagory_list_text{
  font-size: 20px;
 font-weight: bold;

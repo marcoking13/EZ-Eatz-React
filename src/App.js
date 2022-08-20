@@ -68,25 +68,33 @@ class App extends Component {
       url:"landing",
       item:{},
       zip:"",
+      hasSelected:false,
+      username:null,
       account:"",
-      address:"Phoenix",
-      lat:33.4255104 ,
-      lng:-111.9400054,
+      loading:false,
+      address:this.props.address,
+      lat:null ,
+      lng:null,
+      name:"",
+      profilePhoto:null,
       orders:[],
       truck:null
 
     }
 
     this.PostAddress = this.PostAddress.bind(this);
-    this.SetAddress = this.SetAddress.bind(this);
+
     this.changeZip = this.changeZip.bind(this);
     this.changeAddress = this.changeAddress.bind(this);
     this.changeURL = this.changeURL.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
-    this.SetTruck = this.SetTruck.bind(this);
     this.ClearOrder = this.ClearOrder.bind(this);
 
   }
+
+
+
+
 
   componentWillMount(){
 
@@ -104,9 +112,13 @@ class App extends Component {
     cookie.save("orders",this.state.orders,{path:"/"});
   }
 
-  SetTruck(truck){
-    this.setState({truck:truck})
+  SetTruck = (truck) => {
+
+    if(this.state.hasSelected == false){
+      this.setState({truck:truck,hasSelected:true})
+    }
   }
+
 
   ClearCookieTimer(){
 
@@ -151,11 +163,37 @@ class App extends Component {
 
   }
 
+  changeAddressFormat = (address)=>{
+    this.setState({address:address});
+  }
 
   addToOrder(order){
     cookie.remove("orders",{path:"/"});
     this.setState({orders:this.state.orders.concat([order])});
   }
+
+
+
+  letUserInside = async(data)=>{
+
+  var {address,name,orders,image,username,orders} = data;
+  this.setState({loading:true})
+  const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
+
+
+  console.log(response);
+  if(response.data > 0){
+
+    const { lat, lng } = response.data.results[0].geometry.location;
+
+    var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng };
+    this.setState({url:"home",loading:false,address:location.address,name:name,profilePhoto:image,username:username,orders:orders,lat:lat,lng:lng});
+  }else{
+    this.setState({url:"home",loading:false,address:address,name:name,profilePhoto:image,username:username,orders:orders});
+  }
+
+
+}
 
   ClearOrder(){
     cookie.remove("orders",{path:"/"});
@@ -166,7 +204,7 @@ class App extends Component {
           for(var i = 0; i<trucks.length;i++){
 
             if(foodtruckID === trucks[i].objectID){
-              this.setState({orders:[],foodtruck:trucks[i]});
+              this.setState({orders:[]});
               break;
             }
           }
@@ -175,8 +213,9 @@ class App extends Component {
 
   }
 //----------------------------State Changer-----------------------------
-  changeAddress(value){
-    this.setState({address:value});
+  changeAddress(address,lat,lng){
+    this.setState({address:address,lat:lat,lng:lng});
+    console.log(this.state);
   }
 
   PostAddress(address,user){
@@ -199,53 +238,119 @@ class App extends Component {
   }
   //-----------------------------------------------------------------------
   // Sets Address to geocode then save to state to be used on maps
-  SetAddress(address){
-
-
-    if(!address){
-      address = "Enter Address";
-    }
-
-    Geocode.fromAddress(address).then(
-      response => {
-
-        const { lat, lng } = response.results[0].geometry.location;
-        this.setState({address:address,lat:lat, lng:lng });
-        },error => { console.error(error,'error')}
-      );
-    }
+  // ConvertAddress = async(address)=>{
+  //
+  //
+  //     if(!address){
+  //       return {address:"Enter Address",lat:null,lng:null};
+  //     }
+  //
+  //     const response = await Geocode.fromAddress(address);
+  //
+  //     if(response){
+  //       const { lat, lng } = response.results[0].geometry.location;
+  //       console.log({address:address,lat:lat, lng:lng })
+  //       return {address:resp,lat:lat, lng:lng }
+  //     }else{
+  //       return {address:"Enter Address",lat:null, lng:null }
+  //     }
+  //
+  //   }
 
 // JSX will return component depending on url state
   render() {
-    console.log(this.state.truck)
-        if(this.state.url === "loading"){
+
+      var account = {
+        address:this.state.address,
+        name:this.state.name,
+        username:this.state.username,
+        profilePhoto:this.state.profilePhoto,
+        lat:this.state.lat,
+        lng:this.state.lng,
+        orders:this.state.orders,
+      }
+
+      console.log(this.state);
+
+      if(this.state.loading){
+        return <div>Loading.....</div>
+      }
+
+        if(this.state.loading){
                return <LoadingPage  PostAddress = {this.PostAddress}  changeURL={this.changeURL} />
          }
          if(this.state.url === "checkout"){
                 return <CheckoutPage orders = {this.state.orders} changeURL={this.changeURL} />
           }
          if(this.state.url === "map"){
-                return <GooglePage  orders= {this.state.orders}  ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} ChangeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />
+                return (
+                  <GooglePage
+                    orders= {this.state.orders}
+                    account = {account}
+                    ClearOrder = {this.ClearOrder}
+                    PostAddress = {this.PostAddress}
+                    changeAddress = {this.changeAddress}
+                    changeZip = {this.changeZip}
+                    lat = {this.state.lat}
+                    lng = {this.state.lng}
+                    address = {this.state.address}
+                    SetAddress={this.SetAddress}
+                    changeURL={this.changeURL} />
+                )
           }
          if(this.state.url === "modify"){
-                return <ModifyPage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} addToOrder = {this.addToOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} item = {this.state.item}changeURL={this.changeURL} />
+                return <ModifyPage  orders= {this.state.orders} ClearOrder = {this.ClearOrder} addToOrder = {this.addToOrder} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} item = {this.state.item} changeURL={this.changeURL} />
           }
          if(this.state.url === "menu"){
-               return <MenuPage truck = {this.state.truck} orders= {this.state.orders} SetTruck = {this.SetTruck} PostAddress = {this.PostAddress} changeAddress = {this.changeAddress} changeZip = {this.changeZip} address = {this.state.address} SetAddress={this.SetAddress} SetItem = {this.SetItem} changeURL={this.changeURL} />
+               return (
+                 <MenuPage
+                    account = {account}
+                    truck = {this.state.truck}
+                    orders= {this.state.orders}
+                    SetItem = {this.SetItem}
+                    SetTruck = {this.SetTruck}
+                    PostAddress = {this.PostAddress}
+                    changeAddress = {this.changeAddress}
+                    changeZip = {this.changeZip}
+                    address = {this.state.address}
+                    SetAddress={this.SetAddress}
+                    SetItem = {this.SetItem}
+                    changeURL={this.changeURL}
+                  />
+                );
           }
           if(this.state.url === "landing"){
                return <LandingPage  PostAddress = {this.PostAddress} changeURL={this.changeURL} />
           }
           if(this.state.url === "home"){
-               return  <HomePage SetTruck = {this.SetTruck}  orders= {this.state.orders} ClearOrder = {this.ClearOrder} PostAddress = {this.PostAddress} ChangeAddress = {this.changeAddress} changeZip = {this.changeZip} lat = {this.state.lat} lng = {this.state.lng} address = {this.state.address} SetAddress={this.SetAddress} changeURL={this.changeURL} />
+               return (
+                 <HomePage
+                  account = {account}
+                  changeAddressFormat = {this.changeAddressFormat}
+                  SetTruck = {this.SetTruck}
+                  orders= {this.state.orders}
+                  ClearOrder = {this.ClearOrder}
+                  PostAddress = {this.PostAddress}
+                  ConvertAddress = {this.ConvertAddress}
+                  changeAddress = {this.changeAddress}
+                  changeZip = {this.changeZip}
+                  lat = {this.state.lat}
+                  lng = {this.state.lng}
+                  foodtrucks = {this.state.truck}
+                  address = {this.state.address}
+                  lat = {this.state.lat}
+                  lng = {this.state.lng}
+                  SetAddress={this.SetAddress}
+                  changeURL={this.changeURL} />
+                )
            }
           if(this.state.url === "usersign")
           {
-               return <AuthenticationPage  config = {SignupConfig} PostAddress = {this.PostAddress} changeURL={this.changeURL} type="user" />
+               return <AuthenticationPage  letUserInside = {this.letUserInside} config = {SignupConfig} PostAddress = {this.PostAddress} changeURL={this.changeURL} type="user" />
           }
           if(this.state.url === "userlogin")
           {
-              return <AuthenticationPage  config = {LoginConfig} PostAddress = {this.PostAddress} changeURL={this.changeURL} type="user" />
+              return <AuthenticationPage letUserInside = {this.letUserInside}   config = {LoginConfig} PostAddress = {this.PostAddress} changeURL={this.changeURL} type="user" />
           }
       }
 

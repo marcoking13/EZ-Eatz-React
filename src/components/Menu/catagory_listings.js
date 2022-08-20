@@ -6,18 +6,20 @@ import DesktopBox from "./desktop_menu_box_component.js";
 class  CatagoryListings extends React.Component {
 
 
+
+
   renderCatagories = ()=>{
     return this.props.truck.menu.map((catagory)=>{
       return(
-        <li className="menu_catagory_list">
-          <p className="menu_catagory_list_text">{catagory.catagory}</p>
+        <a href = {"#"+catagory.catagory} className="normal-anchor" ><li className="menu_catagory_list">
+          <p className="menu_catagory_list_text"style={{marginLeft:"3.5%"}}>{catagory.catagory}</p>
           <div className="underline"/>
         </li>
+        </a>
       )
     })
   }
   render(){
-    console.log(this.props.truck.menu);
     return (
       <div className="container-fluid with-100 catagory_listings">
         <ul className="width-100">

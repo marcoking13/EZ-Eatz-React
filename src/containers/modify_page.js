@@ -15,13 +15,13 @@ class ModifyPage extends React.Component {
   //----------------------------Constructor--------------------------------
   constructor(props){
     super(props);
-    var item = JSON.parse(cookie.load("currentItem",{path:"/"}));
+    // var item = JSON.parse(cookie.load("currentItem",{path:"/"}));
 
     this.state = {
-      item:item,
+      item:this.props.item,
       add:[],
       remove:[],
-      price:item.price
+      price:this.props.item.price
     }
     //---------------------Binders----------------------------------
       this.returnPrice = this.returnPrice.bind(this);

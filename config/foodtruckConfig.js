@@ -5,7 +5,7 @@ const FoodTrucks =  [{
   objectID:"319ei310328eu30ejsnm0i32ds320dj230d",
   name:"Freeze-Dry",
   logo:"./assets/images/sm.png",
-  lat:33.306160,
+  lat:31.306160,
   lng:-111.841248,
   address:{
 
@@ -54,7 +54,7 @@ const FoodTrucks =  [{
       calories:300,
       price:9.53,
       description:"A giant ice cream sandwich",
-      image:"./assets/images/kingicecreamsandwich.png"
+      image:"./assets/images/ice_cream_2.png"
     },
     {
       item:"Oreo Sandwich",
@@ -86,7 +86,7 @@ const FoodTrucks =  [{
       calories:450,
       price:10.41,
       description:"A oreo ice cream sandwich",
-      image:"./assets/images/oreoicecreamsandwich.png"
+      image:"./assets/images/ice_cream_1.png"
     },
     {
       item:"Toll House Sandwich",
@@ -115,7 +115,7 @@ const FoodTrucks =  [{
 
       ],
       ingredients:[{name:"toll house sandwich",display:false}],
-      image:"./assets/images/tollhouse.png",
+      image:"./assets/images/ice_cream_3.png",
       calories:1000,
       price:4.50,
       description:"classNameic ice cream sandwich"
@@ -154,7 +154,7 @@ const FoodTrucks =  [{
     calories:400,
     price:2.99,
     description:"A scoop of vanilla ice cream",
-    image:"./assets/images/vanillaicecream.png"
+    image:"./assets/images/ice_cream_4.png"
   },
   {
     item:"Strawberry Ice Cream",
@@ -186,7 +186,7 @@ const FoodTrucks =  [{
     calories:450,
     price:2.99,
     description:"A scoop of strawberry ice cream",
-    image:"./assets/images/strawberryicecream.png"
+    image:"./assets/images/ice_cream_5.png"
   },
   {
     item:"Rocky Road Ice Cream",
@@ -218,7 +218,7 @@ const FoodTrucks =  [{
     calories:400,
     price:4.99,
     description:"A scoop of rocky road ice cream",
-    image:"./assets/images/rockyicecream.png"
+    image:"./assets/images/ice_cream_6.png"
   }]
 },
 {
@@ -255,7 +255,7 @@ const FoodTrucks =  [{
     calories:2000,
     price:11.53,
     description:"A 2 pound ice cream cookie we recommend it",
-    image:"./assets/images/endcake.png"
+    image:"./assets/images/ice_cream_7.png"
   },
   {
     item:"Flamingo Cake",
@@ -287,7 +287,7 @@ const FoodTrucks =  [{
     calories:550,
     price:2.41,
     description:"Affordable and fancy cake",
-    image:"./assets/images/flamingocake.png"
+    image:"./assets/images/ice_cream_9.png"
   },
   {
     item:"Fried Ice Cream",
@@ -316,7 +316,7 @@ const FoodTrucks =  [{
     ],
     id:"rhy7f92j9fhj209fduj013ed9j01ss02982928",
    ingredients:[{name:"chocolate ice cream",display:false},{name:"fudge",display:true}],
-   image:"./assets/images/firedicecream.jpg",
+   image:"./assets/images/ice_cream_11.jpg",
     calories:800,
     price:4.50,
     description:"Fried ice  cream"
@@ -424,7 +424,7 @@ image:"./assets/images/samplebanner2.jpg"
 
       ],
       id:"skm1pdm12309e120esjm1209e102",
-      image:"./assets/images/gyro.png",
+      image:"./assets/images/pita_1.png",
       buns:["wheat","gluten-free"],
       ingredients:[{
         name:"mixed greens",
@@ -460,7 +460,7 @@ image:"./assets/images/samplebanner2.jpg"
   catagory:"Pizzas",
     id:"mcocimcnceicnnnnnnn",
   food:[{
-    image:"./assets/images/lavashpizza.png",
+    image:"./assets/images/pita_2.png",
     item:"Lavosh Pizza",
     id:"xkwnccwococne",
     add:[
@@ -527,7 +527,7 @@ image:"./assets/images/samplebanner2.jpg"
     description:"A lavosh Pizza"
   },
   {
-    image:"./assets/images/mushroompizza.png",
+    image:"./assets/images/pita_3.png",
     item:"Garlic Mushroom Pizza",
     add:[
       {
@@ -626,7 +626,7 @@ image:"./assets/images/samplebanner2.jpg"
 
     ],
     id:"ek102eke1209e201",
-    image:"./assets/images/pestopizza.png",
+    image:"./assets/images/pita_4.png",
     ingredients:[{
       name:"pesto",
       display:true
@@ -696,7 +696,7 @@ image:"./assets/images/samplebanner2.jpg"
   id:"nojdmi0ednemide",
   food:[{
     item:"Avocado Hummus",
-    image:"./assets/images/avacadohummus.png",
+    image:"./assets/images/pita_5.png",
     id:"nd39d3d8end2o9d2nodj29",
     ingredients:[{
       name:"olive oil",
@@ -764,7 +764,7 @@ image:"./assets/images/samplebanner2.jpg"
 
     ],
     id:"nc2enfdun298d29dj2398jdm2",
-    image:"./assets/images/redhummus.png",
+    image:"./assets/images/pita_6.png",
     ingredients:[{
       name:"olive oil",
       display:false
@@ -834,7 +834,7 @@ image:"./assets/images/samplebanner2.jpg"
 
     ],
     id:"cdmi30dn32dn3d23o",
-    image:"./assets/images/greenhummus.png",
+    image:"./assets/images/pita_7.png",
     ingredients:[{
       name:"olive oil",
       display:false
@@ -911,7 +911,7 @@ image:"./assets/images/samplebanner2.jpg"
 
 
     ],
-    image:"./assets/images/woodfiredsalmon.png",
+    image:"./assets/images/pita_8.png",
     id:"nd39d3d8end2o44449d2nodj29",
     ingredients:[{
       name:"garlic",
@@ -1045,7 +1045,7 @@ image:"./assets/images/samplebanner2.jpg"
 
 
     ],
-    image:"./assets/images/chickendelsol.png",
+    image:"./assets/images/pita_9.png",
     id:"nc2enfd399393un298d29dj2398jdm2",
     ingredients:[{
       name:"chicken",
@@ -1316,7 +1316,7 @@ address:{
 
       ],
       id:"2ewjsdxme2dcxk203x298292298",
-      image:"./assets/images/burger3.png",
+      image:"./assets/images/burger_1.png",
       ingredients:[{
         name:"toasted bun",
         display:true
@@ -1344,7 +1344,7 @@ address:{
     ],
       calories:870,
       price:6.50,
-      description:"A classNameic burger with a side of fries"
+      description:"A burger with a side of fries"
     }]
 },
 {
@@ -1387,7 +1387,7 @@ address:{
 
     ],
     buns:["leaf","gluten-free"],
-    image:"./assets/images/burger1.png",
+    image:"./assets/images/burger_2.png",
     ingredients:[{
       name:"toasted bun",
       display:true
@@ -1454,7 +1454,7 @@ address:{
 
 
     ],
-    image:"./assets/images/wings.png",
+    image:"./assets/images/burger_3.png",
     ingredients:[{
       name:"buffalo wings",
       display:false
@@ -1505,7 +1505,7 @@ address:{
 
 
     ],
-        image:"./assets/images/salad1.png",
+        image:"./assets/images/burger_4.png",
     ingredients:[{
       name:"olives",
       display:true
@@ -1530,7 +1530,7 @@ address:{
 
     calories:400,
     price:4.99,
-    description:"A classNameic greek salad"
+    description:"A standard greek salad"
   }]
 },
 {
@@ -1570,8 +1570,8 @@ address:{
 
   ],
   food:[{
-    item:"classNameic Cheese",
-        image:"./assets/images/cheesepizza.png",
+    item:"Cheese Pizza",
+        image:"./assets/images/pizza_5.png",
     id:"19292929229384567438920394857",
     ingredients:[{
       name:"cheese",
@@ -1627,7 +1627,7 @@ address:{
 
     ],
     id:"jnnvnvnreivvnvnvnvnrvnvrrvnj22",
-        image:"./assets/images/mushroompizza.png",
+        image:"./assets/images/pizza_6.png",
     ingredients:[{
       name:"olives",
       display:false
@@ -1693,7 +1693,7 @@ address:{
 
 
     ],
-        image:"./assets/images/pestopizza.png",
+        image:"./assets/images/pizza_7.png",
     ingredients:[{
       name:"grilled chicken",
       display:false
@@ -1862,7 +1862,7 @@ address:{
 
       ],
       id:"2ewjsdxme2dcxwddd2wk203x29829sss2298",
-      image:"./assets/images/acai1.png",
+      image:"./assets/images/acai_1.png",
       ingredients:[{
         name:"strawberry",
         display:true
@@ -1928,7 +1928,7 @@ address:{
 
       ],
       id:"2ewjsdxme2dcxwdddddwk203x298292298",
-      image:"./assets/images/acai3.png",
+      image:"./assets/images/acai_2.png",
       ingredients:[{
         name:"strawberry",
         display:true
@@ -1994,7 +1994,7 @@ address:{
 
       ],
       id:"2ewjsdxme2dcxwdd2wk203x298292298",
-      image:"./assets/images/acai2.png",
+      image:"./assets/images/acai_3.png",
       ingredients:[{
         name:"strawberry",
         display:true
@@ -2033,7 +2033,7 @@ address:{
     id:"-e20239042023904kvl9fjjj--",
 
   food:[{
-    image:"./assets/images/smoothie2.png",
+    image:"./assets/images/acai_4.png",
     add:[
       {
         name:"blueberries",
@@ -2100,7 +2100,7 @@ address:{
   },
   {
     item:"Tropic Smoothie",
-      image:"./assets/images/smoothie5.png",
+      image:"./assets/images/acai_5.png",
       add:[
         {
           name:"blueberries",
@@ -2151,7 +2151,7 @@ address:{
   },
   {
     item:"Pineapple Smoothie",
-    image:"./assets/images/smoothie4.png",
+    image:"./assets/images/acai_6.png",
     id:"aa2442020393939838jgjgjg",
     ingredients:[{
       name:"strawberry",
@@ -2269,6 +2269,13 @@ address:{
   mapLogo:"./assets/images/chickenMap.png",
   lat:33.377630,
   lng:-111.879360,
+  address:{
+
+    street:"4005 N Scottsdale Rd",
+    city:"Scottsdale",
+    state:"AZ",
+    zip: 85251
+  },
   routes:routes,
   logo:"./assets/images/rotatingchicken.png",
   background:"./assets/images/chicken_box.png",
@@ -2284,7 +2291,7 @@ address:{
       item:"classNameic Chicken Burger",
       buns:["leaf","gluten-free"],
       id:"2ewjsdxme2dcxk203x29m8292298",
-      image:"./assets/images/burger1.png",
+      image:"./assets/images/chicken_1.png",
       add:[
         {
           name:"A1 sauce",
@@ -2387,7 +2394,7 @@ address:{
 
     ],
     id:"33456789eidmxewicm",
-        image:"./assets/images/meal1.png",
+        image:"./assets/images/chicken_2.png",
     ingredients:[{
       name:"6 chicken pieces",
       display:true
@@ -2445,7 +2452,7 @@ address:{
     ],
     id:"2029e0i3290r203",
     buns:["leaf","gluten-free"],
-    image:"./assets/images/meal2.png",
+    image:"./assets/images/chicken_3.png",
     ingredients:[{
       name:"classNameic Chicken Burger",
       flag:true,
@@ -2528,7 +2535,7 @@ address:{
 
     calories:400,
     price:4.99,
-    image:"./assets/images/salad2.png",
+    image:"./assets/images/chicken_4.png",
     description:"A classNameic greek salad"
   }]
 },
@@ -2537,7 +2544,7 @@ address:{
   id:"nojdmi0ednemide",
 
   food:[{
-    item:"classNameic Cheese",
+    item:"Cheese Pizza",
     add:[
       {
         name:"A1 sauce",
@@ -2572,7 +2579,7 @@ address:{
 
     ],
     id:"19292929229384567438920394857",
-        image:"./assets/images/cheesepizza.png",
+        image:"./assets/images/chicken_5.png",
     ingredients:[{
       name:"cheese",
       display:false
@@ -2627,7 +2634,7 @@ address:{
 
     ],
     id:"jnnvnvnreivvnvnvnvnrvnvrrvnj22",
-        image:"./assets/images/pestopizza.png",
+        image:"./assets/images/chicken_6.png",
     ingredients:[{
       name:"olives",
       display:false
@@ -2693,7 +2700,7 @@ address:{
 
 
     ],
-        image:"./assets/images/mushroompizza.png",
+        image:"./assets/images/chicken_7.png",
     ingredients:[{
       name:"grilled chicken",
       display:false
@@ -2862,7 +2869,7 @@ address:{
 
       ],
       id:"222www--ewj-3-3-3-33-sdxme2dcxk203x298292298",
-      image:"./assets/images/greeksalad.png",
+      image:"./assets/images/salad_1.png",
       ingredients:[{
         name:"Onions",
         display:true
@@ -2995,7 +3002,7 @@ address:{
 
       ],
       id:"239223900932--22-33-3-www--ewjsdxme2dcxk203x298292298",
-      image:"./assets/images/salad2.png",
+      image:"./assets/images/salad_2.png",
       ingredients:[{
         name:"Lemon Dressing",
         display:true
@@ -3028,7 +3035,7 @@ address:{
     {
       item:"Chicken Salad",
       id:"222www--ew03303-3-3-jsdxme-33-3-2dcxk203x298292298",
-      image:"./assets/images/chickensalad.png",
+      image:"./assets/images/salad_3.png",
       add:[
         {
           name:"bread crumbs",
@@ -3158,7 +3165,7 @@ address:{
     calories:400,
     price:8.99,
     description:"",
-    image:"./assets/images/boost.png"
+    image:"./assets/images/salad_5.png"
   },
   {
     item:"Fruit Blast",
@@ -3222,7 +3229,7 @@ address:{
     calories:300,
     price:6.99,
     description:"",
-    image:"./assets/images/fruitblast.png",
+    image:"./assets/images/salad_4.png",
   },
   {
     item:"Grass Shake",
@@ -3427,7 +3434,7 @@ address:{
       ],
       id:"2ewjsdxme2dcxk203x298292298",
       buns:["leaf","gluten-free"],
-    image:"./assets/images/burger2.png",
+    image:"./assets/images/steak_2.png",
       ingredients:[{
         name:"toasted bun",
         display:true
@@ -3455,7 +3462,7 @@ address:{
     ],
       calories:1070,
       price:9.99,
-      description:"A classNameic double cheeseburger with a side of fries"
+      description:"A double cheeseburger with a side of fries"
     }]
 },
 {
@@ -3496,7 +3503,7 @@ address:{
 
 
     ],
-    image:"./assets/images/topsirloin.png",
+    image:"./assets/images/steak_4.png",
     id:"3345678hvtu4ebicbeicebcriebi9dmxewicm",
     ingredients:[{
       name:"mashed potatoes",
@@ -3518,7 +3525,7 @@ address:{
   },
   {
     item:"New York Steak",
-    image:"./assets/images/newyorksteak.png",
+    image:"./assets/images/steak_5.png",
     id:"33456789dmxewic930203f98juf08fj38fj08038jm",
     ingredients:[{
       name:"mashed potatoes",
@@ -3574,7 +3581,7 @@ address:{
 
 
     ],
-    image:"./assets/images/filetmilon.png",
+    image:"./assets/images/steak_1.png",
     id:"33456789dm2-2309-2309-2309-3-9023-0nrwoocrwnjxewicm",
     ingredients:[{
       name:"mashed potatoes",
@@ -3636,7 +3643,7 @@ address:{
 
     ],
     id:"19292929229384567438920394857",
-        image:"./assets/images/cheesepizza.png",
+        image:"./assets/images/steak_3.png",
     ingredients:[{
       name:"cheese",
       display:false
@@ -3691,7 +3698,7 @@ address:{
 
     ],
     id:"jnnvnvnreivvnvnvnvnrvnvrrvnj22",
-        image:"./assets/images/pestopizza.png",
+        image:"./assets/images/steak_6.png",
     ingredients:[{
       name:"olives",
       display:false
@@ -3757,7 +3764,7 @@ address:{
 
 
     ],
-        image:"./assets/images/mushroompizza.png",
+        image:"./assets/images/steak_8.png",
     ingredients:[{
       name:"grilled chicken",
       display:false
@@ -3820,7 +3827,7 @@ address:{
 
     ],
     id:"jnnv90239023903290---1--nvnreivvnvnvnvnrvnvrrvnj22",
-    image:"./assets/images/bakedpotato.png",
+    image:"./assets/images/steak_9.png",
     ingredients:[],
     calories:350,
     price:2.99,
@@ -3858,7 +3865,7 @@ address:{
 
 
     ],
-    image:"./assets/images/fries.png",
+    image:"./assets/images/steak_10.png",
     ingredients:[],
     calories:500,
     price:5.50,
@@ -4017,7 +4024,7 @@ address:{
 
         ],
         id:"3345jciekjijmiomoinceiu6789dmxewicm",
-            image:"./assets/images/ricebowl.png",
+            image:"./assets/images/china_1.png",
         ingredients:[{
           name:"brown rice",
           display:true
@@ -4067,7 +4074,7 @@ address:{
 
       ],
       id:"2ew32i3290ei3j32cmiovc32dcsdxme2dcxk203x298292298",
-    image:"./assets/images/chinachicken.png",
+    image:"./assets/images/china_2.png",
       ingredients:[{
         name:"brown rice",
         display:true
@@ -4124,7 +4131,7 @@ address:{
 
 
     ],
-        image:"./assets/images/wontonsalad.png",
+        image:"./assets/images/china_3.png",
     id:"fj308jv39iqnq3u9tvbverwmncnucqvnrutpg293nqfcvneifjvcenroii",
     ingredients:[
     {name:"olives",display:true},
@@ -4170,7 +4177,7 @@ address:{
 
 
     ],
-        image:"./assets/images/wontonsoup.png",
+        image:"./assets/images/china_4.png",
     id:"fj308jv39iqnq3u9tvbvnucqvnrutpg293nqfcvneifjveeeecenroicndwoixqoxmmoxqmocmqcmoi",
     ingredients:[
     {name:"wontons",display:true}
@@ -4214,7 +4221,7 @@ address:{
 
 
     ],
-        image:"./assets/images/china1.png",
+        image:"./assets/images/china_5.png",
     id:"2029e0i3mecpqcm290r203",
     ingredients:[{
       name:"chicken",
@@ -4389,7 +4396,7 @@ address:{
 
 
       ],
-          image:"./assets/images/burger1.png",
+          image:"./assets/images/burger_1.png",
       ingredients:[{
         name:"toasted bun",
         display:true
@@ -4423,7 +4430,7 @@ address:{
 {
   catagory:"Sliders",
     id:"-20239049fjjj--",
-    image:"./assets/images/burger2.png",
+    image:"./assets/images/burger_2.png",
     add:[
       {
         name:"tzakiki",
@@ -4560,7 +4567,7 @@ address:{
 
     ],
     id:"2029e0i3290r203",
-        image:"./assets/images/wings.png",
+        image:"./assets/images/burger_7.png",
     ingredients:[{
       name:"buffalo wings",
       display:false
@@ -4610,7 +4617,7 @@ address:{
 
 
     ],
-        image:"./assets/images/salad2.png",
+        image:"./assets/images/burger_9.png",
     id:"aa2442020393939838jgjgjg",
     ingredients:[{
       name:"olives",
@@ -4678,7 +4685,7 @@ address:{
 
 
     ],
-      image:"./assets/images/cheesepizza.png",
+      image:"./assets/images/burger_10.png",
     id:"19292929229384567438920394857",
     ingredients:[{
       name:"cheese",
@@ -4734,7 +4741,7 @@ address:{
 
     ],
     id:"jnnvnvnreivvnvnvnvnrvnvrrvnj22",
-        image:"./assets/images/mushroompizza.png",
+        image:"./assets/images/burger_11.png",
     ingredients:[{
       name:"olives",
       display:false
@@ -4800,7 +4807,7 @@ address:{
 
 
     ],
-        image:"./assets/images/pestopizza.png",
+        image:"./assets/images/burger_12.png",
     ingredients:[{
       name:"grilled chicken",
       display:false
@@ -4935,7 +4942,7 @@ address:{
     {
       item:"Cheese Burger",
       id:"2ewjsdxme2dcxk23e13erdcqdrvc2qwq03x298292298",
-          image:"./assets/images/burger3.png",
+          image:"./assets/images/burger_3.png",
           buns:["leaf","gluten-free"],
       ingredients:[{
         name:"toasted bun",
@@ -4972,7 +4979,7 @@ address:{
     id:"-20239049fj4kd340f134jj--",
   food:[{
     item:"Fries",
-        image:"./assets/images/fries.png",
+        image:"./assets/images/burger_4.png",
     id:"33456789dmxew3ekdc2jmo1cj12oiicm",
     modal:false,
     ingredients:[],
@@ -4984,7 +4991,7 @@ address:{
     item:"buffalo wings",
     id:"2029e0i3290r203",
     modal:true,
-        image:"./assets/images/wings.png",
+        image:"./assets/images/burger_13.png",
     ingredients:[{
       name:"buffalo wings",
       display:false
@@ -5003,7 +5010,7 @@ address:{
     item:"Greek Salad",
     id:"aa244340904909412020393939838jgjgjg",
     modal:false,
-        image:"./assets/images/salad1.png",
+        image:"./assets/images/burger_14.png",
     ingredients:[{
       name:"olives",
       display:true
@@ -5036,7 +5043,7 @@ address:{
   id:"nojdmi0ednemide",
   food:[{
     item:"classNameic Cheese",
-        image:"./assets/images/cheesepizza.png",
+        image:"./assets/images/burger_19.png",
     id:"19292929229384567438920394857",
     ingredients:[{
       name:"cheese",
@@ -5059,7 +5066,7 @@ address:{
   {
     item:"Veggie Pizza",
     id:"jnnvnvnreivvnvnvnvnrvnvrrvnj22",
-        image:"./assets/images/cheesepizza.png",
+        image:"./assets/images/burger_16.png",
     ingredients:[{
       name:"olives",
       display:false
@@ -5092,7 +5099,7 @@ address:{
   {
     id:"r3j29fj2f92m9mc9m29",
     item:"Chicken Pizza",
-        image:"./assets/images/pestopizza.png",
+        image:"./assets/images/burger_17.png",
     ingredients:[{
       name:"grilled chicken",
       display:false

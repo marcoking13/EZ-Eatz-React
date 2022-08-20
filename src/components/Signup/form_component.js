@@ -1,7 +1,7 @@
 import React from "react";
 import FormIcon from "./../../images/form_icon.svg";
 import LandingBackground from "./../../images/landing_background.png";
-
+import JWT_Decode from "jwt-decode";
 
 
 class FormComponent extends React.Component {
@@ -14,6 +14,40 @@ class FormComponent extends React.Component {
 
     this.formRef = React.createRef();
     this.errorRef = React.createRef();
+
+  }
+
+  handleGoogleLogin = (response)=>{
+    const credential = response.credential;
+    var userObject = JWT_Decode(credential);
+    console.log(userObject);
+    const new_account = {
+      address:null,
+      image:userObject.picture,
+      name:userObject.name,
+      username:userObject.email,
+      password:userObject.sub,
+      orders:[]
+    }
+
+    this.props.GoogleAuthentication(new_account);
+
+  }
+
+  componentDidMount(){
+
+    /* global google */
+    setTimeout(()=>{google.accounts.id.initialize({
+      client_id:"652597126493-g3kk4nl2pkpua4nd185msth7f2gr0vd9.apps.googleusercontent.com",
+      callback:this.handleGoogleLogin
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById("google_login"),
+      {theme:"outline",size:"large"}
+    )
+
+  },500);
 
   }
 
@@ -58,12 +92,14 @@ class FormComponent extends React.Component {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
+
+
   render(){
 
     return(
       <div className="container-fluid form_component padding-top-5"style = {{background:`url(${LandingBackground})`,height:"1080px",paddingBottom:"100%"}}>
         <p className="ez_title margin-left-5">EZ<strong className="ez_title_end">Eatz</strong></p>
-        <p className="type">{this.CapitalizeFirstLetter(this.props.type)}</p>
+        <div id="google_login"></div>
         <div className="row add_form  " ref ={this.formRef}>
           <div className="col-4"/>
           <div className="col-4 form_container jumbotron "style={{background:"white",borderRadius:"5px"}}>

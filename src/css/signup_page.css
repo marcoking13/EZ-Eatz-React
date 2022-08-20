@@ -17,6 +17,16 @@
   font-weight: 500;
 
 }
+#google_login{
+  position: absolute;
+  right:2%;
+  z-index:99;
+  top:2%;
+  width:20%;
+}
+#google_login button{
+  width:100%;
+}
 .halfControl{
   width:50%;
   margin-top:5%;

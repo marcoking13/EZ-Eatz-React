@@ -8,15 +8,47 @@
   margin-bottom: 2%;
   float:left;
 }
+.profile_button:hover{
+filter:invert(90);
+}
 .moveUpNav{
   top:3.5% !important;
   position: absolute;
   left: 15%;
 
+}
+.new_ez_button_text{
+  width:70%;float:left;
+}
+.width-90{
+  width:90%;
+}
+.margin-left-5{
+  margin-left:5%;
+}
+.new_ez_button_icon_small{
+  width:15%;margin-left:5%;float:left;filter:brightness(100);margin-top:2.5%;
+}
+.new_ez_button{
+  width:100%;background:black;border-radius:30px;color:white;height:40px;
+}
+.new_ez_button:hover{
+  background:#e6e6e6;
+  color:black;
+  border-color:#e6e6e6;
+
 
 }
+.new_ez_button:hover img{
+  filter:invert(90);
+}
+
+.width-30{
+  width:30%;
+}
 .ez_button{
-  border-radius:40px;
+  border-radius:20px;
+
   border-color:none;
 }
 .ez_button:hover{

@@ -11,6 +11,7 @@ var url = process.env.MONGODB_URI || "mongodb://localhost:27017/heroku_9tlg8v4r"
 var path = require("path");
 var http = require("http");
 const Cookies = require("cookies");
+const UserConstructor = require("./config/user_constructor.js");
 const mongojs = require("mongojs");
 const session = require("express-session");
 const FoodtruckConfig = require("./config/foodtruckConfig.js");
@@ -20,7 +21,8 @@ const UserSample = require("./config/userSample.js");
 const Users = require("./database/userSchema.js");
 const CurrentUser = require("./database/currentUserSchema.js");
 const geocoder = require("node-geocoder");
-
+const ConvertToCoords = require("./geoconvert.js");
+const CalculateDistance = require("./distance_calculator.js");
 const app = express();
 
 const port = process.env.PORT || 4001;
@@ -51,32 +53,54 @@ app.listen(port,function(){
 
   app.post("/api/signup",async (req,res)=>{
     var found = false;
+
     const data = await dbO.collection("users").find({}).toArray();
 
       for(var i =0; i<data.length; i++){
         if(data[i].username === req.body.username){
+          return res.json(false);
           found = true;
           break;
         }
       }
       if(!found){
-        dbO.collection("users").insertOne({
-          name:req.body.name,
-          profilePhoto:"",
-          address:req.body.address,
-          orders:[],
-          username:req.body.username,
-          password:req.body.password
+        const data = req.body;
 
-        });
+        const account = {
+          name:data.name,
+          image:"",
+          address:data.address,
+          orders:[],
+          username:data.username,
+          password:data.password
+        }
+
+
+        const NewUser = new UserConstructor(account);
+
+        dbO.collection("users").insertOne(NewUser);
+        res.json(NewUser);
       }
 
-    res.json(!found);
+
 
   });
 
   app.get("/api/currentUser",(req,res)=>{
     PostFoodtrucksToAPI(req,res);
+  });
+
+  app.post("/api/geoconverter",(req,res) => {
+    res.json(ConvertToCoords(req.body.address));
+  });
+
+  app.post("/api/distance-calculator",(req,res) => {
+
+    var data = req.body;
+
+    const distance = CalculateDistance(data.userLocation,data.foodtruckLocation,data.radius);
+    res.json(distance);
+
   });
 
   app.post("/api/trucks", async (req,res)=>{
@@ -86,7 +110,38 @@ app.listen(port,function(){
 
   });
 
+  app.post("/api/google_login", async (req,res)=>{
+
+    const data = req.body;
+
+    const account = {
+      name:data.name,
+      image:data.image,
+      address:data.address,
+      orders:[],
+      username:data.username,
+      password:data.password
+    }
+
+
+    const NewUser = new UserConstructor(account);
+
+
+
+    const search = await dbO.collection("users").findOne({password:account.password,username:account.username});
+
+    if(search){
+      res.json(search);
+    }else{
+      dbO.collection("users").insertOne(NewUser);
+      const search = await dbO.collection("users").findOne({password:NewUser.password,username:NewUser.username});
+      res.json(search);
+    }
+
+  });
+
   app.post("/api/login", async (req,res)=>{
+
 
     const search = await dbO.collection("users").findOne({password:req.body.password,username:req.body.username});
     res.json(search);
@@ -121,6 +176,7 @@ var PostUsersToAPI= (req,res,db) =>{
     // });
 
 }
+
 
 
 var PostAddressToUser = (req,res) => {
@@ -176,8 +232,8 @@ var mongooseStartup = () => {
 
       var dbO = db.db("heroku_9tlg8v4r");
       const foodtrucks = dbO.collection("foodtrucks");
-      const result = await foodtrucks.deleteMany({});
-      console.log("Deleted " + result.deletedCount + " documents");
+    //  const result = await foodtrucks.deleteMany({});
+    //  console.log("Deleted " + result.deletedCount + " documents");
       dbO.collection("foodtrucks").find({}).toArray(function(err, result) {
           if (err) throw err;
 

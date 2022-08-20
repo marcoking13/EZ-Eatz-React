@@ -55,7 +55,8 @@ class AuthenticationPage extends React.Component {
     console.log(data);
     if(data){
 
-      this.props.changeURL("home");
+      this.props.letUserInside(data);
+
 
     }else{
 
@@ -69,17 +70,22 @@ class AuthenticationPage extends React.Component {
   Verify = async(info,url,alertValue)=>{
 
     const {data} = await axios.post(url,info);
+    console.log(data);
     this.CheckInputs(data,alertValue);
 
   }
 
-  SubmitAuthentication = () =>{
+  GoogleAuthentication = (info)=>{
+    this.Verify(info,"/api/google_login","Error Has Occured with Google!");
+  }
 
-    var info = {};
+  SubmitAuthentication = (info) =>{
+
+
     var url = "";
     var alertValue = "";
 
-    if(this.state.key == "login"){
+     if(this.state.key == "login"){
 
        info = {
         username:this.state.username,
@@ -91,19 +97,12 @@ class AuthenticationPage extends React.Component {
 
     }else{
 
-       info = {
-          username:this.state.username,
-          password:this.state.password,
-          address:this.state.address,
-          name:this.state.name
-        }
 
         url = "/api/signup";
         alertValue = "Username Already Taken!";
 
 
     }
-
 
     this.Verify(info,url,alertValue);
 
@@ -120,6 +119,7 @@ class AuthenticationPage extends React.Component {
         <FormComponent
           ChangeInput = {this.ChangeInput}
           dataKey = {dataItem.key}
+          GoogleAuthentication={this.GoogleAuthentication}
           type = {this.state.key}
           placeholder={dataItem.placeholder}
           title = {dataItem.title}
@@ -128,7 +128,16 @@ class AuthenticationPage extends React.Component {
       )
     }
     else{
-          this.SubmitAuthentication();
+      var info = {
+         username:this.state.username,
+         password:this.state.password,
+         address:this.state.address,
+         image:"",
+         verified:false,
+         name:this.state.name
+       }
+
+          this.SubmitAuthentication(info);
           return <div />
       }
   }

@@ -32,16 +32,23 @@ class FoodBox extends React.Component {
     return html;
   }
 
+
+  SelectTruck = (truck) =>{
+
+     this.props.changeURL("menu");
+
+     return this.props.SetTruck(truck);
+
+  }
+
   render(){
     // Renders the Foodtruck Box for the home page;
     if(window.innerWidth >= 600){
-         return (
-           <div className="col-3" key ={this.props.id} onClick = {(e)=>{
-             var foodtruck = this.props.foodtruck;
 
-             this.props.ClearOrder();
-             this.props.changeURL("menu");
-             this.props.SetTruck(foodtruck);
+         return (
+           <div className="col-3" key ={this.props.id}  data = {this.props.foodtruck}onClick = {(e)=>{
+             return this.SelectTruck(this.props.foodtruck);
+
 
            }}>
             <div className="w90 ml5">
@@ -65,7 +72,7 @@ class FoodBox extends React.Component {
                 <p className="foodtruck_box_price">$$$$</p>
                </div>
                <div className="col-4">
-                <p className="medium-font">3.2 miles</p>
+                <p className="medium-font">{this.props.foodtruck.distance}</p>
                </div>
              </div>
             </div>
