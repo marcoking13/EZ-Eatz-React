@@ -51,37 +51,37 @@ class NavBarHome extends React.Component {
 
 
   //---------------------------------Rendering Icons---------------------------------//
-  renderCheckoutIcon(){
-
-    if(this.props.orders.length > 0){
-      return  <img alt="cart"src={Cart}  onClick = {()=>{this.props.changeURL("checkout")}}className="w100 mt2_5"/>
-    }else{
-      return  <img alt="cart"src={Cart} className="w100 o_5 mt2_5"/>
-    }
-
-  }
-
-  renderMapIcon(){
-    if(this.props.changeFlag){
-        // Renders Map icon if user is not on map page
-        // changeFlag = true or false is user is on google maps
-        if(window.innerWidth > 500){
-          return(
-            <img alt="google"src={GoogleMap} onClick = {()=>{
-              this.props.changeURL("map");
-            }} className="w100 mt2_5"/>
-          );
-        }else{
-          return(
-            <img alt="google"src={GoogleMap} onClick = {()=>{
-              this.props.changeURL("map");
-            }} className="w10 posAb posRight fr"/>
-          );
-        }
-      }else{
-        return null;
-      }
-  }
+  // renderCheckoutIcon(){
+  //
+  //   if(this.props.orders.length > 0){
+  //     return  <img alt="cart"src={Cart}  onClick = {()=>{this.props.changeURL("checkout")}}className="w100 mt2_5"/>
+  //   }else{
+  //     return  <img alt="cart"src={Cart} className="w100 o_5 mt2_5"/>
+  //   }
+  //
+  // }
+  //
+  // renderMapIcon(){
+  //   if(this.props.changeFlag){
+  //       // Renders Map icon if user is not on map page
+  //       // changeFlag = true or false is user is on google maps
+  //       if(window.innerWidth > 500){
+  //         return(
+  //           <img alt="google"src={GoogleMap} onClick = {()=>{
+  //             this.props.changeURL("map");
+  //           }} className="w100 mt2_5"/>
+  //         );
+  //       }else{
+  //         return(
+  //           <img alt="google"src={GoogleMap} onClick = {()=>{
+  //             this.props.changeURL("map");
+  //           }} className="w10 posAb posRight fr"/>
+  //         );
+  //       }
+  //     }else{
+  //       return null;
+  //     }
+  // }
 
 //--------------------------------Render JSX function------------------------------------
 
@@ -102,10 +102,6 @@ class NavBarHome extends React.Component {
         address:"Enter Address",lat:null,lng:null
       }
 
-      // if(!e.target.value){
-      //   return this.props.changeAddress(location.address,location.lat,location.lng);
-      // }
-
       const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
 
       if(response){
@@ -113,12 +109,6 @@ class NavBarHome extends React.Component {
         const { lat, lng } = response.data.results[0].geometry.location;
 
         location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng };
-
-
-
-        if(this.props.FoodtrucksNearMe){
-          this.props.FoodtrucksNearMe();
-        }
 
         this.props.changeAddress(location.address,location.lat,location.lng);
         this.setState({address:location.address});
@@ -129,15 +119,22 @@ class NavBarHome extends React.Component {
 
       }
 
+      if(this.props.FoodtrucksNearMe){
+        this.props.FoodtrucksNearMe(location.lat,location.lng);
+      }
 
   }
 
   renderProfilePicture = (hasProfilePic)=>{
-    var r = Math.floor(Math.random() * 255);
-    var g = Math.floor(Math.random() * 255);
-    var b = Math.floor(Math.random() * 255);
+    var profile_color = [0,0,0];
+    profile_color = this.props.account.profile_color;
 
-    var rgb = `rgb(${r},${g},${b})`;
+    if(profile_color.length > 0){
+        profile_color = this.props.account.profile_color;
+
+  }
+
+    var rgb = `rgb(${profile_color[0]},${profile_color[1]},${profile_color[2]})`;
 
     var letter = this.props.account.name.charAt(0).toUpperCase();
 
@@ -154,14 +151,25 @@ class NavBarHome extends React.Component {
     }
   }
 
-  renderButton = (img,text,url) =>{
+  renderNotification = (notifications) =>{
+    console.log(notifications);
+    if(notifications > 0){
+      return <div className="notify_icon" style={{width:"25px",height:"25px",background:"black",position:"absolute",top:"-25%",right:"0%",borderRadius:"50%"}}>{notifications}</div>;
+    }else{
+      return null;
+    }
+  }
+
+  renderButton = (img,text,url,notifications) =>{
+    console.log(notifications)
     return(
-      <button className="new_ez_button"onClick = {()=>{
+      <button className="new_ez_button " style={{position:"relative"}} onClick = {()=>{
         this.props.changeURL(url)
 
       }}>
         <img className="new_ez_button_icon_small invert_svg" src={img}/>
           <p className="new_ez_button_text">{text}</p>
+          {this.renderNotification(notifications)}
        </button>
 
     )
@@ -170,7 +178,7 @@ class NavBarHome extends React.Component {
 
 
   renderDesktopJSX(){
-
+      console.log(this.props.orders.length);
       return(
         <div className="container-fluid navbar_home">
         <div className="row width-90 margin-left-5">
@@ -193,11 +201,11 @@ class NavBarHome extends React.Component {
               </div>
 
               <div className="col-2">
-                {this.renderButton(Cart,"Checkout")}
+                {this.renderButton(Cart,"Checkout","checkout",this.props.orders.length)}
               </div>
 
               <div className="col-2">
-                  {this.renderButton(Search,"Search All")}
+                  {this.renderButton(Search,"Search All","home",0)}
               </div>
 
               <div className="col-1">

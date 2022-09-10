@@ -1,19 +1,20 @@
 
 import React from "react";
 import cookie from "react-cookies";
+import GeoDistance from "geo-distance";
 import {Map, Marker, GoogleApiWrapper, google} from 'google-maps-react';
 import axios from "axios";
-import NoResults from "./../components/no_results"
 
+import NoResults from "./../components/no_results"
 import ToggleIcon from "./../images/arrow_row_icon.svg";
-import "./../css/home_page.css";
-import GeoDistance from "geo-distance";
+
 import HomePageNav from "./../components/Navbar/home_nav_bar.js";
 import FoodBox from "./../components/Home/foodtruck_box_home.js";
 import Filter from "./../components/Home/filter.js";
 import Footer from "./../components/Footer/footnote.js";
 import FooterMobile from "./../components/Footer/footnote_mobile.js";
 
+import "./../css/home_page.css";
 
 import Logo from "./../images/logo.png";
 
@@ -23,31 +24,30 @@ class HomePage extends React.Component {
 
   constructor(props){
     super(props);
+
     this.state={
       cookie:"",
       currentFoodTruck:{},
       nearbyFoodtrucks:[],
-      radius:20,
+      radius:10000,
       changedAddress:false,
-
     }
 
-console.log(this.props.account);
-
-
   }
-
 
 //------------------------------State Changer-------------------------------//
 
   // Used to Toggle Map and Search
-  changeFlag = (bool) => {
-    this.setState({flag:bool,maps:false});
+  // changeFlag = (bool) => {
+  //   this.setState({flag:bool,maps:false});
+  // }
+  changeRadius = (radius) => {
+    this.setState({radius:radius});
   }
   // Used to change the address bar form
-  changeAddressFlag = () => {
-    this.setState({changedAddress:true});
-  }
+  // changeAddressFlag = () => {
+  //   this.setState({changedAddress:true});
+  // }
 
   // GetFoodTruckData = async () =>{
   //
@@ -57,24 +57,24 @@ console.log(this.props.account);
   // }
 
 
-  IntializePage = async()=>{
+  IntializePage = async ()=>{
+
     const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.account.address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
 
-    console.log(response);
     if(response.data.results.length > 0){
 
       const { lat, lng } = response.data.results[0].geometry.location;
-
       var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng };
-      console.log(location);
+
       this.FoodtrucksNearMe(lat,lng);
+
     }
+
   }
 
   componentDidMount(){
     this.IntializePage();
   }
-
 
   FoodtrucksNearMe = async (lat,lng) => {
 
@@ -82,7 +82,6 @@ console.log(this.props.account);
     const nearbyFoodtrucks = [];
 
     data.map(async(foodtruck)=>{
-
 
       var foodtruckLocation = {
         lat:foodtruck.lat,
@@ -92,20 +91,25 @@ console.log(this.props.account);
         lat:lat,
         lng: lng
       }
-      console.log(userLocation,foodtruckLocation);
 
       var body = {
         foodtruckLocation:foodtruckLocation,
         userLocation:userLocation,
-        radius:this.state.radius
+        radius:2000
       }
 
       const response = await axios.post("/api/distance-calculator",body);
 
       foodtruck.distance = response.data.distance.toString() +""+response.data.unit;
-      nearbyFoodtrucks.push(foodtruck);
-      this.setState({nearbyFoodtrucks:nearbyFoodtrucks});
+      
+      if(response.data.distance <= this.state.radius )
+      {
+        nearbyFoodtrucks.push(foodtruck);
 
+
+      }
+
+      this.setState({nearbyFoodtrucks:nearbyFoodtrucks});
 
     });
 
@@ -113,6 +117,7 @@ console.log(this.props.account);
 
 
   CreateFoodtruckBoxes = () => {
+
     var limit = 4;
     const foodtrucks = this.state.nearbyFoodtrucks.map((foodtruck,i)=>{
     var randomCounter = Math.floor(Math.random() * this.state.nearbyFoodtrucks.length);
@@ -130,7 +135,7 @@ console.log(this.props.account);
           foodtruck = {this.state.nearbyFoodtrucks[randomCounter]}
           changeURL = {this.props.changeURL}
         />
-        )
+      )
     });
     return foodtrucks;
   }
@@ -170,66 +175,63 @@ console.log(this.props.account);
 
 //  -------------------------Foodtruck Box Component Loop----------------------------
   // Loops through foodtrucks in state then renders them in JSX
-  foodTruckLoop(){
-    var key = 0;
-    return  this.state.nearbyFoodtrucks.map((foodtruck)=>{
-
-          key ++;
-          // Not working -- Value is out of scope so i can't use the value for the foodtruck
-          // Gets user location and the foodtruck location
-          // Then calculates distance and returns the distance
-          // Then passes down the returned value to the rendered component Food Box
-          var destinations = foodtruck.address.street + " "+ foodtruck.address.city + " "+ foodtruck.address.state + " " + foodtruck.address.zip;
-          var service = new this.props.google.maps.DistanceMatrixService();
-          var address = cookie.load("address",{path:"/"});
-          var distance;
-          service.getDistanceMatrix({
-            origins: [address],
-            destinations: [destinations],
-            travelMode: this.props.google.maps.TravelMode.DRIVING,
-            unitSystem: this.props.google.maps.UnitSystem.METRIC,
-            avoidHighways: false,
-            avoidTolls: false
-          },(data,status)=>{
-
-              if(data.rows[0].elements[0].distance){
-                console.log("Found");
-              }else{
-                console.log("Not Found");
-              }
-            });
-            console.log(foodtruck);
-          return (
-            <FoodBox
-              address = {this.props.address}
-              key = {key}
-              SetTruck = {this.props.SetTruck}
-              id = {key}
-              ClearOrder = {this.props.ClearOrder}
-              foodtruck = {foodtruck}
-              changeURL = {this.props.changeURL}
-            />
-          );
-
-    });
-
-  }
+  // foodTruckLoop(){
+  //   var key = 0;
+  //   return  this.state.nearbyFoodtrucks.map((foodtruck)=>{
+  //
+  //         key ++;
+  //
+  //         var destinations = foodtruck.address.street + " "+ foodtruck.address.city + " "+ foodtruck.address.state + " " + foodtruck.address.zip;
+  //         var service = new this.props.google.maps.DistanceMatrixService();
+  //         var address = cookie.load("address",{path:"/"});
+  //         var distance;
+  //         service.getDistanceMatrix({
+  //           origins: [address],
+  //           destinations: [destinations],
+  //           travelMode: this.props.google.maps.TravelMode.DRIVING,
+  //           unitSystem: this.props.google.maps.UnitSystem.METRIC,
+  //           avoidHighways: false,
+  //           avoidTolls: false
+  //         },(data,status)=>{
+  //
+  //             if(data.rows[0].elements[0].distance){
+  //               console.log("Found");
+  //             }else{
+  //               console.log("Not Found");
+  //             }
+  //           });
+  //           console.log(foodtruck);
+  //         return (
+  //           <FoodBox
+  //             address = {this.props.address}
+  //             key = {key}
+  //             SetTruck = {this.props.SetTruck}
+  //             id = {key}
+  //             ClearOrder = {this.props.ClearOrder}
+  //             foodtruck = {foodtruck}
+  //             changeURL = {this.props.changeURL}
+  //           />
+  //         );
+  //
+  //   });
+  //
+  // }
 
   renderFoodtruckSection(){
     if(this.state.nearbyFoodtrucks.length > 0){
     return(
       <div className='row'>
         <div className="col-2">
-           <Filter radius = {this.state.radius}/>
+           <Filter radius = {this.state.radius} changeRadius = {this.changeRadius}/>
         </div>
-      <div className="foodtruck_container col-10">
-      {this.CreateFoodtruckRow("Most Popular Brands")}
-      {this.CreateFoodtruckRow("Closest To You")}
-      {this.CreateFoodtruckRow("Most Affordable")}
-      {this.CreateFoodtruckRow("Hot Deals")}
-      {this.CreateFoodtruckRow("Vegan Trucks")}
-      {this.CreateFoodtruckRow("Try Something New")}
-      </div>
+        <div className="foodtruck_container col-10">
+          {this.CreateFoodtruckRow("Most Popular Brands")}
+          {this.CreateFoodtruckRow("Closest To You")}
+          {this.CreateFoodtruckRow("Most Affordable")}
+          {this.CreateFoodtruckRow("Hot Deals")}
+          {this.CreateFoodtruckRow("Vegan Trucks")}
+          {this.CreateFoodtruckRow("Try Something New")}
+        </div>
       </div>
     )
   }else{
@@ -263,14 +265,10 @@ console.log(this.props.account);
               navStyle ="white"
               />
 
-
               {this.renderFoodtruckSection()}
 
-
-
-
             </div>
-    );
+        );
 
 
     }else{
@@ -284,6 +282,7 @@ console.log(this.props.account);
               changeAddress = {this.props.changeAddress}
               SetAddress = {this.props.SetAddress}
               address = {this.props.address}
+
               changeFlag = {this.changeFlag}
               changeURL = {this.props.changeURL}
               navStyle ="white"
@@ -294,10 +293,11 @@ console.log(this.props.account);
             <ul className="list-group ">
               <h4 className="ml5 resultTitle text-center posRel mb1">Food Trucks</h4>
               <br/>
-              {this.foodTruckLoop()}
+
           </ul>
 
           <FooterMobile />
+
         </div>
       );
     }

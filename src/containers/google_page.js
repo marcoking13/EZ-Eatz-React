@@ -16,7 +16,6 @@ import Logo from "./../images/logo.png";
 import "./../css/utility.css";
 
 
-
 //----------------------------------------Wrapper Component--------------------------------------------------------//
 const MyMapComponent = compose(
   withProps({
@@ -28,7 +27,8 @@ const MyMapComponent = compose(
   withScriptjs,
   withGoogleMap
 )((props) =>
-     <GoogleMap  zoom={12} center = {{lat:props.lat,lng:props.lng}} key = {props.lat.toString()}>
+
+     <GoogleMap  zoom={12} center = {{lat:props.lat,lng:props.lng}} key = {props.address}>
 
       <Marker
         position = {{
@@ -48,7 +48,6 @@ const MyMapComponent = compose(
           <Marker
             position={{ lat: marker.lat, lng: marker.lng }}
             icon = {{url:marker.url, scaledSize: new window.google.maps.Size(40,40)}}
-
             onClick = {()=>{
 
               var foodtruckID = marker.id;
@@ -68,6 +67,7 @@ export default class Maps extends React.Component {
 
   constructor(props){
     super(props);
+
     this.state = {
       lat:this.props.lat,
       address:this.props.address,
@@ -99,24 +99,35 @@ export default class Maps extends React.Component {
 
   componentWillMount(){
 
-
     this.SetMarkersOnMap();
 
   }
 
+  componentDidMount(){
+
+    this.ConvertAddress();
+
+  }
+
+  ConvertAddress = async () =>{
+
+    const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
+    const { lat, lng } = response.data.results[0].geometry.location;
+
+    this.setState({lat:lat,lng:lng});
+
+  }
 
   SetMarkersOnMap = async() =>{
-    const foodtrucks =  await axios.post("/api/trucks",null);
 
+    const foodtrucks =  await axios.post("/api/trucks",null);
     var markers = [];
     var trucks = foodtrucks.data;
-
     var i = 0;
 
     for(var i = 0 ; i <trucks.length; i ++){
 
         var address = trucks[i].address.street +  "," + trucks[i].address.city + "," +trucks[i].address.state;
-
         var lat = trucks[i].lat;
         var lng = trucks[i].lng;
 
@@ -127,8 +138,6 @@ export default class Maps extends React.Component {
       this.setState({markers:markers});
 
   }
-
-
 
   // changeAddress(address,lat,lng){
   //
@@ -169,12 +178,13 @@ export default class Maps extends React.Component {
     }
 
   }
+
   renderMap(){
     if(this.state.lat && this.state.lng){
       return(
         <div style={{width:"100vw",height:"100vh"}}>
           <MyMapComponent
-            key = {this.state.lat.toString()}
+            address = {this.props.address}
             changeURL = {this.props.changeURL}
             ClearOrder = {this.props.ClearOrder}
             markers = {this.state.markers}
@@ -187,8 +197,10 @@ export default class Maps extends React.Component {
       return <NoResults text = "Enter Your Address to View Map!"/>
     }
   }
+
+
   render(){
-    console.log(this.props);
+
       return (
         <div className="container-fluid" >
             {this.renderBar()}

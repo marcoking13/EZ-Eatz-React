@@ -10,10 +10,13 @@ var distance;
 class FoodBox extends React.Component {
 
   renderStar(){
+
     var stars = 3;
     var starLimit = 5;
     var html = [];
+
     for(var i = 0; i<starLimit;i++){
+
       if(stars > i){
         html.push(
           <div className={"no-padding-no-margin col-2"}>
@@ -27,39 +30,39 @@ class FoodBox extends React.Component {
             </div>
             );
         }
+
       }
 
     return html;
+
   }
 
 
   SelectTruck = (truck) =>{
 
      this.props.changeURL("menu");
-
      return this.props.SetTruck(truck);
 
   }
 
   render(){
-    // Renders the Foodtruck Box for the home page;
+    var city = this.props.foodtruck.address.city;
+
     if(window.innerWidth >= 600){
 
          return (
            <div className="col-3" key ={this.props.id}  data = {this.props.foodtruck}onClick = {(e)=>{
              return this.SelectTruck(this.props.foodtruck);
-
-
            }}>
             <div className="w90 ml5">
-               <img alt="showcase" className="w100 relative moveUpDown h100px foodtruck_image"  src={this.props.foodtruck.background}/>
+               <img alt="showcase" className="w100 relative moveUpDown foodtruck_image"  src={this.props.foodtruck.background}/>
 
                <div className="row foodtruck_info_row">
                  <div className="col-12 fl foodtruck_info">
                    <br />
                    <p className="bold text-left foodtruck_box_title"><strong>{this.props.foodtruck.name}</strong></p>
                    <div className="foodtruck_line_box" />
-                   <p className="text-left ml1">{this.props.foodtruck.address.street + "," + this.props.foodtruck.address.state+","+this.props.foodtruck.address.zip}</p>
+                   <p className="text-left ml1">{city + "," + this.props.foodtruck.address.state+","+this.props.foodtruck.address.zip}</p>
                    <p className=" text-left  ml1 text-left">{this.props.distance}</p>
                  </div>
 
@@ -69,7 +72,7 @@ class FoodBox extends React.Component {
                    </div>
                </div>
                <div className="col-2">
-                <p className="foodtruck_box_price">$$$$</p>
+                <p className="foodtruck_box_price color-green bolder monospace">$$$$</p>
                </div>
                <div className="col-4">
                 <p className="medium-font">{this.props.foodtruck.distance}</p>
@@ -94,12 +97,12 @@ class FoodBox extends React.Component {
 
                 <div className="col-5 fl">
                     <span> <p className="text-center bold"><strong>{this.props.foodtruck.name}</strong></p></span>
-                    <span> <p className="text-center ">{this.props.foodtruck.address.street + "," + this.props.foodtruck.address.state+","+this.props.foodtruck.address.zip}</p></span>
+                    <span> <p className="text-center ">{this.props.foodtruck.address.city + "," + this.props.foodtruck.address.state+","+this.props.foodtruck.address.zip}</p></span>
                 </div>
 
                 <div className="col-5 fl">
                   <span><p className="text-center ">Wait: 20-30 min</p></span>
-                  <span><p className="text-center green-font ">$$</p></span>
+                  <span><p className="text-center color-green ">$$</p></span>
                 </div>
               </div>
 

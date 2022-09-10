@@ -2,6 +2,11 @@
   width:70%;
   bottom:5px;
 }
+
+
+.w15{
+  width:15%;
+}
 @media screen and (max-width:580px){
   .modName{
     font-size: 12px;

@@ -1,10 +1,13 @@
 import React from "react";
+import JWT_Decode from "jwt-decode";
+
 import FormIcon from "./../../images/form_icon.svg";
 import LandingBackground from "./../../images/landing_background.png";
-import JWT_Decode from "jwt-decode";
+
 
 
 class FormComponent extends React.Component {
+
   constructor(props){
     super(props);
     this.state = {
@@ -20,7 +23,7 @@ class FormComponent extends React.Component {
   handleGoogleLogin = (response)=>{
     const credential = response.credential;
     var userObject = JWT_Decode(credential);
-    console.log(userObject);
+
     const new_account = {
       address:null,
       image:userObject.picture,
@@ -36,34 +39,40 @@ class FormComponent extends React.Component {
 
   componentDidMount(){
 
-    /* global google */
-    setTimeout(()=>{google.accounts.id.initialize({
-      client_id:"652597126493-g3kk4nl2pkpua4nd185msth7f2gr0vd9.apps.googleusercontent.com",
-      callback:this.handleGoogleLogin
-    });
+      /* global google */
+      setTimeout(()=>{google.accounts.id.initialize({
+        client_id:"652597126493-g3kk4nl2pkpua4nd185msth7f2gr0vd9.apps.googleusercontent.com",
+        callback:this.handleGoogleLogin
+      });
 
-    google.accounts.id.renderButton(
-      document.getElementById("google_login"),
-      {theme:"outline",size:"large"}
-    )
+      google.accounts.id.renderButton(
+        document.getElementById("google_login"),
+        {theme:"outline",size:"large"}
+      )
 
-  },500);
+    },500);
 
   }
 
   EnterInformation = (event) =>{
-      console.log(this.props.type,this.props.dataKey,this.state.input.length);
+
       if(!this.state.input){
+
         this.errorRef.current.innerHTML = "*Must Enter a Value!";
         return;
+
       }
       else if(this.props.type == "signup" && this.props.dataKey == "password" && this.state.input.length < 10){
+
         this.errorRef.current.innerHTML = "*Password must be 10 characters or longer";
         return;
+
       }
       else if(this.props.type == "signup" && this.props.dataKey == "username" && this.state.input.length < 7){
+
         this.errorRef.current.innerHTML = "*Username must be 7 characters or longer";
         return;
+
       }else{
 
         this.errorRef.current.innerHTML = "";
@@ -85,24 +94,32 @@ class FormComponent extends React.Component {
           this.setState({input:"",key:""});
 
         },500);
+
       }
+
   }
 
  CapitalizeFirstLetter = (word) => {
+
   return word.charAt(0).toUpperCase() + word.slice(1);
+
 }
-
-
 
   render(){
 
     return(
       <div className="container-fluid form_component padding-top-5"style = {{background:`url(${LandingBackground})`,height:"1080px",paddingBottom:"100%"}}>
+
         <p className="ez_title margin-left-5">EZ<strong className="ez_title_end">Eatz</strong></p>
+
         <div id="google_login"></div>
+
         <div className="row add_form  " ref ={this.formRef}>
+
           <div className="col-4"/>
+
           <div className="col-4 form_container jumbotron "style={{background:"white",borderRadius:"5px"}}>
+
             <div className=" form-group">
               <p className="form_text "> {this.props.title} </p>
               <input type = {this.props.dataKey} className="form-control form_input" placeholder = {this.props.placeholder} onChange = {(e)=>{this.setState({input:e.target.value})}} value = {this.state.input}/>

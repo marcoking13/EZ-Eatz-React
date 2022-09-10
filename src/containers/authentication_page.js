@@ -41,8 +41,7 @@ class AuthenticationPage extends React.Component {
 
     }
 
-
-}
+ }
 
   Reset = () =>{
 
@@ -52,11 +51,9 @@ class AuthenticationPage extends React.Component {
 
   CheckInputs = (data,alertValue)=>{
 
-    console.log(data);
     if(data){
 
       this.props.letUserInside(data);
-
 
     }else{
 
@@ -70,17 +67,18 @@ class AuthenticationPage extends React.Component {
   Verify = async(info,url,alertValue)=>{
 
     const {data} = await axios.post(url,info);
-    console.log(data);
+
     this.CheckInputs(data,alertValue);
 
   }
 
   GoogleAuthentication = (info)=>{
+
     this.Verify(info,"/api/google_login","Error Has Occured with Google!");
+
   }
 
   SubmitAuthentication = (info) =>{
-
 
     var url = "";
     var alertValue = "";
@@ -95,20 +93,16 @@ class AuthenticationPage extends React.Component {
       url = "/api/login";
       alertValue = "Wrong Username or Password!";
 
-    }else{
-
+     }else{
 
         url = "/api/signup";
         alertValue = "Username Already Taken!";
-
 
     }
 
     this.Verify(info,url,alertValue);
 
   }
-
-
 
   render(){
 
@@ -128,6 +122,7 @@ class AuthenticationPage extends React.Component {
       )
     }
     else{
+// fix this
       var info = {
          username:this.state.username,
          password:this.state.password,
@@ -138,8 +133,10 @@ class AuthenticationPage extends React.Component {
        }
 
           this.SubmitAuthentication(info);
+
           return <div />
       }
+
   }
 
 }

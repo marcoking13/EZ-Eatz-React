@@ -1,121 +1,84 @@
 .filter_text{
-  font-family: "Roboto";
   font-size:20px;
-  margin-left:10%;
-  font-weight:bold;
+}
 
-}
-.margin-top-20{
-  margin-top:20%;
-}
-.margin-top-25{
-  margin-top:25%;
-}
-.sort_container{
-  width:100%;
-
-  margin-top:5%;
-}
-.filter_list{
-  list-style-type: none;
-  margin-top:1%;
-  clear:both;
-  width:100%;
-}
-.filter-center{
-  width:50%;
-  margin-left:25%;
-  border-radius:50%;
-  padding:10%;
-  border:2px solid black;
-  background:black;
-}
 .toggle_deals{
-  width:80%;
-  margin-left:10%;
-  border:2px solid #e6e6e6;
-  color:black;
-  text-align:center;
+  border-radius:30px;
+}
 
-}
-.margin-left-10{
-  margin-left: 10%;
-}
 .filter_heading{
-  margin-top:15%;
-  margin-left:5%;
   font-size:25px;
-  font-weight: bold;
+}
 
+.radius_input{
+  width:55%;
+  height:30px;
 }
+
 .switch{
-  height:24.5px;
-  z-index:0;
-  float:left;
-  width:2%;
-  background:red;
-  position:relative;
+  height:25px;
+  width:25px;
+  box-shadow: 1px 1px 1px 1px black;
 }
-.margin-top-5{
-  margin-top:5%;
-}
-.margin-top-10{
-  margin-top:10%;
-}
+
 .price_tag{
   border-radius:10px;
-  background:#e6e6e6;
-  text-align:center;
   margin-top:2.5%;
   font-size:15px;
 }
+
+.mile_box{
+  width:20%;
+  height:30px;
+}
+
 .price_tag:hover{
   background:black;
   color:white;
 }
+
 .active_price_tag{
   background:black;
   color:white;
 }
-.on_switch{
-  float:right;
+
+.active_price_tag_switch{
+  background:white !important;
 }
+
+/* .on_switch{
+  float:right;
+  background:white;
+}
+
 .off_switch{
   float:left;
+  background:black;
 }
-.on_toggle{
 
+.on_toggle{
   background:black;
   color:white;
 }
-.off_toggle{
 
+.off_toggle{
   background:white;
   color:black;
-}
+} */
+
 .filter_bubble{
   width:10%;
-  padding:5%;
-  float:left;
-
-  border-radius:50%;
-  background:none;
-  border:2px solid #e6e6e6;
+  height:20px;
 }
 
 .filter_bubble:hover{
-  background:black;
-  border-color:black;
-  transition: all;
-}
-.filter_bubble:hover .filter_center{
   background:white;
-  border-color:white;
   transition: all;
+  border-color:red;
 }
+
 .filter_item{
   width:50%;
   margin-left:5%;
   float:left;
-
 }

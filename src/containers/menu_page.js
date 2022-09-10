@@ -47,7 +47,6 @@ class MenuPage extends React.Component {
     //----------------------Binders---------------------------------------------------------------------------------
 
      this.SetItem = this.SetItem.bind(this);
-
      window.scrollTo(0,0);
 
   }
@@ -73,6 +72,7 @@ class MenuPage extends React.Component {
 
         <HomePageNav
           orders = {this.props.orders}
+          account = {this.props.account}
           PostAddress = {this.props.PostAddress}
           changeZip = {this.props.zip}
           changeAddress = {this.props.changeAddress}
@@ -83,31 +83,40 @@ class MenuPage extends React.Component {
           googleMap={this.state.flag}
           navStyle ="white"
         />
+
         <br />
         <br />
+
         <ShowBox
           SetAddress = {this.props.SetAddress}
           changeURL = {this.props.changeURL}
           truck = {this.props.truck}
         />
+
         <div className="container-fluid menu_container">
+
         <div className="row">
-        <div style={{marginLeft:"3.5%"}}/>
-        <div clasName="col-3 catagory_listings">
-          <CatagoryListings truck = {this.props.truck}/>
+          <div style={{marginLeft:"3.5%"}}/>
+          <div clasName="col-3 catagory_listings">
+            <CatagoryListings truck = {this.props.truck}/>
+          </div>
+          <div style={{marginLeft:"10%"}}/>
+          <div className="menux col-8 margin-left-5">
+            <MenuRows truck = {this.props.truck} SetItem = {this.props.SetItem}/>
+          </div>
+
         </div>
-        <div style={{marginLeft:"10%"}}/>
-        <div className="menux col-8 margin-left-5">
-          <MenuRows truck = {this.props.truck} SetItem = {this.props.SetItem}/>
-        </div>
-        </div>
+
           <ModifyModal item = {this.state.item} />
 
         </div>
 
         {this.renderFooter(window.innerWidth)}
+
     </div>
+
     )
+
   }
 
 }

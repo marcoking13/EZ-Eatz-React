@@ -13,7 +13,16 @@ class AddResult extends React.Component{
   }
   // renders the JSX
   render(){
-    return this.renderAddMods()
+
+    return (
+      <div>
+        Add:
+      <ul>
+
+      {this.renderAddMods()}
+      </ul>
+      </div>
+    )
   }
 
 }

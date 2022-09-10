@@ -4,12 +4,11 @@ import cookie from "react-cookies";
 import "./../css/modify.css";
 
 import HomePageNav from "./../components/Navbar/home_nav_bar.js";
-import Addon from "./../components/Modify/addon_component.js";
-import Remover from "./../components/Modify/remover_component.js";
-import RemoveResult from "./../components/Modify/remove_result_component.js";
-import AddResult from "./../components/Modify/add_result_component.js";
+import Modify from "./../components/Modify/modify_component.js";
 import Footer from "./../components/Footer/footnote.js";
 import FooterMobile from "./../components/Footer/footnote_mobile.js";
+
+import PlaceholderItem from "./../images/placeholder_pizza.png";
 //-------------------------------Constructor-------------------------------------
 class ModifyPage extends React.Component {
   //----------------------------Constructor--------------------------------
@@ -17,184 +16,199 @@ class ModifyPage extends React.Component {
     super(props);
     // var item = JSON.parse(cookie.load("currentItem",{path:"/"}));
 
+    var options = this.props.item.options.length > 0 ? this.props.item.options[0] :  [];
     this.state = {
       item:this.props.item,
       add:[],
       remove:[],
+      type:options,
       price:this.props.item.price
     }
-    //---------------------Binders----------------------------------
-      this.returnPrice = this.returnPrice.bind(this);
-      this.addIngredient = this.addIngredient.bind(this);
-      this.removeIngredient = this.removeIngredient.bind(this);
 
-      window.scrollTo(0,0);
+    window.scrollTo(0,0);
 
   }
-  //------------------------------------Returns Price of Item----------------------------------
-  // Gets the price of item and turns into a two place decimal number
-  returnPrice(modPrice){
-    var newPrice =  (this.state.price + modPrice);
-    newPrice = Math.round(newPrice * 100) / 100;
-    return newPrice;
+
+
+  RemoveOrAddIngredient = (ingredient,state,no_concat) =>{
+
+    if(no_concat){
+
+      return { state:ingredient}
+
+    }
+    else{
+       if(state.length <= 0){
+
+        return { state: state.concat(ingredient)}
+
+      }else {
+
+          for(var i = 0; i < state.length; i++){
+
+            if(state[i] === ingredient){
+
+                delete state[i];
+
+                return { state:state};
+
+              }
+
+            }
+
+            return {state:state.concat(ingredient)}
+
+        }
+
+      }
+
   }
-  //-------------------------------------Add and Remove Items from State-------------------------------
-  addIngredient(mod){
-      // If there are no items added then its ok to add items without looping to verify
-    if(this.state.add.length === 0){
-      this.setState({ add: this.state.add.concat(mod),price:this.returnPrice(mod.price)});
-    }else if(this.state.add.length >= 1){
-      // if more than one mods are selected then loop the added mods allow toggling between it being selected
-      for(var i = 0; i<= this.state.add.length;i++){
-          // If the  user clicked a mod that was already clicked, toggle mod off and remove it from state
-        if(this.state.add[i] === mod){
-          var priceReduction = (this.state.price - mod.price);
-          priceReduction = Math.round(priceReduction * 100) / 100;
-          delete this.state.add[i];
-            this.setState({ add: this.state.add,price:priceReduction});
-            break;
-        }
-          // If the  user clicked a mod that was already clicked, toggle mod on and add it to the state
-        if(i>=this.state.add.length){
-            this.setState({ add: this.state.add.concat(mod),price:this.returnPrice(mod.price)});
-            break;
-          }
-        }
-      }
-   }
-    removeIngredient(mod){
-        // If there are no items removed then its ok to remove items without looping to verify
-        if(this.state.remove.length === 0){
-          this.setState({ remove: this.state.remove.concat(mod)});
-        }else if(this.state.remove.length >= 1){
-            // if more than one mods are selected then loop the removed mods allow toggling between it being selected
-          for(var i = 0; i<= this.state.remove.length;i++){
-            // If the  user clicked a mod that was already clicked, toggle mod off and remove it from state
-            if(this.state.remove[i] === mod){
-              delete this.state.remove[i];
-                this.setState({ remove: this.state.remove});
-                break;
-            }
-            // If the  user clicked a mod that was not clicked, toggle mod on and add to state
-            if(i>=this.state.remove.length){
-              this.setState({ remove: this.state.remove.concat(mod)});
-              break;
-            }
 
-          }
-        }
+
+
+  CalculateTotal = (price)=>{
+
+    var total = price;
+
+    if(this.state.type.length > 0){
+      total += this.state.type[0].price;
     }
-    //---------------------------------------Render Labels and Titles-------------------------------------------
-    // Renders "Add" text if item has items to add
-    renderAddText(){
-      if(this.state.item.add){
-        return <p className="modTitle text-center mt5 mono f18px ">Add</p>
-      }else{
-        return null
+
+    for(var i = 0; i < this.state.add.length;i++){
+      if(this.state.add[i]){
+        total += this.state.add[i].price;
       }
     }
-    renderButtons(width){
-      if(width >= 580){
-        return (
-          <div className="row">
 
-                <div className="col-2"/>
+    return total;
 
-                <div className="col-4">
-                  <button
-                      className="button ui red f13px inverted w100"
-                      onClick={()=>{
-                        this.addItem("menu")
-                        }}>
-                      Add To Cart
-                      </button>
-                    </div>
+  }
 
-                    <div className="col-4">
-                      <button
-                        onClick={()=>{
-                        this.addItem("checkout")
-                      }}
-                        className="button ui green f13px inverted w100">
-                         Checkout
-                      </button>
-                    </div>
-                  </div>
-      )
-    }else{
-        return(
-            <div className="row">
-              <div className='col-3'/>
-              <div className="col-6">
-                    <br />
-                    <button
-                      className="button ui red f13px inverted w100"
-                        onClick={()=>{
-                          this.addItem("menu")
-                        }}>
-                        Add To Cart
-                        </button>
-                      </div>
-                <div className='col-2'/>
-                  <br />
-                <div className='col-3'/>
-                    <br />
-                      <div className="col-6">
-                      <br />
-                        <button
-                          onClick={()=>{
-                            this.addItem("checkout")
-                          }}
-                          className="button ui green f13px inverted w100">
-                           Checkout
-                        </button>
-                      </div>
-                    </div>
-              );
-      }
-    }
-    // Renders "Remove" text if item has items to remove
-    renderRemoveText(){
-        if(this.state.item.ingredients.length > 0){
-          return   <p className="modTitle mt2_5 text-center mono f18px">Remove</p>
-        }else{
-          return <div />
-        }
-      }
-    //Renders the item image and changes the size depending on the pixel width
+
+  AddIngredient = (ingredient) => {
+
+    var state = this.state.add;
+    var new_state = this.RemoveOrAddIngredient(ingredient,state,false);
+    console.log(new_state);
+    this.setState({add:new_state.state});
+
+  }
+
+  ChangeType = (ingredient) => {
+
+    var state = this.state.type;
+    var new_state = this.RemoveOrAddIngredient(ingredient,state,true);
+
+    this.setState({type:[new_state.state]});
+
+  }
+
+  RemoveIngredient = (ingredient) => {
+
+    var state = this.state.remove;
+    console.log(ingredient);
+    var new_state = this.RemoveOrAddIngredient(ingredient,state,false);
+    console.log(new_state);
+    this.setState({remove:new_state.state});
+
+  }
+
     renderJumbotron(){
 
         return (
           <div className="container-fluid">
-              <p className="modTitle text-center mono f18px mt2_5">Add Order</p>
 
               <div className="row">
-                <div className="col-10"/>
-                <div className="col-1 p0">
-                  <img className="w100" src = {this.state.item.image} />
+
+                <div className="col-4">
+                  <div className="row">
+                    <div className="col-2"/>
+                    <div className="col-9">
+                      <img className="w100 " src = {this.props.item.image} />
+                      <br />
+                    </div>
+                    <br />
+                  </div>
+                    <p className="itemName " style={{fontSize:"22px",marginLeft:"25%"}}>{this.state.item.name}</p>
+                    <p className="modify_description mt2_5 ml25">{this.props.item.description}</p>
+                  <p className="modify_total mt5 ml25"style={{fontSize:"22px",marginLeft:"25%"}}>Total: ${this.CalculateTotal(this.state.price)} -------------------</p>
+
+                  <div className="row mt5">
+
+                    <div className="col-2"/>
+
+                        <div className="col-4 mt5">
+
+                          <button
+                              className="btn add-to-cart ui cb f13px w100"
+                              onClick={()=>{
+                                this.addItem("menu")
+                                }}>
+                              Add To Cart
+                              </button>
+
+                            </div>
+
+                        <div className="col-4 mt5">
+
+                          <button
+                              onClick={()=>{
+                                this.addItem("checkout")
+                              }}
+                              className="btn f13px add-to-checkout  w100">
+                              Checkout
+                          </button>
+
+                        </div>
+
+                    </div>
+
                 </div>
+                <div className="col-1"/>
+
+                <div className="col-7">
+                  <div className="row">
+                  <div className="col-4 mt5">
+                    <p className="modTitle mt5 text-center mono f18px">Options</p>
+                    <Modify
+                      prefix = ""
+                      current_modifiers = {this.state.type}
+                      modifiers = {this.state.item.options}
+                      modifyIngredient = {this.ChangeType}
+                      price = {this.state.price.toFixed(2)}
+                     />
+                  </div>
+
+                  <div className="col-4 mt5">
+                    <p className="modTitle mt5 text-center mono f18px">Add</p>
+                    <Modify
+                      prefix = ""
+                      current_modifiers = {this.state.add}
+                      modifiers = {this.state.item.addons}
+                      modifyIngredient = {this.AddIngredient}
+                      price = {this.state.price.toFixed(2)}
+                     />
+                  </div>
+
+                  <div className="col-4 mt5">
+                  <p className="modTitle mt5 text-center mono f18px">Remove</p>
+                      <Modify
+                          prefix = "No"
+                          current_modifiers = {this.state.remove}
+                          modifiers = {this.state.item.ingredients}
+                          modifyIngredient = {this.RemoveIngredient}
+                          price = {this.state.price.toFixed(2)}
+                        />
+                  </div>
+                  </div>
+
+                <div className="col-12"></div>
+
               </div>
-              <br />
-              <div className="row">
-                <div className="col-4"/>
-                <div className="col-6">
-                    <h6 className="itemName">{this.state.item.item}</h6>
-                    <ul>
-                        <AddResult  add = {this.state.add} />
-                        <RemoveResult remove = {this.state.remove}/>
-                    </ul>
-                </div>
               </div>
 
-            <div className="row">
-              <div className="col-2"/>
-              <div className="col-6">
-                <h5 className="totalM w100 mt5 text-center fl">{"Total= $"+ this.state.price.toFixed(2)}</h5>
-              </div>
-            </div>
             <br />
 
-            {this.renderButtons(window.innerWidth)}
         </div>
       );
 
@@ -206,7 +220,7 @@ class ModifyPage extends React.Component {
         item:this.state.item,
         mod:{
           add:this.state.add,
-          remove:this.state.remove,
+          remove:this.state.remove
         }
       }
       this.props.addToOrder(order);
@@ -222,54 +236,30 @@ class ModifyPage extends React.Component {
     }
 
     //----------------------------------------------Renderer---------------------------------------
-    //---------------------------------------------------------------------------------------------
   render(){
 
     return (
       <div>
         <HomePageNav
           orders = {this.props.orders}
-          PostAddress = {this.props.PostAddress}
-          changeZip = {this.props.zip}
+          account = {this.props.account}
           changeAddress = {this.props.changeAddress}
-          SetAddress = {this.props.SetAddress}
           address = {this.props.address}
           changeURL = {this.props.changeURL}
-          navStyle ="white"/>
+          navStyle ="white"
+        />
 
-        <div className="row pb20px">
+        <div className="pb20px">
           {this.renderJumbotron()}
         </div>
-          <br />
-        <div className="modContainer BTR">
 
-            {this.renderAddText()}
+        {this.renderFooter(window.innerWidth)}
 
-          <div>
-            <Addon
-              add = {this.state.add}
-              addIngredient = {this.addIngredient}
-              price = {this.state.price.toFixed(2)}
-              item = {this.state.item} />
-          </div>
-
-        </div>
-        <div className="modContainer BTR ">
-
-            {this.renderRemoveText()}
-
-          <div>
-              <Remover
-                  remove = {this.state.remove}
-                  removeIngredient = {this.removeIngredient}
-                  item = {this.state.item} />
-          </div>
-
-        </div>
-          {this.renderFooter(window.innerWidth)}
       </div>
     )
+
   }
+
 }
 
 export default ModifyPage;

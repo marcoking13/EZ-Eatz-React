@@ -24,7 +24,7 @@ class Remover extends React.Component {
     // if there are ingredients then render the jsx
     if(ing.display){
       return(
-        <div key = {key} className="col-2 ml5 modCont">
+        <div key = {key} className="col-12  modCont">
 
           <div className ="mt5 modBox" onClick = {()=>{
             this.props.removeIngredient(ing);
@@ -46,7 +46,7 @@ class Remover extends React.Component {
 
   // renderer for jsx
   render(){
-      return <div className="row pb2_5 pl7_5 BBbf4 pt2_5 rowMod pr5">{this.renderRemovers()}</div>
+      return <div className="row   w90 ml5   ">{this.renderRemovers()}</div>
   }
 
 }

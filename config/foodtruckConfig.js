@@ -15,7 +15,7 @@ const FoodTrucks =  [{
     zip: 85251
   },
   stars:3,
-  background:"./assets/images/smoothie_box.png",
+  background:"./assets/images/freeze_menu.png",
   display:"./assets/images/smoothie.jpg",
   mapLogo:"./assets/images/smoothieKingMap.png",
   type:["dessert","all-american"],
@@ -54,7 +54,7 @@ const FoodTrucks =  [{
       calories:300,
       price:9.53,
       description:"A giant ice cream sandwich",
-      image:"./assets/images/ice_cream_2.png"
+      image:"./assets/images/icecream_1.png"
     },
     {
       item:"Oreo Sandwich",
@@ -379,7 +379,7 @@ image:"./assets/images/samplebanner2.jpg"
   routes:routes,
     stars:5,
   logo:"./assets/images/pita.png",
-  background:"./assets/images/pita_box.png",
+  background:"./assets/images/pita_menu.png",
   display:"./assets/images/pitajungle.jpg",
   type:["all-american","greek"],
   priceAverage:total,
@@ -1270,7 +1270,7 @@ address:{
   mapLogo:"./assets/images/burgerMap.png",
   routes:routes,
   logo:"./assets/images/burgerjoint.png",
-  background:"./assets/images/burgerjointbanner.jpg",
+  background:"./assets/images/burger_menu.jpg",
   display:"./assets/images/burger33.jpg",
   type:["all-american","burgers"],
   priceAverage:total,
@@ -1817,7 +1817,7 @@ address:{
   mapLogo:"./assets/images/acai_box.png",
   routes:routes,
   logo:"./assets/images/acaishop.png",
-  background:"./assets/images/acai_box.png",
+  background:"./assets/images/acai_menu.png",
   display:"./assets/images/acai02.jpg",
   type:["all-american","burgers"],
   priceAverage:total,
@@ -2278,7 +2278,7 @@ address:{
   },
   routes:routes,
   logo:"./assets/images/rotatingchicken.png",
-  background:"./assets/images/chicken_box.png",
+  background:"./assets/images/chicken_menu.png",
   display:"./assets/images/chicken2029.jpg",
   type:["all-american","burgers"],
   priceAverage:total,
@@ -3387,7 +3387,7 @@ address:{
   mapLogo:"./assets/images/steakMap.png",
   routes:routes,
   logo:"./assets/images/firegrill.png",
-  background:"./assets/images/steak_box.png",
+  background:"./assets/images/steak_menu.png",
   display:"./assets/images/steak498.jpg",
   type:["all-american","burgers"],
   priceAverage:total,
@@ -3980,7 +3980,7 @@ address:{
   },
   lng:-111.982830,
   logo:"./assets/images/chinabowl.png",
-  background:"./assets/images/asian_box.png",
+  background:"./assets/images/chinese_menu.png",
   display:"./assets/images/china9292.jpg",
   type:["all-american","burgers","chinese"],
   priceAverage:total,
@@ -4350,7 +4350,7 @@ address:{
   lng:-111.9396360,
   mapLogo:"./assets/images/johnnyMap.png",
   logo:"./assets/images/johnnyrocket.png",
-  background:"./assets/images/johnnyrocketbanner.jpg",
+  background:"./assets/images/johnny_menu.png",
   display:"./assets/images/america33.jpg",
   type:["all-american","burgers","healthy","dessert"],
   priceAverage:total,
@@ -4567,7 +4567,7 @@ address:{
 
     ],
     id:"2029e0i3290r203",
-        image:"./assets/images/burger_7.png",
+        image:"./assets/images/wings_1.png",
     ingredients:[{
       name:"buffalo wings",
       display:false
@@ -4617,7 +4617,7 @@ address:{
 
 
     ],
-        image:"./assets/images/burger_9.png",
+        image:"./assets/images/salad_2.png",
     id:"aa2442020393939838jgjgjg",
     ingredients:[{
       name:"olives",
@@ -4685,7 +4685,7 @@ address:{
 
 
     ],
-      image:"./assets/images/burger_10.png",
+      image:"./assets/images/pizza_4.png",
     id:"19292929229384567438920394857",
     ingredients:[{
       name:"cheese",
@@ -4741,7 +4741,7 @@ address:{
 
     ],
     id:"jnnvnvnreivvnvnvnvnrvnvrrvnj22",
-        image:"./assets/images/burger_11.png",
+        image:"./assets/images/pizza_4.png",
     ingredients:[{
       name:"olives",
       display:false
@@ -4807,7 +4807,7 @@ address:{
 
 
     ],
-        image:"./assets/images/burger_12.png",
+        image:"./assets/images/pizza_4.png",
     ingredients:[{
       name:"grilled chicken",
       display:false
@@ -4930,7 +4930,7 @@ address:{
   mapLogo:"./assets/images/burgerMap2.png",
   routes:routes,
   logo:"./assets/images/thestand.png",
-  background:"./assets/images/burger_box.png",
+  background:"./assets/images/burger_menu.png",
   display:"./assets/images/burger339.jpg",
   type:["all-american","burgers","dessert","healthy","chinese"],
   priceAverage:total,

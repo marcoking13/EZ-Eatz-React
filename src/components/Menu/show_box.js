@@ -84,7 +84,7 @@ class ShowBox extends React.Component {
               <div className="menu_page">
                 <div className="row">
 
-                  <div className="menu_showcase col-12" style={{background:`url(${process.env.PUBLIC_URL +  this.props.truck.background})`,backgroundSize:"cover"}} ></div>
+                  <div className="menu_showcase col-12" style={{background:`url(${process.env.PUBLIC_URL +  this.props.truck.banner})`,backgroundSize:"cover"}} ></div>
                 </div>
                 <br />
 

@@ -1,13 +1,17 @@
 import React from "react";
-import Background from "./../images/no_results.png"
+import Background from "./../images/no_results.png";
+
+import "./../css/utility.css";
+import "./../css/home_page.css";
 
 const NoResults = (props)=>{
-  return(
-    <div className="no_results_container width-100"style={{background:`url(${Background})`,height:"1080px"}}>
-      <p style={{opacity:"90%",width:"100%",textAlign:"center",paddingTop:"15%",fontSize:"50px",fontFamily:"Roboto"}}>{props.text}</p>
 
+  return(
+    <div className="no_results_container width-100 screen-height"style={{background:`url(${Background})`}}>
+      <p className="width-100 text-center padding-top-15 roboto no_results_text">{props.text}</p>
     </div>
   )
+
 }
 
 export default NoResults;

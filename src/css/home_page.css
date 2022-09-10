@@ -11,11 +11,22 @@
 .profile_button:hover{
 filter:invert(90);
 }
+
 .moveUpNav{
   top:3.5% !important;
   position: absolute;
   left: 15%;
 
+}
+.no_results_text{
+  font-size:30px;
+  opacity:90%;
+}
+.padding-top-15{
+  padding-top:15%;
+}
+.screen-height{
+  height:1080px
 }
 .new_ez_button_text{
   width:70%;float:left;
@@ -88,16 +99,18 @@ filter:invert(90);
   margin-left:5%;
 }
 .foodtruck_image{
-  height:110px;
+  height:140px;
 }
 .logoHM{
   width:60px;
   height:60px;
 
   position: absolute;
-top:11%;
-left:5%;
+  top:11%;
+  left:5%;
+
 }
+
 .w200px{
   width:200px;
 }
@@ -141,30 +154,6 @@ left:5%;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .rotate-180{
   transform:rotate(180deg);
 }
@@ -190,11 +179,9 @@ left:5%;
   bottom:0px;
 }
 .foodtruck_box_price{
-  color:green;
-  font-family: monospace;
-  font-weight: bolder;
   font-size:15px;
 }
+
 .moveUpDown:hover{
   border:0px none solid !important;
   animation-name: moveUp !important;
@@ -203,14 +190,12 @@ left:5%;
   animation-timing-function: ease-in-out !important;
   bottom:20px;
 }
+
 .foodtruck_line_box{
-  width:0px;
   height:2px;
-  background:black;
-  position: relative;
   bottom:5px;
-  transition:all;
 }
+
 @keyframes expand_line {
   from{
     width:0px;

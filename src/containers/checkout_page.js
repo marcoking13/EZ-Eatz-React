@@ -36,41 +36,15 @@ class CheckoutPage extends React.Component {
     });
   }
 
-  componentWillMount(){
-
-      var total = this.state.total;
-
-      for(var i = 0; i<this.props.orders.length;i++){
-        total += this.props.orders[i].price;
-      }
-
-      var foodTruckID = cookies.load("foodtruckCurrent",{path:"/"});
-
-      axios.get("/api/trucks").then((data)=>{
-
-        var trucks = data.data;
-
-        for(var i = 0; i<trucks.length;i++){
-          var id = trucks[i].objectID;
-
-          if(id === foodTruckID){
-            this.setState({truck:trucks[i],total:total,totalTip:total});
-          }
-
-        }
-
-      });
-
-  }
-
   render(){
     if(window.innerWidth >= 580){
       return(
           <CheckoutDesktop
              orders = {this.props.orders}
-             truck = {this.state.truck}
+             truck = {this.props.truck}
              tip = {this.state.tip}
              changeTip = {this.changeTip}
+             account = {this.props.account}
              totalTip = {this.state.totalTip}
              total = {this.state.total}
              changeURL = {this.props.changeURL}

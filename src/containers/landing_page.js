@@ -17,6 +17,7 @@ class LandingPage extends React.Component {
   //-------------------------------Constructor--------------------------------
   constructor(props){
     super(props);
+
     this.state ={
       className:"black",
       err:false,
@@ -24,6 +25,7 @@ class LandingPage extends React.Component {
       username : "",
       password: "",
       account:{}
+
     }
       //------------------------Binders--------------------------------------
      this.handleSubmit = this.handleSubmit.bind(this);

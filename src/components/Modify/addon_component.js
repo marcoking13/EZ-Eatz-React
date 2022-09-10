@@ -30,14 +30,14 @@ class Addon extends React.Component {
   renderAddOn(){
     var key = 0;
 
-    return this.props.item.add.map((addOn)=>{
+    return this.props.item.addons.map((addOn)=>{
         key ++;
         var color = this.decideColor(this.props.add,addOn);
         var fixedPrice = addOn.price.toFixed(2);
 
           return(
 
-            <div key = {key} className="col-2 modCont ml5">
+            <div key = {key} className="col-12 modCont">
 
               <div className ="mt5 modBox" onClick = {(e)=>{  this.props.addIngredient(addOn) }}>
 
@@ -53,8 +53,8 @@ class Addon extends React.Component {
 
   render(){
 
-    if(this.props.item.add){
-      return <div className="row pb2_5 pl7_5 BBbf4 pt2_5 rowMod pr5">{this.renderAddOn()}</div>
+    if(this.props.item.addons){
+      return <div className="row border-right-light-2px w90 ml5">{this.renderAddOn()}</div>
     }else{
       return null;
     }

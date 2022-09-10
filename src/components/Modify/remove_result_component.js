@@ -13,7 +13,15 @@ class RemoveResult extends React.Component{
   }
   //renderer
   render(){
-    return this.renderRemoveMods()
+    return(
+    <div>
+      Remove:
+    <ul>
+
+    {this.renderRemoveMods()}
+    </ul>
+    </div>
+  );
   }
 }
 
