@@ -1,7 +1,7 @@
 import React from "react";
 
-import MobileBox from "./mobile_menu_box_component.js";
-import DesktopBox from "./desktop_menu_box_component.js";
+
+import Box from "./desktop_menu_box_component.js";
 
 class  MenuBoxes extends React.Component {
 
@@ -17,11 +17,9 @@ class  MenuBoxes extends React.Component {
 
           for(var i=0;i<menu.food.length;i++){
 
-            if(window.innerWidth <=800){
-              html.push(<MobileBox _id = {i} SetItem = {this.props.SetItem} menu = {menu} i = {i} />  )
-            }else if(window.innerWidth >= 800){
-              html.push(  <DesktopBox _id = {i} SetItem = {this.props.SetItem} menu = {menu} i = {i} />  )
-            }
+
+            html.push(  <Box _id = {i} SetItem = {this.props.SetItem} menu = {menu} i = {i} />  )
+
 
           }
           // This will determine what heading will be rendered

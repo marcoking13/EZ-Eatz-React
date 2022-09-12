@@ -10,20 +10,18 @@ import Search from "./../../images/userChoice.png";
 import Cart from "./../../images/cart.png";
 import ProfilePicture from "./../../images/profileIcon.png";
 
-class MobileBar extends React.Component {
+class Bar extends React.Component {
 
     renderCheckoutIcon(){
 
       if(this.props.orders.length > 0){
-        return  <img alt="cart"src={Cart}  onClick = {()=>{this.props.changeURL("checkout")}} className="w100 mt2_5 iconG" />
+        return  <img alt="cart"src={Cart}  onClick = {()=>{this.props.ChangeURL("checkout")}} className="w100 mt2_5 iconG" />
       }else{
         return  <img alt="cart"src={Cart} className="w100 o_5 mt2_5 iconG" />
       }
 
 
     }
-
-
 
   render(){
 
@@ -73,7 +71,7 @@ class MobileBar extends React.Component {
             <img alt="search"  src={Search}
               onClick = {()=>{
 
-                    this.props.changeURL("home")
+                    this.props.ChangeURL("home")
                   }}
                     className="w100 mt2_5"
                     />
@@ -94,7 +92,7 @@ class MobileBar extends React.Component {
                       onClick = {()=>{
                         cookies.remove("account",{path:"/"});
                         cookies.remove("address",{path:"/"});
-                        this.props.changeURL("login");
+                        this.props.ChangeURL("login");
                       }}
                       >Logout</button>
                   </div>
@@ -111,4 +109,4 @@ class MobileBar extends React.Component {
 }
 
 
-export default MobileBar;
+export default Bar;

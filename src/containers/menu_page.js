@@ -2,18 +2,16 @@ import React from "react";
 
 import cookie from "react-cookies";
 import axios from "axios";
-import "./../css/new_menu.css";
+
 import HomePageNav from "./../components/Navbar/home_nav_bar";
 import ShowBox from "./../components/Menu/show_box";
 import CatagoryListings from "./../components/Menu/catagory_listings";
 import MenuRows from "./../components/Menu/menu_row";
 import MenuBoxes from "./../components/Menu/menu_boxes_component";
-import ModifyModal from "./../components/Menu/modify_modal.js";
 import Footer from "./../components/Footer/footnote.js";
-import FooterMobile from "./../components/Footer/footnote_mobile.js";
-
 
 import "./../css/menuPage.css";
+import "./../css/new_menu.css";
 
 //--------------------------Component -----------------------------------------
 class MenuPage extends React.Component {
@@ -55,13 +53,6 @@ class MenuPage extends React.Component {
     this.setState({item:item})
   }
 
-  renderFooter(width){
-    if(width <= 580){
-      return <FooterMobile />
-    }else{
-      return <Footer />
-    }
-  }
 
 //------------------------------------------------Renderer----------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------
@@ -73,13 +64,10 @@ class MenuPage extends React.Component {
         <HomePageNav
           orders = {this.props.orders}
           account = {this.props.account}
-          PostAddress = {this.props.PostAddress}
-          changeZip = {this.props.zip}
-          changeAddress = {this.props.changeAddress}
+          ChangeAddress = {this.props.ChangeAddress}
           SetAddress = {this.props.SetAddress}
           address = {this.props.address}
-          changeFlag = {this.changeFlag}
-          changeURL = {this.props.changeURL}
+          ChangeURL = {this.props.ChangeURL}
           googleMap={this.state.flag}
           navStyle ="white"
         />
@@ -89,7 +77,7 @@ class MenuPage extends React.Component {
 
         <ShowBox
           SetAddress = {this.props.SetAddress}
-          changeURL = {this.props.changeURL}
+          ChangeURL = {this.props.ChangeURL}
           truck = {this.props.truck}
         />
 
@@ -107,11 +95,9 @@ class MenuPage extends React.Component {
 
         </div>
 
-          <ModifyModal item = {this.state.item} />
-
         </div>
 
-        {this.renderFooter(window.innerWidth)}
+        <Footer />
 
     </div>
 

@@ -2,9 +2,8 @@ import React from "react";
 import cookies from "react-cookies";
 import axios from "axios";
 
-import CheckoutMobile from "./../components/Checkout/checkout_mobile_page";
+
 import Footer from "./../components/Footer/footnote.js";
-import FooterMobile from "./../components/Footer/footnote_mobile.js";
 import CheckoutDesktop from "./../components/Checkout/checkout_desktop_page";
 
 import "./../css/checkout.css";
@@ -21,51 +20,71 @@ class CheckoutPage extends React.Component {
       tip:0,
       truck:{},
       total:0,
-      totalTip:0
     }
 
-    this.changeTip = this.changeTip.bind(this);
 
     window.scrollTo(0,0);
+
   }
 
-  changeTip(tip){
-    this.setState({
-      tip:tip,
-      totalTip:this.state.total + this.state.total * tip /100
-    });
+  componentDidMount(){
+    var total = this.CalculateTotal();
+    this.setState({total:total.toFixed(2)})
+  }
+
+  CalculateTotal = () =>{
+    var total = 0;
+    this.props.orders.map((order)=>{
+      total += order.price;
+
+      if(order.mod.add.length > 0){
+        order.mod.add.map((add)=>{
+          total += add.price;
+        });
+      }
+      if(order.mod.type.length >0){
+        total += order.mod.type[0].price;
+      }
+    })
+
+    return total;
+
+  }
+
+  CalculateTip = (tip)=>{
+
+      var new_total = this.state.total;
+      var tip = parseFloat(tip / 100);
+      tip = tip.toFixed(2);
+      new_total = new_total;
+      console.log(new_total,tip);
+      var total_tip = (tip * new_total);
+      new_total = parseFloat((new_total+total_tip));
+      console.log(new_total);
+      new_total = new_total.toFixed(2);
+      this.setState({total:new_total});
+
   }
 
   render(){
-    if(window.innerWidth >= 580){
-      return(
+
+        return(
           <CheckoutDesktop
              orders = {this.props.orders}
              truck = {this.props.truck}
              tip = {this.state.tip}
-             changeTip = {this.changeTip}
              account = {this.props.account}
-             totalTip = {this.state.totalTip}
+             CalculateTip = {this.CalculateTip}
+             address = {this.props.address}
              total = {this.state.total}
-             changeURL = {this.props.changeURL}
+             ChangeURL = {this.props.ChangeURL}
            />
-        )
-  }else {
+         )
 
-      return (
-          <CheckoutMobile
-            orders = {this.props.orders}
-            truck = {this.state.truck}
-            tip = {this.state.tip}
-            changeTip = {this.changeTip}
-            totalTip = {this.state.totalTip}
-            total = {this.state.total}
-            changeURL = {this.props.changeURL}
-          />
-        );
     }
+
   }
-}
+
 
 
 export default CheckoutPage;

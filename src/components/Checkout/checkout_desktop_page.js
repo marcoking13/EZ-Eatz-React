@@ -1,62 +1,56 @@
 import React from "react";
 
-import TipBoxes from "./tip_boxes_component.js";
 import Navbar from "./../Navbar/home_nav_bar.js";
-import Dropdown from "./drop_down_component.js";
 import Footer from "./../Footer/footnote.js";
 
-import Visa from "./../images/visa.png";
-import Paypal from "./../images/paypal.png"
+import Visa from "./../../images/cards.png";
 
 
 class Checkout extends React.Component {
 
-    // renderFoodtruckData(){
-    //   if(this.props.orders){
-    //     return(
-    //       <div className="fl ml10 w40 truckConCheckout">
-    //         <img className="w30 truckCheckoutImg" src = {this.props.truck.logo} />
-    //         <p className="fr mr5 f13px mt5 bold truckNameCheckout"> {this.props.truck.name}</p>
-    //       </div>
-    //     )
-    //   }else{
-    //     return null;
-    //   }
-    // }
-
-  addLoop(counter,render_mod){
-    if(render_mod){
-    return this.props.orders[counter].mod.add.map((add)=>{
-      return <li className="ml5 f13px list-circle adders">{"Add "+add.name}</li>
-    })
-  }else{
-    return <div />
-  }
+  constructor(props){
+    super(props);
+    this.state = {
+      tip:0
+    }
   }
 
-  removeLoop(counter,render_mod){
-    if(render_mod){
-      return this.props.orders[counter].mod.remove.map((remove)=>{
-        return <li className="ml10 none f13px removers">{"-No "+remove.name}</li>
-      });
-  }else{
-    return <div />
+
+  modifyLoop(array,prefix,render_mod){
+
+      if(render_mod && array.length > 0){
+        return array.map((modify)=>{
+          return <li className={"ml10 none f13px removers "}>{"-"+prefix+" "+modify.name}</li>
+        });
+      }else{
+        return <div />
+      }
+
+
   }
-  }
+
 
   ordersLoop(render_mod){
-    console.log(this.props.orders);
+
+
+    var dash =  render_mod ? "" : " ------------";
     if(this.props.orders){
       var html = [];
 
       for(var i = 0; i<=this.props.orders.length - 1;i++){
+
           var fixedPrice = this.props.orders[i].item.price.toFixed(2);
+          var order = this.props.orders[i];
+          var mod = order.mod;
+
+
           html.push(
             <div className="w100 mt5 orderBox">
-              <p className="text-left orderName"style={{fontFamily:"Roboto",fontSize:"18px",fontWeight:"normal"}}>{this.props.orders[i].item.name + " $ "+fixedPrice}</p>
+              <p className="text-left orderName font-size-18 roboto normal">{this.props.orders[i].item.name +" " +dash + " $ "+fixedPrice}</p>
               <ul >
-                {this.addLoop(i,render_mod)}
-                {this.removeLoop(i,render_mod)}
+                {this.modifyLoop(mod.type,"",render_mod)}
+                {this.modifyLoop(mod.add,"Add",render_mod)}
+                {this.modifyLoop(mod.remove,"-No",render_mod)}
               </ul>
             </div>
               )
@@ -66,75 +60,91 @@ class Checkout extends React.Component {
     }else{
       return null
     }
+
   }
 
     render(){
+
       return(
         <div className="container-fluid">
           <Navbar
             orders = {this.props.orders}
             account = {this.props.account}
-            changeAddress = {this.props.changeAddress}
+            ChangeAddress = {this.props.ChangeAddress}
             address = {this.props.address}
-            changeURL = {this.props.changeURL}
+            ChangeURL = {this.props.ChangeURL}
             navStyle ="white"
           />
           <div className="container-fluid mt5">
-          <div className="row ">
+          <div className="row w90 ml5">
+
             <br />
-            <div className="col-1" />
 
             <div className="col-4">
-              <p className="checkout_truck_name"style={{fontSize:"25px",fontWeight:"bold",fontFamily:"Roboto"}}>{this.props.truck.name} ({this.props.truck.address.city +","+this.props.truck.address.state})</p>
+              <p className="checkout_truck_name bold roboto font-size-25">{this.props.truck.name} ({this.props.truck.address.city +","+this.props.truck.address.state})</p>
               <div className="row">
 
-                <div className="col-12">
+                <div className="col-9">
                     {this.ordersLoop(true)}
                 </div>
 
               </div>
 
             </div>
-            <div className="col-2"style={{position:"fixed",top:"25%",right:"10%",border:"2px solid #e6e6e6"}}>
+
+            <div className="col-4">
+
+                <div className="row">
+                  <div className="col-2">  <h5>Tip</h5> </div>
+
+                  <div className="col-10">
+                  <form
+                  onSubmit = {(e)=>{
+                      e.preventDefault();
+
+                      this.props.CalculateTip(parseInt(this.state.tip));
+
+                  }}
+                    >
+                    <input className="fl w80 form-control tip_box_height width-70"
+                     onChange = {(e)=>{
+                       this.setState({tip:e.target.value})
+
+                     }}
+
+
+                    type="number" placeholder="Enter Tip Amount" value = {this.state.tip}/>
+                    </form>
+                    <div className="fl w20 text-center bbe6 percent_box tip_box_height">%</div>
+                    <div className="row">
+
+                    </div>
+                  </div>
+                  <div className="col-12">
+
+                      <img src = {Visa} className="w100 mt10"/>
+
+                 </div>
+               </div>
+              </div>
+              <div className="col-1"/>
+            <div className="col-3 padding-bottom-5 background-white border-e6">
+              <p className="text-center font-size-22 margin-top-5">Order Summary</p>
+              <br />
               {this.ordersLoop(false)}
-              <p style={{fontWeight:"bold",fontSize:"16px",fontFamily:"Roboto",marginTop:"5%"}}>
-                Total: ${this.props.total.toFixed(2)}
+              <p className="roboto font-size-22 mt10">
+                Total: --------------------------- ${this.props.total}
               </p>
+              <button className="btn btn-danger w90 ml5 mt10 border-radius-20px">Place Order</button>
             </div>
           </div>
-            <div className="row">
-              <div className="col-1"/>
-
-              <div className="col-7 mt5">
-
-                  <div className="row">
-                    <div className="col-1"><p>Tip</p></div>
-                    <div className="col-5">
-                      <input className="fl w80 form-control" type="number" placeholder="Enter Tip Amount"style={{width:"70%",float:'left',height:"30px"}}/>
-                      <div className="fl w20 text-center bbe6"style={{float:"left",width:"15%",background:"#e6e6e6",height:"30px"}}>%</div>
-                    </div>
-                    <div className="col-5">
-                      <div className="row">
-                      <div className="col-6">
-                        <img src = {Paypal} className="w100"/>
-                      </div>
-                      <div className="col-6">
-                        <img src = {Visa} className="w100"/>
-                      </div>
-                    </div>
-                    <p className="checkout_title">Total: ${this.props.total.toFixed(2)}</p>
-                    </div>
-              </div>
-
-            </div>
 
 
-            </div>
-
+        </div>
+    <Footer />
 </div>
-                <Footer />
 
-            </div>
+
       );
     }
 }

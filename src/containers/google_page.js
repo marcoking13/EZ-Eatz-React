@@ -3,8 +3,8 @@ import {GoogleMap, withScriptjs,withGoogleMap,Marker} from "react-google-maps";
 import { compose, withProps } from "recompose"
 import axios from 'axios';
 import cookies from "react-cookies";
+
 import NoResults from "./../components/no_results"
-import MobileBar from "./../components/Maps/mobile_bar";
 import Navbar from "./../components/Navbar/home_nav_bar";
 
 import ProfilePicture from "./../images/profileIcon.png";
@@ -76,24 +76,6 @@ export default class Maps extends React.Component {
       markers:[]
     }
 
-  //  this.changeAddress = this.changeAddress.bind(this);
-
-
-    // axios.get("/api/users").then((response)=>{
-    //   var accounts = response.data;
-    //   // var accountCookie = JSON.parse(cookies.load("account",{path:"/"}));
-    // //   if(accounts.length > 0){
-    // //     for(var i = 0; i <= accounts.length; i++){
-    // //
-    // //       if(accounts[i].account.username == accountCookie.username){
-    // //
-    // //         this.setState({place:accounts[i].address});
-    // //         this.ConvertToCoords(this.state.place);
-    // //
-    // //       }
-    // //     }
-    // // }
-    // });
 
   }
 
@@ -139,53 +121,13 @@ export default class Maps extends React.Component {
 
   }
 
-  // changeAddress(address,lat,lng){
-  //
-  //   this.setState({
-  //     address:place,
-  //     lat:lat,
-  //     lng:lng
-  //
-  //   });
-  //
-  // }
-  //
-
-  renderBar(){
-
-    if(window.innerWidth <= 590){
-      return (
-          <MobileBar
-            place = {this.state.place}
-            orders = {this.props.orders}
-            changePlace = {this.changePlace}
-            changeURL = {this.props.changeURL}
-          />
-        )
-    }else{
-      return (
-        <Navbar
-          place = {this.state.place}
-          account = {this.props.account}
-          changeAddress = {this.props.changeAddress}
-          address = {this.props.address}
-          isMap = {true}
-          orders = {this.props.orders}
-          changePlace = {this.changePlace}
-          changeURL = {this.props.changeURL}
-        />
-      )
-    }
-
-  }
-
   renderMap(){
     if(this.state.lat && this.state.lng){
       return(
         <div style={{width:"100vw",height:"100vh"}}>
           <MyMapComponent
             address = {this.props.address}
-            changeURL = {this.props.changeURL}
+            ChangeURL = {this.props.ChangeURL}
             ClearOrder = {this.props.ClearOrder}
             markers = {this.state.markers}
             lat = {this.props.lat}
@@ -203,7 +145,16 @@ export default class Maps extends React.Component {
 
       return (
         <div className="container-fluid" >
-            {this.renderBar()}
+          <Navbar
+            place = {this.state.place}
+            account = {this.props.account}
+            ChangeAddress = {this.props.ChangeAddress}
+            address = {this.props.address}
+            isMap = {true}
+            orders = {this.props.orders}
+            changePlace = {this.changePlace}
+            ChangeURL = {this.props.ChangeURL}
+          />
             <br />
             {this.renderMap()}
           </div>

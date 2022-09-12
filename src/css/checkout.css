@@ -10,6 +10,52 @@
   background:DodgerBlue !important;
   color:white !important;
 }
+.font-size-25{
+  font-size: 25px;
+}
+.tip_box_height{
+  height:30px
+}
+.width-70{
+  width:70%;
+}
+.padding-bottom-5{
+  padding-bottom: 5%;
+}
+.font-size-22{
+  font-size: 22px;
+}
+.margin-top-5{
+  margin-top: 5%;
+}
+.border-e6{
+  border: 2px solid #e6e6e6;
+}
+.background-white{
+  background: white;
+}
+.border-radius-20px{
+  border-radius: 20px;
+}
+.float-left{
+  float: left;
+}
+.width-15{
+  width:15%;
+}
+.background-e6{
+  background: #e6e6e6;
+}
+
+.font-size-18{
+  font-size:18px
+}
+.roboto{
+  font-family: "Roboto"
+}
+.normal{
+  font-weight: normal;
+}
 .tipBox:hover{
   background:DodgerBlue;
   color:white;

@@ -10,11 +10,12 @@ class Modify extends React.Component {
 
 
     var current_modifiers = this.props.current_modifiers;
-    for(var i = 0; i<current_modifiers.length;i++){
 
+    for(var i = 0; i<current_modifiers.length;i++){
 
       // if they match then make the mod box blue
       if(new_modifier === current_modifiers[i]){
+        
           flag = true;
           break;
         }

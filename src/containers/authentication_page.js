@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+
 import FormComponent from "./../components/signup/form_component";
 
 
@@ -53,7 +54,7 @@ class AuthenticationPage extends React.Component {
 
     if(data){
 
-      this.props.letUserInside(data);
+      this.props.LetUserInside(data);
 
     }else{
 

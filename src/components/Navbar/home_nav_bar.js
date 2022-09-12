@@ -2,12 +2,7 @@ import React from "react";
 
 import cookies from "react-cookies";
 import Geocode from "react-geocode";
-
-
 import axios from "axios";
-
-import MobileNav from "./../Navbar/mobile_nav_bar.js";
-import AddressInput from "./../Navbar/address_input";
 
 import "./../../css/home_page.css";
 
@@ -49,50 +44,8 @@ class NavBarHome extends React.Component {
     }
   }
 
-
-  //---------------------------------Rendering Icons---------------------------------//
-  // renderCheckoutIcon(){
-  //
-  //   if(this.props.orders.length > 0){
-  //     return  <img alt="cart"src={Cart}  onClick = {()=>{this.props.changeURL("checkout")}}className="w100 mt2_5"/>
-  //   }else{
-  //     return  <img alt="cart"src={Cart} className="w100 o_5 mt2_5"/>
-  //   }
-  //
-  // }
-  //
-  // renderMapIcon(){
-  //   if(this.props.changeFlag){
-  //       // Renders Map icon if user is not on map page
-  //       // changeFlag = true or false is user is on google maps
-  //       if(window.innerWidth > 500){
-  //         return(
-  //           <img alt="google"src={GoogleMap} onClick = {()=>{
-  //             this.props.changeURL("map");
-  //           }} className="w100 mt2_5"/>
-  //         );
-  //       }else{
-  //         return(
-  //           <img alt="google"src={GoogleMap} onClick = {()=>{
-  //             this.props.changeURL("map");
-  //           }} className="w10 posAb posRight fr"/>
-  //         );
-  //       }
-  //     }else{
-  //       return null;
-  //     }
-  // }
-
 //--------------------------------Render JSX function------------------------------------
 
-  renderMobileJSX(){
-    return (
-      <div className="container-fluid bb">
-        <MobileNav  changeURL = {this.props.changeURL} />
-        <br />
-      </div>
-    );
-  }
 
   submitLocation =  async(e) =>{
 
@@ -110,12 +63,12 @@ class NavBarHome extends React.Component {
 
         location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng };
 
-        this.props.changeAddress(location.address,location.lat,location.lng);
+        this.props.ChangeAddress(location.address,location.lat,location.lng);
         this.setState({address:location.address});
 
       }else{
 
-        this.props.changeAddress(location.address,location.lat,location.lng);
+        this.props.ChangeAddress(location.address,location.lat,location.lng);
 
       }
 
@@ -131,8 +84,7 @@ class NavBarHome extends React.Component {
 
     if(profile_color.length > 0){
         profile_color = this.props.account.profile_color;
-
-  }
+    }
 
     var rgb = `rgb(${profile_color[0]},${profile_color[1]},${profile_color[2]})`;
 
@@ -140,19 +92,21 @@ class NavBarHome extends React.Component {
 
 
     return <div className="profile_image"style={{background:rgb,width:"50px",height:"50px",borderRadius:"50%",color:"white",textAlign:"center",fontSize:"30px",position:"relative",bottom:"10px",left:"30px"}}>{letter}</div>
-  }
-  renderToggle = (toggle) =>{
-    if(!toggle){
 
+  }
+
+  renderToggle = (toggle) =>{
+
+    if(!toggle){
       return this.renderButton(MapIcon2,"See Map","map")
     }else{
-
       return this.renderButton(Truck,"See Trucks","home")
     }
+
   }
 
   renderNotification = (notifications) =>{
-    console.log(notifications);
+
     if(notifications > 0){
       return <div className="notify_icon" style={{width:"25px",height:"25px",background:"black",position:"absolute",top:"-25%",right:"0%",borderRadius:"50%"}}>{notifications}</div>;
     }else{
@@ -161,10 +115,10 @@ class NavBarHome extends React.Component {
   }
 
   renderButton = (img,text,url,notifications) =>{
-    console.log(notifications)
+
     return(
       <button className="new_ez_button " style={{position:"relative"}} onClick = {()=>{
-        this.props.changeURL(url)
+        this.props.ChangeURL(url)
 
       }}>
         <img className="new_ez_button_icon_small invert_svg" src={img}/>
@@ -175,74 +129,53 @@ class NavBarHome extends React.Component {
     )
   }
 
-
-
-  renderDesktopJSX(){
-      console.log(this.props.orders.length);
-      return(
-        <div className="container-fluid navbar_home">
-        <div className="row width-90 margin-left-5">
-          <div className="col-2">
-            <p className="ez_title margin-top-0  relative adjust_up">EZ<strong className="ez_title">Eatz</strong></p>
-          </div>
-
-          <div className="col-10">
-            <div className="row">
-              <div className="col-2">
-                {this.renderToggle(this.props.isMap)}
-              </div>
-
-              <div className="col-5">
-                <form onSubmit = { (e)=>{this.submitLocation(e)}}>
-                <input className="form-control ez_home_input"  onChange = {(e)=>{
-                  this.setState({address:e.target.value});
-                }}  value = {this.state.address} placeholder="Enter Address"/>
-                </form>
-              </div>
-
-              <div className="col-2">
-                {this.renderButton(Cart,"Checkout","checkout",this.props.orders.length)}
-              </div>
-
-              <div className="col-2">
-                  {this.renderButton(Search,"Search All","home",0)}
-              </div>
-
-              <div className="col-1">
-                  {this.renderProfilePicture()}
-              </div>
-
-              </div>
-
-
-            </div>
-
-          </div>
-          </div>
-
-      );
-  }
-
-
   //JSX//
 //---------------------------------------------------------------------------
   render(){
-    var innerWidth = window.innerWidth;
-    if(innerWidth <= 600){
-      return (
-          <div className={"container-fluid bb navbarEZ " + this.props.navStyle}>
-            {this.renderMobileJSX()}
+
+    return(
+      <div className="container-fluid navbar_home">
+      <div className="row width-90 margin-left-5">
+        <div className="col-2">
+          <p className="ez_title margin-top-0  relative adjust_up">EZ<strong className="ez_title">Eatz</strong></p>
+        </div>
+
+        <div className="col-10">
+          <div className="row">
+            <div className="col-2">
+              {this.renderToggle(this.props.isMap)}
+            </div>
+
+            <div className="col-5">
+              <form onSubmit = { (e)=>{this.submitLocation(e)}}>
+              <input className="form-control ez_home_input"  onChange = {(e)=>{
+                this.setState({address:e.target.value});
+              }}  value = {this.state.address} placeholder="Enter Address"/>
+              </form>
+            </div>
+
+            <div className="col-2">
+              {this.renderButton(Cart,"Checkout","checkout",this.props.orders.length)}
+            </div>
+
+            <div className="col-2">
+                {this.renderButton(Search,"Search All","home",0)}
+            </div>
+
+            <div className="col-1">
+                {this.renderProfilePicture()}
+            </div>
+
+            </div>
+
+
           </div>
 
-        );
-    }else{
-
-      return(
-        <div className={"container-fluid bw navbarEZ " + this.props.navStyle}>
-          {this.renderDesktopJSX()}
         </div>
-      );
-    }
+        </div>
+
+    );
+
   }
 }
 

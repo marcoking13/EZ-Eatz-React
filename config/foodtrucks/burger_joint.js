@@ -30,228 +30,266 @@ const FoodtruckCreate = (random_street,id,ownerID,lat,lng) =>{
   new Menu("10494949",
 
   [
-  new Catagory("Appetizers","104949490",
+  new Catagory("Appetizers","104934349490",
   [
-  new Item("Fried Calamari","14997949","lemon, chickpeas and garlic",8.99,public_images + "/food/chicken_20.png",300,
+  new Item("jumbo salted preztles","1449934457949","comes roasted pepper cheese sauce",8.95,public_images + "/food/pretzle_1.png",300,
   [
-    new Ingredients("calamari sauce",true),
-    new Ingredients("seasoned garnish",true)
+    new Ingredients("salt",true),
+    new Ingredients("roasted pepper cheese sauce",true)
   ],
   [
     {
-      name:"regular",
-      price:0
-    },
-    {
-      name:"large",
+      name:"two pretzels",
       price:2.99
     },
   ],
   [
-  new Addon("calamari sauce",2.5),
-  new Addon("side of fries",4.5),
-  new Addon("side of pickles",3)
+  new Addon("roasted pepper sauce",2.99),
+  new Addon("extra salt",0.0),
 
   ],
 
   ),
-  new Item("Ceaser Salad","14959749","lemon, chickpeas and garlic",5.99,public_images + "/food/pita_jungle_7.png",300,
+  new Item("Garlic Parmesan Fries","14335313959749","garlic oil / shredded reggiano cheese",10.99,public_images + "/food/fries_1.png",300,
   [
-    new Ingredients("tomato",true),
-    new Ingredients("onions",true),
-    new Ingredients("mixed greens",true),
-    new Ingredients("croutons",true)
+    new Ingredients("shredded parmesan",true),
+    new Ingredients("garlic oils",true),
+    new Ingredients("salt",true),
+    new Ingredients("pepper",true)
   ],
   [
-    {
-      name:"regular",
-      price:0
-    },
     {
       name:"large",
-      price:2.99
+      price:3.99
     },
   ],
   [
-  new Addon("ceaser dressing",2.5),
-  new Addon("side of croutons",2.5),
-  new Addon("side of feta",3)
+  new Addon("garlic oil",1.5),
+  new Addon("shredded reggiano cheese",.99),
 
   ],
 
   ),
 
-  new Item("Truffle Oil Fries","14699949","lemon, chickpeas and garlic",4.99,public_images + "/food/pita_jungle_7.png",300,
+  new Item("Fried Pickles","14622995449","dill pickle chips",11.99,public_images + "/food/pickles_1.png",300,
   [
-    new Ingredients("parmasene",true),
-    new Ingredients("truffle oils",true),
+    new Ingredients("chipotle ranch",true),
     new Ingredients("salt",true)
 
   ],
   [
     {
-      name:"regular",
-      price:0
-    },
-    {
       name:"large",
       price:2.99
     },
   ],
   [
-  new Addon("secret sauce",2.5),
-  new Addon("truffle oil",2.99)
+    new Addon("chipotle ranch",1.5)
   ],
 
   ),
-  new Item("Pretzle Bites","14199949","lemon, chickpeas and garlic",6.99,public_images + "/food/pita_jungle_7.png",300,
+  new Item("Mozzarella Sticks","14341219949","mozzarella sticks and marinara dipping sauce",11.95,public_images + "/food/mozz_1.png",300,
   [
-    new Ingredients("garlic seasoning",true),
-    new Ingredients("cheese fondu",true)
+    new Ingredients("marinara sauce",true),
+    new Ingredients("shredded parmesan",true)
 
   ],
   [
+
     {
-      name:"regular",
-      price:0
-    },
-    {
-      name:"large",
-      price:2.99
+      name:"6 sticks",
+      price:3.99
     },
   ],
   [
-  new Addon("extra fondu",2.99)
+  new Addon("marinara sauce",1.99)
+  ],
+
+  ),
+  new Item("Hellfire Nachos","15431219949","chips / buffalo sauce / bleu cheese crumbles / green onions",11.95,public_images + "/food/chips_1.png",300,
+  [
+    new Ingredients("buffalo sauce",true),
+    new Ingredients("bleu cheese crumbles",true),
+    new Ingredients("green onions",true)
+  ],
+  [
+
+  ],
+  [
+  new Addon("green chips",3.99),
+  new Addon("bleu cheese crumbles",4.99),
+  new Addon("hellfire chips",3.99)
+  ],
+
+  ),
+  new Item("Chicken Tenders","145441219949","4 tenders with fries and bbq sauce",12.95,public_images + "/food/tenders_1.png",300,
+  [
+    new Ingredients("BBQ Sauce",true),
+
+  ],
+  [
+
+    {
+      name:"6 tenders",
+      price:4.99
+    },
+  ],
+  [
+  new Addon("extra fries",5.99),
+  new Addon("extra BBQ sauce",2.99)
   ],
 
   ),
 ]
 ),
-new Catagory("Entrees","4994949490",
+new Catagory("Sliders","49943344944349490",
 [
-  new Item("Grilled Chicken Platter","14959749","lemon, chickpeas and garlic",9.99,public_images + "/food/pita_jungle_7.png",300,
+  new Item("Buffalo Chicken Sliders","149593749","shredded buffalo chicken / bleu cheese crumbles",12.95,public_images + "/food/sliders_1.png",300,
   [
-    new Ingredients("grilled chicken",true),
-    new Ingredients("brown rice",true),
-    new Ingredients("tomato",true),
-    new Ingredients("onions",true)
-  ],
-  [
-    {
-      name:"rice",
-      price:0
-    },
-    {
-      name:"smashed potatoes",
-      price:2.99
-    },
-  ],
-  [
-  new Addon("side of fries",4.99),
-  new Addon("side of smashed potatoes",3.99),
-  new Addon("extra chicken",9.99)
+    new Ingredients("toasted bun",true),
+    new Ingredients("shredded buffalo chicken",true),
+    new Ingredients("bleu cheese crumbles",true)
 
   ],
+  [
 
-  ),
-  new Item("Fried Chicken Nuggets","149597419","lemon, chickpeas and garlic",9.99,public_images + "/food/pita_jungle_7.png",300,
-  [
-    new Ingredients("side of fries",true),
-    new Ingredients("10-piece chicken nuggets",true)
-  ],
-  [
     {
-      name:"regular meal",
-      price:0
-    },
-    {
-      name:"large meal",
+      name:"6 sliders",
       price:4.99
     },
   ],
   [
-  new Addon("side of fries",4.99),
-  new Addon("side of smashed potatoes",3.99),
-  new Addon("extra chicken nuggets",2.99)
+  new Addon("side of garlic fries",4.99),
+  new Addon("side of cheese burger fries",6.99),
+    new Addon("add slider",2.99)
 
   ],
 
   ),
-  new Item("Fried Chicken Breast","149533749","lemon, chickpeas and garlic",7.99,public_images + "/food/pita_jungle_7.png",300,
+  new Item("Cheeseburger Sliders","1339597419","american cheeseburgers with carmelized onions",13.99,public_images + "/food/sliders_2.png",300,
   [
-    new Ingredients("fried chicken breast",true),
-    new Ingredients("brown rice",true),
-    new Ingredients("tomato",true),
-    new Ingredients("onions",true)
+    new Ingredients("carmelized onions",true),
+    new Ingredients("american cheese",true),
+    new Ingredients("au jus",true)
   ],
   [
+
     {
-      name:"rice",
-      price:0
-    },
-    {
-      name:"smashed potatoes",
-      price:2.99
+      name:"5 sliders",
+      price:3.99
     },
   ],
   [
-  new Addon("side of fries",4.99),
-  new Addon("side of smashed potatoes",3.99),
-  new Addon("extra chicken",9.99)
+    new Addon("side of garlic fries",4.99),
+    new Addon("side of cheese burger fries",6.99),
+    new Addon("add slider",2.99)
+
+  ],
+
+  ),
+  new Item("Bacon PB&J Cheeseburger","93939094909340","sugar cured bacon, peanut butter and jelly / cheddar",14.99,public_images + "/food/sliders_3.png",300,
+  [
+    new Ingredients("sugar cured bacon",true),
+    new Ingredients("peanut butter",true),
+    new Ingredients("grape jelly",true),
+    new Ingredients("cheddar",true),
+    new Ingredients("chipotle honey sauce",true)
+  ],
+  [
+
+    {
+      name:"6 sliders",
+      price:5.99
+    },
+  ],
+  [
+    new Addon("side of garlic fries",4.99),
+    new Addon("side of cheese burger fries",6.99),
+    new Addon("add slider",3.99)
 
   ]
 
   )
 ]
 ),
-new Catagory("Dessert","104949490",
+new Catagory("1/2 LB Burgers","439349043903490",
 [
-  new Item("Ice Cream Sundae","14959749","lemon, chickpeas and garlic",9.99,public_images + "/food/pita_jungle_7.png",300,
+  new Item("Jucy Lucy","32939039303940","cheddar-jack stuffed patty / lettuce / tomatoes / pickles",15.95,public_images + "/food/burgers_3.png",300,
   [
-    new Ingredients("hot fudge",true),
-    new Ingredients("vanilla ice cream",true),
-    new Ingredients("cherry",true),
-    new Ingredients("rainbow sprinkles",true)
+    new Ingredients("lettuce",true),
+    new Ingredients("tomatoes",true),
+    new Ingredients("pickles",true),
+    new Ingredients("cheddar",true)
   ],
   [
+
     {
-      name:"vanilla",
+      name:"wheat bun",
       price:0
     },
     {
-      name:"french vanilla",
-      price:.99
+      name:"gluten free",
+      price:0
     },
   ],
   [
-  new Addon("rainbow sprinkles",1.99),
-  new Addon("hot fudge",1.99),
-  new Addon("sugar coated pistachios",3.99)
+  new Addon("chips",1.99),
+  new Addon("tots",2.99),
+  new Addon("sweet tots",2.99)
 
   ]
 
   ),
-  new Item("Ice Cream Cookie Cake","149259749","lemon, chickpeas and garlic",4.99,public_images + "/food/pita_jungle_7.png",300,
+  new Item("Bacon PB&J","49349034909340","sugar cured bacon / peanut butter and jelly / cheddar / honey sauce",16.99,public_images + "/food/burgers_2.png",300,
   [
-    new Ingredients("handmade warm cookie",true)
+    new Ingredients("sugar cured bacon",true),
+    new Ingredients("peanut butter",true),
+    new Ingredients("grape jelly",true),
+    new Ingredients("cheddar",true),
+    new Ingredients("chipotle honey sauce",true)
   ],
   [
+
     {
-      name:"vanilla",
+      name:"wheat bun",
       price:0
     },
     {
-      name:"french vanilla",
-      price:.99
+      name:"gluten free",
+      price:0
     },
   ],
   [
-    new Addon("rainbow sprinkles",1.99),
-    new Addon("hot fudge",1.99),
-    new Addon("sugar coated pistachios",3.99)
-
-  ]
-
+    new Addon("chips",1.99),
+    new Addon("tots",2.99),
+    new Addon("sweet tots",2.99),
+    new Addon("honey sauce",.99)
+]
+  ),
+  new Item("CB & CB","393984","swiss / carmelized onion / lettuce / garlic aioli",15.99,public_images + "/food/burgers_1.png",300,
+  [
+    new Ingredients("swiss",true),
+    new Ingredients("carmelized onion",true),
+    new Ingredients("lettuce",true),
+    new Ingredients("garlic aioli",true),
+  ],
+  [
+    
+    {
+      name:"wheat bun",
+      price:0
+    },
+    {
+      name:"gluten free",
+      price:0
+    },
+  ],
+  [
+    new Addon("chips",1.99),
+    new Addon("tots",2.99),
+    new Addon("sweet tots",2.99),
+    new Addon("garlic aioli",.99)
+]
   )
 ]
 )

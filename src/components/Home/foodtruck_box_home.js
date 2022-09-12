@@ -40,7 +40,7 @@ class FoodBox extends React.Component {
 
   SelectTruck = (truck) =>{
 
-     this.props.changeURL("menu");
+     this.props.ChangeURL("menu");
      return this.props.SetTruck(truck);
 
   }
@@ -87,7 +87,7 @@ class FoodBox extends React.Component {
             <li className="list-group-item container-fluid" key ={this.props.id} onClick = {(e)=>{
               var foodtruckID = this.props.foodtruck.objectID;
               this.props.ClearOrder();
-              this.props.changeURL("menu");
+              this.props.ChangeURL("menu");
 
             }}>
               <div classNameaName="row">

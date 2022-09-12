@@ -14,47 +14,30 @@ const BurgerJoint = require("./foodtrucks/burger_joint.js")
 
 const FoodtruckConfig = ()=>{
 
+  const config = [PitaJungle,RotatingChicken,BurgerJoint,FreezeDry];
   const public_images ="./../public/assets/images/";
   const fake_street = ["Scottsdale","Arcadia", "Tempe","Phoenix","Tucson","Paradise Valley","Queen Creek","Peoria","Chandler","Flagstaff","South Phoenix","Desert Ridge","Cave Creek"]
-  const foodtrucks = []
+  const foodtrucks = [];
 
   for (var i =0; i < 20; i++){
+
     var fake_street_i = fake_street[Math.floor(Math.random() * fake_street.length )]
     var id = Math.floor(Math.random() * 3000 );
     var ownerID = Math.floor(Math.random() * 3000)
 
-    var randomize = Math.random() * .056;
-    randomize = randomize.toFixed(3)
-    var lat =  Math.random() * 31;
-    var lng = Math.random() * -111;
+    var randomize_lng = (Math.random() * .056) -111;
+    var randomize_lat = (Math.random() * .056) + 31;
 
-    lat = lat.toFixed(5)
-    lng = lng.toFixed(5);
+    lat = randomize_lat.toFixed(5)
+    lng = randomize_lng.toFixed(5);
     lat = parseFloat(lat);
     lng = parseFloat(lng);
-    var rando = Math.random() * 100;
 
-    console.log(lat,lng,fake_street_i,randomize,id,rando);
-
-
-    if(Math.random() * 100 > 50){
-      foodtrucks.push(FreezeDry(fake_street_i,id,ownerID,lat,lng));
-    }else if(Math.random() * 100 > 50){
-      foodtrucks.push(PitaJungle(fake_street_i,id,ownerID,lat,lng));
-    }else if(Math.random() * 100 > 50){
-      foodtrucks.push(RotatingChicken(fake_street_i,id,ownerID,lat,lng));
-    }else{
-      foodtrucks.push(BurgerJoint(fake_street_i,id,ownerID,lat,lng));
-    }
-
+    foodtrucks.push(config[Math.floor(Math.random() * config.length)](fake_street_i,id,ownerID,lat,lng));
 
   }
 
-
   return foodtrucks;
-
-
-
 
 }
 

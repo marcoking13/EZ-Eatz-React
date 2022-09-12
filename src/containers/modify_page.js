@@ -6,9 +6,7 @@ import "./../css/modify.css";
 import HomePageNav from "./../components/Navbar/home_nav_bar.js";
 import Modify from "./../components/Modify/modify_component.js";
 import Footer from "./../components/Footer/footnote.js";
-import FooterMobile from "./../components/Footer/footnote_mobile.js";
 
-import PlaceholderItem from "./../images/placeholder_pizza.png";
 //-------------------------------Constructor-------------------------------------
 class ModifyPage extends React.Component {
   //----------------------------Constructor--------------------------------
@@ -17,6 +15,7 @@ class ModifyPage extends React.Component {
     // var item = JSON.parse(cookie.load("currentItem",{path:"/"}));
 
     var options = this.props.item.options.length > 0 ? this.props.item.options[0] :  [];
+    console.log(options);
     this.state = {
       item:this.props.item,
       add:[],
@@ -89,7 +88,7 @@ class ModifyPage extends React.Component {
 
     var state = this.state.add;
     var new_state = this.RemoveOrAddIngredient(ingredient,state,false);
-    console.log(new_state);
+
     this.setState({add:new_state.state});
 
   }
@@ -106,9 +105,9 @@ class ModifyPage extends React.Component {
   RemoveIngredient = (ingredient) => {
 
     var state = this.state.remove;
-    console.log(ingredient);
+
     var new_state = this.RemoveOrAddIngredient(ingredient,state,false);
-    console.log(new_state);
+
     this.setState({remove:new_state.state});
 
   }
@@ -116,7 +115,7 @@ class ModifyPage extends React.Component {
     renderJumbotron(){
 
         return (
-          <div className="container-fluid">
+          <div className="container-fluid mt5">
 
               <div className="row">
 
@@ -129,9 +128,10 @@ class ModifyPage extends React.Component {
                     </div>
                     <br />
                   </div>
+                    <br />
                     <p className="itemName " style={{fontSize:"22px",marginLeft:"25%"}}>{this.state.item.name}</p>
                     <p className="modify_description mt2_5 ml25">{this.props.item.description}</p>
-                  <p className="modify_total mt5 ml25"style={{fontSize:"22px",marginLeft:"25%"}}>Total: ${this.CalculateTotal(this.state.price)} -------------------</p>
+                  <p className="modify_total mt5 ml25"style={{fontSize:"22px",marginLeft:"25%"}}>Total: --------------------- ${this.CalculateTotal(this.state.price)} </p>
 
                   <div className="row mt5">
 
@@ -220,20 +220,14 @@ class ModifyPage extends React.Component {
         item:this.state.item,
         mod:{
           add:this.state.add,
-          remove:this.state.remove
+          remove:this.state.remove,
+          type:this.state.type
         }
       }
-      this.props.addToOrder(order);
-      this.props.changeURL(url);
+      this.props.AddToOrder(order);
+      this.props.ChangeURL(url);
     }
-    //----------------Footnote--------------------------
-    renderFooter(width){
-      if(width < 480){
-        return <FooterMobile />
-      }else{
-        return <Footer />
-      }
-    }
+
 
     //----------------------------------------------Renderer---------------------------------------
   render(){
@@ -253,7 +247,7 @@ class ModifyPage extends React.Component {
           {this.renderJumbotron()}
         </div>
 
-        {this.renderFooter(window.innerWidth)}
+        <Footer />
 
       </div>
     )

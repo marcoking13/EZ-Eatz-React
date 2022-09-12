@@ -1,6 +1,5 @@
 import React from "react";
 
-import MobileBox from "./mobile_menu_box_component.js";
 import DesktopBox from "./desktop_menu_box_component.js";
 
 class  MenuRow extends React.Component {

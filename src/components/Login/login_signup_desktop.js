@@ -30,11 +30,11 @@ class LoginSignupDesktop extends React.Component{
         <div className="col-1"/>
 
         <div className="col-2 margin-top-5">
-          <button className="width-100  btn btn_landing white-background" onClick={()=>{this.props.changeURL("userlogin")}}>Login</button>
+          <button className="width-100  btn btn_landing white-background" onClick={()=>{this.props.ChangeURL("userlogin")}}>Login</button>
         </div>
 
         <div className="col-2 margin-top-5">
-          <button onClick={()=>{this.props.changeURL("usersign")}} className="width-100  btn signup_button_landing btn_landing black-background white"><img className="icon" src={ProfileIcon}/> Signup</button>
+          <button onClick={()=>{this.props.ChangeURL("usersign")}} className="width-100  btn signup_button_landing btn_landing black-background white"><img className="icon" src={ProfileIcon}/> Signup</button>
         </div>
       </div>
 

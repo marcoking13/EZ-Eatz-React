@@ -16,13 +16,12 @@ import SignupConfig from "./config/signup_info.js";
 import LandingPage from "./containers/landing_page";
 import AuthenticationPage from "./containers/authentication_page";
 
-import LoadingPage from "./containers/loading_page";
 import ModifyPage from "./containers/modify_page";
 import CheckoutPage from "./containers/checkout_page.js";
 import HomePage from "./containers/home_page.js";
 import MenuPage from "./containers/menu_page.js";
 import GooglePage from "./containers/google_page.js";
-import SignupForm from "./containers/signup_form.js";
+
 
 
 
@@ -31,38 +30,6 @@ class App extends Component {
   constructor(props){
     super(props);
 
-    // var orders = [];
-    // var truck;
-    // var urlCookie = "landing";
-    //
-    // if(cookie.load("account",{path:"/"})){
-    //   urlCookie = "home";
-    // }
-    //
-    // var foodtruckID  = cookie.load("foodtruckCurrent",{path:"/"});
-    //
-    // cookie.remove("currentItem",{path:"/"});
-    // cookie.remove("foodtruck",{path:"/"});
-    //
-    // axios.get("/api/trucks").then((response)=>{
-    //   var trucks = response.data;
-    //     // Loop through each truck object
-    //   for(var i = 0; i<trucks.length;i++){
-    //     // If the selected truck's id matches the looped trucks
-    //       //Save the currently looped truck into the state
-    //     if(foodtruckID === trucks[i].objectID){
-    //       truck = trucks[i];
-    //
-    //       break;
-    //     }
-    //
-    //   }
-    //
-    // });
-    //
-    // if(cookie.load("orders",{path:"/"}) && cookie.load("foodtruck",{path:"/"})){
-    //     orders= JSON.parse(cookie.load("orders",{path:"/"}));
-    //   }
 
     this.state = {
       url:"landing",
@@ -84,13 +51,7 @@ class App extends Component {
     }
 
 
-    this.changeURL = this.changeURL.bind(this);
-    this.addToOrder = this.addToOrder.bind(this);
-    this.ClearOrder = this.ClearOrder.bind(this);
-
   }
-
-
 
 
   ConvertAddress = async () =>{
@@ -104,6 +65,7 @@ class App extends Component {
     }
 
   }
+
   componentWillMount(){
 
       if(cookie.load("account",{path:"/"})){
@@ -116,15 +78,13 @@ class App extends Component {
 
   }
 
-  componentDidUpdate(){
-    cookie.save("orders",this.state.orders,{path:"/"});
-  }
 
   SetTruck = (truck) => {
 
     if(this.state.hasSelected == false){
       this.setState({truck:truck,hasSelected:true})
     }
+
   }
 
 
@@ -132,13 +92,11 @@ class App extends Component {
 
 
       this.setState({item:item,url:"modify"});
-      console.log(this.state.item);
 
   }
 
 
-
-  ClearCookieTimer(){
+  ClearCookieTimer = ()=>{
 
     var seconds = 0;
     var minutes;
@@ -181,37 +139,35 @@ class App extends Component {
 
   }
 
-  changeAddressFormat = (address)=>{
+  ChangeAddressFormat = (address)=>{
     this.setState({address:address});
   }
 
-  addToOrder(order){
+  AddToOrder = (order) =>{
     cookie.remove("orders",{path:"/"});
     this.setState({orders:this.state.orders.concat([order])});
   }
 
+  LetUserInside = async (data) => {
 
+    var {address,name,orders,image,username,orders,profile_color} = data;
 
-  letUserInside = async(data)=>{
+    this.setState({loading:true});
 
-  var {address,name,orders,image,username,orders,profile_color} = data;
+    const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
 
-  this.setState({loading:true});
+    if(response.data.results.length > 0){
 
-  const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
+      const { lat, lng } = response.data.results[0].geometry.location;
 
-  if(response.data.results.length > 0){
+      var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng};
+      this.setState({url:"home",loading:false,profile_color:profile_color,address:location.address,name:name,profilePhoto:image,username:username,orders:orders,lat:lat,lng:lng});
 
-    const { lat, lng } = response.data.results[0].geometry.location;
+    }else{
 
-    var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng};
-    this.setState({url:"home",loading:false,profile_color:profile_color,address:location.address,name:name,profilePhoto:image,username:username,orders:orders,lat:lat,lng:lng});
+      this.setState({url:"home",loading:false,address:address,name:name,profilePhoto:image,username:username,orders:orders,profile_color:profile_color});
 
-  }else{
-
-    this.setState({url:"home",loading:false,address:address,name:name,profilePhoto:image,username:username,orders:orders,profile_color:profile_color});
-
-  }
+    }
 
 
 }
@@ -234,19 +190,22 @@ class App extends Component {
 
   }
 //----------------------------State Changer-----------------------------
-   changeAddress  = async (address,lat,lng)=>{
+   ChangeAddress  = async (address,lat,lng)=>{
     this.setState({address:address,lat:lat,lng:lng});
     const response = await axios.post("/api/change_user_address",{username:this.state.username,address:address,lat:lat,lng:lng});
   }
 
-  changeURL(url){
-        cookie.remove("url",{path:"/"});
-        if(url !== "modify"){
-          cookie.save("url",url,{path:"/"});
-        }
+   ChangeURL = (url) =>{
 
+    cookie.remove("url",{path:"/"});
 
-        this.setState({url:url});
+    if(url !== "modify"){
+
+      cookie.save("url",url,{path:"/"});
+
+    }
+
+    this.setState({url:url});
 
   }
 
@@ -268,23 +227,19 @@ class App extends Component {
         return <div>Loading.....</div>
       }
 
-      if(this.state.loading){
-        return <LoadingPage  PostAddress = {this.PostAddress}  changeURL={this.changeURL} />
-       }
-
      if(this.state.url === "checkout"){
         return (
           <CheckoutPage
               orders = {this.state.orders}
-              changeURL={this.changeURL}
+              ChangeURL={this.ChangeURL}
               account = {account}
               truck = {this.state.truck}
               ClearOrder = {this.ClearOrder}
-              changeAddress = {this.changeAddress}
+              ChangeAddress = {this.ChangeAddress}
               lat = {this.state.lat}
               lng = {this.state.lng}
               address = {this.state.address}
-              changeURL={this.changeURL}
+              ChangeURL={this.ChangeURL}
 
            />
          )
@@ -296,11 +251,11 @@ class App extends Component {
                   orders= {this.state.orders}
                   account = {account}
                   ClearOrder = {this.ClearOrder}
-                  changeAddress = {this.changeAddress}
+                  ChangeAddress = {this.ChangeAddress}
                   lat = {this.state.lat}
                   lng = {this.state.lng}
                   address = {this.state.address}
-                  changeURL={this.changeURL} />
+                  ChangeURL={this.ChangeURL} />
             )
           }
       if(this.state.url === "modify"){
@@ -309,11 +264,11 @@ class App extends Component {
                  account = {account}
                  orders= {this.state.orders}
                  ClearOrder = {this.ClearOrder}
-                 addToOrder = {this.addToOrder}
-                 changeAddress = {this.changeAddress}
+                 AddToOrder = {this.AddToOrder}
+                 ChangeAddress = {this.ChangeAddress}
                  address = {this.state.address}
                  item = {this.state.item}
-                 changeURL={this.changeURL}
+                 ChangeURL={this.ChangeURL}
               />
             )
           }
@@ -325,40 +280,40 @@ class App extends Component {
                 orders= {this.state.orders}
                 SetItem = {this.SetItem}
                 SetTruck = {this.SetTruck}
-                changeAddress = {this.changeAddress}
+                ChangeAddress = {this.ChangeAddress}
                 address = {this.state.address}
                 SetItem = {this.SetItem}
-                changeURL={this.changeURL}
+                ChangeURL={this.ChangeURL}
             />
           );
         }
         if(this.state.url === "landing"){
-            return <LandingPage  PostAddress = {this.PostAddress} changeURL={this.changeURL} />
+            return <LandingPage  ChangeURL={this.ChangeURL} />
           }
           if(this.state.url === "home"){
              return (
                <HomePage
                   account = {account}
-                  changeAddressFormat = {this.changeAddressFormat}
+                  ChangeAddressFormat = {this.ChangeAddressFormat}
                   SetTruck = {this.SetTruck}
                   orders= {this.state.orders}
                   ClearOrder = {this.ClearOrder}
                   ConvertAddress = {this.ConvertAddress}
-                  changeAddress = {this.changeAddress}
+                  ChangeAddress = {this.ChangeAddress}
                   foodtrucks = {this.state.truck}
                   address = {this.state.address}
                   lat = {this.state.lat}
                   lng = {this.state.lng}
-                  changeURL={this.changeURL} />
+                  ChangeURL={this.ChangeURL} />
                 )
            }
           if(this.state.url === "usersign")
           {
-               return <AuthenticationPage  letUserInside = {this.letUserInside} config = {SignupConfig} changeURL={this.changeURL} type="user" />
+               return <AuthenticationPage  LetUserInside = {this.LetUserInside} config = {SignupConfig} ChangeURL={this.ChangeURL} type="user" />
           }
           if(this.state.url === "userlogin")
           {
-              return <AuthenticationPage letUserInside = {this.letUserInside} config = {LoginConfig} changeURL={this.changeURL} type="user" />
+              return <AuthenticationPage LetUserInside = {this.LetUserInside} config = {LoginConfig} ChangeURL={this.ChangeURL} type="user" />
           }
       }
 

@@ -6,10 +6,7 @@ import "./../css/landing_page.css";
 import axios from "axios";
 import cookie from "react-cookies";
 
-import LoginSignupMobile from "./../components/Login/login_signup_mobile.js";
 import LoginSignupDesktop from "./../components/Login/login_signup_desktop.js";
-
-
 
 //-----------------------------------Component----------------------------------
 class LandingPage extends React.Component {
@@ -27,24 +24,20 @@ class LandingPage extends React.Component {
       account:{}
 
     }
-      //------------------------Binders--------------------------------------
-     this.handleSubmit = this.handleSubmit.bind(this);
-     this.changeUsername = this.changeUsername.bind(this);
-     this.changePassword = this.changePassword.bind(this);
 
   }
 
   //---------------------------Account State Changers----------------------
-  changeUsername(event){
+  changeUsername = (event) =>{
     this.setState({username:event.target.value,className:"red"});
   }
 
-  changePassword(event){
+  changePassword = (event) =>{
     this.setState({password:event.target.value,className2:"red"});
   }
 //-------------------------------------When User Tried To Login-------------------------------------------
 
-  handleSubmit(event){
+  handleSubmit =(event) =>{
       // Stop form from submitting to api
       event.preventDefault();
         // Save and parse account object
@@ -80,13 +73,20 @@ class LandingPage extends React.Component {
 //-------------------------------------------------------------------------------------------
   render(){
 
-    if (window.innerWidth >= 590 ) {
-        return  <LoginSignupDesktop  err = {this.state.err } changeURL= {this.props.changeURL} username={this.state.username} password = {this.state.password} changeUsername= {this.changeUsername} changePassword={this.changePassword} handleSubmit  = {this.handleSubmit}/>
-      }else{
-        return  <LoginSignupMobile err = {this.state.err } changeURL= {this.props.changeURL} username={this.state.username} password = {this.state.password} changeUsername= {this.changeUsername} changePassword={this.changePassword} handleSubmit  = {this.handleSubmit}/>
-    }
 
-  }
+      return (
+        <LoginSignupDesktop
+          err = {this.state.err }
+          ChangeURL= {this.props.ChangeURL}
+          username={this.state.username}
+          password = {this.state.password}
+          changeUsername= {this.changeUsername}
+          changePassword={this.changePassword}
+          handleSubmit  = {this.handleSubmit}
+          />
+        )
+
+      }
 
 }
 

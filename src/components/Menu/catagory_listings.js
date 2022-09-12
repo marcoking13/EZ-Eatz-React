@@ -1,11 +1,8 @@
 import React from "react";
 
-import MobileBox from "./mobile_menu_box_component.js";
 import DesktopBox from "./desktop_menu_box_component.js";
 
 class  CatagoryListings extends React.Component {
-
-
 
 
   renderCatagories = ()=>{
@@ -19,16 +16,19 @@ class  CatagoryListings extends React.Component {
       )
     })
   }
+
   render(){
+
     return (
       <div className="container-fluid with-100 catagory_listings">
+
         <ul className="width-100">
           {this.renderCatagories()}
-
         </ul>
 
       </div>
     )
+    
   }
 
 }

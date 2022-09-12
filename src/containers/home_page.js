@@ -7,12 +7,11 @@ import axios from "axios";
 
 import NoResults from "./../components/no_results"
 import ToggleIcon from "./../images/arrow_row_icon.svg";
-
 import HomePageNav from "./../components/Navbar/home_nav_bar.js";
 import FoodBox from "./../components/Home/foodtruck_box_home.js";
 import Filter from "./../components/Home/filter.js";
 import Footer from "./../components/Footer/footnote.js";
-import FooterMobile from "./../components/Footer/footnote_mobile.js";
+
 
 import "./../css/home_page.css";
 
@@ -37,25 +36,10 @@ class HomePage extends React.Component {
 
 //------------------------------State Changer-------------------------------//
 
-  // Used to Toggle Map and Search
-  // changeFlag = (bool) => {
-  //   this.setState({flag:bool,maps:false});
-  // }
+
   changeRadius = (radius) => {
     this.setState({radius:radius});
   }
-  // Used to change the address bar form
-  // changeAddressFlag = () => {
-  //   this.setState({changedAddress:true});
-  // }
-
-  // GetFoodTruckData = async () =>{
-  //
-  //   const {data} = await axios.post("/api/trucks",null);
-  //   return data;
-  //
-  // }
-
 
   IntializePage = async ()=>{
 
@@ -101,12 +85,10 @@ class HomePage extends React.Component {
       const response = await axios.post("/api/distance-calculator",body);
 
       foodtruck.distance = response.data.distance.toString() +""+response.data.unit;
-      
+
       if(response.data.distance <= this.state.radius )
       {
         nearbyFoodtrucks.push(foodtruck);
-
-
       }
 
       this.setState({nearbyFoodtrucks:nearbyFoodtrucks});
@@ -114,7 +96,6 @@ class HomePage extends React.Component {
     });
 
   }
-
 
   CreateFoodtruckBoxes = () => {
 
@@ -125,6 +106,7 @@ class HomePage extends React.Component {
       if(i >= limit){
         return false;
       }
+
       return(
         <FoodBox
           address = {this.state.nearbyFoodtrucks[randomCounter].address}
@@ -133,13 +115,14 @@ class HomePage extends React.Component {
           ClearOrder = {this.props.ClearOrder}
           SetTruck = {this.props.SetTruck}
           foodtruck = {this.state.nearbyFoodtrucks[randomCounter]}
-          changeURL = {this.props.changeURL}
+          ChangeURL = {this.props.ChangeURL}
         />
       )
     });
-    return foodtrucks;
-  }
 
+    return foodtrucks;
+
+  }
 
   CreateFoodtruckRow = (title,foodtrucks) => {
      return (
@@ -173,50 +156,6 @@ class HomePage extends React.Component {
      )
   }
 
-//  -------------------------Foodtruck Box Component Loop----------------------------
-  // Loops through foodtrucks in state then renders them in JSX
-  // foodTruckLoop(){
-  //   var key = 0;
-  //   return  this.state.nearbyFoodtrucks.map((foodtruck)=>{
-  //
-  //         key ++;
-  //
-  //         var destinations = foodtruck.address.street + " "+ foodtruck.address.city + " "+ foodtruck.address.state + " " + foodtruck.address.zip;
-  //         var service = new this.props.google.maps.DistanceMatrixService();
-  //         var address = cookie.load("address",{path:"/"});
-  //         var distance;
-  //         service.getDistanceMatrix({
-  //           origins: [address],
-  //           destinations: [destinations],
-  //           travelMode: this.props.google.maps.TravelMode.DRIVING,
-  //           unitSystem: this.props.google.maps.UnitSystem.METRIC,
-  //           avoidHighways: false,
-  //           avoidTolls: false
-  //         },(data,status)=>{
-  //
-  //             if(data.rows[0].elements[0].distance){
-  //               console.log("Found");
-  //             }else{
-  //               console.log("Not Found");
-  //             }
-  //           });
-  //           console.log(foodtruck);
-  //         return (
-  //           <FoodBox
-  //             address = {this.props.address}
-  //             key = {key}
-  //             SetTruck = {this.props.SetTruck}
-  //             id = {key}
-  //             ClearOrder = {this.props.ClearOrder}
-  //             foodtruck = {foodtruck}
-  //             changeURL = {this.props.changeURL}
-  //           />
-  //         );
-  //
-  //   });
-  //
-  // }
-
   renderFoodtruckSection(){
     if(this.state.nearbyFoodtrucks.length > 0){
     return(
@@ -244,8 +183,6 @@ class HomePage extends React.Component {
 
   render(){
 
-    if(window.innerWidth > 500){
-
         return (
           <div className="container-fluid pb5" key = {this.props.lat}>
 
@@ -255,13 +192,13 @@ class HomePage extends React.Component {
               account = {this.props.account}
               isMap = {false}
               FoodtrucksNearMe = {this.FoodtrucksNearMe}
-              changeAddressFormat = {this.props.changeAddressFormat}
+              ChangeAddressFormat = {this.props.ChangeAddressFormat}
               changeZip = {this.props.zip}
               ConvertAddress = {this.props.ConvertAddress}
-              changeAddress = {this.props.changeAddress}
+              ChangeAddress = {this.props.ChangeAddress}
               address = {this.props.address}
               changeFlag = {this.changeFlag}
-              changeURL = {this.props.changeURL}
+              ChangeURL = {this.props.ChangeURL}
               navStyle ="white"
               />
 
@@ -270,41 +207,8 @@ class HomePage extends React.Component {
             </div>
         );
 
-
-    }else{
-      return (
-        <div>
-
-          <HomePageNav
-              PostAddress = {this.props.PostAddress}
-              changeZip = {this.props.zip}
-              account = {this.props.account}
-              changeAddress = {this.props.changeAddress}
-              SetAddress = {this.props.SetAddress}
-              address = {this.props.address}
-
-              changeFlag = {this.changeFlag}
-              changeURL = {this.props.changeURL}
-              navStyle ="white"
-            />
-            <div className="divder2"/>
-            <img src = {Logo} className="logoHM"/>
-            <br/>
-            <ul className="list-group ">
-              <h4 className="ml5 resultTitle text-center posRel mb1">Food Trucks</h4>
-              <br/>
-
-          </ul>
-
-          <FooterMobile />
-
-        </div>
-      );
-    }
   }
+
 }
 
-export default GoogleApiWrapper(
-  {
-    apiKey: "AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM",
-  })(HomePage);
+export default HomePage;
