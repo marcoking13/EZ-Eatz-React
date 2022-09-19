@@ -7,9 +7,13 @@
 .foodtruck_menu_name{
   font-size: 30px;
   font-weight: bold;
-  margin-top:2.5%;
   font-family: "Roboto";
   margin-left:5%;
+}
+.logo_container {
+  border-radius: 50%;
+  position: relative;
+  bottom:50px;
 }
 .foodtruck_menu_details{
   margin-left: 5%;
@@ -65,7 +69,6 @@ font-weight: bold;
   font-size: 30px;
   font-weight: bold;
   display:inline !important;
-  margin-top:1%;
   font-family: "Roboto";
   width:100%;
   color:black;

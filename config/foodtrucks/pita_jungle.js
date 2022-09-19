@@ -17,7 +17,7 @@ const FoodtruckCreate = (random_street,id,ownerID,lat,lng) =>{
   ownerID,
   id,
   "Pita Jungle",
-  ["healthy","greek food"],
+  ["healthy","greek food","vegan"],
   4,
   lat,
   lng,
@@ -25,7 +25,7 @@ const FoodtruckCreate = (random_street,id,ownerID,lat,lng) =>{
   public_images+"/logos/pita_logo.png",
   public_images+"/banners/pita_jungle_banner.png",
   public_images+"/background/pita_background.png",
-  public_images+"/logos/pita_logo.png",
+  public_images+"/logos/pita_map.svg",
   null,
   new Menu("40494949",
 
@@ -252,7 +252,148 @@ new Ingredients("mixed greens",true), new Ingredients("onions",true)],
 ),
 
 ]
+),
+
+new Catagory("Beverages","jnfdjndfndnfdj",
+[
+  new Item("Coca Cola","njfdnjdnjvndfjnfdjn_j","an coca cola soda",2.99,public_images + "/food/coke.png",400,
+  [],
+  [
+    {
+      name:"small",
+      price:-1.99
+    },
+    {
+      name:"large",
+      price:1.99
+    },
+    {
+      name:"extra large",
+      price:2.99
+    }
+  ],
+  [],
+  ),
+
+  new Item("Root Beer","ncjcfnvdjn_fd_njdfn_dfjn","an rootbeer soda / A&W",2.99,public_images + "/food/root_beer.png",400,
+  [],
+  [
+    {
+      name:"small",
+      price:-1.99
+    },
+    {
+      name:"large",
+      price:1.99
+    },
+    {
+      name:"extra large",
+      price:2.99
+    }
+  ],
+  [],
+  ),
+
+  new Item("Dr Pepper","33ojfiefc3inc","an sparkly soda with a kick",2.99,public_images + "/food/dr_pepper.png",400,
+  [],
+  [
+    {
+      name:"small",
+      price:-1.99
+    },
+    {
+      name:"large",
+      price:1.99
+    },
+    {
+      name:"extra large",
+      price:2.99
+    }
+  ],
+  [],
+  ),
+
+
+  new Item("Sierra Mist","5492949","an refreshing sprite soda",2.99,public_images + "/food/sprite.png",400,
+  [],
+  [
+    {
+      name:"small",
+      price:-1.99
+    },
+    {
+      name:"large",
+      price:1.99
+    },
+    {
+      name:"extra large",
+      price:2.99
+    }
+  ],
+  [],
+  ),
+
+  new Item("Water","5492949","Pure filtered water",.99,public_images + "/food/water.png",0,
+  [],
+  [
+    {
+      name:"small",
+      price:0
+    },
+    {
+      name:"large",
+      price:.50
+    },
+    {
+      name:"extra large",
+      price:1.50
+    }
+  ],
+  [],
+  ),
+
+new Item("Diet Coca Cola","5492949","an diet coca cola soda",2.99,public_images + "/food/diet_coke.png",400,
+[],
+[
+  {
+    name:"small",
+    price:-1.99
+  },
+  {
+    name:"large",
+    price:1.99
+  },
+  {
+    name:"extra large",
+    price:2.99
+  }
+],
+[],
+),
+new Item("Orange Fanta","5492949","an orange fizzy soda",2.99,public_images + "/food/fanta.png",400,
+[],
+[
+  {
+    name:"small",
+    price:-1.99
+  },
+  {
+    name:"large",
+    price:1.99
+  },
+  {
+    name:"extra large",
+    price:2.99
+  }
+],
+[],
 )
+
+]
+
+
+)
+
 
 ]
 

@@ -1,5 +1,5 @@
 import React from "react";
-import {GoogleMap, withScriptjs,withGoogleMap,Marker} from "react-google-maps";
+import {GoogleMap, withScriptjs,withGoogleMap,Marker,InfoWindow} from "react-google-maps";
 import { compose, withProps } from "recompose"
 import axios from 'axios';
 import cookies from "react-cookies";
@@ -12,6 +12,9 @@ import Search from "./../images/userChoice.png";
 import Cart from "./../images/cart.png";
 import Ringer from "./../images/ringer.gif";
 import Logo from "./../images/logo.png";
+import Star from "./../images/full_star.png";
+
+import "./../css/google.css"
 
 import "./../css/utility.css";
 
@@ -28,7 +31,11 @@ const MyMapComponent = compose(
   withGoogleMap
 )((props) =>
 
-     <GoogleMap  zoom={12} center = {{lat:props.lat,lng:props.lng}} key = {props.address}>
+     <GoogleMap  zoom={12} center = {{lat:props.lat,lng:props.lng}} key = {props.address} onClick = {()=>{
+       if(props.modal){
+         props.setModal(null);
+       }
+     }}>
 
       <Marker
         position = {{
@@ -41,24 +48,36 @@ const MyMapComponent = compose(
           scaledSize: new window.google.maps.Size(35,35)
         }}
 
+
       />
+
+
 
       {props.markers.map(marker => (
 
           <Marker
             position={{ lat: marker.lat, lng: marker.lng }}
-            icon = {{url:marker.url, scaledSize: new window.google.maps.Size(40,40)}}
+            icon = {{url:marker.url, scaledSize: new window.google.maps.Size(50,50)}}
             onClick = {()=>{
 
-              var foodtruckID = marker.id;
-              props.ClearOrder();
-              props.changeURL("menu");
+              props.setModal({modal:marker.truck})
+              props.SetCenter(marker.truck.lat,marker.truck.lng);
+
 
             }}
 
-          />
+
+
+
+          >
+
+
+
+          </Marker>
 
         ))}
+
+
 
      </GoogleMap>
 )
@@ -73,9 +92,9 @@ export default class Maps extends React.Component {
       address:this.props.address,
       lng:this.props.lng,
       place:"",
-      markers:[]
+      markers:[],
+      modal:null
     }
-
 
   }
 
@@ -85,6 +104,66 @@ export default class Maps extends React.Component {
 
   }
 
+  SetCenter = (lat,lng) =>{
+    this.setState({
+      lat:lat,
+      lng:lng
+    })
+  }
+
+  RenderModal =()=>{
+
+
+    if(this.state.modal){
+
+      var stars = [];
+      var expensive = "";
+
+      for(var i =0 ; i < this.state.modal.modal.stars;i++){
+        stars.push(<div className="col-2"style={{padding:0}}>
+          <img className="w100" src = {Star} />
+        </div>);
+      }
+
+      for(var i = 0; i < this.state.modal.modal.expensive; i++){
+        expensive += "$";
+      }
+
+
+
+      return (
+
+        <div className="row maps_modal"style={{position:"absolute",width:"30%",background:"white",borderRadius:"20px"}}>
+          <img style={{width:"100%",height:"200px",borderRadius:"5px"}} src ={this.state.modal.modal.banner}/>
+          <p className="w100 mt2_5 ml5" style={{fontSize:"20px",fontFamily:"Roboto"}}>{this.state.modal.modal.name}, ({this.state.modal.modal.address.city},{this.state.modal.modal.address.state})</p>
+          <div className="row">
+              <div className="col-1"/>
+              <div className="col-6"style={{position:"relative",bottom:"5px"}}>
+                <div className="row">
+                  {stars}
+                </div>
+              </div>
+          </div>
+          <p className="w100 ml5" style={{fontSize:"13px",fontFamily:"Roboto",color:"grey",marginLeft:"5%"}}>{expensive} | {this.state.modal.modal.type[0]} | 20-30 min</p>
+
+          <br />
+
+          <button onClick = {()=>{
+            this.props.SetTruck(this.state.modal.modal);
+            this.props.ChangeURL("menu");
+          }}className="btn add-to-cart ui cb f13px w50" style={{marginLeft:"25%",width:"50%",marginTop:"5%",color:"grey"}} >See Menu</button>
+
+
+        </div>
+      )
+    }else{
+      return <div />
+    }
+  }
+
+  setModal = (truck)=>{
+    this.setState({modal:truck})
+  }
   componentDidMount(){
 
     this.ConvertAddress();
@@ -113,7 +192,7 @@ export default class Maps extends React.Component {
         var lat = trucks[i].lat;
         var lng = trucks[i].lng;
 
-        markers.push({lat:lat,lng:lng,url:trucks[i].mapLogo,id:trucks[i].objectID});
+        markers.push({lat:lat,lng:lng,url:trucks[i].mapLogo,id:trucks[i].objectID,truck:trucks[i]});
 
       }
 
@@ -123,6 +202,7 @@ export default class Maps extends React.Component {
 
   renderMap(){
     if(this.state.lat && this.state.lng){
+
       return(
         <div style={{width:"100vw",height:"100vh"}}>
           <MyMapComponent
@@ -131,20 +211,28 @@ export default class Maps extends React.Component {
             ClearOrder = {this.props.ClearOrder}
             markers = {this.state.markers}
             lat = {this.props.lat}
+            SetCenter = {this.SetCenter}
+            modal =  {this.state.modal}
+            setModal = {this.setModal}
+            RenderModal = {this.RenderModal}
+            SetTruck = {this.props.SetTruck}
             lng = {this.props.lng}
           />
         </div>
       )
-    }else{
-      return <NoResults text = "Enter Your Address to View Map!"/>
-    }
+
+  }
+   else{
+     return <NoResults text = "Enter Your Address to View Map!"/>
+   }
+
   }
 
 
   render(){
 
       return (
-        <div className="container-fluid" >
+        <div className="container-fluid">
           <Navbar
             place = {this.state.place}
             account = {this.props.account}
@@ -157,7 +245,10 @@ export default class Maps extends React.Component {
           />
             <br />
             {this.renderMap()}
+            {this.RenderModal()}
           </div>
       );
+
     }
+
   }

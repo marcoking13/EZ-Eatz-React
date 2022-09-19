@@ -1,26 +1,30 @@
-
-const Geocode = require("react-geocode");
+const NodeGeocoder = require('node-geocoder');
 
 
 const ConvertToCoords = async (address) =>{
 
-  Geocode.setApiKey("AIzaSyDT3CvnaTo7AnBgi4XRNHPrf0_hDTrF0EE");
-  Geocode.enableDebug();
+  const options = {
+    provider: 'google',
 
-  const {results,error} = Geocode.fromAddress(address);
+    // Optional depending on the providers
+    fetch: null,
+    apiKey: 'AIzaSyDT3CvnaTo7AnBgi4XRNHPrf0_hDTrF0EE',
+    formatter: null // 'gpx', 'string', ...
+  };
 
-  const returnResponse = (results,error) => {
-    if(results){
-      const { lat, lng } = results[0].geometry.location;
-      return {lat:lat,lng:lng}
+  const geocoder = NodeGeocoder(options);
+
+  const res = await geocoder.geocode(address);
+
+    if(res){
+      const { latitude, longitude } = res[0];
+      return {lat:latitude,lng:longitude}
   }else{
 
       console.error(error);
       return false;
 
   }
-}
-
 
 
 }

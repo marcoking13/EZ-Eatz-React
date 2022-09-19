@@ -37,11 +37,13 @@ class NavBarHome extends React.Component {
 
   GetProfileData = async()=>{
     const {data} = await axios.get("/api/current_user",this.props.username);
+
     if(!data){
       return false;
     }else{
       return true;
     }
+
   }
 
 //--------------------------------Render JSX function------------------------------------
@@ -79,7 +81,9 @@ class NavBarHome extends React.Component {
   }
 
   renderProfilePicture = (hasProfilePic)=>{
+
     var profile_color = [0,0,0];
+
     profile_color = this.props.account.profile_color;
 
     if(profile_color.length > 0){
@@ -112,6 +116,7 @@ class NavBarHome extends React.Component {
     }else{
       return null;
     }
+
   }
 
   renderButton = (img,text,url,notifications) =>{
@@ -125,16 +130,16 @@ class NavBarHome extends React.Component {
           <p className="new_ez_button_text">{text}</p>
           {this.renderNotification(notifications)}
        </button>
-
     )
+
   }
 
   //JSX//
 //---------------------------------------------------------------------------
   render(){
 
-    return(
-      <div className="container-fluid navbar_home">
+  return(
+    <div className="container-fluid navbar_home"style={{background:"white"}}>
       <div className="row width-90 margin-left-5">
         <div className="col-2">
           <p className="ez_title margin-top-0  relative adjust_up">EZ<strong className="ez_title">Eatz</strong></p>
@@ -172,7 +177,8 @@ class NavBarHome extends React.Component {
           </div>
 
         </div>
-        </div>
+
+      </div>
 
     );
 

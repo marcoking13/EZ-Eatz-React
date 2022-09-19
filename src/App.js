@@ -46,6 +46,7 @@ class App extends Component {
       name:"",
       profilePhoto:null,
       orders:[],
+      checkout_truck:null,
       truck:null
 
     }
@@ -54,6 +55,26 @@ class App extends Component {
   }
 
 
+
+  SetCheckoutTruck = (truck) => {
+    this.setState({checkout_truck:truck});
+  }
+
+
+  CapitlizeWordsOfSentence = (sentence) => {
+
+    const new_sentence = sentence.split(" ");
+
+    new_sentence.map((word) => {
+        return word[0].toUpperCase() + word.substring(1);
+    }).join(" ");
+
+    console.log(new_sentence);
+
+    return new_sentence;
+
+  }
+
   ConvertAddress = async () =>{
     const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
 
@@ -61,9 +82,13 @@ class App extends Component {
       const { lat, lng } = response.data.results[0].geometry.location;
       this.setState({lat:lat,lng:lng});
     }else{
-        this.setState({lat:null,lng:null});
+      this.setState({lat:null,lng:null});
     }
 
+  }
+
+  ClearCurrentTruck = () =>{
+    this.setState({truck:null});
   }
 
   componentWillMount(){
@@ -81,15 +106,12 @@ class App extends Component {
 
   SetTruck = (truck) => {
 
-    if(this.state.hasSelected == false){
-      this.setState({truck:truck,hasSelected:true})
-    }
+    this.setState({truck:truck})
 
   }
 
 
   SetItem = (item) => {
-
 
       this.setState({item:item,url:"modify"});
 
@@ -143,9 +165,10 @@ class App extends Component {
     this.setState({address:address});
   }
 
-  AddToOrder = (order) =>{
+  AddToOrder = (order,truck) =>{
     cookie.remove("orders",{path:"/"});
-    this.setState({orders:this.state.orders.concat([order])});
+    console.log(this.state.orders);
+    this.setState({orders:this.state.orders.concat(order),checkout_truck:truck});
   }
 
   LetUserInside = async (data) => {
@@ -172,23 +195,87 @@ class App extends Component {
 
 }
 
-  ClearOrder(){
-    cookie.remove("orders",{path:"/"});
-    var foodtruckID  = cookie.load("foodtruckCurrent",{path:"/"});
-      axios.get("/api/trucks").then((response)=>{
-        var trucks = response.data;
+ GuestEntrance = async (address) =>{
 
-          for(var i = 0; i<trucks.length;i++){
+    this.setState({loading:true});
 
-            if(foodtruckID === trucks[i].objectID){
-              this.setState({orders:[]});
-              break;
-            }
-          }
+    const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
 
+    var guest_account = {
+      lat:null,
+      lng:null,
+      name:"Guest",
+      username:Math.floor((Math.random() * 3000) + (3000 * (Math.random() *2000)+20)),
+      password:null,
+      profile_color:"black",
+      address:address,
+      orders:[]
+    }
+
+    if(response.data.results.length > 0){
+
+        const { lat, lng } = response.data.results[0].geometry.location;
+
+        var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng};
+
+        this.setState({
+          loading:false,
+          name:guest_account.name,
+          profile_color:guest_account.profile_color,
+          profileIcon:null,
+          username:guest_account.name,
+          orders:[],
+          address:guest_account.address,
+          lat:lat,
+          lng:lng,
+          url:"home"
         });
 
+      }
+   else{
+
+     this.setState({
+       loading:false,
+       name:guest_account.name,
+       profile_color:guest_account.profile_color,
+       profileIcon:null,
+       username:guest_account.name,
+       orders:[],
+       address:guest_account.address,
+       url:"home"
+     });
+
+    }
+
+ }
+
+  ClearOrder = (order,truck) =>{
+
+    // cookie.remove("orders",{path:"/"});
+    // var foodtruckID  = cookie.load("foodtruckCurrent",{path:"/"});
+    console.log(truck,this.state.truck);
+    if(truck === this.state.checkout_truck || !this.state.checkout_truck){
+
+      this.setState({orders:this.state.orders.concat(order),checkout_truck:truck});
+      return true;
+    }else{
+
+      var confirm_bool = window.confirm("Warning: Adding from another foodtruck will clear your current order");
+      console.log(confirm_bool);
+
+      if(confirm_bool){
+        this.setState({orders:[]}, ()=>{
+          this.setState({orders:this.state.orders.concat(order),checkout_truck:truck});
+        });
+        console.log(this.state.orders);
+        return true;
+      }else{
+        return false;
+      }
+
+    }
   }
+
 //----------------------------State Changer-----------------------------
    ChangeAddress  = async (address,lat,lng)=>{
     this.setState({address:address,lat:lat,lng:lng});
@@ -235,6 +322,7 @@ class App extends Component {
               account = {account}
               truck = {this.state.truck}
               ClearOrder = {this.ClearOrder}
+              CapitlizeWordsOfSentence = {this.CapitlizeWordsOfSentence}
               ChangeAddress = {this.ChangeAddress}
               lat = {this.state.lat}
               lng = {this.state.lng}
@@ -250,12 +338,13 @@ class App extends Component {
                 <GooglePage
                   orders= {this.state.orders}
                   account = {account}
-                  ClearOrder = {this.ClearOrder}
                   ChangeAddress = {this.ChangeAddress}
+                  SetTruck = {this.SetTruck}
                   lat = {this.state.lat}
                   lng = {this.state.lng}
                   address = {this.state.address}
-                  ChangeURL={this.ChangeURL} />
+                  ChangeURL={this.ChangeURL}
+                />
             )
           }
       if(this.state.url === "modify"){
@@ -267,8 +356,12 @@ class App extends Component {
                  AddToOrder = {this.AddToOrder}
                  ChangeAddress = {this.ChangeAddress}
                  address = {this.state.address}
+                 CapitlizeWordsOfSentence = {this.CapitlizeWordsOfSentence}
+                 ClearOrder = {this.ClearOrder}
+                 SetCheckoutTruck = {this.SetCheckoutTruck}
                  item = {this.state.item}
                  ChangeURL={this.ChangeURL}
+                 truck = {this.state.truck}
               />
             )
           }
@@ -281,6 +374,7 @@ class App extends Component {
                 SetItem = {this.SetItem}
                 SetTruck = {this.SetTruck}
                 ChangeAddress = {this.ChangeAddress}
+                CapitlizeWordsOfSentence = {this.CapitlizeWordsOfSentence}
                 address = {this.state.address}
                 SetItem = {this.SetItem}
                 ChangeURL={this.ChangeURL}
@@ -288,7 +382,7 @@ class App extends Component {
           );
         }
         if(this.state.url === "landing"){
-            return <LandingPage  ChangeURL={this.ChangeURL} />
+            return <LandingPage  ChangeURL={this.ChangeURL} GuestEntrance = {this.GuestEntrance} />
           }
           if(this.state.url === "home"){
              return (
@@ -297,14 +391,16 @@ class App extends Component {
                   ChangeAddressFormat = {this.ChangeAddressFormat}
                   SetTruck = {this.SetTruck}
                   orders= {this.state.orders}
-                  ClearOrder = {this.ClearOrder}
+                  ClearCurrentTruck = {this.ClearCurrentTruck}
                   ConvertAddress = {this.ConvertAddress}
                   ChangeAddress = {this.ChangeAddress}
+                  CapitlizeWordsOfSentence = {this.CapitlizeWordsOfSentence}
                   foodtrucks = {this.state.truck}
                   address = {this.state.address}
                   lat = {this.state.lat}
                   lng = {this.state.lng}
-                  ChangeURL={this.ChangeURL} />
+                  ChangeURL={this.ChangeURL}
+                />
                 )
            }
           if(this.state.url === "usersign")

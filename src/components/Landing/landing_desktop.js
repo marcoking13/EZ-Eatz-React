@@ -4,7 +4,14 @@ import "./../../css/landing_page.css";
 import LandingBackground from "./../../images/landing_background.png";
 import ProfileIcon from "./../../images/profile_icon.png";
 
-class LoginSignupDesktop extends React.Component{
+class LandingDesktop extends React.Component{
+
+  constructor(props){
+    super(props);
+    this.state = {
+      address : ""
+    }
+  }
 
   renderErrorMessage(err){
 
@@ -38,21 +45,32 @@ class LoginSignupDesktop extends React.Component{
         </div>
       </div>
 
+      <form onSubmit = {(e)=>{
+        e.preventDefault();
+        this.props.GuestEntrance(this.state.address);
+      }}>
       <div className="row margin-top-5 width-90 margin-5">
 
         <div className="col-1"/>
 
         <div className="col-10">
-          <p className="sub_slogan_landing margin-top-5"> Track and Order from Foodtrucks Near You!  </p>
+          <h2 className="sub_slogan_landing margin-top-5"> Track and Order from Foodtrucks Near You!  </h2>
           <p className="reward_slogan nuniko margin-top-5">Start an Account Today and Recieve 20% Off On Your First Meal! </p>
 
           <div className="row">
             <div className="col-6">
-                <input className="form-control width-100" placeholder = "Enter you address"/>
+
+                <input className="form-control width-100" placeholder = "Enter you address" value = {this.state.address} onChange = {(e)=>{
+                  this.setState({address:e.target.value})
+                }}/>
+
             </div>
 
             <div className="col-2">
-              <button className="width-100 btn black-background white">Submit</button>
+              <button className="width-100 btn black-background white " type="submit" onSubmit = {(e)=>{
+                e.preventDefault();
+                this.props.GuestEntrance(this.state.address);
+              }}>Submit</button>
             </div>
 
           </div>
@@ -60,11 +78,11 @@ class LoginSignupDesktop extends React.Component{
         </div>
 
       </div>
-
+      </form>
     </div>
     );
 
   }
 }
 
-export default LoginSignupDesktop;
+export default LandingDesktop;

@@ -8,21 +8,19 @@ class Modify extends React.Component {
     // default it false ie white
     var flag = false;
 
-
     var current_modifiers = this.props.current_modifiers;
 
     for(var i = 0; i<current_modifiers.length;i++){
 
       // if they match then make the mod box blue
       if(new_modifier === current_modifiers[i]){
-        
           flag = true;
           break;
         }
 
       }
       // if true then box is blue else it is white
-      var color = flag ? "bd44" : "bw";
+      var color = flag ? "bd44 active_modify_bubble" : "bw modify_bubble";
 
       return color;
 
@@ -57,7 +55,7 @@ class Modify extends React.Component {
   render(){
 
     if(this.props.modifiers.length > 0){
-      return <div className="border-right-light-2px "style={{height:"500px"}}>{this.renderContainer()}</div>
+      return <div className="border-right-black-1px "style={{height:"500px"}}>{this.renderContainer()}</div>
     }else{
       return null;
     }

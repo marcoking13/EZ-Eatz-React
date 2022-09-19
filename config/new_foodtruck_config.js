@@ -10,30 +10,36 @@ const FreezeDry = require("./foodtrucks/freeze_dry.js");
 const PitaJungle = require("./foodtrucks/pita_jungle.js");
 const RotatingChicken = require("./foodtrucks/rotating_chicken.js");
 const BurgerJoint = require("./foodtrucks/burger_joint.js")
+const ChinaBowl = require("./foodtrucks/china_bowl.js");
+const TheStand = require("./foodtrucks/the_stand.js");
 
+const ConvertToCoords = require("./geocode");
 
-const FoodtruckConfig = ()=>{
+const FoodtruckConfig = async()=>{
 
-  const config = [PitaJungle,RotatingChicken,BurgerJoint,FreezeDry];
+  const config = [PitaJungle,RotatingChicken,BurgerJoint,FreezeDry,TheStand,ChinaBowl,FreezeDry];
   const public_images ="./../public/assets/images/";
   const fake_street = ["Scottsdale","Arcadia", "Tempe","Phoenix","Tucson","Paradise Valley","Queen Creek","Peoria","Chandler","Flagstaff","South Phoenix","Desert Ridge","Cave Creek"]
   const foodtrucks = [];
 
-  for (var i =0; i < 20; i++){
+  for (var i =0; i < 50; i++){
 
-    var fake_street_i = fake_street[Math.floor(Math.random() * fake_street.length )]
+    var address = fake_street[Math.floor(Math.random() * fake_street.length )]
     var id = Math.floor(Math.random() * 3000 );
-    var ownerID = Math.floor(Math.random() * 3000)
+    var ownerID = Math.floor(Math.random() * 3000);
+    var truck = Math.floor(Math.random() * config.length);
 
-    var randomize_lng = (Math.random() * .056) -111;
-    var randomize_lat = (Math.random() * .056) + 31;
+    foodtrucks.push(config[truck](address,id,ownerID));
 
-    lat = randomize_lat.toFixed(5)
-    lng = randomize_lng.toFixed(5);
-    lat = parseFloat(lat);
-    lng = parseFloat(lng);
+    var price_average = foodtrucks[i].priceAverage();
 
-    foodtrucks.push(config[Math.floor(Math.random() * config.length)](fake_street_i,id,ownerID,lat,lng));
+    foodtrucks[i].expensive = foodtrucks[i].expensive(price_average);
+
+    var formatted_address = `${foodtrucks[i].address.city},${foodtrucks[i].address.state}`;
+
+    await foodtrucks[i].convert_address(formatted_address)
+
+
 
   }
 

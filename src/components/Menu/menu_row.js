@@ -7,12 +7,12 @@ class  MenuRow extends React.Component {
 
   RenderRow = () =>{
 
-    console.log(this.props.truck.menu);
-    console.log(this.props.truck);
-
     const rows = this.props.truck.menu.catagories.map((catagory)=>{
+
       const catagory_name = <p className="menu_row_title" key = {catagory.catagory} id = {catagory.catagory}> {catagory.catagory} </p>
+
       const food_items = catagory.menu.map((food_item,index)=>{
+
         return (
           <div className="col-4 menu_item" onClick = {()=>{console.log(food_item);this.props.SetItem(food_item)}}>
             <img className="menu_item_image" src = {food_item.image}/>
@@ -24,7 +24,9 @@ class  MenuRow extends React.Component {
 
           </div>
         )
+
       });
+
       return (
         <div className="menu_row_container">
           {catagory_name}
@@ -33,16 +35,19 @@ class  MenuRow extends React.Component {
           </div>
         </div>
       )
+
     });
     return rows;
   }
     // Renderer
   render(){
+
     return(
       <div className="container-fluid">
         {this.RenderRow()}
     </div>
-  )
+    )
+    
   }
 
 }

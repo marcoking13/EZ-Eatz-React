@@ -3,9 +3,52 @@
   bottom:5px;
 }
 
-
 .w15{
   width:15%;
+}
+.ml25{
+  margin-left: 25%;
+}
+.modify_bubble{
+  border-color:#e6e6e6 !important;
+  background:#e6e6e6;
+}
+.active_modify_bubble{
+  border-color:black !important;
+
+  background:black !important;
+}
+.active_modify_bubble:hover{
+  border-color:red !important;
+}
+.modify_bubble:hover{
+  border-color:black !important;
+  background:black !important;
+}
+.border-right-black-1px {
+  border-right: 1px solid black;
+}
+.back_arrow_container{
+  position: absolute;
+  top:15%;
+  width:80%;
+  left:5%;
+}
+.back_arrow_container:hover{
+  filter:brightness(100);
+}
+.back_arrow_to_menu{
+  width:50%;
+  margin-top: 40%;
+  filter:brightness(0);
+}
+.back_arrow_text{
+  font-family: "Roboto";
+  font-size: 16px;
+  color:black;
+  position:absolute;
+  top:55%;
+  left:-5%;
 }
 @media screen and (max-width:580px){
   .modName{

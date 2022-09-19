@@ -4,7 +4,6 @@ import axios from "axios";
 import FormComponent from "./../components/signup/form_component";
 
 
-
 class AuthenticationPage extends React.Component {
   constructor(props){
     super(props);
@@ -110,6 +109,7 @@ class AuthenticationPage extends React.Component {
     var dataItem = this.state.data[this.state.counter];
 
     if(this.state.counter < this.state.limit){
+
       return(
         <FormComponent
           ChangeInput = {this.ChangeInput}
@@ -121,21 +121,23 @@ class AuthenticationPage extends React.Component {
           directions = {dataItem.directions}
         />
       )
+      
     }
     else{
-// fix this
+
       var info = {
-         username:this.state.username,
-         password:this.state.password,
-         address:this.state.address,
-         image:"",
-         verified:false,
-         name:this.state.name
-       }
+           username:this.state.username,
+           password:this.state.password,
+           address:this.state.address,
+           image:"",
+           verified:false,
+           name:this.state.name
+         }
 
-          this.SubmitAuthentication(info);
+        this.SubmitAuthentication(info);
 
-          return <div />
+        return <div />
+
       }
 
   }

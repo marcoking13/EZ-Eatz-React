@@ -6,16 +6,16 @@ import "./../css/modify.css";
 import HomePageNav from "./../components/Navbar/home_nav_bar.js";
 import Modify from "./../components/Modify/modify_component.js";
 import Footer from "./../components/Footer/footnote.js";
+import BackArrow from  "./../images/back_arrow.png";
 
 //-------------------------------Constructor-------------------------------------
 class ModifyPage extends React.Component {
   //----------------------------Constructor--------------------------------
   constructor(props){
     super(props);
-    // var item = JSON.parse(cookie.load("currentItem",{path:"/"}));
 
     var options = this.props.item.options.length > 0 ? this.props.item.options[0] :  [];
-    console.log(options);
+
     this.state = {
       item:this.props.item,
       add:[],
@@ -133,11 +133,11 @@ class ModifyPage extends React.Component {
                     <p className="modify_description mt2_5 ml25">{this.props.item.description}</p>
                   <p className="modify_total mt5 ml25"style={{fontSize:"22px",marginLeft:"25%"}}>Total: --------------------- ${this.CalculateTotal(this.state.price)} </p>
 
-                  <div className="row mt5">
+                  <div className="row">
 
-                    <div className="col-2"/>
+                    <div className="col-3"/>
 
-                        <div className="col-4 mt5">
+                        <div className="col-6 mt2_5">
 
                           <button
                               className="btn add-to-cart ui cb f13px w100"
@@ -149,17 +149,7 @@ class ModifyPage extends React.Component {
 
                             </div>
 
-                        <div className="col-4 mt5">
 
-                          <button
-                              onClick={()=>{
-                                this.addItem("checkout")
-                              }}
-                              className="btn f13px add-to-checkout  w100">
-                              Checkout
-                          </button>
-
-                        </div>
 
                     </div>
 
@@ -168,7 +158,7 @@ class ModifyPage extends React.Component {
 
                 <div className="col-7">
                   <div className="row">
-                  <div className="col-4 mt5">
+                  <div className="col-4">
                     <p className="modTitle mt5 text-center mono f18px">Options</p>
                     <Modify
                       prefix = ""
@@ -179,7 +169,7 @@ class ModifyPage extends React.Component {
                      />
                   </div>
 
-                  <div className="col-4 mt5">
+                  <div className="col-4">
                     <p className="modTitle mt5 text-center mono f18px">Add</p>
                     <Modify
                       prefix = ""
@@ -190,7 +180,7 @@ class ModifyPage extends React.Component {
                      />
                   </div>
 
-                  <div className="col-4 mt5">
+                  <div className="col-4">
                   <p className="modTitle mt5 text-center mono f18px">Remove</p>
                       <Modify
                           prefix = "No"
@@ -214,6 +204,7 @@ class ModifyPage extends React.Component {
 
     }
     addItem(url){
+
       var order = {
         name:this.state.item.item,
         price:this.state.price,
@@ -224,8 +215,14 @@ class ModifyPage extends React.Component {
           type:this.state.type
         }
       }
-      this.props.AddToOrder(order);
-      this.props.ChangeURL(url);
+
+      var comfirm_order = this.props.ClearOrder(order,this.props.truck);
+
+
+      if(comfirm_order){
+        this.props.ChangeURL(url);
+      }
+
     }
 
 
@@ -237,11 +234,28 @@ class ModifyPage extends React.Component {
         <HomePageNav
           orders = {this.props.orders}
           account = {this.props.account}
-          changeAddress = {this.props.changeAddress}
+          ChangeAddress = {this.props.ChangeAddress}
           address = {this.props.address}
-          changeURL = {this.props.changeURL}
+          ChangeURL = {this.props.ChangeURL}
           navStyle ="white"
         />
+
+        <div className="back_arrow_container">
+            <div className="row">
+              <div className="col-12">
+                <div className="row">
+                  <div className="col-1">
+                    <img className="back_arrow_to_menu" src = {BackArrow} onClick = {()=>{
+                      this.props.ChangeURL("menu");
+                    }}/>
+                  </div>
+                  <div className="col-9 w100">
+                    <p className="back_arrow_text">Go Back to Menu</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
 
         <div className="pb20px">
           {this.renderJumbotron()}

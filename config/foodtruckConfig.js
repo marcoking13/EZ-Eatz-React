@@ -14,7 +14,7 @@ const FoodTrucks =  [{
     state:"AZ",
     zip: 85251
   },
-  stars:3,
+  stars:3.6,
   background:"./assets/images/freeze_menu.png",
   display:"./assets/images/smoothie.jpg",
   mapLogo:"./assets/images/smoothieKingMap.png",

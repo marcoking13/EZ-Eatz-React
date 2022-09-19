@@ -52,7 +52,9 @@ class LoadingPage extends React.Component{
 //-------------------------------------Renderer---------------------------------------------
 //-------------------------------------------------------------------------------------------
     render(){
+      
       return(
+
         <div className="container-fluid loadingPage lighten" style={{background:"black",height:"1000px"}}>
 
           <div className="row">
@@ -65,9 +67,12 @@ class LoadingPage extends React.Component{
           <div className="col-4"></div>
 
         </div>
+
       </div>
       )
+
     }
+
   }
 
 export default LoadingPage;

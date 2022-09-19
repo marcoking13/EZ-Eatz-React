@@ -13,6 +13,12 @@
 .new_ez_button:hover .notify_icon{
   color:white !important;
 }
+.ml40{
+  margin-left: 40%;
+}
+.ml10{
+  margin-left: 10%;
+}
 .bb{
   background:black;
 }

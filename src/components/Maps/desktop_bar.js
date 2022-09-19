@@ -20,7 +20,6 @@ class Bar extends React.Component {
         return  <img alt="cart"src={Cart} className="w100 o_5 mt2_5 iconG" />
       }
 
-
     }
 
   render(){
@@ -38,7 +37,9 @@ class Bar extends React.Component {
         </div>
 
         <div className="col-4">
+
           <br />
+
             <input  value = {this.props.place} className="form-control bb text-center cw "
               onChange = {(e)=>{
                 e.preventDefault();
@@ -46,15 +47,18 @@ class Bar extends React.Component {
                 this.props.changePlace(value);
               }}
               placeholder = " Enter Address"/>
+
               <div className="p0">
                 <br />
-                <button className="ui button inverted o0  w0 blue" onClick = {
+                <button className="ui button inverted o0 w0 blue" onClick = {
                   (e)=>{
                     e.preventDefault();
                     this.props.ConvertToCoords(this.props.place);
                   }
-                }>Search</button>
-              </div>
+                }>
+                Search
+              </button>
+             </div>
 
           </div>
 
@@ -77,14 +81,10 @@ class Bar extends React.Component {
                     />
                 </div>
 
-
-
                   <div className="col-2">
                       <br />
                       {this.renderCheckoutIcon()}
                   </div>
-
-
 
                   <div className="col-3">
                     <br />
@@ -95,13 +95,16 @@ class Bar extends React.Component {
                         this.props.ChangeURL("login");
                       }}
                       >Logout</button>
+
                   </div>
 
                 </div>
 
               </div>
+
               <br />
               <br />
+
             </div>
 
       )

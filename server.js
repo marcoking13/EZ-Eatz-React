@@ -11,11 +11,9 @@ var path = require("path");
 var http = require("http");
 var url = process.env.MONGODB_URI || "mongodb://localhost:27017/heroku_9tlg8v4r" ;
 
-const ConvertToCoords = require("./geoconvert.js");
+const ConvertToCoords = require("./config/geocode.js");
 const CalculateDistance = require("./distance_calculator.js");
 var FoodtruckConfigNew = require("./config/new_foodtruck_config.js");
-
-
 
 const collections = ["foodtrucks","users","currentUser"];
 const database = "eater_db";
@@ -50,16 +48,16 @@ const MongooseStartup = () => {
 
       var dbO = db.db("heroku_9tlg8v4r");
       const foodtrucks = dbO.collection("foodtrucks");
-     const result = await foodtrucks.deleteMany({});
-     console.log("Deleted " + result.deletedCount + " documents");
-      dbO.collection("foodtrucks").find({}).toArray(function(err, result) {
+      const result = await foodtrucks.deleteMany({});
+      // console.log("Deleted " + result.deletedCount + " documents");
+      dbO.collection("foodtrucks").find({}).toArray(async function(err, result) {
           if (err) throw err;
-          var foodtrucks = FoodtruckConfigNew();
-    
+          var foodtrucks = await FoodtruckConfigNew();
+          // console.log(result.length,foodtrucks);
           if(result.length <= 0){
-            dbO.collection("foodtrucks").insertMany(foodtrucks,(err,data)=>{console.log(data)});
+            dbO.collection("foodtrucks").insertMany(foodtrucks);
           }else{
-            console.log("Trucks already in Db");
+            console.log("Trucks already in Db",foodtrucks);
           }
 
       });
@@ -161,6 +159,7 @@ const MongooseStartup = () => {
   app.post("/api/trucks", async (req,res)=>{
 
       const data = await dbO.collection("foodtrucks").find({}).toArray();
+      console.log(data);
       res.json(data);
 
   });

@@ -26,7 +26,7 @@ class Filter extends React.Component {
         e.preventDefault();
         this.props.changeRadius(this.state.radius)
       }}>
-        <input placeholder="Enter Radius" value = {this.state.radius} type="number" className=" radius_input float-left margin-left-5 form-control" style={{height:"30px"}} onChange = {(e)=>{
+        <input placeholder="Enter Radius" value = {this.state.radius} type="number" className=" radius_input float-left margin-left-5 form-control" onChange = {(e)=>{
           this.setState({radius:e.target.value})
         }}/>
         <span className="e6-background text-center float-left mile_box" >mi</span>
@@ -78,6 +78,19 @@ class Filter extends React.Component {
 
   }
 
+  renderFilterBubble = (name,left_margin)=>{
+    return(
+      <div style={{marginLeft:left_margin}}>
+        <div className="filter_list width-100 list-style-none clear-both">
+          <div className="filter_bubble float-left no-background border-radius-50 border-e6-2px"></div>
+          <p className="filter_item width-50 margin-left-5 float-left">
+              {name}
+          </p>
+      </div>
+      </div>
+    )
+  }
+
   render(){
 
       return (
@@ -87,28 +100,9 @@ class Filter extends React.Component {
           <div className="sort_container width-100 margin-top-5">
             <p className="filter_text bold roboto margin-left-10">Sort</p>
 
-            <div className="margin-left-10">
-              <div className="filter_list width-100 list-style-none clear-both">
-                <div className="filter_bubble float-left no-background border-radius-50 border-e6-2px"></div>
-                <p className="filter_item width-50 margin-left-5 float-left">
-                    For You (Default)
-                </p>
-              </div>
-
-              <div className="filter_list width-100 list-style-none clear-both">
-                <div className="filter_bubble border-e6-2px float-left no-background border-radius-50"></div>
-                  <p className="filter_item width-50 margin-left-5 float-left">
-                    Best Ratings
-                </p>
-              </div>
-
-              <div className="filter_list width-100 list-style-none clear-both">
-                <div className="filter_bubble border-e6-2px float-left no-background border-radius-50"></div>
-                <p className="filter_item width-50 margin-left-5 float-left">
-                  Closest
-                </p>
-              </div>
-            </div>
+            {this.renderFilterBubble("For You (Default)",10)}
+            {this.renderFilterBubble("Best Ratings",10)}
+            {this.renderFilterBubble("Closest to You",10)}
 
           </div>
 
@@ -142,7 +136,7 @@ class Filter extends React.Component {
         </div>
 
       </div>
-      
+
     );
 
   }

@@ -148,11 +148,10 @@ class FormComponent extends React.Component {
 
       </div>
     )
+
   }
 
-
 }
-
 
 
 export default FormComponent

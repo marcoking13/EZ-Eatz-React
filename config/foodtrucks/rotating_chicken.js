@@ -18,14 +18,14 @@ const FoodtruckCreate = (random_street,id,ownerID,lat,lng) =>{
   id,
   "Rotating Chicken",
   ["all-american","fast-food"],
-  4,
+  2,
   lat,
   lng,
   new Address("",random_street,"AZ",""),
   public_images+"/logos/chicken_logo.png",
   public_images+"/banners/chicken_banner.png",
   public_images+"/background/johnny_background.png",
-  public_images+"/logos/chicken_logo.png",
+  public_images+"/logos/chicken_map.svg",
   null,
   new Menu("10494949",
 
@@ -254,7 +254,147 @@ new Catagory("Dessert","104949490",
 
   )
 ]
+),
+new Catagory("Beverages","504949490",
+[
+  new Item("Coca Cola","nicrmvmnjernvn","an coca cola soda",2.99,public_images + "/food/coke.png",400,
+  [],
+  [
+    {
+      name:"small",
+      price:-1.99
+    },
+    {
+      name:"large",
+      price:1.99
+    },
+    {
+      name:"extra large",
+      price:2.99
+    }
+  ],
+  [],
+  ),
+
+  new Item("Root Beer","r3im3iimc","an rootbeer soda / A&W",2.99,public_images + "/food/root_beer.png",400,
+  [],
+  [
+    {
+      name:"small",
+      price:-1.99
+    },
+    {
+      name:"large",
+      price:1.99
+    },
+    {
+      name:"extra large",
+      price:2.99
+    }
+  ],
+  [],
+  ),
+
+  new Item("Dr Pepper","4jfi3ri8fji3","an sparkly soda with a kick",2.99,public_images + "/food/dr_pepper.png",400,
+  [],
+  [
+    {
+      name:"small",
+      price:-1.99
+    },
+    {
+      name:"large",
+      price:1.99
+    },
+    {
+      name:"extra large",
+      price:2.99
+    }
+  ],
+  [],
+  ),
+
+
+  new Item("Sierra Mist","5492jfuij4949","an refreshing sprite soda",2.99,public_images + "/food/sprite.png",400,
+  [],
+  [
+    {
+      name:"small",
+      price:-1.99
+    },
+    {
+      name:"large",
+      price:1.99
+    },
+    {
+      name:"extra large",
+      price:2.99
+    }
+  ],
+  [],
+  ),
+
+  new Item("Water","549322949","Pure filtered water",.99,public_images + "/food/water.png",0,
+  [],
+  [
+    {
+      name:"small",
+      price:0
+    },
+    {
+      name:"large",
+      price:.50
+    },
+    {
+      name:"extra large",
+      price:1.50
+    }
+  ],
+  [],
+  ),
+
+new Item("Diet Coca Cola","vjnfnvjfnjn_njrencjen","an diet coca cola soda",2.99,public_images + "/food/diet_coke.png",400,
+[],
+[
+  {
+    name:"small",
+    price:-1.99
+  },
+  {
+    name:"large",
+    price:1.99
+  },
+  {
+    name:"extra large",
+    price:2.99
+  }
+],
+[],
+),
+new Item("Orange Fanta","jcvnjfjnvdjnvdfjnfdj","an orange fizzy soda",2.99,public_images + "/food/fanta.png",400,
+[],
+[
+  {
+    name:"small",
+    price:-1.99
+  },
+  {
+    name:"large",
+    price:1.99
+  },
+  {
+    name:"extra large",
+    price:2.99
+  }
+],
+[],
 )
+
+]
+
+
+)
+
 ]
 )
 

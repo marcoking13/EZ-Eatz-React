@@ -28,40 +28,67 @@ class CheckoutPage extends React.Component {
   }
 
   componentDidMount(){
+
     var total = this.CalculateTotal();
-    this.setState({total:total.toFixed(2)})
+    this.setState({total:total.toFixed(2)});
+
   }
 
   CalculateTotal = () =>{
     var total = 0;
+
     this.props.orders.map((order)=>{
       total += order.price;
 
-      if(order.mod.add.length > 0){
-        order.mod.add.map((add)=>{
-          total += add.price;
-        });
-      }
-      if(order.mod.type.length >0){
-        total += order.mod.type[0].price;
-      }
-    })
+      total += this.CalculateMods(order.item,order.mod);
+
+    });
 
     return total;
 
   }
 
+CalculateMods = (item,mod)=>{
+    if(mod){
+      console.log(mod);
+      var total = 0;
+      var option = mod.type.length > 0 ? mod.type[0].price : 0;
+      var addons = mod.add;
+
+      total += option;
+
+      console.log(total);
+
+      if(addons.length > 0){
+        addons.forEach((addon) => {
+          total += addon.price;
+        });
+
+        console.log(total);
+
+      }
+      return total;
+  }else{
+    return 0
+  }
+}
+
+
   CalculateTip = (tip)=>{
 
-      var new_total = this.state.total;
+      var new_total = parseFloat(this.CalculateTotal());
       var tip = parseFloat(tip / 100);
+
       tip = tip.toFixed(2);
+
       new_total = new_total;
-      console.log(new_total,tip);
+
       var total_tip = (tip * new_total);
-      new_total = parseFloat((new_total+total_tip));
-      console.log(new_total);
+
+      new_total = (new_total+total_tip);
+
       new_total = new_total.toFixed(2);
+
       this.setState({total:new_total});
 
   }
@@ -75,6 +102,7 @@ class CheckoutPage extends React.Component {
              tip = {this.state.tip}
              account = {this.props.account}
              CalculateTip = {this.CalculateTip}
+             CalculateMods = {this.CalculateMods}
              address = {this.props.address}
              total = {this.state.total}
              ChangeURL = {this.props.ChangeURL}

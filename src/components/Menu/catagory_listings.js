@@ -6,15 +6,19 @@ class  CatagoryListings extends React.Component {
 
 
   renderCatagories = ()=>{
+
     return this.props.truck.menu.catagories.map((catagory)=>{
+
       return(
         <a href = {"#"+catagory.catagory} className="normal-anchor" ><li className="menu_catagory_list">
-          <p className="menu_catagory_list_text"style={{marginLeft:"3.5%"}}>{catagory.catagory}</p>
-          <div className="underline"/>
+          <p className="menu_catagory_list_text ml40 w100">{catagory.catagory}</p>
+          <div className="underline ml40"/>
         </li>
         </a>
       )
+
     })
+
   }
 
   render(){
@@ -28,7 +32,7 @@ class  CatagoryListings extends React.Component {
 
       </div>
     )
-    
+
   }
 
 }

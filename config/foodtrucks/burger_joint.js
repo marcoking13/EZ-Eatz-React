@@ -1,4 +1,3 @@
-
 const Menu = require("./../menu_constructor.js")
 const Catagory = require("./../menu_catagory.js")
 const Item = require("./../menu_item_constructor.js")
@@ -18,14 +17,14 @@ const FoodtruckCreate = (random_street,id,ownerID,lat,lng) =>{
   id,
   "Burger Joint",
   ["all-american","fast-food"],
-  4,
+  3,
   lat,
   lng,
   new Address("",random_street,"AZ",""),
   public_images+"/logos/burger_logo.png",
   public_images+"/banners/burger_banner.png",
   public_images+"/background/burger_background.png",
-  public_images+"/logos/burger_logo.png",
+  public_images+"/logos/burger_map.svg",
   null,
   new Menu("10494949",
 
@@ -274,7 +273,7 @@ new Catagory("1/2 LB Burgers","439349043903490",
     new Ingredients("garlic aioli",true),
   ],
   [
-    
+
     {
       name:"wheat bun",
       price:0
@@ -292,7 +291,147 @@ new Catagory("1/2 LB Burgers","439349043903490",
 ]
   )
 ]
+),
+new Catagory("Beverages","83h4f98345hf954hj9ufhh9ghf9h49s",
+[
+  new Item("Coca Cola","vmnjfnvjrfnvjjrenvkjervnrjknr","an coca cola soda",2.99,public_images + "/food/coke.png",400,
+  [],
+  [
+    {
+      name:"small",
+      price:-1.99
+    },
+    {
+      name:"large",
+      price:1.99
+    },
+    {
+      name:"extra large",
+      price:2.99
+    }
+  ],
+  [],
+  ),
+
+  new Item("Root Beer"," jfnvjfndkcnjewmxksmcdkndjkn","an rootbeer soda / A&W",2.99,public_images + "/food/root_beer.png",400,
+  [],
+  [
+    {
+      name:"small",
+      price:-1.99
+    },
+    {
+      name:"large",
+      price:1.99
+    },
+    {
+      name:"extra large",
+      price:2.99
+    }
+  ],
+  [],
+  ),
+
+  new Item("Dr Pepper","vnjfnjfnjvnfjnvjfvnjnf","an sparkly soda with a kick",2.99,public_images + "/food/dr_pepper.png",400,
+  [],
+  [
+    {
+      name:"small",
+      price:-1.99
+    },
+    {
+      name:"large",
+      price:1.99
+    },
+    {
+      name:"extra large",
+      price:2.99
+    }
+  ],
+  [],
+  ),
+
+
+  new Item("Sierra Mist","hg8g7hg78h8547h5hg8h5h","an refreshing sprite soda",2.99,public_images + "/food/sprite.png",400,
+  [],
+  [
+    {
+      name:"small",
+      price:-1.99
+    },
+    {
+      name:"large",
+      price:1.99
+    },
+    {
+      name:"extra large",
+      price:2.99
+    }
+  ],
+  [],
+  ),
+
+  new Item("Water","4tyhvb874vh844h48vhs","Pure filtered water",.99,public_images + "/food/water.png",0,
+  [],
+  [
+    {
+      name:"small",
+      price:0
+    },
+    {
+      name:"large",
+      price:.50
+    },
+    {
+      name:"extra large",
+      price:1.50
+    }
+  ],
+  [],
+  ),
+
+new Item("Diet Coca Cola","j894gh8v4vh8thgv85hvb578tbh78b85h","an diet coca cola soda",2.99,public_images + "/food/diet_coke.png",400,
+[],
+[
+  {
+    name:"small",
+    price:-1.99
+  },
+  {
+    name:"large",
+    price:1.99
+  },
+  {
+    name:"extra large",
+    price:2.99
+  }
+],
+[],
+),
+new Item("Orange Fanta","jvr4r9hjvj9u4tvhhv9uh4t9uhvt94","an orange fizzy soda",2.99,public_images + "/food/fanta.png",400,
+[],
+[
+  {
+    name:"small",
+    price:-1.99
+  },
+  {
+    name:"large",
+    price:1.99
+  },
+  {
+    name:"extra large",
+    price:2.99
+  }
+],
+[],
 )
+
+]
+
+
+)
+
 ]
 )
 

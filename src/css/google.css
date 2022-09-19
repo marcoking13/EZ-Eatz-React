@@ -1,0 +1,18 @@
+.maps_modal{
+  top:35%;
+  animation: trans_down .2s 1 ease-in;
+  left:0%;
+  padding-bottom:2.5%;
+
+}
+
+
+@keyframes trans_down{
+  0%{
+    left:-60%;
+  }
+
+  100%{
+    left:0%;
+  }
+}
