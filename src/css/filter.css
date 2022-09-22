@@ -22,9 +22,13 @@
 }
 
 .price_tag{
-  border-radius:10px;
+  border-radius:2px;
   margin-top:2.5%;
-  font-size:15px;
+  margin-left:5%;
+  float: left;
+  font-size:14px;
+  font-family: "Roboto";
+  font-weight: bold;
 }
 
 .mile_box{
@@ -37,9 +41,15 @@
   color:white;
 }
 
+
 .active_price_tag{
   background:black;
   color:white;
+}
+
+.active_price_tag:hover{
+  background:white;
+  color:black;
 }
 
 .active_price_tag_switch{
@@ -71,14 +81,36 @@
   height:20px;
 }
 
-.filter_bubble:hover{
-  background:white;
-  transition: all;
-  border-color:red;
-}
 
 .filter_item{
   width:50%;
   margin-left:5%;
   float:left;
+}
+
+
+.filter_bubble{
+  background:white;
+  border:2px solid black;
+}
+.filter_inner_bubble{
+  width:60%;
+  height:10px;
+  border-radius:50%;
+  margin-left:20%;
+  margin-top:20%;
+  background:white;
+
+}
+
+.active_filter_bubble{
+  background:black;
+  transition: all;
+  border-color:white;
+}
+
+.filter_bubble:hover{
+  background:black;
+  transition: all;
+  border-color:white;
 }

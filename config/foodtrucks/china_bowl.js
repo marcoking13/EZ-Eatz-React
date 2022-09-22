@@ -17,6 +17,7 @@ const FoodtruckCreate = (random_street,id,ownerID,lat,lng) =>{
   ownerID,
   id,
   "China's Bowl",
+  true,
   ["asian","fast-food"],
   2,
   lat,

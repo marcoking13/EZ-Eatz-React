@@ -4,7 +4,7 @@ const CalculateDistance = (userLocation,foodtruckLocation,radius) =>{
 
 
        var distance = GeoDistance.between(userLocation, foodtruckLocation).human_readable('customary')
-       console.log(userLocation,foodtruckLocation);
+      
        var parsed_distance = parseFloat(distance.distance);
 
        if(distance <= radius){

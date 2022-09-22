@@ -112,7 +112,7 @@ class FormComponent extends React.Component {
 
         <p className="ez_title margin-left-5">EZ<strong className="ez_title_end">Eatz</strong></p>
 
-        <div id="google_login"></div>
+        <div id="google_login" style={{position:"absolute",width:"15%",right:"5%",top:"2.5%"}}></div>
 
         <div className="row add_form  " ref ={this.formRef}>
 

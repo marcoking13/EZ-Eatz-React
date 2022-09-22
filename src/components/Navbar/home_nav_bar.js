@@ -12,7 +12,6 @@ import GoogleMap from "./../../images/map_icon.svg";
 import Cart from "./../../images/cart_icon.svg";
 import Truck from "./../../images/truck_icon.png";
 import MapIcon2 from "./../../images/map_icon_2.svg";
-import Logo from "./../../images/logo.png";
 
 class NavBarHome extends React.Component {
   constructor(props){

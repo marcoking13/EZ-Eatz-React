@@ -21,16 +21,18 @@ const FoodtruckConfig = async()=>{
   const public_images ="./../public/assets/images/";
   const fake_street = ["Scottsdale","Arcadia", "Tempe","Phoenix","Tucson","Paradise Valley","Queen Creek","Peoria","Chandler","Flagstaff","South Phoenix","Desert Ridge","Cave Creek"]
   const foodtrucks = [];
-
+  var counter = 0;
   for (var i =0; i < 50; i++){
 
     var address = fake_street[Math.floor(Math.random() * fake_street.length )]
     var id = Math.floor(Math.random() * 3000 );
     var ownerID = Math.floor(Math.random() * 3000);
-    var truck = Math.floor(Math.random() * config.length);
-
-    foodtrucks.push(config[truck](address,id,ownerID));
-
+    var truck_length = config.length;
+    if(counter >= truck_length){
+      counter = 0;
+    }
+    foodtrucks.push(config[counter](address,id,ownerID));
+    counter += 1;
     var price_average = foodtrucks[i].priceAverage();
 
     foodtrucks[i].expensive = foodtrucks[i].expensive(price_average);

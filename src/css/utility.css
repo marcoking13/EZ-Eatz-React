@@ -765,3 +765,18 @@ body{
 .transition-all{
   transition: all;
 }
+
+.loading_box{
+  animation: load infinite ease-in 1.5s !important;
+}
+@keyframes load {
+  0%{
+  opacity:.5;
+  }
+  50%{
+      opacity:1;
+  }
+  100%{
+    opacity:.5;
+  }
+}

@@ -6,15 +6,15 @@ import {Map, Marker, GoogleApiWrapper, google} from 'google-maps-react';
 import axios from "axios";
 
 import NoResults from "./../components/no_results"
+import HomeNoResults from "./../components/home_no_results"
 import ToggleIcon from "./../images/arrow_row_icon.svg";
+import LoadingHome from "./../components/loading_home";
 import HomePageNav from "./../components/Navbar/home_nav_bar.js";
 import FoodBox from "./../components/Home/foodtruck_box_home.js";
 import Filter from "./../components/Home/filter.js";
 import Footer from "./../components/Footer/footnote.js";
 
 import "./../css/home_page.css";
-
-import Logo from "./../images/logo.png";
 
 import GoogleMapsSection from "./../images/maps_2.png";
 
@@ -34,10 +34,16 @@ class HomePage extends React.Component {
       nearby_starting:0,
       vegan_starting:0,
       nearbyFoodtrucks:[],
+      price_sort:5,
       cheapest_trucks:[],
+      is_loading:true,
       vegan_trucks:[],
       ethnic_trucks:[],
-      radius:50,
+      sort:{
+        name:null,
+        criteria:null
+      },
+      radius:30,
       changedAddress:false,
     }
 
@@ -46,7 +52,20 @@ class HomePage extends React.Component {
 //------------------------------State Changer-------------------------------//
 
   changeRadius = (radius) => {
+
     this.setState({radius:radius});
+    this.IntializePage(radius)
+  }
+
+  changePriceSort = (price_sort) => {
+    console.log(price_sort);
+    this.setState({price_sort:price_sort});
+    this.IntializePage()
+  }
+
+  changeSort = (sort) =>{
+    this.setState({sort});
+    this.IntializePage()
   }
 
   IntializePage = async ()=>{
@@ -55,13 +74,12 @@ class HomePage extends React.Component {
 
     if(response.data.results.length > 0){
 
+      this.setState({is_loading:true})
+
       const { lat, lng } = response.data.results[0].geometry.location;
       var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng };
 
-      this.FoodtrucksNearMe(lat,lng);
-      this.BestRatedFoodtrucks(lat,lng);
-      this.CheapestTrucks(lat,lng);
-      this.VeganTrucks(lat,lng);
+      this.OrganizeFoodtrucks(lat,lng,this.state.radius,this.state.sort,this.state.price_sort);
       this.props.ClearCurrentTruck();
 
     }
@@ -69,226 +87,69 @@ class HomePage extends React.Component {
   }
 
 
+  OrganizeFoodtrucks = async(lat,lng,radius,sort,price_sort) => {
 
-  ToggleRatingStarting = (multiplier) =>{
-    var toggle_amount = multiplier * 4;
-    console.log(toggle_amount + this.state.best_rated_starting);
-    if(this.state.best_rated_starting + toggle_amount < this.state.best_rated_foodtrucks.length && this.state.best_rated_starting + toggle_amount > 0){
-      this.setState({best_rated_starting: this.state.best_rated_starting + toggle_amount});
-    }else{
-      this.setState({best_rated_starting:0})
-    }
+    var config = {lat:lat,lng:lng,radius:radius,sort:sort,price_sort:price_sort};
+    var close_config = config;
+    close_config.radius = (close_config.radius / 2)
+
+    const best_rated_data = await axios.post("/api/best_rated_trucks",config);
+    const best_rated_trucks = best_rated_data.data;
+
+    const nearest_data = await axios.post("/api/nearest_trucks",close_config);
+    const nearest_trucks = nearest_data.data;
+
+    const vegan_data = await axios.post("/api/vegan_trucks",config);
+    const vegan_trucks = vegan_data.data;
+
+    const cheapest_data = await axios.post("/api/cheapest_trucks",config);
+    const cheapest_trucks = cheapest_data.data;
+
+    this.setState({
+      best_rated_foodtrucks:best_rated_trucks,
+      vegan_trucks:vegan_trucks,
+      cheapest_trucks:cheapest_trucks,
+      nearbyFoodtrucks:nearest_trucks,
+      is_loading:false
+    })
+
+
   }
 
-  ToggleVeganStarting = (multiplier) =>{
+  ToggleTrucks = (multiplier,starting,trucks_length) => {
     var toggle_amount = multiplier * 4;
+    var new_toggle = starting + toggle_amount;
 
-    if(this.state.vegan_starting + toggle_amount < this.state.vegan_foodtrucks.length && this.state.vegan_starting + toggle_amount > 0){
-      this.setState({vegan_starting: this.state.vegan_starting + toggle_amount});
+    if(new_toggle < trucks_length && new_toggle > 0){
+      return new_toggle;
     }else{
-      this.setState({vegan_starting:0})
+      return 0;
     }
+
   }
 
-  ToggleNearbyStarting = (multiplier) =>{
-    var toggle_amount = multiplier * 4;
-      console.log(this.state.nearby_starting + toggle_amount > this.state.nearbyFoodtrucks.length);
-    if(this.state.nearby_starting + toggle_amount < this.state.nearbyFoodtrucks.length && this.state.nearby_starting + toggle_amount > 0){
-      this.setState({nearby_starting: this.state.nearby_starting + toggle_amount});
-      console.log(this.state.nearby_starting);
-    }else{
-      this.setState({nearby_starting:0})
-    }
-    console.log(this.state.nearby_starting);
+  ToggleRatingStarting = (multiplier,starting,trucks_length) =>{
+    var toggle = this.ToggleTrucks(multiplier,starting,trucks_length);
+    this.setState({best_rated_starting:toggle});
   }
 
-  ToggleExpensiveStarting = (multiplier) =>{
-    var toggle_amount = multiplier * 4;
+  ToggleVeganStarting = (multiplier,starting,trucks_length) =>{
+    var toggle = this.ToggleTrucks(multiplier,starting,trucks_length);
+    this.setState({vegan_starting:toggle});
+  }
 
-    if(this.state.cheapest_starting + toggle_amount < this.state.cheapest_trucks.length && this.state.cheapest_starting + toggle_amount > 0){
-      this.setState({cheapest_starting: this.state.cheapest_starting + toggle_amount});
+  ToggleNearbyStarting = (multiplier,starting,trucks_length) =>{
+    var toggle = this.ToggleTrucks(multiplier,starting,trucks_length);
+    this.setState({nearby_starting:toggle});
+  }
 
-    }else{
-      this.setState({cheapest_starting:0})
-    }
-
+  ToggleExpensiveStarting = (multiplier,starting,trucks_length) =>{
+    var toggle = this.ToggleTrucks(multiplier,starting,trucks_length);
+    this.setState({cheapest_starting:toggle});
   }
 
   componentDidMount(){
     this.IntializePage();
-  }
-
-  BestRatedFoodtrucks = async (lat,lng) => {
-    const {data} = await axios.post("/api/trucks",null);
-    console.log(data);
-    const foodtrucks = [];
-    data.map(async(foodtruck)=>{
-        var rating = foodtruck.stars;
-        var foodtruckLocation = {
-          lat:foodtruck.lat,
-          lng:foodtruck.lng
-        }
-        var userLocation = {
-          lat:lat,
-          lng: lng
-        }
-
-        var body = {
-          foodtruckLocation:foodtruckLocation,
-          userLocation:userLocation,
-          radius:this.state.radius
-        }
-
-        const response = await axios.post("/api/distance-calculator",body);
-
-        foodtruck.distance = response.data.distance.toString() +""+response.data.unit;
-
-        if(response.data.distance <= this.state.radius && rating > 3.5)
-        {
-          foodtrucks.push(foodtruck);
-        }
-
-        this.setState({best_rated_foodtrucks:foodtrucks});
-
-    });
-  }
-
-  CheapestTrucks = async (lat,lng) => {
-    const {data} = await axios.post("/api/trucks",null);
-
-    console.log(data);
-
-    const foodtrucks = [];
-
-    data.map(async(foodtruck)=>{
-        var expensive = foodtruck.expensive;
-        console.log(expensive)
-        var foodtruckLocation = {
-          lat:foodtruck.lat,
-          lng:foodtruck.lng
-        }
-        var userLocation = {
-          lat:lat,
-          lng: lng
-        }
-
-        var body = {
-          foodtruckLocation:foodtruckLocation,
-          userLocation:userLocation,
-          radius:this.state.radius
-        }
-
-        const response = await axios.post("/api/distance-calculator",body);
-
-        foodtruck.distance = response.data.distance.toString() +""+response.data.unit;
-
-        if(response.data.distance <= this.state.radius && expensive < 3)
-        {
-          foodtrucks.push(foodtruck);
-        }
-
-        this.setState({cheapest_trucks:foodtrucks});
-
-    });
-
-  }
-
-
-  VeganTrucks = async (lat,lng) => {
-    const {data} = await axios.post("/api/trucks",null);
-
-    console.log(data);
-
-    function isVegan(types){
-      for(var i = 0; i < types.length; i++){
-        if(types[i] == "vegan"  || types[i] =="Vegan"){
-          return true;
-          break;
-        }
-      }
-      return false;
-    }
-
-    const foodtrucks = [];
-
-    data.map(async(foodtruck)=>{
-        var type = foodtruck.type;
-        var is_vegan = isVegan(type);
-        console.log(is_vegan);
-        var foodtruckLocation = {
-          lat:foodtruck.lat,
-          lng:foodtruck.lng
-        }
-        var userLocation = {
-          lat:lat,
-          lng: lng
-        }
-
-        var body = {
-          foodtruckLocation:foodtruckLocation,
-          userLocation:userLocation,
-          radius:this.state.radius
-        }
-
-
-
-        const response = await axios.post("/api/distance-calculator",body);
-
-        foodtruck.distance = response.data.distance.toString() +""+response.data.unit;
-
-
-
-        if(response.data.distance <= this.state.radius && is_vegan)
-        {
-          foodtrucks.push(foodtruck);
-        }
-
-        this.setState({vegan_trucks:foodtrucks});
-
-    });
-
-  }
-
-  FoodtrucksNearMe = async (lat,lng) => {
-
-    const {data} = await axios.post("/api/trucks",null);
-    const foodtrucks = [];
-
-    data.map(async(foodtruck)=>{
-
-      var foodtruckLocation = {
-        lat:foodtruck.lat,
-        lng:foodtruck.lng
-      }
-      var userLocation = {
-        lat:lat,
-        lng: lng
-      }
-
-      var closer_radius = parseFloat(this.state.radius / 1.5).toFixed(2);
-
-      var body = {
-        foodtruckLocation:foodtruckLocation,
-        userLocation:userLocation,
-        radius:closer_radius
-      }
-
-      const response = await axios.post("/api/distance-calculator",body);
-
-      foodtruck.distance = response.data.distance.toString() +""+response.data.unit;
-
-      if(response.data.distance <= this.state.radius )
-      {
-        foodtrucks.push(foodtruck);
-      }
-
-
-
-    });
-
-    this.setState({nearbyFoodtrucks:foodtrucks});
-
-
   }
 
   CreateFoodtruckBoxes = (truck_catagory,starting) => {
@@ -321,6 +182,7 @@ class HomePage extends React.Component {
   }
 
   CreateFoodtruckRow = (title,foodtruck_catagory,toggle_catagory,toggle_func) => {
+    if(foodtruck_catagory.length > 0){
      return (
        <div className="container-fluid row margin-top-5">
 
@@ -341,10 +203,10 @@ class HomePage extends React.Component {
               <div className="row">
 
                 <div className="col-6">
-                  <img src ={ToggleIcon} onClick = {()=>{toggle_func(-1)}} className="w100 truck_row_toggle_icon rotate-180" />
+                  <img src ={ToggleIcon} onClick = {()=>{console.log(toggle_func,toggle_catagory,foodtruck_catagory.length);toggle_func(-1,toggle_catagory,foodtruck_catagory.length)}} className="w100 truck_row_toggle_icon rotate-180" />
                 </div>
                 <div className="col-6">
-                  <img src ={ToggleIcon} onClick = {()=>{toggle_func(1)}} className="w100 truck_row_toggle_icon" />
+                  <img src ={ToggleIcon} onClick = {()=>{toggle_func(1,toggle_catagory,foodtruck_catagory.length)}} className="w100 truck_row_toggle_icon" />
                 </div>
 
               </div>
@@ -358,41 +220,46 @@ class HomePage extends React.Component {
 
        </div>
      )
+   }else{
+     return <HomeNoResults title = {title}/>
+   }
   }
-  // {this.CreateFoodtruckRow("Most Affordable",this.state.cheapest_foodtrucks)}
-  // {this.CreateFoodtruckRow("Vegan Trucks",this.state.vegan_trucks)}
-  // {this.CreateFoodtruckRow("Try Something New",this.state.ethnic_trucks)}
+
   renderFoodtruckSection(){
-    console.log(this.state.nearbyFoodtrucks,this.state.best_rated_foodtrucks);
-    if(this.state.nearbyFoodtrucks.length > 0 && this.state.best_rated_foodtrucks.length >0){
+
+    if(this.state.is_loading){
+        return <LoadingHome text = "There are no Trucks in Radius Yet"  key = {this.state.radius}/>
+    }
+
       return(
-        <div className='row'>
+        <div className='row' key = {this.state.radius}>
 
           <div className="col-2">
-             <Filter radius = {this.state.radius} changeRadius = {this.changeRadius}/>
+             <Filter price_sort = {this.state.price_sort} changePriceSort = {this.changePriceSort} radius = {this.state.radius} changeRadius = {this.changeRadius} sort = {this.state.sort} changeSort = {this.changeSort}/>
           </div>
 
           <div className="foodtruck_container col-10">
 
             {this.CreateFoodtruckRow("Nearest You",this.state.nearbyFoodtrucks,this.state.nearby_starting,this.ToggleNearbyStarting)}
             {this.CreateFoodtruckRow("Best Rated",this.state.best_rated_foodtrucks,this.state.best_rated_starting,this.ToggleRatingStarting)}
+
             <div className="relative w100">
               <img src = {GoogleMapsSection} className="w100" />
               <button onClick = {()=>{
                 this.props.ChangeURL("map");
               }}style={{top:"60%",left:"2.5%",position:"absolute",width:"30%",color:"white",background:"black"}} className="button black ui inverted invert add-to-cart cw">See Map</button>
             </div>
+
             {this.CreateFoodtruckRow("Most Affordable",this.state.cheapest_trucks,this.state.cheapest_starting,this.ToggleExpensiveStarting)}
             {this.CreateFoodtruckRow("Vegan Options",this.state.vegan_trucks,this.state.vegan_starting,this.ToggleVeganStarting)}
+
           </div>
 
         </div>
       )
-    }else{
-      return <NoResults text = "There are no Trucks in Radius Yet"/>
     }
 
-  }
+
 
   //------------------------------Renderer--------------------------------
   render(){

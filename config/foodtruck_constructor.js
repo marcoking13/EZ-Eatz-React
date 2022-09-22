@@ -1,15 +1,18 @@
 const ConvertToCoords  = require("./geocode");
 
 class Foodtruck {
-constructor(ownerID,objectID,name,type,stars,lat,lng,address,logo,banner,background,mapLogo,routes,menu) {
+constructor(ownerID,objectID,name,vegan_friendly,type,stars,lat,lng,address,logo,banner,background,mapLogo,routes,menu) {
     this.ownerID = ownerID;
     this.objectID = objectID;
     this.name = name;
+    this.vegan_friendly = vegan_friendly;
     this.logo = logo;
     this.lat = lat;
     this.lng = lng;
     this.type = type;
     this.stars = stars;
+    this.distance = null,
+    this.distance_int = 0,
     this.address = address;
     this.background = background;
     this.banner = banner;

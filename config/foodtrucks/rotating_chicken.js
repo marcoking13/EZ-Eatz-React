@@ -17,6 +17,7 @@ const FoodtruckCreate = (random_street,id,ownerID,lat,lng) =>{
   ownerID,
   id,
   "Rotating Chicken",
+  true,
   ["all-american","fast-food"],
   2,
   lat,

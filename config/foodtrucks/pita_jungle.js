@@ -17,6 +17,7 @@ const FoodtruckCreate = (random_street,id,ownerID,lat,lng) =>{
   ownerID,
   id,
   "Pita Jungle",
+  true,
   ["healthy","greek food","vegan"],
   4,
   lat,

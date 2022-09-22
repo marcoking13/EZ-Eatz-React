@@ -5,13 +5,11 @@ import axios from 'axios';
 import cookies from "react-cookies";
 
 import NoResults from "./../components/no_results"
+import Loading from "./../components/loading_map";
 import Navbar from "./../components/Navbar/home_nav_bar";
 
-import ProfilePicture from "./../images/profileIcon.png";
-import Search from "./../images/userChoice.png";
-import Cart from "./../images/cart.png";
 import Ringer from "./../images/ringer.gif";
-import Logo from "./../images/logo.png";
+
 import Star from "./../images/full_star.png";
 
 import "./../css/google.css"
@@ -31,7 +29,7 @@ const MyMapComponent = compose(
   withGoogleMap
 )((props) =>
 
-     <GoogleMap  zoom={12} center = {{lat:props.lat,lng:props.lng}} key = {props.address} onClick = {()=>{
+     <GoogleMap  zoom={12} center = {{lat:props.center_lat,lng:props.center_lng}} key = {props.address} onClick = {()=>{
        if(props.modal){
          props.setModal(null);
        }
@@ -60,17 +58,12 @@ const MyMapComponent = compose(
             icon = {{url:marker.url, scaledSize: new window.google.maps.Size(50,50)}}
             onClick = {()=>{
 
-              props.setModal({modal:marker.truck})
-              props.SetCenter(marker.truck.lat,marker.truck.lng);
+              props.setModal({modal:marker.truck});
+
+              props.SetCenter(marker.lat,marker.lng);
 
 
-            }}
-
-
-
-
-          >
-
+            }}>
 
 
           </Marker>
@@ -93,6 +86,9 @@ export default class Maps extends React.Component {
       lng:this.props.lng,
       place:"",
       markers:[],
+      is_loading:true,
+      center_lat : this.props.lat,
+      center_lng : this.props.lng,
       modal:null
     }
 
@@ -106,9 +102,10 @@ export default class Maps extends React.Component {
 
   SetCenter = (lat,lng) =>{
     this.setState({
-      lat:lat,
-      lng:lng
+      center_lat:lat,
+      center_lng:lng
     })
+    console.log(this.state);
   }
 
   RenderModal =()=>{
@@ -138,7 +135,7 @@ export default class Maps extends React.Component {
           <p className="w100 mt2_5 ml5" style={{fontSize:"20px",fontFamily:"Roboto"}}>{this.state.modal.modal.name}, ({this.state.modal.modal.address.city},{this.state.modal.modal.address.state})</p>
           <div className="row">
               <div className="col-1"/>
-              <div className="col-6"style={{position:"relative",bottom:"5px"}}>
+              <div className="col-6 mt2_5"style={{position:"relative",bottom:"5px"}}>
                 <div className="row">
                   {stars}
                 </div>
@@ -151,7 +148,7 @@ export default class Maps extends React.Component {
           <button onClick = {()=>{
             this.props.SetTruck(this.state.modal.modal);
             this.props.ChangeURL("menu");
-          }}className="btn add-to-cart ui cb f13px w50" style={{marginLeft:"25%",width:"50%",marginTop:"5%",color:"grey"}} >See Menu</button>
+          }}className="btn add-to-cart ui cb f13px w50" style={{marginLeft:"5%",width:"50%",marginTop:"5%",color:"grey"}} >See Menu</button>
 
 
         </div>
@@ -175,7 +172,7 @@ export default class Maps extends React.Component {
     const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
     const { lat, lng } = response.data.results[0].geometry.location;
 
-    this.setState({lat:lat,lng:lng});
+    this.setState({lat:lat,lng:lng,is_loading:false});
 
   }
 
@@ -201,6 +198,9 @@ export default class Maps extends React.Component {
   }
 
   renderMap(){
+    if(this.state.is_loading){
+      return <Loading />
+    }
     if(this.state.lat && this.state.lng){
 
       return(
@@ -212,6 +212,8 @@ export default class Maps extends React.Component {
             markers = {this.state.markers}
             lat = {this.props.lat}
             SetCenter = {this.SetCenter}
+            center_lat = {this.state.center_lat}
+            center_lng = {this.state.center_lng}
             modal =  {this.state.modal}
             setModal = {this.setModal}
             RenderModal = {this.RenderModal}

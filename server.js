@@ -41,6 +41,64 @@ app.listen(port,function(){
 
 });
 
+
+const LoopThroughFoodtruck = (data,lat,lng,radius,sort,price_sort)=> {
+  var trucks = [];
+  console.log(price_sort);
+  data.map((truck)=>{
+
+    const userLocation = {
+      lat:lat,
+      lng:lng
+    }
+
+    const foodtruckLocation = {
+      lat:truck.lat,
+      lng:truck.lng
+    }
+
+    const data = CalculateDistance(userLocation,foodtruckLocation,radius);
+
+    if(data.distance <= radius && price_sort >= truck.expensive){
+
+      if(sort.name){
+
+        if(sort.name == "ratings"){
+
+          if(sort.criteria <= truck.stars){
+
+            truck.distance = data.distance.toString() +""+ data.unit;
+            truck.distance_int = data.distance;
+            trucks.push(truck);
+
+          }
+
+        }else if(sort.name == "nearest"){
+
+            if(sort.criteria >= data.distance){
+
+              truck.distance = data.distance.toString() +""+ data.unit;
+              trucks.push(truck);
+
+            }
+
+        }
+        }else{
+
+          truck.distance = data.distance.toString() +""+ data.unit;
+          trucks.push(truck);
+
+        }
+    }
+
+
+  })
+
+  return trucks;
+
+}
+
+
 const MongooseStartup = () => {
 
     MongoClient.connect(url,async(err,db)=>{
@@ -48,16 +106,15 @@ const MongooseStartup = () => {
 
       var dbO = db.db("heroku_9tlg8v4r");
       const foodtrucks = dbO.collection("foodtrucks");
-      const result = await foodtrucks.deleteMany({});
+      // const result = await foodtrucks.deleteMany({});
       // console.log("Deleted " + result.deletedCount + " documents");
       dbO.collection("foodtrucks").find({}).toArray(async function(err, result) {
           if (err) throw err;
           var foodtrucks = await FoodtruckConfigNew();
-          // console.log(result.length,foodtrucks);
           if(result.length <= 0){
             dbO.collection("foodtrucks").insertMany(foodtrucks);
           }else{
-            console.log("Trucks already in Db",foodtrucks);
+            console.log("Trucks already in Db");
           }
 
       });
@@ -159,8 +216,53 @@ const MongooseStartup = () => {
   app.post("/api/trucks", async (req,res)=>{
 
       const data = await dbO.collection("foodtrucks").find({}).toArray();
-      console.log(data);
+
       res.json(data);
+
+  });
+
+  app.post("/api/best_rated_trucks", async (req,res) =>{
+      var {lat,lng,radius,sort,price_sort} = req.body;
+
+      const data = await dbO.collection("foodtrucks").find({stars: {$gt:3.5}}).toArray();
+
+      var trucks = LoopThroughFoodtruck(data,lat,lng,radius,sort,price_sort);
+
+      res.json(trucks);
+
+  });
+
+  app.post("/api/vegan_trucks", async (req,res) =>{
+      var {lat,lng,radius,sort,price_sort} = req.body;
+
+      const data = await dbO.collection("foodtrucks").find({type: {$in:["vegan"]}}).toArray();
+
+      var trucks = LoopThroughFoodtruck(data,lat,lng,radius,sort,price_sort);
+
+      res.json(trucks);
+
+  });
+
+  app.post("/api/nearest_trucks", async (req,res) =>{
+      var {lat,lng,radius,sort,price_sort} = req.body;
+
+      const data = await dbO.collection("foodtrucks").find({}).toArray();
+
+      var trucks = LoopThroughFoodtruck(data,lat,lng,radius,sort,price_sort);
+
+      res.json(trucks);
+
+  });
+
+
+  app.post("/api/cheapest_trucks", async (req,res) =>{
+      var {lat,lng,radius,sort,price_sort} = req.body;
+
+      const data = await dbO.collection("foodtrucks").find({expensive: {$lt:3}}).toArray();
+
+      var trucks = LoopThroughFoodtruck(data,lat,lng,radius,sort,price_sort);
+
+      res.json(trucks);
 
   });
 

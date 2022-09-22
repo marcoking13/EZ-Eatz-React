@@ -39,14 +39,26 @@ class Filter extends React.Component {
     var dollar = "$";
     var html = [];
 
-    for ( var i = 0; i < 4; i++){
+    console.log(this.props.price_sort);
+
+    for ( var dollar_amount = 0; dollar_amount < 5; dollar_amount++){
+
+      var active = dollar_amount + 1 == this.props.price_sort ? "active_price_tag" : ""
+      console.log(dollar_amount, this.props.price_sort);
 
       html.push(
-        <div className="col-6 price_tag text-center e6-background">
-            {dollar}
+        <div className={"col-5 price_tag text-center e6-background " + active} sort = {dollar_amount} onClick = {(e)=>{
+          var sort = e.target.getAttribute("sort");
+          this.props.changePriceSort(parseInt(sort) + 1);
+        }}>
+             {dollar}
         </div>
       );
+
       dollar += "$";
+
+
+
     }
 
     return html
@@ -78,11 +90,17 @@ class Filter extends React.Component {
 
   }
 
-  renderFilterBubble = (name,left_margin)=>{
+  renderFilterBubble = (name,sort)=>{
+    console.log(sort,this.props.sort);
+    var active = this.props.sort.name == sort.name ? "active_filter_bubble" : "" ;
     return(
-      <div style={{marginLeft:left_margin}}>
+      <div style={{marginLeft:"10%"}} sort = {sort} onClick = {()=>{
+        this.props.changeSort(sort);
+      }}>
         <div className="filter_list width-100 list-style-none clear-both">
-          <div className="filter_bubble float-left no-background border-radius-50 border-e6-2px"></div>
+          <div className={"float-left no-background border-radius-50 border-e6-2px filter_bubble "+active}>
+            <div className="filter_inner_bubble"></div>
+          </div>
           <p className="filter_item width-50 margin-left-5 float-left">
               {name}
           </p>
@@ -100,9 +118,9 @@ class Filter extends React.Component {
           <div className="sort_container width-100 margin-top-5">
             <p className="filter_text bold roboto margin-left-10">Sort</p>
 
-            {this.renderFilterBubble("For You (Default)",10)}
-            {this.renderFilterBubble("Best Ratings",10)}
-            {this.renderFilterBubble("Closest to You",10)}
+            {this.renderFilterBubble("For You (Default)",{name:null,criteria:null})}
+            {this.renderFilterBubble("Best Ratings",{name:"ratings",criteria:3.5})}
+            {this.renderFilterBubble("Closest to You",{name:"nearest",criteria:10})}
 
           </div>
 
@@ -123,7 +141,7 @@ class Filter extends React.Component {
           <br />
 
           <div className="prices_container width-100 margin-top-5">
-            <p className="filter_text bold roboto margin-left-10">Prices</p>
+            <p className="filter_text bold roboto margin-left-10">Price Limit</p>
 
           <div className="row">
             <div className="col-1"/>

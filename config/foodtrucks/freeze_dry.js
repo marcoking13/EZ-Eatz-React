@@ -18,6 +18,7 @@ const FoodtruckCreate = (random_street,id,ownerID,lat,lng) =>{
   ownerID,
   id,
   "Freeze-Dry",
+  false,
   ["all-american","ice-cream"],
   2,
   lat,
