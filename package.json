@@ -29,6 +29,8 @@
     "node-geocoder": "^3.29.0",
     "path": "^0.12.7",
     "posix-character-classes": "^1.0.0",
+    "postcss-dir-pseudo-class": "^6.0.5",
+    "postcss-pseudo-class-any-link": "^7.1.6",
     "react": "^16.8.4",
     "react-cookies": "^0.1.0",
     "react-dom": "^16.8.4",
@@ -49,10 +51,6 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  },
-  "engines" : {
-    "npm" : "8.5.0",
-    "node" : "v16.14.2"
   },
   "proxy": "http://localhost:4001",
   "browserslist": [
