@@ -3,11 +3,10 @@ import React from "react";
 import cookie from "react-cookies";
 import axios from "axios";
 
-import HomePageNav from "./../components/Navbar/home_nav_bar";
-import ShowBox from "./../components/Menu/show_box";
+import Navbar from "./../components/Navbar/home_nav_bar";
+import Showcase from "./../components/Menu/show_box";
 import CatagoryListings from "./../components/Menu/catagory_listings";
 import MenuRows from "./../components/Menu/menu_row";
-import MenuBoxes from "./../components/Menu/menu_boxes_component";
 import Footer from "./../components/Footer/footnote.js";
 
 import "./../css/menuPage.css";
@@ -24,25 +23,7 @@ class MenuPage extends React.Component {
       currentItem:{},
       item:null
     }
-    // // Save foodtruck in cookie to variable
-    // var foodtruckID  = cookie.load("foodtruckCurrent",{path:"/"});
-    // //------------------------------Axios Foodtruck Inialization-----------------------------
-    //   // Find all foodtrucks in database and save into variable
-    //
-    // axios.get("/api/trucks").then((response)=>{
-    //   var trucks = response.data;
-    //     // Loop through each truck object
-    //   for(var i = 0; i<trucks.length;i++){
-    //     // If the selected truck's id matches the looped trucks
-    //       //Save the currently looped truck into the state
-    //     if(foodtruckID === trucks[i].objectID){
-    //       this.setState({foodtruck:trucks[i]});
-    //       this.props.SetTruck(trucks[i]);
-    //       break;
-    //     }
-    //   }
 
-    // });
 
      window.scrollTo(0,0);
 
@@ -60,15 +41,16 @@ class MenuPage extends React.Component {
     return expensive;
   }
 
-
 //------------------------------------------------Renderer----------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------
   render(){
 
+    console.log(this.props.truck);
+
     return(
       <div>
 
-        <HomePageNav
+        <Navbar
           orders = {this.props.orders}
           account = {this.props.account}
           ChangeAddress = {this.props.ChangeAddress}
@@ -82,7 +64,7 @@ class MenuPage extends React.Component {
         <br />
         <br />
 
-        <ShowBox
+        <Showcase
           SetAddress = {this.props.SetAddress}
           renderExpensive = {this.renderExpensive}
           ChangeURL = {this.props.ChangeURL}

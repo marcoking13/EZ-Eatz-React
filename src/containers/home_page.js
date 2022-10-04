@@ -1,22 +1,21 @@
-
 import React from "react";
 import cookie from "react-cookies";
 import GeoDistance from "geo-distance";
 import {Map, Marker, GoogleApiWrapper, google} from 'google-maps-react';
 import axios from "axios";
 
-import NoResults from "./../components/no_results"
-import HomeNoResults from "./../components/home_no_results"
-import ToggleIcon from "./../images/arrow_row_icon.svg";
-import LoadingHome from "./../components/loading_home";
-import HomePageNav from "./../components/Navbar/home_nav_bar.js";
-import FoodBox from "./../components/Home/foodtruck_box_home.js";
+import NoResults from "./../components/Loading/home_no_results"
+import Loading from "./../components/Loading/loading_home";
+import Navbar from "./../components/Navbar/home_nav_bar.js";
+import FoodtruckBox from "./../components/Home/foodtruck_box_home.js";
+import SeeAll from "./../components/Home/see_all.js";
 import Filter from "./../components/Home/filter.js";
 import Footer from "./../components/Footer/footnote.js";
 
 import "./../css/home_page.css";
 
 import GoogleMapsSection from "./../images/maps_2.png";
+import ToggleIcon from "./../images/arrow_row_icon.svg";
 
 ///-------------------------Component----------------------//
 class HomePage extends React.Component {
@@ -35,7 +34,9 @@ class HomePage extends React.Component {
       vegan_starting:0,
       nearbyFoodtrucks:[],
       price_sort:5,
+      see_all:null,
       cheapest_trucks:[],
+      title:null,
       is_loading:true,
       vegan_trucks:[],
       ethnic_trucks:[],
@@ -55,6 +56,12 @@ class HomePage extends React.Component {
 
     this.setState({radius:radius});
     this.IntializePage(radius)
+  }
+
+  toggleSeeAll = (trucks,title) =>{
+
+    this.setState({see_all:trucks,title:title});
+
   }
 
   changePriceSort = (price_sort) => {
@@ -163,7 +170,7 @@ class HomePage extends React.Component {
 
         if(truck_catagory[index]){
         html.push(
-          <FoodBox
+          <FoodtruckBox
             address = {truck_catagory[index].address}
             key = {index}
             id = {i}
@@ -193,7 +200,9 @@ class HomePage extends React.Component {
             <div className="col-3"/>
 
             <div className="col-1">
-              <p className="hyperlink">See All</p>
+              <p className="hyperlink" onClick = {()=>{
+                this.toggleSeeAll(foodtruck_catagory,title)
+              }}>See All</p>
             </div>
 
             <div className="col-2"/>
@@ -221,14 +230,14 @@ class HomePage extends React.Component {
        </div>
      )
    }else{
-     return <HomeNoResults title = {title}/>
+     return <NoResults title = {title}/>
    }
   }
 
   renderFoodtruckSection(){
 
     if(this.state.is_loading){
-        return <LoadingHome text = "There are no Trucks in Radius Yet"  key = {this.state.radius}/>
+        return <Loading text = "There are no Trucks in Radius Yet"  key = {this.state.radius}/>
     }
 
       return(
@@ -263,11 +272,33 @@ class HomePage extends React.Component {
 
   //------------------------------Renderer--------------------------------
   render(){
+      var modal_is_active = this.state.see_all ? "active_modal_see_all no-point" : "";
 
+      if(this.state.see_all){
+        return  (
+          <div>
+            <div className= {modal_is_active} />
+
+              <SeeAll
+                SetTruck = {this.props.SetTruck}
+                ClearOrder = {this.props.ClearOrder}
+                ChangeURL = {this.props.ChangeURL}
+                see_all = {this.state.see_all}
+                title = {this.state.title}
+                key = {this.state.see_all}
+                toggleSeeAll = {this.toggleSeeAll}
+                address = {this.props.address}
+                account = {this.props.account}
+              />
+
+           </div>
+         )
+      }
+      
         return (
-          <div className="container-fluid pb5" key = {this.props.lat}>
+          <div className={"container-fluid pb5 "} key = {this.props.lat}>
 
-            <HomePageNav
+            <Navbar
               PostAddress = {this.props.PostAddress}
               orders = {this.props.orders}
               account = {this.props.account}

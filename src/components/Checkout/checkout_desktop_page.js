@@ -82,8 +82,13 @@ class Checkout extends React.Component {
 
     render(){
 
+      var checkout_available = this.props.orders.length > 0 ? "" : "not_checkout_available"
+
+
       return(
-        <div className="container-fluid">
+        <div className="container-fluid" onClick = {()=>{
+          this.props.toggleModal();
+        }}>
 
           <Navbar
             orders = {this.props.orders}
@@ -165,7 +170,13 @@ class Checkout extends React.Component {
                 Total: --------------------------- ${this.props.total}
               </p>
 
-              <button className="btn btn-danger w90 ml5 mt10 border-radius-20px">Place Order</button>
+              <button className={"btn btn-danger w90 ml5 mt10 border-radius-20px "+checkout_available}onClick = {()=>{
+                console.log(this.props.orders.length);
+
+                if(this.props.orders.length > 0){
+                  this.props.toggleModal();
+                }
+              }}>Place Order</button>
 
             </div>
 

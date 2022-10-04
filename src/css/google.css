@@ -1,9 +1,47 @@
 .maps_modal{
-  top:35%;
+  top:27.5%;
   animation: trans_down .2s 1 ease-in;
   left:0%;
   padding-bottom:2.5%;
+  position: absolute;
+  width:30%;
+  border-radius: 20px;
+  background:white;
+}
 
+.padding-0{
+  padding:0
+}
+
+.banner_modal {
+  height:250px;
+}
+.roboto{
+  font-family: "Roboto"
+}
+.relative {
+  position: relative;
+}
+.font-size-20px{
+  font-size: 20px;
+}
+.w50{
+  width:50%;
+}
+.grey{
+  color:grey
+}
+.font-size-13px{
+  font-size: 13px;
+}
+.ml5{
+  margin-left: 5%;
+}
+.mt5{
+  margin-top: 5%;
+}
+.adjust_bottom {
+  bottom:5px;
 }
 
 

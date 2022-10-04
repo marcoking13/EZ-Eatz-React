@@ -3,7 +3,7 @@ import cookie from "react-cookies";
 
 import "./../css/modify.css";
 
-import HomePageNav from "./../components/Navbar/home_nav_bar.js";
+import Navbar from "./../components/Navbar/home_nav_bar.js";
 import Modify from "./../components/Modify/modify_component.js";
 import Footer from "./../components/Footer/footnote.js";
 import BackArrow from  "./../images/back_arrow.png";
@@ -231,7 +231,7 @@ class ModifyPage extends React.Component {
 
     return (
       <div>
-        <HomePageNav
+        <Navbar
           orders = {this.props.orders}
           account = {this.props.account}
           ChangeAddress = {this.props.ChangeAddress}

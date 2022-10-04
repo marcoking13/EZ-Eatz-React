@@ -4,7 +4,8 @@ import axios from "axios";
 
 
 import Footer from "./../components/Footer/footnote.js";
-import CheckoutDesktop from "./../components/Checkout/checkout_desktop_page";
+import Modal from "./../components/Checkout/modal.js";
+import Page from "./../components/Checkout/checkout_desktop_page";
 
 import "./../css/checkout.css";
 
@@ -17,6 +18,7 @@ class CheckoutPage extends React.Component {
         hour:12,
         minute:0
       },
+      modal:false,
       tip:0,
       truck:{},
       total:0,
@@ -46,6 +48,14 @@ class CheckoutPage extends React.Component {
 
     return total;
 
+  }
+
+  toggleModal = () =>{
+    if(this.state.modal){
+      this.setState({modal:false})
+    }else{
+      this.setState({modal:true})
+    }
   }
 
 CalculateMods = (item,mod)=>{
@@ -93,20 +103,42 @@ CalculateMods = (item,mod)=>{
 
   }
 
+
+  renderModal = () => {
+    if(this.state.modal && this.props.orders.length > 0){
+      return (
+        <React.Fragment>
+          <div className="checkout_modal_cover"/>
+          <Modal
+            total = {this.state.total}
+            title = {this.props.truck.name}
+            address = {this.props.address}
+            toggleModal = {this.toggleModal}
+          />
+        </React.Fragment >
+      )
+    }
+  }
+
   render(){
 
         return(
-          <CheckoutDesktop
-             orders = {this.props.orders}
-             truck = {this.props.truck}
-             tip = {this.state.tip}
-             account = {this.props.account}
-             CalculateTip = {this.CalculateTip}
-             CalculateMods = {this.CalculateMods}
-             address = {this.props.address}
-             total = {this.state.total}
-             ChangeURL = {this.props.ChangeURL}
-           />
+          <div>
+            {this.renderModal()}
+            <Page
+               orders = {this.props.orders}
+               truck = {this.props.truck}
+               toggleModal = {this.toggleModal}
+               tip = {this.state.tip}
+               account = {this.props.account}
+               CalculateTip = {this.CalculateTip}
+               CalculateMods = {this.CalculateMods}
+               address = {this.props.address}
+               total = {this.state.total}
+               ChangeURL = {this.props.ChangeURL}
+             />
+
+           </div>
          )
 
     }

@@ -1,0 +1,42 @@
+.see_all_container{
+  position: absolute;
+  top:5%;
+  z-index:2;
+  animation: see_all .3s 1 ease-in;
+  background:white;
+  width:95%;
+  padding-bottom:5%;
+  left:2.5%;
+}
+
+.pb5{
+  padding-bottom:5%;
+}
+
+.exit_button{
+  font-weight: bold;
+  font-family: "Roboto";
+  color:grey;
+  position: relative;
+  top:50px;
+  font-size: 24px;
+}
+
+.exit_button:hover{
+  color:black;
+}
+
+.catagory_see_all{
+  font-family: "Roboto";
+  text-align: center;
+  font-size: 22px;
+}
+
+@keyframes see_all {
+  0%{
+    top:-100%
+  }
+  100%{
+    top:5%;
+  }
+}

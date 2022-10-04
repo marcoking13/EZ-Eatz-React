@@ -64,7 +64,96 @@
   background:	#8470ff;
   border-color:#8470ff;
 }
+.checkout_modal{
+  animation: checkout_modal .3s ease-in 1;
+  position: absolute;
+  width:50%;
+  border-radius:5px;
+  z-index:3;
+  top:5%;
+  left:25%;
+  padding-bottom:15%;
+  background:white;
+}
+@keyframes checkout_modal{
+  0%{
+    top:-40%;
+  }
+  100%{
+    top:5%;
+  }
+}
+.exit_success{
+  top:2.5%;
+  left:2.5%;
+  position: absolute;
+  color:white;
+  font-size: 25px;
+}
+.pb5{
+  padding-bottom:5%;
+}
+.not_checkout_available{
+  opacity:.4 !important;
+  pointer-events: none !important;
+}
+.success_message{
+  font-weight: bold;
+  text-align: center;
+  margin-top: 2.5%;
+  font-size: 25px;
+  color:#7ED957;
+  animation: success_appear 1s 1 ease-in;
+  position: relative;
+  font-family: "Archivo Black";
+}
+@keyframes success_appear{
+  0%{
+    opacity:0%;
+    top:-20px;
+  }
+  50%{
+    opacity:1;
+  }
+  100%{
+    top:0px;
+    opacity:1;
+  }
+}
+.success_title{
+  font-family: "Roboto";
+  font-size: 20px;
 
+  text-align: left;
+  margin-left: 5%;
+  margin-top:2.5%;
+}
+.big_text{
+  font-size: 25px;
+  font-weight: bold;
+}
+.total_success{
+  font-family: "Roboto";
+  font-size: 20px;
+  text-align: center;
+}
+.exit_success:hover{
+  color:red;
+}
+.checkout_modal_cover{
+  position: absolute;
+  z-index:2;
+  background:black;
+  top:0%;
+  width:100%;
+  height:1080px;
+  opacity:.7;
+  pointer-events: none;
+}
+.success_img{
+  width:100%;
+  height:300px;
+}
 @media screen and (max-width:590px){
   .tipBox{
     margin-left:0;

@@ -6,7 +6,7 @@ import "./../css/landing_page.css";
 import axios from "axios";
 import cookie from "react-cookies";
 
-import DesktopLandingPage from "./../components/Landing/landing_desktop.js";
+import DesktopPage from "./../components/Landing/landing_desktop.js";
 
 //-----------------------------------Component----------------------------------
 class LandingPage extends React.Component {
@@ -75,7 +75,7 @@ class LandingPage extends React.Component {
 
 
       return (
-        <DesktopLandingPage
+        <DesktopPage
           err = {this.state.err }
           GuestEntrance = {this.props.GuestEntrance}
           ChangeURL= {this.props.ChangeURL}

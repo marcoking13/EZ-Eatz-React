@@ -426,6 +426,146 @@ new Item("Orange Fanta","jvr4r9hjvj9u4tvhhv9uh4t9uhvt94","an orange fizzy soda",
   }
 ],
 [],
+),
+new Catagory("Desserts","504949490",
+[
+new Item("Classic Ice Cream Sandwich","5494949","A hot fudge ice cream sandwich",3.99,public_images + "/food/freeze_dry_12.png",400,
+[new Ingredients("Homemade Ice Cream",true),new Ingredients("Triple Chocolate Cookies",true)],
+[
+  {
+    name:"chocolate",
+    price:0
+  },
+  {
+    name:"strawberry",
+    price:0
+  },
+  {
+    name:"mint chocolate chip",
+    price:0
+  },
+  {
+    name:"cake batter",
+    price:0
+  },
+  {
+    name:"rocky road",
+    price:0
+  }
+],
+[
+new Addon("skittles",.5),
+new Addon("fudge",.4),
+new Addon("m&m",.3),
+new Addon("oreos",.6),
+new Addon("sprinkles",.5),
+new Addon("marshmallow",.5)
+],
+
+),
+new Item("Hot Fudge Sandwich","5474949","A hot fudge ice cream sandwich",6.99,public_images + "/food/freeze_dry_10.png",400,
+[new Ingredients("Homemade Ice Cream",true),new Ingredients("Hot Fudge",true),new Ingredients("Triple Chocolate Cookies",true)],
+[{
+  name:"chocolate",
+  price:0
+},
+{
+  name:"strawberry",
+  price:0
+},
+{
+  name:"mint chocolate chip",
+  price:0
+},
+{
+  name:"cake batter",
+  price:0
+},
+{
+  name:"rocky road",
+  price:0
+}],
+[
+new Addon("chocolate chips",.5),
+new Addon("extra fudge",.4),
+new Addon("m&m",.3),
+new Addon("oreos",.6),
+new Addon("sprinkles",.5),
+new Addon("marshmallow",.5)
+],
+
+),
+
+new Item("Classic Ice Cream Sandwich","5484949","A hot fudge ice cream sandwich",3.99,public_images + "/food/freeze_dry_8.png",400,
+[new Ingredients("Homemade Ice Cream",true),new Ingredients("Triple Chocolate Cookies",true)],
+[
+  {
+    name:"chocolate",
+    price:0
+  },
+  {
+    name:"strawberry",
+    price:0
+  },
+  {
+    name:"mint chocolate chip",
+    price:0
+  },
+  {
+    name:"cake batter",
+    price:0
+  },
+  {
+    name:"rocky road",
+    price:0
+  }
+],
+[
+new Addon("skittles",.5),
+new Addon("fudge",.4),
+new Addon("m&m",.3),
+new Addon("oreos",.6),
+new Addon("sprinkles",.5),
+new Addon("marshmallow",.5)
+],
+
+),
+new Item("Special Ice Cream Sandwich","5492949","A hot fudge ice cream sandwich",5.99,public_images + "/food/freeze_dry_7.png",400,
+[new Ingredients("Homemade Ice Cream",true),new Ingredients("Nerd Ropes",true),new Ingredients("Triple Chocolate Cookies",true)],
+[
+  {
+    name:"chocolate",
+    price:0
+  },
+  {
+    name:"strawberry",
+    price:0
+  },
+  {
+    name:"mint chocolate chip",
+    price:0
+  },
+  {
+    name:"cake batter",
+    price:0
+  },
+  {
+    name:"vanilla",
+    price:0
+  }
+],
+[
+new Addon("chocolate chips",.5),
+new Addon("mystery gummies",.5),
+new Addon("extra fudge",.4),
+new Addon("m&m",.3),
+new Addon("oreos",.6),
+new Addon("sprinkles",.5),
+new Addon("marshmallow",.5)
+]
+)]
+
+
 )
 
 ]

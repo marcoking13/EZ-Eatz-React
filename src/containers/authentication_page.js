@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-import FormComponent from "./../components/signup/form_component";
+import Form from "./../components/Authentication/form_component";
 
 
 class AuthenticationPage extends React.Component {
@@ -111,7 +111,7 @@ class AuthenticationPage extends React.Component {
     if(this.state.counter < this.state.limit){
 
       return(
-        <FormComponent
+        <Form
           ChangeInput = {this.ChangeInput}
           dataKey = {dataItem.key}
           GoogleAuthentication={this.GoogleAuthentication}
@@ -121,7 +121,7 @@ class AuthenticationPage extends React.Component {
           directions = {dataItem.directions}
         />
       )
-      
+
     }
     else{
 

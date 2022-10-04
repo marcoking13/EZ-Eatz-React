@@ -4,13 +4,12 @@ import { compose, withProps } from "recompose"
 import axios from 'axios';
 import cookies from "react-cookies";
 
-import NoResults from "./../components/no_results"
-import Loading from "./../components/loading_map";
+import Loading from "./../components/Loading/loading_map";
+import NoResults from "./../components/Loading/no_results";
 import Navbar from "./../components/Navbar/home_nav_bar";
+import Modal from "./../components/Maps/modal.js";
 
 import Ringer from "./../images/ringer.gif";
-
-import Star from "./../images/full_star.png";
 
 import "./../css/google.css"
 
@@ -45,23 +44,18 @@ const MyMapComponent = compose(
           url:Ringer,
           scaledSize: new window.google.maps.Size(35,35)
         }}
-
-
       />
-
-
 
       {props.markers.map(marker => (
 
           <Marker
             position={{ lat: marker.lat, lng: marker.lng }}
-            icon = {{url:marker.url, scaledSize: new window.google.maps.Size(50,50)}}
+            icon = {{url:marker.url, scaledSize: new window.google.maps.Size(60,60)}}
+            style={{borderRadius:"50%"}}
             onClick = {()=>{
 
               props.setModal({modal:marker.truck});
-
               props.SetCenter(marker.lat,marker.lng);
-
 
             }}>
 
@@ -69,8 +63,6 @@ const MyMapComponent = compose(
           </Marker>
 
         ))}
-
-
 
      </GoogleMap>
 )
@@ -101,66 +93,18 @@ export default class Maps extends React.Component {
   }
 
   SetCenter = (lat,lng) =>{
+
     this.setState({
       center_lat:lat,
       center_lng:lng
     })
-    console.log(this.state);
-  }
 
-  RenderModal =()=>{
-
-
-    if(this.state.modal){
-
-      var stars = [];
-      var expensive = "";
-
-      for(var i =0 ; i < this.state.modal.modal.stars;i++){
-        stars.push(<div className="col-2"style={{padding:0}}>
-          <img className="w100" src = {Star} />
-        </div>);
-      }
-
-      for(var i = 0; i < this.state.modal.modal.expensive; i++){
-        expensive += "$";
-      }
-
-
-
-      return (
-
-        <div className="row maps_modal"style={{position:"absolute",width:"30%",background:"white",borderRadius:"20px"}}>
-          <img style={{width:"100%",height:"200px",borderRadius:"5px"}} src ={this.state.modal.modal.banner}/>
-          <p className="w100 mt2_5 ml5" style={{fontSize:"20px",fontFamily:"Roboto"}}>{this.state.modal.modal.name}, ({this.state.modal.modal.address.city},{this.state.modal.modal.address.state})</p>
-          <div className="row">
-              <div className="col-1"/>
-              <div className="col-6 mt2_5"style={{position:"relative",bottom:"5px"}}>
-                <div className="row">
-                  {stars}
-                </div>
-              </div>
-          </div>
-          <p className="w100 ml5" style={{fontSize:"13px",fontFamily:"Roboto",color:"grey",marginLeft:"5%"}}>{expensive} | {this.state.modal.modal.type[0]} | 20-30 min</p>
-
-          <br />
-
-          <button onClick = {()=>{
-            this.props.SetTruck(this.state.modal.modal);
-            this.props.ChangeURL("menu");
-          }}className="btn add-to-cart ui cb f13px w50" style={{marginLeft:"5%",width:"50%",marginTop:"5%",color:"grey"}} >See Menu</button>
-
-
-        </div>
-      )
-    }else{
-      return <div />
-    }
   }
 
   setModal = (truck)=>{
     this.setState({modal:truck})
   }
+
   componentDidMount(){
 
     this.ConvertAddress();
@@ -198,9 +142,11 @@ export default class Maps extends React.Component {
   }
 
   renderMap(){
+
     if(this.state.is_loading){
       return <Loading />
     }
+
     if(this.state.lat && this.state.lng){
 
       return(
@@ -223,13 +169,12 @@ export default class Maps extends React.Component {
         </div>
       )
 
-  }
+   }
    else{
      return <NoResults text = "Enter Your Address to View Map!"/>
    }
 
-  }
-
+}
 
   render(){
 
@@ -247,7 +192,11 @@ export default class Maps extends React.Component {
           />
             <br />
             {this.renderMap()}
-            {this.RenderModal()}
+          <Modal
+            ChangeURL = {this.props.ChangeURL}
+            modal = {this.state.modal}
+            SetTruck = {this.props.SetTruck}
+          />
           </div>
       );
 

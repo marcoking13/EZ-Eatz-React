@@ -13,7 +13,6 @@ var url = process.env.MONGODB_URI || "mongodb://localhost:27017/heroku_9tlg8v4r"
 
 const ConvertToCoords = require("./config/geocode.js");
 const CalculateDistance = require("./distance_calculator.js");
-var FoodtruckConfigNew = require("./config/new_foodtruck_config.js");
 
 const collections = ["foodtrucks","users","currentUser"];
 const database = "eater_db";
@@ -24,6 +23,8 @@ const UserConstructor = require("./config/user_constructor.js");
 const Truck = require("./database/foodtruckSchema.js");
 const UserSample = require("./config/userSample.js");
 
+const FoodtruckGenerator = require("./config/foodtruck_generator.js")
+FoodtruckGenerator();
 const app = express();
 const port = process.env.PORT || 4001;
 
@@ -110,11 +111,11 @@ const MongooseStartup = () => {
       // console.log("Deleted " + result.deletedCount + " documents");
       dbO.collection("foodtrucks").find({}).toArray(async function(err, result) {
           if (err) throw err;
-          var foodtrucks = await FoodtruckConfigNew();
+          var foodtrucks = await FoodtruckGenerator();
           if(result.length <= 0){
             dbO.collection("foodtrucks").insertMany(foodtrucks);
           }else{
-            console.log("Trucks already in Db");
+            console.log("Trucks already in Db "+foodtrucks.length );
           }
 
       });
