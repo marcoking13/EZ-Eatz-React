@@ -50,7 +50,10 @@
   top:55%;
   left:-5%;
 }
-@media screen and (max-width:580px){
+.modify_container{
+  height:500px
+}
+/* @media screen and (max-width:580px){
   .modName{
     font-size: 12px;
     width:100px;
@@ -78,5 +81,57 @@
   }
   .modCon{
     padding-right: 30px !important;
+  }
+} */
+.itemName{
+  font-size:22px;
+  margin-left:25%
+}
+.modify_total{
+  font-size:22px;margin-left:25%
+}
+@media screen and (max-width:844px){
+  .back_arrow_container{
+    width:100%;
+    top:10%;
+    position:absolute !important;
+  }
+  .modify_jumobtron{
+    margin-top:30% !important;
+  }
+  .itemName{
+    margin-left:5% !important
+  }
+  .modify_description{
+    margin-left:5% !important;
+  }
+  .modify_total{
+    margin-left:5% !important;
+  }
+  .modTitle{
+    padding-top:2.5%;
+    padding-bottom:2.5%;
+    background:#F1F1F1;
+  }
+  .modify_container{
+    height:100% !important;
+  }
+  .modify_bubble{
+    height:30px !important;
+    width:30px !important;
+  }
+  .modName{
+    font-size:18px !important;
+  }
+  .modNamer{
+    position: static;
+
+    margin-bottom: 0px !important;
+  }
+  .modify_wrapper{
+    margin-top:10%;
+  }
+  .modify_button{
+    margin-top:10%;
   }
 }

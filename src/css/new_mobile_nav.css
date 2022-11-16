@@ -1,0 +1,11 @@
+.mobile_nav_text{
+color:white;
+margin-left:10%;
+border:2px solid none;
+}
+.nav_container_mobile{
+  margin-left: 12.5%;
+}
+.mobile_nav_text:hover{
+  border-color:white;
+}

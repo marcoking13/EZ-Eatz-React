@@ -190,7 +190,6 @@ export default class Maps extends React.Component {
             changePlace = {this.changePlace}
             ChangeURL = {this.props.ChangeURL}
           />
-            <br />
             {this.renderMap()}
           <Modal
             ChangeURL = {this.props.ChangeURL}

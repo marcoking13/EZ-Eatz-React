@@ -3,6 +3,7 @@ import JWT_Decode from "jwt-decode";
 
 import FormIcon from "./../../images/form_icon.svg";
 import LandingBackground from "./../../images/landing_background.png";
+import LandingBackgroundMobile from "./../../images/landing_background_mobile.png";
 
 
 
@@ -107,18 +108,25 @@ class FormComponent extends React.Component {
 
   render(){
 
+    var width = window.innerWidth;
+
+    var background = width >= 844 ? LandingBackground : LandingBackgroundMobile;
+    var height = width >= 844 ? 1080 : 900;
+    var col_spacer = width >= 844 ? 4 : 2;
+    var col_container = width >=844 ? 4 : 8;
+
     return(
-      <div className="container-fluid form_component padding-top-5"style = {{background:`url(${LandingBackground})`,height:"1080px",paddingBottom:"100%"}}>
+      <div className="container-fluid form_component padding-top-5"style = {{background:`url(${background})`,height:height + "px",paddingBottom:"100%"}}>
 
         <p className="ez_title margin-left-5">EZ<strong className="ez_title_end">Eatz</strong></p>
 
-        <div id="google_login" style={{position:"absolute",width:"15%",right:"5%",top:"2.5%"}}></div>
+        <div id="google_login"></div>
 
         <div className="row add_form  " ref ={this.formRef}>
 
-          <div className="col-4"/>
+          <div className={"col-"+col_spacer + " form_spacer"}/>
 
-          <div className="col-4 form_container jumbotron "style={{background:"white",borderRadius:"5px"}}>
+          <div className={"col-"+col_container+" form_container jumbotron "}style={{background:"white",borderRadius:"5px"}}>
 
             <div className=" form-group">
               <p className="form_text "> {this.props.title} </p>

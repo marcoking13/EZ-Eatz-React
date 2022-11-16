@@ -1,4 +1,6 @@
-
+#google_login{
+  position:absolute;width:15%;right:5%;top:2.5%;
+}
 
 .form_icon{
   width:20%;
@@ -44,7 +46,9 @@
 
   padding:5%;
 }
-
+.form_component{
+  background-size:cover;
+}
 .form_button{
   border-radius:20px;
   margin-top:15%;
@@ -85,13 +89,76 @@
 
   }
 }
+@keyframes remove_form_m {
+  from{
+    left:0px;
+
+  }
+  to{
+    left:600px;
+
+  }
+}
+
+@keyframes add_form_m {
+  from{
+    left:-1100px;
+  }
+  to{
+    left:0px;
+
+  }
+}
 @keyframes remove_form {
   from{
     left:0px;
 
   }
   to{
-    left:1100px;
+    left:600px;
 
   }
+}
+
+
+@media screen and (max-width: 844px)
+{
+  .form_component{
+    background-size:cover !important;
+  }
+
+  .form_container{
+    margin-top:5% !important;
+  }
+
+  .form_spacer{
+    width:0% !important;
+  }
+
+  #google_login{
+    top: 95% !important;
+    width: 70% !important;
+    left: 32.5% !important;
+  }
+
+  .add_form{
+    position: relative;
+    animation-name: add_form_m !important;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    left:0px;
+  }
+.form_text{
+  text-align:center !important;
+}
+  .remove_form{
+    position: relative;
+    animation-name: remove_form_m !important;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    left:0px;
+  }
+
 }

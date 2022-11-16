@@ -96,9 +96,7 @@ class App extends Component {
       if(cookie.load("account",{path:"/"})){
         this.Initialization();
       }
-      if(window.innerWidth < 480){
-        this.setState({url:"map"})
-      }
+
       this.ClearCookieTimer();
 
   }

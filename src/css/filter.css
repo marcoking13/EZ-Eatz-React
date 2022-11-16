@@ -114,3 +114,59 @@
   transition: all;
   border-color:white;
 }
+
+
+.filter_modal{
+  width:100%;
+  background:white;
+  z-index:2;
+  left:0%;
+  position:absolute;
+  top:10%;
+  padding-bottom:5%;
+}
+.x_modal_filter{
+  position: absolute;
+  right:10%;
+  z-index:999;
+  font-size:20px;
+  color:grey;
+  top:10%;
+}
+.x_modal_filter:hover{
+  color:black;
+}
+.filter_icon_mobile{
+  width:5%;
+  position: fixed;
+  z-index:55;
+  top:22.5%;
+  right:5%;
+}
+.filter_icon_mobile_active{
+  z-index:-1 !important;
+}
+.filter_icon_mobile:hover{
+  filter:brightness(0);
+}
+.filter_background{
+  width:100%;
+  position:absolute;
+  top:0%;
+  height:3000px;
+  background:black;
+}
+
+.visible{
+  visibility: hidden;
+}
+.invisible{
+  visibility: hidden;
+}
+@media screen and (max-width:844px){
+  .filter_bubble{
+    width:5%;
+
+  }
+
+}

@@ -61,4 +61,45 @@
 .icon{
   float:left;
   width:15%;
+
+}
+.ez_logo_mobile{
+  opacity:0;
+}
+/*--------------------Mobile--------------------------*/
+
+@media screen and (max-width: 844px)
+{
+
+  .icon{
+    float: left;
+    width: 25%;
+    margin-top: 2.5%;
+
+  }
+.landing_page{
+  background-size:cover !important;
+}
+.reward_slogan{
+  font-size:18px;
+}
+.sub_slogan_landing{
+  font-size:25px;
+}
+.ez_title {
+  text-align:center;
+  font-size:55px;
+  color:red;
+}
+.ez_title_end {
+  text-align:center;
+  font-size:55px;
+}
+
+    .ez_logo_mobile{
+      width:30%;
+      margin-left:35%;
+    opacity:1;
+    margin-top:-5%;
+    }
 }

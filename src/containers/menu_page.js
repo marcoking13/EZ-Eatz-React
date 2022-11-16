@@ -46,6 +46,10 @@ class MenuPage extends React.Component {
   render(){
 
     console.log(this.props.truck);
+    
+    var menu_col_size = window.innerWidth  >= 844 ? 7 : 12
+    var listing_col_size = window.innerWidth  >= 844 ? 3 : 12
+    var spacer_col_size = window.innerWidth  >= 844 ? 2 : 0
 
     return(
       <div>
@@ -61,9 +65,6 @@ class MenuPage extends React.Component {
           navStyle ="white"
         />
 
-        <br />
-        <br />
-
         <Showcase
           SetAddress = {this.props.SetAddress}
           renderExpensive = {this.renderExpensive}
@@ -74,11 +75,11 @@ class MenuPage extends React.Component {
         <div className="container-fluid menu_container mt5">
 
         <div className="row">
-          <div clasName="col-4 catagory_listings">
+          <div clasName={"col-"+ listing_col_size+ " catagory_listings"}>
             <CatagoryListings truck = {this.props.truck}/>
           </div>
-          <div className="col-2"/>
-          <div className="menux col-7">
+          <div className={spacer_col_size}/>
+          <div className={"menux col-"+menu_col_size}>
             <MenuRows truck = {this.props.truck} SetItem = {this.props.SetItem}/>
           </div>
 

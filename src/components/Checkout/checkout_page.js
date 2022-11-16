@@ -84,6 +84,13 @@ class Checkout extends React.Component {
 
       var checkout_available = this.props.orders.length > 0 ? "" : "not_checkout_available"
 
+      var checkout_col_size = window.innerWidth >= 844 ? 4 : 12;
+
+      var margin_top_view = window.innerWidth >= 844 ? 0 : 5;
+
+      var margin_style = {
+        marginTop:margin_top_view.toString() + "%"
+      }
 
       return(
         <div className="container-fluid" onClick = {()=>{
@@ -105,7 +112,7 @@ class Checkout extends React.Component {
 
             <br />
 
-            <div className="col-4">
+            <div className={"col-"+checkout_col_size}style={margin_style}>
               {this.renderCheckoutTitle()}
 
               <div className="row">
@@ -118,7 +125,7 @@ class Checkout extends React.Component {
 
             </div>
 
-            <div className="col-4">
+            <div className={"col-"+checkout_col_size}style={margin_style}>
 
                 <div className="row">
                   <div className="col-2">  <h5>Tip</h5> </div>
@@ -158,7 +165,7 @@ class Checkout extends React.Component {
 
               <div className="col-1"/>
 
-            <div className="col-3 padding-bottom-5 background-white border-e6">
+            <div className={"col-"+checkout_col_size +" padding-bottom-5 background-white border-e6"}style={margin_style}>
 
               <p className="text-center font-size-22 margin-top-5">Order Summary</p>
 
@@ -167,7 +174,7 @@ class Checkout extends React.Component {
               {this.ordersLoop(false)}
 
               <p className="roboto font-size-22 mt10">
-                Total: --------------------------- ${this.props.total}
+                Total: ------------------ ${this.props.total}
               </p>
 
               <button className={"btn btn-danger w90 ml5 mt10 border-radius-20px "+checkout_available}onClick = {()=>{

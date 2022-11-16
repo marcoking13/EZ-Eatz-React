@@ -46,7 +46,8 @@ class ShowBox extends React.Component {
 
 
   render(){
-
+    var logo_col = window.innerWidth >= 844 ? 1 : 3;
+    var star_col_size = window.innerWidth >= 844 ? 2 : 3;
         return(
             <div className="container-fluid">
 
@@ -56,25 +57,22 @@ class ShowBox extends React.Component {
                     <div className="menu_showcase col-12" style={{background:`url(${process.env.PUBLIC_URL +  this.props.truck.banner})`,backgroundSize:"cover"}} ></div>
                 </div>
 
-                <br />
-
                 <div className="row">
                   <div className="margin-left-5"/>
-                  <div className="col-1">
+                  <div className={"col-"+logo_col}>
                     <div className="logo_container" style={{border:"none 0px solid",background:"none"}}>
                           <img src = {process.env.PUBLIC_URL + this.props.truck.mapLogo} className="foodtruck_logo_menu" style={{border:"none 0px solid"}}/>
                     </div>
                   </div>
 
                   <div className="col-12">
-                    <br/>
                     <p className="foodtruck_menu_name">{this.props.truck.name} ({this.props.truck.address.city}, { this.props.truck.address.state})</p>
                     <p className="foodtruck_menu_details">10-30 min | {this.props.truck.type[0]} | {this.props.renderExpensive()}</p>
                   </div>
 
                   <div className="margin-left-5"/>
 
-                  <div className="col-2">
+                  <div className={"col-"+star_col_size}>
                       <div className="row foodtruck_star_container">
                         {this.renderStars()}
                       </div>

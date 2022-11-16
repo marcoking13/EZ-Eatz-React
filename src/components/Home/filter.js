@@ -109,56 +109,62 @@ class Filter extends React.Component {
     )
   }
 
-  render(){
+  renderFilterPage = () => {
+    return(
+    <div className="container-fluid filter">
+      <p className="filter_heading margin-left-5 margin-top-15 bold">Filter Trucks</p>
 
-      return (
-        <div className="container-fluid filter">
-          <p className="filter_heading margin-left-5 margin-top-15 bold">Filter Trucks</p>
+      <div className="sort_container width-100 margin-top-5">
+        <p className="filter_text bold roboto margin-left-10">Sort</p>
 
-          <div className="sort_container width-100 margin-top-5">
-            <p className="filter_text bold roboto margin-left-10">Sort</p>
-
-            {this.renderFilterBubble("For You (Default)",{name:null,criteria:null})}
-            {this.renderFilterBubble("Best Ratings",{name:"ratings",criteria:3.5})}
-            {this.renderFilterBubble("Closest to You",{name:"nearest",criteria:10})}
-
-          </div>
-
-          <br />
-
-          <div className="deals_container width-100 margin-top-10">
-            <p className="filter_text bold roboto margin-left-10">Radius</p>
-            {this.renderRadius()}
-          </div>
-
-          <br />
-
-          <div className="deals_container width-100 margin-top-10">
-            <p className="filter_text bold roboto margin-left-10">Deals</p>
-            {this.renderToggleDeals()}
-          </div>
-
-          <br />
-
-          <div className="prices_container width-100 margin-top-5">
-            <p className="filter_text bold roboto margin-left-10">Price Limit</p>
-
-          <div className="row">
-            <div className="col-1"/>
-            <div className="col-10">
-              <div className="row width-90">
-                  {this.renderPriceTags()}
-              </div>
-            </div>
-          </div>
-        </div>
+        {this.renderFilterBubble("For You (Default)",{name:null,criteria:null})}
+        {this.renderFilterBubble("Best Ratings",{name:"ratings",criteria:3.5})}
+        {this.renderFilterBubble("Closest to You",{name:"nearest",criteria:10})}
 
       </div>
 
-    );
+      <br />
 
+      <div className="deals_container width-100 margin-top-10">
+        <p className="filter_text bold roboto margin-left-10">Radius</p>
+        {this.renderRadius()}
+      </div>
+
+      <br />
+
+      <div className="deals_container width-100 margin-top-10">
+        <p className="filter_text bold roboto margin-left-10">Deals</p>
+        {this.renderToggleDeals()}
+      </div>
+
+      <br />
+
+      <div className="prices_container width-100 margin-top-5">
+        <p className="filter_text bold roboto margin-left-10">Price Limit</p>
+
+      <div className="row">
+        <div className="col-1"/>
+        <div className="col-10">
+          <div className="row width-90">
+              {this.renderPriceTags()}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+)
   }
 
-}
+  render(){
+
+      return (
+        <div >
+          {this.renderFilterPage()}
+      </div>
+    );
+    }
+
+  }
 
 export default  Filter;

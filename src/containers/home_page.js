@@ -10,6 +10,7 @@ import Navbar from "./../components/Navbar/home_nav_bar.js";
 import FoodtruckBox from "./../components/Home/foodtruck_box_home.js";
 import SeeAll from "./../components/Home/see_all.js";
 import Filter from "./../components/Home/filter.js";
+import Filter_Mobile_Icon from "./../images/filter_mobile_icon.png";
 import Footer from "./../components/Footer/footnote.js";
 
 import "./../css/home_page.css";
@@ -30,6 +31,7 @@ class HomePage extends React.Component {
       best_rated_foodtrucks:[],
       best_rated_starting:0,
       cheapest_starting:0,
+      filter_modal:false,
       nearby_starting:0,
       vegan_starting:0,
       nearbyFoodtrucks:[],
@@ -135,6 +137,9 @@ class HomePage extends React.Component {
 
   }
 
+  toggleFilterModal = (toggle) =>{
+    this.setState({filter_modal:toggle})
+  }
   ToggleRatingStarting = (multiplier,starting,trucks_length) =>{
     var toggle = this.ToggleTrucks(multiplier,starting,trucks_length);
     this.setState({best_rated_starting:toggle});
@@ -189,17 +194,21 @@ class HomePage extends React.Component {
   }
 
   CreateFoodtruckRow = (title,foodtruck_catagory,toggle_catagory,toggle_func) => {
+    var title_class = window.innnerWidth >= 844 ? "col-5" : "col-12 text-center";
+    var see_all_class = window.innnerWidth >= 844 ? "col-1" : "col-4 text-center";
+    var divider_class = window.innnerWidth >= 844 ? "col-3" : "col-4";
+
     if(foodtruck_catagory.length > 0){
      return (
        <div className="container-fluid row margin-top-5">
 
-            <div className="col-5">
+            <div className={title_class}>
               <p className="truck_row_title">{title}</p>
             </div>
 
-            <div className="col-3"/>
+            <div className={divider_class}/>
 
-            <div className="col-1">
+            <div className={see_all_class}>
               <p className="hyperlink" onClick = {()=>{
                 this.toggleSeeAll(foodtruck_catagory,title)
               }}>See All</p>
@@ -234,29 +243,54 @@ class HomePage extends React.Component {
    }
   }
 
+  renderFilter =() =>{
+    if(window.innerWidth >= 844){
+
+          return(      <div className="col-2">
+                   <Filter price_sort = {this.state.price_sort} changePriceSort = {this.changePriceSort} radius = {this.state.radius} changeRadius = {this.changeRadius} sort = {this.state.sort} changeSort = {this.changeSort}/>
+                </div>
+              )
+    }else{
+      var visibility = this.state.filter_modal ? "visible" : "invisible";
+      return (
+        <div className={"filter_modal  "+visibility} >
+          <div className="filter_modal_background"/>
+          <p className="x_modal_filter"onClick = {()=>{
+            this.toggleFilterModal(false);
+          }}>X</p>
+          <Filter price_sort = {this.state.price_sort} changePriceSort = {this.changePriceSort} radius = {this.state.radius} changeRadius = {this.changeRadius} sort = {this.state.sort} changeSort = {this.changeSort}/>
+        </div>
+      )
+    }
+  }
+
   renderFoodtruckSection(){
+    var spacer = window.innerWidth >= 844 ? null : <div className="col-1 margin-left-2_5"/> ;
+    var active = this.state.filter_modal ? "filter_icon_mobile_active" : ""
+    var filter_icon = window.innerWidth >= 844 ? null : <img src = {Filter_Mobile_Icon} onClick = {()=>{
+      this.toggleFilterModal(true);
+    }}className={"filter_icon_mobile " + active} />;
 
     if(this.state.is_loading){
         return <Loading text = "There are no Trucks in Radius Yet"  key = {this.state.radius}/>
     }
 
+
       return(
         <div className='row' key = {this.state.radius}>
-
-          <div className="col-2">
-             <Filter price_sort = {this.state.price_sort} changePriceSort = {this.changePriceSort} radius = {this.state.radius} changeRadius = {this.changeRadius} sort = {this.state.sort} changeSort = {this.changeSort}/>
-          </div>
-
+          {filter_icon}
+          {this.renderFilter()}
+          {spacer}
           <div className="foodtruck_container col-10">
 
             {this.CreateFoodtruckRow("Nearest You",this.state.nearbyFoodtrucks,this.state.nearby_starting,this.ToggleNearbyStarting)}
             {this.CreateFoodtruckRow("Best Rated",this.state.best_rated_foodtrucks,this.state.best_rated_starting,this.ToggleRatingStarting)}
 
-            <div className="relative w100">
+            <div className="relative w100 maps_ad_container">
               <img src = {GoogleMapsSection} className="w100" />
               <button onClick = {()=>{
                 this.props.ChangeURL("map");
-              }}style={{top:"60%",left:"2.5%",position:"absolute",width:"30%",color:"white",background:"black"}} className="button black ui inverted invert add-to-cart cw">See Map</button>
+              }} className="button black ui add-to-cart cw google_home_button">See Map</button>
             </div>
 
             {this.CreateFoodtruckRow("Most Affordable",this.state.cheapest_trucks,this.state.cheapest_starting,this.ToggleExpensiveStarting)}
@@ -294,7 +328,7 @@ class HomePage extends React.Component {
            </div>
          )
       }
-      
+
         return (
           <div className={"container-fluid pb5 "} key = {this.props.lat}>
 

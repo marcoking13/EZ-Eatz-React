@@ -12,6 +12,7 @@ import GoogleMap from "./../../images/map_icon.svg";
 import Cart from "./../../images/cart_icon.svg";
 import Truck from "./../../images/truck_icon.png";
 import MapIcon2 from "./../../images/map_icon_2.svg";
+import NewMobileNavBar from './new_mobile_nav_bar.js';
 
 class NavBarHome extends React.Component {
   constructor(props){
@@ -137,6 +138,11 @@ class NavBarHome extends React.Component {
 //---------------------------------------------------------------------------
   render(){
 
+    if(window.innerWidth <= 844){
+      return(
+        <NewMobileNavBar data = {this.props}/>
+      )
+    }
   return(
     <div className="container-fluid navbar_home"style={{background:"white"}}>
       <div className="row width-90 margin-left-5">

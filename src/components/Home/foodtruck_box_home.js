@@ -59,12 +59,13 @@ class FoodBox extends React.Component {
   render(){
 
         var city = this.props.foodtruck.address.city;
+        var col_size = window.innerWidth >= 844 ? 3 : 12
 
         return (
-           <div className="col-3" key ={this.props.id}  data = {this.props.foodtruck}onClick = {(e)=>{
+           <div className={"col-"+col_size + " foodtruck_col"} key ={this.props.id}  data = {this.props.foodtruck}onClick = {(e)=>{
              return this.SelectTruck(this.props.foodtruck);
            }}>
-            <div className="w90 ml5">
+            <div className="w90 ml5 foodtruck_wrapper">
                <img alt="showcase" className="w100 relative moveUpDown foodtruck_image"  src={this.props.foodtruck.background}/>
 
                <div className="row foodtruck_info_row">

@@ -26,7 +26,7 @@ const UserSample = require("./config/userSample.js");
 const FoodtruckGenerator = require("./config/foodtruck_generator.js")
 FoodtruckGenerator();
 const app = express();
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 4002;
 
 app.use(bodyParser());
 app.use(session({secret:"njerenve",saveUnintialized:true,resave:true,httpOnly:false}));

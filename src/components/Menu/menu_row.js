@@ -12,9 +12,9 @@ class  MenuRow extends React.Component {
       const catagory_name = <p className="menu_row_title" key = {catagory.catagory} id = {catagory.catagory}> {catagory.catagory} </p>
 
       const food_items = catagory.menu.map((food_item,index)=>{
-
+        var col_size = window.innerWidth >=  844 ? 4 : 6;
         return (
-          <div className="col-4 menu_item" onClick = {()=>{console.log(food_item);this.props.SetItem(food_item)}}>
+          <div className={"col-" + col_size + " menu_item"} onClick = {()=>{console.log(food_item);this.props.SetItem(food_item)}}>
             <img className="menu_item_image" src = {food_item.image}/>
             <div className="row">
               <p className="col-6 menu_item_description"> {food_item.name}</p>
@@ -47,7 +47,7 @@ class  MenuRow extends React.Component {
         {this.RenderRow()}
     </div>
     )
-    
+
   }
 
 }

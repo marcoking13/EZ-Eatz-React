@@ -54,3 +54,27 @@
     left:0%;
   }
 }
+
+@media screen and (max-width:844px){
+  .google_modal_button {
+    margin-top: 1% !important;
+    border-radius: 10px;
+    background: black;
+    color: white !important;
+    margin-left: 25%;
+  }
+  .google_modal_title{
+    margin-left:7.5% !important;
+  }
+  .google_modal_rating{
+    margin-left:2.5%;
+  }
+  .google_modal_details{
+    margin-top:2.5%;
+    margin-left:10%;
+  }
+  .maps_modal{
+    width:85%;
+    padding-bottom:5%;
+  }
+}

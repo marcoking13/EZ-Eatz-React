@@ -5,7 +5,7 @@ import axios from "axios";
 
 import Footer from "./../components/Footer/footnote.js";
 import Modal from "./../components/Checkout/modal.js";
-import Page from "./../components/Checkout/checkout_desktop_page";
+import Page from "./../components/Checkout/checkout_page";
 
 import "./../css/checkout.css";
 
@@ -59,28 +59,26 @@ class CheckoutPage extends React.Component {
   }
 
 CalculateMods = (item,mod)=>{
+
     if(mod){
-      console.log(mod);
+
       var total = 0;
       var option = mod.type.length > 0 ? mod.type[0].price : 0;
       var addons = mod.add;
 
       total += option;
 
-      console.log(total);
-
       if(addons.length > 0){
         addons.forEach((addon) => {
           total += addon.price;
         });
-
-        console.log(total);
 
       }
       return total;
   }else{
     return 0
   }
+
 }
 
 

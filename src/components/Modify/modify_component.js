@@ -41,7 +41,7 @@ class Modify extends React.Component {
 
               <div className ="mt5 modBox" onClick = {(e)=>{ console.log(modifier); this.props.modifyIngredient(modifier)}}>
 
-                <div className={"bw br10px fl ml5 mr5 BBd4 turnd4 w20px h20px "+color}>  <img alt="mod" className="checkser ml15 posRel" src="assets/images/check.png"/></div>
+                <div className={"bw br10px fl ml5 mr5 BBd4 turnd4 w20px h20px modify_bubble "+color}>  <img alt="mod" className="checkser ml15 posRel" src="assets/images/check.png"/></div>
                   <p className=" ml5 f15px modNamer modName">{this.props.prefix} {modifier.name} {price_text}</p>
                 </div>
 
@@ -55,7 +55,7 @@ class Modify extends React.Component {
   render(){
 
     if(this.props.modifiers.length > 0){
-      return <div className="border-right-black-1px "style={{height:"500px"}}>{this.renderContainer()}</div>
+      return <div className="border-right-black-1px modify_container">{this.renderContainer()}</div>
     }else{
       return null;
     }

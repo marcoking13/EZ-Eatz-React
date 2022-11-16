@@ -33,6 +33,9 @@ filter:invert(90);
   left: 15%;
 
 }
+.google_home_button{
+    background:black !important;
+}
 .no_results_text{
   font-size:30px;
   opacity:90%;
@@ -238,4 +241,42 @@ filter:invert(90);
   color:blue;
   border-color:blue;
 
+}
+.google_home_button{
+  top:60%;
+  left:2.5%;
+  position:absolute;
+  width:30%;
+  color:white;
+  background:black
+}
+.foodtruck_col{
+  margin-top:2.5%;
+}
+
+@media screen and (max-width:844px){
+  .hyperlink{
+    width:50%;
+    margin-left:25%;
+    font-size:14px;
+  }
+  .truck_row_title{
+    font-size:30px;
+    margin-top:10%;
+  }
+  .foodtruck_col{
+    margin-left:8.5%;
+    margin-top:2.5%;
+  }
+  .google_home_button{
+    width: 50%;
+    font-size: 12px !important;
+    padding: 2%;
+  }
+  .maps_ad_container{
+    margin-bottom:5%;
+  }
+  .foodtruck_wrapper{
+    margin-left:0 !important;
+  }
 }
