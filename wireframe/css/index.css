@@ -1,0 +1,36 @@
+.menu_showcase{
+  width:100%;
+  height:300px;
+  background-size:cover;
+  background:url("./../imgs/background_menu.png");
+
+}
+.foodtruck_menu_name{
+  font-size: 30px;
+  font-weight: bold;
+  margin-top:5%;
+  font-family: "Roboto";
+  margin-left:5%;
+}
+.foodtruck_menu_details{
+  margin-left: 5%;
+  color:grey;
+  font-size:13px;
+}
+
+.foodtruck_menu_name{
+  font-size: 30px;
+  font-weight: bold;
+  margin-top:2.5%;
+  font-family: "Roboto";
+
+  color:black;
+  margin-left:5%;
+}
+.menu_subheading{
+  margin-top:5%;
+  margin-left: 5%;
+  font-size: 25px;
+  font-weight: normal;
+  font-family: "Roboto";
+}
