@@ -10,7 +10,7 @@ const session = require("express-session");
 var path = require("path");
 var http = require("http");
 var url = process.env.MONGODB_URI || "mongodb://sableye12:thirdpi1@iad2-c11-0.mongo.objectrocket.com:54979,iad2-c11-2.mongo.objectrocket.com:54979,iad2-c11-1.mongo.objectrocket.com:54979/ezEatz?replicaSet=1ef93570889249a49db7dbe2d95a2050" ;
-
+console.log(url);
 const ConvertToCoords = require("./config/geocode.js");
 const CalculateDistance = require("./distance_calculator.js");
 
@@ -109,7 +109,7 @@ const MongooseStartup = () => {
     MongoClient.connect(url,async(err,db)=>{
       if(err) throw err;
 
-      var dbO = db.db("heroku_9tlg8v4r");
+      var dbO = db.db("ezEatz");
       const foodtrucks = dbO.collection("foodtrucks");
       // const result = await foodtrucks.deleteMany({});
       // console.log("Deleted " + result.deletedCount + " documents");
@@ -137,7 +137,7 @@ const MongooseStartup = () => {
 
  MongoClient.connect(url, async (err,db)=>{
 
-  var dbO = db.db("heroku_9tlg8v4r");
+  var dbO = db.db("ezEatz");
 
   console.log("Database is working");
 
