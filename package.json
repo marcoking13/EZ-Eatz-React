@@ -12,6 +12,7 @@
     "cookie-parser": "^1.4.4",
     "cookies": "^0.8.0",
     "dotenv": "^8.2.0",
+    "eslint-config-react-app": "^6.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "fake-address-generator": "^1.1.0",

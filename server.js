@@ -9,7 +9,7 @@ const mongojs = require("mongojs");
 const session = require("express-session");
 var path = require("path");
 var http = require("http");
-var url = process.env.MONGODB_URI || "mongodb://localhost:27017/heroku_9tlg8v4r" ;
+var url = process.env.MONGODB_URI || "mongodb://sableye12:thirdpi1@iad2-c11-0.mongo.objectrocket.com:54979,iad2-c11-2.mongo.objectrocket.com:54979,iad2-c11-1.mongo.objectrocket.com:54979/ezEatz?replicaSet=1ef93570889249a49db7dbe2d95a2050" ;
 
 const ConvertToCoords = require("./config/geocode.js");
 const CalculateDistance = require("./distance_calculator.js");
@@ -41,6 +41,10 @@ app.listen(port,function(){
   console.log("App running on "+port);
 
 });
+
+
+var MongoClient = require('mongodb').MongoClient;
+
 
 
 const LoopThroughFoodtruck = (data,lat,lng,radius,sort,price_sort)=> {
