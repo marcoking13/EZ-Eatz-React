@@ -42,7 +42,7 @@ class FormComponent extends React.Component {
 
       /* global google */
       setTimeout(()=>{google.accounts.id.initialize({
-        client_id:"652597126493-g3kk4nl2pkpua4nd185msth7f2gr0vd9.apps.googleusercontent.com",
+        client_id:"701475510454-o2lcvanv7qef8sd256f5jr5seqhhk38j.apps.googleusercontent.com",
         callback:this.handleGoogleLogin
       });
 
