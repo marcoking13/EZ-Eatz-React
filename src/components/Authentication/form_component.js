@@ -3,7 +3,7 @@ import JWT_Decode from "jwt-decode";
 
 import FormIcon from "./../../images/form_icon.svg";
 import LandingBackground from "./../../images/landing_background.png";
-import LandingBackgroundMobile from "./../../images/landing_background_mobile.png";
+import LandingBackgroundMobile from "./../../images/landing_background.png";
 
 
 

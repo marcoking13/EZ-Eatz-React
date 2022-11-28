@@ -11,8 +11,9 @@ const LoadingBox = (props)=>{
 
   const LoadingLoop = () => {
     var html = [];
+    var size = window.innerWidth >= 844 ? 3 : 10;
     for (var i =0; i <= 20; i++){
-      html.push(<img src ={LoadingImg} className="col-3 loading_box"/>)
+      html.push(<img src ={LoadingImg} className={"col-"+size+" loading_box"}/>)
     }
     return html;
   }

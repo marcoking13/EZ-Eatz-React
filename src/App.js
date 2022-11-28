@@ -23,9 +23,6 @@ import MenuPage from "./containers/menu_page.js";
 import GooglePage from "./containers/google_page.js";
 
 
-
-
-
 class App extends Component {
   constructor(props){
     super(props);

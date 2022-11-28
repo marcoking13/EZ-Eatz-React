@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./../../css/landing_page.css";
-import LandingBackground from "./../../images/landing_background_mobile.png";
+import LandingBackground from "./../../images/landing_background.png";
 import Logo from "./../../images/logo.png";
 import ProfileIcon from "./../../images/profile_icon.png";
 
@@ -36,7 +36,10 @@ class LandingMobile extends React.Component{
         </div>
 
         <div className="col-3 margin-top-5">
-          <button onClick={()=>{this.props.ChangeURL("usersign")}} className="width-100  btn signup_button_landing btn_landing black-background white"><img className="icon" src={ProfileIcon}/> Signup</button>
+          <button onClick={()=>{this.props.ChangeURL("usersign")}} className="width-100  btn signup_button_landing btn_landing black-background white">
+            <img className="icon landing_icon" src={ProfileIcon}/>
+            Signup
+          </button>
         </div>
       </div>
       <div className="row navbar_landing" >

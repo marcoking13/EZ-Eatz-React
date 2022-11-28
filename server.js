@@ -49,7 +49,8 @@ app.listen(port,function(){
 
 const LoopThroughFoodtruck = (data,lat,lng,radius,sort,price_sort)=> {
   var trucks = [];
-  console.log(price_sort);
+
+
   data.map((truck)=>{
 
     const userLocation = {
@@ -98,7 +99,7 @@ const LoopThroughFoodtruck = (data,lat,lng,radius,sort,price_sort)=> {
 
 
   })
-
+  console.log(trucks);
   return trucks;
 
 }

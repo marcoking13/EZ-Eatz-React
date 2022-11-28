@@ -8,7 +8,7 @@ class  CatagoryListings extends React.Component {
   renderCatagories = ()=>{
 
     return this.props.truck.menu.catagories.map((catagory)=>{
-      var col_size = window.innerWidth >= 844 ? 12 : 3;
+      var col_size = window.innerWidth >= 844 ? 12 : 4;
 
       return(
         <li class={"col-"+col_size + " mt5"} style={{listStyleType:"none"}}>

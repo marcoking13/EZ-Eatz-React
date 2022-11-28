@@ -195,7 +195,7 @@ class HomePage extends React.Component {
 
   CreateFoodtruckRow = (title,foodtruck_catagory,toggle_catagory,toggle_func) => {
     var title_class = window.innnerWidth >= 844 ? "col-5" : "col-12 text-center";
-    var see_all_class = window.innnerWidth >= 844 ? "col-1" : "col-4 text-center";
+    var see_all_class = window.innnerWidth >= 844 ? "col-12" : "col-12 text-center";
     var divider_class = window.innnerWidth >= 844 ? "col-3" : "col-4";
 
     if(foodtruck_catagory.length > 0){
@@ -273,6 +273,9 @@ class HomePage extends React.Component {
 
     if(this.state.is_loading){
         return <Loading text = "There are no Trucks in Radius Yet"  key = {this.state.radius}/>
+    }
+    if(!this.state.is_loading && this.state.nearbyFoodtrucks.length < 1 ){
+        return <NoResults text = "There are no Trucks in Radius Yet"  key = {this.state.radius}/>
     }
 
 

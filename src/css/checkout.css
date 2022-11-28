@@ -162,4 +162,8 @@
     float:right;
     margin-right: 5%;
   }
+  .checkout_modal{
+    width:100% !important;
+    left: 0% !important;
+  }
 }
