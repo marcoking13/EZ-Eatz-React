@@ -94,10 +94,13 @@ class Checkout extends React.Component {
 
       return(
         <div className="container-fluid" onClick = {()=>{
-          this.props.toggleModal();
+          if(this.props.modal){
+              this.props.toggleModal(false);
+            }
         }}>
 
           <Navbar
+            url = {this.props.url}
             orders = {this.props.orders}
             account = {this.props.account}
             ChangeAddress = {this.props.ChangeAddress}
@@ -178,10 +181,10 @@ class Checkout extends React.Component {
               </p>
 
               <button className={"btn btn-danger w90 ml5 mt10 border-radius-20px "+checkout_available}onClick = {()=>{
-                console.log(this.props.orders.length);
 
-                if(this.props.orders.length > 0){
-                  this.props.toggleModal();
+
+                if(this.props.orders.length > 0 && this.props.modal == false){
+                  this.props.toggleModal(true);
                 }
               }}>Place Order</button>
 

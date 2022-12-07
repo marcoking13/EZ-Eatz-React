@@ -9,3 +9,10 @@ border:2px solid none;
 .mobile_nav_text:hover{
   border-color:white;
 }
+@media screen and (max-width:600px){
+  .ez_home_input{
+    margin-top:5%;
+    background:white;
+  }
+
+}

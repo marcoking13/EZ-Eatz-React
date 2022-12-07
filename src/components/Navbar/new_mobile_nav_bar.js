@@ -2,10 +2,11 @@ import React from "react";
 import "./../../css/new_mobile_nav.css";
 import "./../../css/home_page.css";
 
+import AddressInput from "./address_input";
+
 class NewMobileNavBar extends React.Component {
   constructor(props){
     super(props);
-    console.log(this.props,this.props.data);
   }
 
 
@@ -31,6 +32,7 @@ class NewMobileNavBar extends React.Component {
 
   render(){
       return(
+        <div>
         <div class="pos-f-t">
           <div class="collapse bg-dark" id="navbarToggleExternalContent">
             <div class="bg-dark p-4 nav_container_mobile">
@@ -45,6 +47,8 @@ class NewMobileNavBar extends React.Component {
               <span class="navbar-toggler-icon"></span>
             </button>
           </nav>
+      </div>
+        <AddressInput url = {this.props.url} submitLocation = {this.props.submitLocation} address = {this.props.address} />
       </div>
       )
   }

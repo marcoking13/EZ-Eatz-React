@@ -161,24 +161,24 @@ class ModifyPage extends React.Component {
 
     return(
       <div class="modify_showbox_component">
-    <div className="row">
-      <div className={"col-"+spacer_col_size}/>
-      <div className={"col-"+image_col_size}>
-        <img className="w100 " src = {this.props.item.image} />
-        <br />
-      </div>
-      <br />
-    </div>
+        <div className="row">
+          <div className={"col-"+spacer_col_size}/>
+          <div className={"col-"+image_col_size}>
+            <img className="w100 " src = {this.props.item.image} />
+            <br />
+          </div>
+          <br />
+        </div>
       <br />
       <p className="itemName ">{this.state.item.name}</p>
       <p className="modify_description mt2_5 ml25">{this.props.item.description}</p>
-    <p className="modify_total mt5 ml25">Total: {total_dash} ${this.CalculateTotal(this.state.price)} </p>
+    <p className="modify_total mt5 ml25">Total: ${this.CalculateTotal(this.state.price)} </p>
 
-    <div className="row">
+    <div className="row ml5">
 
-      <div className="col-3"/>
 
-          <div className="col-6 mt2_5">
+
+          <div className="col-12 mt2_5">
 
             <button
                 className="btn add-to-cart ui cb f13px w100 modify_button"
@@ -197,6 +197,7 @@ class ModifyPage extends React.Component {
     )
   }
   renderModifiers = () =>{
+
     var modify_col_size = window.innerWidth >= 844 ? 4 : 12;
     var modify_container_col_size = window.innerWidth >= 844 ? 7 : 12;
 
@@ -274,6 +275,7 @@ class ModifyPage extends React.Component {
     return (
       <div>
         <Navbar
+          url = {this.props.url}
           orders = {this.props.orders}
           account = {this.props.account}
           ChangeAddress = {this.props.ChangeAddress}

@@ -46,7 +46,7 @@ class MenuPage extends React.Component {
   render(){
 
     console.log(this.props.truck);
-    
+
     var menu_col_size = window.innerWidth  >= 844 ? 7 : 12
     var listing_col_size = window.innerWidth  >= 844 ? 3 : 12
     var spacer_col_size = window.innerWidth  >= 844 ? 2 : 0
@@ -55,6 +55,7 @@ class MenuPage extends React.Component {
       <div>
 
         <Navbar
+          url = {this.props.url}
           orders = {this.props.orders}
           account = {this.props.account}
           ChangeAddress = {this.props.ChangeAddress}

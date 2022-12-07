@@ -184,7 +184,7 @@ filter:invert(90);
 }
 .hyperlink{
   color:#404040;
-  border-bottom:1px solid #404040;
+  text-decoration: underline;
   font-family: sans-serif;
   text-align: center;
 

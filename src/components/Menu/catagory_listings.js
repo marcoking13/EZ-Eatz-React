@@ -14,8 +14,8 @@ class  CatagoryListings extends React.Component {
         <li class={"col-"+col_size + " mt5"} style={{listStyleType:"none"}}>
           <a href = {"#"+catagory.catagory} className="normal-anchor" >
           <div className="menu_catagory_list">
-            <p className="menu_catagory_list_text ml40 w100">{catagory.catagory}</p>
-            <div className="underline ml40"/>
+            <p className="menu_catagory_list_text ml10 w100">{catagory.catagory}</p>
+            <div className="underline ml10"/>
           </div>
           </a>
         </li>

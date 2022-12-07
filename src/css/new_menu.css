@@ -45,7 +45,7 @@ font-weight: bold;
 }
 .menu_catagory_list:hover .underline{
   animation: underline .2s 1 ease-in;
-  width:100%;
+  width:30%;
 }
 .underline{
   height:1px;
@@ -93,7 +93,7 @@ font-weight: bold;
     width:0px
   }
   100%{
-    width:100%;
+    width:30%;
   }
 }
 .menu_row_title{

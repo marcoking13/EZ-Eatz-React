@@ -181,6 +181,7 @@ export default class Maps extends React.Component {
       return (
         <div className="container-fluid">
           <Navbar
+            url = {this.props.url}
             place = {this.state.place}
             account = {this.props.account}
             ChangeAddress = {this.props.ChangeAddress}

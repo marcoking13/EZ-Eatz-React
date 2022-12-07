@@ -14,6 +14,7 @@ import Truck from "./../../images/truck_icon.png";
 import MapIcon2 from "./../../images/map_icon_2.svg";
 import NewMobileNavBar from './new_mobile_nav_bar.js';
 
+
 class NavBarHome extends React.Component {
   constructor(props){
     super(props);
@@ -49,23 +50,24 @@ class NavBarHome extends React.Component {
 //--------------------------------Render JSX function------------------------------------
 
 
-  submitLocation =  async(e) =>{
+  submitLocation =  async(address) =>{
 
-      e.preventDefault();
 
+    console.log(address);
       var location = {
         address:"Enter Address",lat:null,lng:null
       }
 
-      const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
-
-      if(response){
+      const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
+        console.log(response);
+      if(response || response.data.results[0].geometry){
 
         const { lat, lng } = response.data.results[0].geometry.location;
 
         location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng };
 
         this.props.ChangeAddress(location.address,location.lat,location.lng);
+        console.log(location);
         this.setState({address:location.address});
 
       }else{
@@ -140,7 +142,16 @@ class NavBarHome extends React.Component {
 
     if(window.innerWidth <= 844){
       return(
-        <NewMobileNavBar data = {this.props}/>
+        <NewMobileNavBar
+         url = {this.props.url}
+         data = {this.props}
+         address = {this.state.address}
+         submitLocation = {this.submitLocation}
+         changeURL = {this.props.changeURL}
+         orders = {this.props.orders}
+         account = {this.props.account}
+         FoodtrucksNearMe = {this.props.FoodtrucksNearMe}
+         />
       )
     }
   return(
@@ -157,7 +168,12 @@ class NavBarHome extends React.Component {
             </div>
 
             <div className="col-5">
-              <form onSubmit = { (e)=>{this.submitLocation(e)}}>
+              <form onSubmit = { (e)=>{
+                e.preventDefault();
+                console.log(this.state.address)
+                this.submitLocation(this.state.address)
+
+              }}>
               <input className="form-control ez_home_input"  onChange = {(e)=>{
                 this.setState({address:e.target.value});
               }}  value = {this.state.address} placeholder="Enter Address"/>

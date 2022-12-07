@@ -214,7 +214,7 @@ class HomePage extends React.Component {
               }}>See All</p>
             </div>
 
-            <div className="col-2"/>
+            <div className="col-10"/>
 
             <div className="col-1">
 
@@ -336,6 +336,7 @@ class HomePage extends React.Component {
           <div className={"container-fluid pb5 "} key = {this.props.lat}>
 
             <Navbar
+              url = {this.props.url}
               PostAddress = {this.props.PostAddress}
               orders = {this.props.orders}
               account = {this.props.account}

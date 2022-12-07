@@ -50,12 +50,10 @@ class CheckoutPage extends React.Component {
 
   }
 
-  toggleModal = () =>{
-    if(this.state.modal){
-      this.setState({modal:false})
-    }else{
-      this.setState({modal:true})
-    }
+  toggleModal = (toggle) =>{
+
+      this.setState({modal:toggle})
+
   }
 
 CalculateMods = (item,mod)=>{
@@ -124,10 +122,12 @@ CalculateMods = (item,mod)=>{
           <div>
             {this.renderModal()}
             <Page
+               url = {this.props.url}
                orders = {this.props.orders}
                truck = {this.props.truck}
                toggleModal = {this.toggleModal}
                tip = {this.state.tip}
+               modal = {this.state.modal}
                account = {this.props.account}
                CalculateTip = {this.CalculateTip}
                CalculateMods = {this.CalculateMods}

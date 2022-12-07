@@ -108,7 +108,7 @@ class App extends Component {
 
   SetItem = (item) => {
 
-      this.setState({item:item,url:"modify"});
+    this.setState({item:item,url:"modify"});
 
   }
 
@@ -162,7 +162,6 @@ class App extends Component {
 
   AddToOrder = (order,truck) =>{
     cookie.remove("orders",{path:"/"});
-    console.log(this.state.orders);
     this.setState({orders:this.state.orders.concat(order),checkout_truck:truck});
   }
 
@@ -273,6 +272,7 @@ class App extends Component {
 
 //----------------------------State Changer-----------------------------
    ChangeAddress  = async (address,lat,lng)=>{
+     console.log(address,lat,lng);
     this.setState({address:address,lat:lat,lng:lng});
     const response = await axios.post("/api/change_user_address",{username:this.state.username,address:address,lat:lat,lng:lng});
   }
@@ -312,6 +312,7 @@ class App extends Component {
      if(this.state.url === "checkout"){
         return (
           <CheckoutPage
+            url = {this.state.url}
               orders = {this.state.orders}
               ChangeURL={this.ChangeURL}
               account = {account}
@@ -331,6 +332,7 @@ class App extends Component {
       if(this.state.url === "map"){
             return (
                 <GooglePage
+                  url = {this.state.url}
                   orders= {this.state.orders}
                   account = {account}
                   ChangeAddress = {this.ChangeAddress}
@@ -345,6 +347,7 @@ class App extends Component {
       if(this.state.url === "modify"){
             return(
               <ModifyPage
+                url = {this.state.url}
                  account = {account}
                  orders= {this.state.orders}
                  ClearOrder = {this.ClearOrder}
@@ -363,6 +366,7 @@ class App extends Component {
          if(this.state.url === "menu"){
            return (
              <MenuPage
+               url = {this.state.url}
                 account = {account}
                 truck = {this.state.truck}
                 orders= {this.state.orders}
@@ -382,6 +386,7 @@ class App extends Component {
           if(this.state.url === "home"){
              return (
                <HomePage
+                 url = {this.state.url}
                   account = {account}
                   ChangeAddressFormat = {this.ChangeAddressFormat}
                   SetTruck = {this.SetTruck}
