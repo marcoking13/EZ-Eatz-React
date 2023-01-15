@@ -114,6 +114,8 @@ class HomePage extends React.Component {
     const cheapest_data = await axios.post("/api/cheapest_trucks",config);
     const cheapest_trucks = cheapest_data.data;
 
+    console.log(nearest_trucks,cheapest_trucks,vegan_trucks,best_rated_trucks);
+
     this.setState({
       best_rated_foodtrucks:best_rated_trucks,
       vegan_trucks:vegan_trucks,
@@ -197,7 +199,7 @@ class HomePage extends React.Component {
     var title_class = window.innnerWidth >= 844 ? "col-5" : "col-12 text-center";
     var see_all_class = window.innnerWidth >= 844 ? "col-12" : "col-12 text-center";
     var divider_class = window.innnerWidth >= 844 ? "col-3" : "col-4";
-
+    console.log(foodtruck_catagory);
     if(foodtruck_catagory.length > 0){
      return (
        <div className="container-fluid row margin-top-5">
