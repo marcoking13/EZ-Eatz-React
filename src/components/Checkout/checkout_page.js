@@ -101,9 +101,10 @@ class Checkout extends React.Component {
 
           <Navbar
             url = {this.props.url}
+            toggle_map = {false}
             orders = {this.props.orders}
             account = {this.props.account}
-            ChangeAddress = {this.props.ChangeAddress}
+            ChangeCurrentAddress = {this.props.ChangeCurrentAddress}
             address = {this.props.address}
             ChangeURL = {this.props.ChangeURL}
             navStyle ="white"

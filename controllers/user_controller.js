@@ -5,10 +5,11 @@ const FoodtruckClass = require("./../config/foodtruck_constructor.js");
 const FindAllTrucks = (req,res,next) => {
 
       var {lat,lng,radius,sort,price_sort} = req.body;
-
-      FoodtruckClass.FindAllTrucks((found_trucks) =>{
-
+      console.log(req.body)
+      var found_trucks = FoodtruckClass.FindAllTrucks((found_trucks)=>{
+        console.log(found_trucks.length);
         FoodtruckClass.FilterTrucks(found_trucks,lat,lng,radius,sort,price_sort,(filtered_trucks)=>{
+          console.log(filtered_trucks)
             res.json(filtered_trucks);
         });
 

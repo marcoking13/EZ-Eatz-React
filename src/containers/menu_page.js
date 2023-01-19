@@ -24,7 +24,6 @@ class MenuPage extends React.Component {
       item:null
     }
 
-
      window.scrollTo(0,0);
 
   }
@@ -35,10 +34,13 @@ class MenuPage extends React.Component {
 
   renderExpensive = () =>{
     var expensive = "";
+
     for(var i = 0; i < this.props.truck.expensive; i++){
       expensive += "$";
     }
+
     return expensive;
+
   }
 
 //------------------------------------------------Renderer----------------------------------------------------------------------
@@ -57,13 +59,10 @@ class MenuPage extends React.Component {
         <Navbar
           url = {this.props.url}
           orders = {this.props.orders}
+          toggle_map = {false}
           account = {this.props.account}
-          ChangeAddress = {this.props.ChangeAddress}
-          SetAddress = {this.props.SetAddress}
           address = {this.props.address}
           ChangeURL = {this.props.ChangeURL}
-          googleMap={this.state.flag}
-          navStyle ="white"
         />
 
         <Showcase
@@ -76,10 +75,13 @@ class MenuPage extends React.Component {
         <div className="container-fluid menu_container mt5">
 
         <div className="row">
+
           <div clasName={"col-"+ listing_col_size+ " catagory_listings"}>
             <CatagoryListings truck = {this.props.truck}/>
           </div>
+
           <div className={spacer_col_size}/>
+
           <div className={"menux col-"+menu_col_size}>
             <MenuRows truck = {this.props.truck} SetItem = {this.props.SetItem}/>
           </div>

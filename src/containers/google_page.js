@@ -184,11 +184,10 @@ export default class Maps extends React.Component {
             url = {this.props.url}
             place = {this.state.place}
             account = {this.props.account}
-            ChangeAddress = {this.props.ChangeAddress}
+            ChangeCurrentAddress = {this.props.ChangeCurrentAddress}
             address = {this.props.address}
-            isMap = {true}
+            toggle_map = {false}
             orders = {this.props.orders}
-            changePlace = {this.changePlace}
             ChangeURL = {this.props.ChangeURL}
           />
             {this.renderMap()}

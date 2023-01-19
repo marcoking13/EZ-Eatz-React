@@ -8,10 +8,11 @@ class  MenuRow extends React.Component {
   RenderRow = () =>{
 
     const rows = this.props.truck.menu.catagories.map((catagory)=>{
-
+      console.log(catagory);
       const catagory_name = <p className="menu_row_title" key = {catagory.catagory} id = {catagory.catagory}> {catagory.catagory} </p>
 
       const food_items = catagory.menu.map((food_item,index)=>{
+        console.log(food_item,index);
         var col_size = window.innerWidth >=  844 ? 4 : 6;
         return (
           <div className={"col-" + col_size + " menu_item"} onClick = {()=>{console.log(food_item);this.props.SetItem(food_item)}}>

@@ -39,12 +39,11 @@ class Filter extends React.Component {
     var dollar = "$";
     var html = [];
 
-    console.log(this.props.price_sort);
+
 
     for ( var dollar_amount = 0; dollar_amount < 5; dollar_amount++){
 
       var active = dollar_amount + 1 == this.props.price_sort ? "active_price_tag" : ""
-      console.log(dollar_amount, this.props.price_sort);
 
       html.push(
         <div className={"col-5 price_tag text-center e6-background " + active} sort = {dollar_amount} onClick = {(e)=>{
@@ -56,8 +55,6 @@ class Filter extends React.Component {
       );
 
       dollar += "$";
-
-
 
     }
 
@@ -91,7 +88,7 @@ class Filter extends React.Component {
   }
 
   renderFilterBubble = (name,sort)=>{
-    console.log(sort,this.props.sort);
+    
     var active = this.props.sort.name == sort.name ? "active_filter_bubble" : "" ;
     return(
       <div style={{marginLeft:"10%"}} sort = {sort} onClick = {()=>{

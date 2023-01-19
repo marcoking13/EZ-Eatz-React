@@ -276,6 +276,7 @@ class ModifyPage extends React.Component {
       <div>
         <Navbar
           url = {this.props.url}
+          toggle_map = {false}
           orders = {this.props.orders}
           account = {this.props.account}
           ChangeAddress = {this.props.ChangeAddress}

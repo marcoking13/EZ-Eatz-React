@@ -8,6 +8,7 @@ var url = process.env.MONGODB_URI || "mongodb://sableye12:thirdpi1@iad2-c11-0.mo
 class Foodtruck {
 constructor(ownerID,objectID,name,vegan_friendly,type,stars,lat,lng,address,logo,banner,background,mapLogo,routes,menu) {
     this.ownerID = ownerID;
+    this.priceAverage = 0;
     this.objectID = objectID;
     this.name = name;
     this.vegan_friendly = vegan_friendly;
@@ -39,46 +40,41 @@ constructor(ownerID,objectID,name,vegan_friendly,type,stars,lat,lng,address,logo
 
     }
 
-
-
-
-
-    this.expensive = function(average){
-
-      if(average < 5){
-        return 1
-      }else if (average > 5 && average < 10){
-        return 2
-      }else if (average > 10 && average < 30){
-        return 3
-      }
-      else if(average > 30 && average < 100){
-        return 4
-      }else{
-        return 5
-      }
-
-
-    }
-
-    this.priceAverage = function(prices){
-
-      var total = 0;
-      var items = 0;
-
-      this.menu.catagories.map((catagory)=>{
-        catagory.menu.map((item)=>{
-          total += item.price;
-          items ++;
-        });
-      })
-
-      var average = parseInt(total / items);
-
-
-      return average;
-
-    }
+    // this.expensive = function(average){
+    //
+    //   if(average < 5){
+    //     return 1
+    //   }else if (average > 5 && average < 10){
+    //     return 2
+    //   }else if (average > 10 && average < 30){
+    //     return 3
+    //   }
+    //   else if(average > 30 && average < 100){
+    //     return 4
+    //   }else{
+    //     return 5
+    //   }
+    //
+    //
+    // }
+    // this.priceAverage = function(){
+    //
+    //   var total = 0;
+    //   var items = 0;
+    //
+    //   this.menu.catagories.map((catagory)=>{
+    //     catagory.menu.map((item)=>{
+    //       total += item.price;
+    //       items ++;
+    //     });
+    //   })
+    //
+    //   var average = parseInt(total / items);
+    //
+    //
+    //   return average;
+    //
+    // }
 
   }
   //
@@ -99,20 +95,57 @@ constructor(ownerID,objectID,name,vegan_friendly,type,stars,lat,lng,address,logo
   //
   // }
 
+
+  SetExpensive(average){
+
+    if(average < 5){
+      this.expensive = 1
+    }else if (average > 5 && average < 10){
+      this.expensive = 2
+    }else if (average > 10 && average < 30){
+      this.expensive = 3
+    }
+    else if(average > 30 && average < 100){
+      this.expensive = 4
+    }else{
+      this.expensive = 5
+    }
+
+  }
+
+  PriceAverage(){
+
+
+      var total = 0;
+      var items = 0;
+
+      this.menu.catagories.map((catagory)=>{
+        catagory.menu.map((item)=>{
+          total += item.price;
+          items ++;
+        });
+      })
+
+      var average = parseInt(total / items);
+
+      this.priceAverage = average;
+
+
+  }
+
   static FindAllTrucks(cb){
 
-      MongoClient.connect(url,async (err,db)=>{
-      var db_instance = db.db("ezEatz");
-      var found_trucks = await db_instance.collection("foodtrucks").find({}).toArray();
-      console.log(found_trucks.length);
-        if(found_trucks && found_trucks.length > 0){
-          cb(found_trucks);
-        }else{
-          cb([]);
-        }
+    MongoClient.connect(url, async (err,db)=>{
+        var db_instance = db.db("ezEatz");
+        var found_trucks = await db_instance.collection("foodtrucks").find({}).toArray();
 
-  });
+            if(found_trucks && found_trucks.length > 0){
+              cb(found_trucks);
+            }else{
+              cb([]);
+            }
 
+      });
 
   }
 
@@ -120,32 +153,31 @@ constructor(ownerID,objectID,name,vegan_friendly,type,stars,lat,lng,address,logo
 
           var new_trucks = await FoodtruckGenerator();
           MongoClient.connect(url, async (err,db)=>{
-          var db_instance = db.db("ezEatz");
-          db_instance.collection("foodtrucks").insertMany(new_trucks,(err,result) =>{
-            if(err){
-              cb(err);
-            }else{
-              cb("Inserted Foodtrucks");
-            }
-          });
+            var db_instance = db.db("ezEatz");
+            const insert_response = await db_instance.collection("foodtrucks").insertMany(new_trucks);
 
-      });
+              if(!insert_response){
+                cb(err);
+              }else{
+                cb("Inserted Foodtrucks");
+              }
+
+          });
 
   }
 
 
-   static FindBestRatedTrucks(cb){
+static FindBestRatedTrucks(cb){
 
   MongoClient.connect(url, async (err,db)=>{
       var db_instance = db.db("ezEatz");
       var found_trucks = await db_instance.collection("foodtrucks").find({stars: {$gt:3.5}}).toArray();
-        console.log(found_trucks);
 
-          if(found_trucks && found_trucks.length > 0){
-            cb(found_trucks);
-          }else{
-            cb([]);
-          }
+      if(found_trucks && found_trucks.length > 0){
+          cb(found_trucks);
+        }else{
+          cb([]);
+        }
 
       });
 
@@ -156,13 +188,13 @@ constructor(ownerID,objectID,name,vegan_friendly,type,stars,lat,lng,address,logo
     MongoClient.connect(url, async (err,db)=>{
       var db_instance = db.db("ezEatz");
       var found_trucks = await db_instance.collection("foodtrucks").find({expensive: {$lt:3.5}}).toArray();
-       console.log(found_trucks.length);
 
          if(found_trucks && found_trucks.length > 0){
            cb(found_trucks);
          }else{
            cb([]);
          }
+
      });
 
  }
@@ -188,7 +220,7 @@ static FindTruckType(query,cb){
   MongoClient.connect(url, async (err,db)=>{
       var db_instance = db.db("ezEatz");
       var found_trucks = await db_instance.collection("foodtrucks").find(query).toArray();
-        console.log(found_trucks.length);
+
           if(found_trucks && found_trucks.length > 0){
             cb(found_trucks);
           }else{
@@ -204,7 +236,7 @@ static FindTruckType(query,cb){
   static FilterTrucks(data,lat,lng,radius,sort,price_sort,cb) {
 
       var trucks = [];
-
+      console.log(data);
       if(!data || data.length <= 0){
         cb([]);
         return;
@@ -220,9 +252,9 @@ static FindTruckType(query,cb){
           lat:truck.lat,
           lng:truck.lng
         }
-
+       console.log(trucks[0],trucks.length);
         const data = CalculateDistance(userLocation,foodtruckLocation,radius);
-
+        console.log(data);
         if(data.distance <= radius && price_sort >= truck.expensive){
 
           if(sort.name){
@@ -254,6 +286,7 @@ static FindTruckType(query,cb){
         }
 
       });
+
       if(trucks.length > 0 && trucks){
         cb(trucks);
       }else{

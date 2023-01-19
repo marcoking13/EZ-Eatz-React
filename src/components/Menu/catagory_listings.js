@@ -6,7 +6,7 @@ class  CatagoryListings extends React.Component {
 
 
   renderCatagories = ()=>{
-
+    console.log(this.props.truck.menu.catagories);
     return this.props.truck.menu.catagories.map((catagory)=>{
       var col_size = window.innerWidth >= 844 ? 12 : 4;
 

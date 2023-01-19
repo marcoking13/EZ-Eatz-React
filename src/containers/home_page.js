@@ -29,25 +29,26 @@ class HomePage extends React.Component {
       cookie:"",
       currentFoodTruck:{},
       best_rated_foodtrucks:[],
-      best_rated_starting:0,
-      cheapest_starting:0,
-      filter_modal:false,
-      nearby_starting:0,
-      vegan_starting:0,
       nearbyFoodtrucks:[],
-      price_sort:5,
-      see_all:null,
       cheapest_trucks:[],
-      title:null,
-      is_loading:true,
       vegan_trucks:[],
       ethnic_trucks:[],
+      best_rated_starting:0,
+      cheapest_starting:0,
+      nearby_starting:0,
+      vegan_starting:0,
+      filter_modal:false,
+      price_sort:5,
+      see_all:null,
+      title:null,
+      is_loading:true,
       sort:{
         name:null,
         criteria:null
       },
       radius:30,
       changedAddress:false,
+      address:this.props.address
     }
 
   }
@@ -55,19 +56,20 @@ class HomePage extends React.Component {
 //------------------------------State Changer-------------------------------//
 
   changeRadius = (radius) => {
-
     this.setState({radius:radius});
-    this.IntializePage(radius)
+    this.IntializePage(radius);
   }
 
+  ChangeCurrentAddress = (address,lat,lng) =>{
+    this.setState({address:address});
+    this.props.ChangeAddress(address,lat,lng)
+    this.IntializePage()
+  }
   toggleSeeAll = (trucks,title) =>{
-
     this.setState({see_all:trucks,title:title});
-
   }
 
   changePriceSort = (price_sort) => {
-    console.log(price_sort);
     this.setState({price_sort:price_sort});
     this.IntializePage()
   }
@@ -79,9 +81,9 @@ class HomePage extends React.Component {
 
   IntializePage = async ()=>{
 
-    const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.account.address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
+    const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
 
-    if(response.data.results.length > 0){
+    if(response.data.results.length > 0 && response){
 
       this.setState({is_loading:true})
 
@@ -89,6 +91,18 @@ class HomePage extends React.Component {
       var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng };
 
       this.OrganizeFoodtrucks(lat,lng,this.state.radius,this.state.sort,this.state.price_sort);
+      this.props.ClearCurrentTruck();
+
+    } else{
+
+      this.setState({
+        best_rated_foodtrucks:[],
+        vegan_trucks:[],
+        cheapest_trucks:[],
+        nearbyFoodtrucks:[],
+        is_loading:false
+      });
+
       this.props.ClearCurrentTruck();
 
     }
@@ -113,8 +127,6 @@ class HomePage extends React.Component {
 
     const cheapest_data = await axios.post("/api/cheapest_trucks",config);
     const cheapest_trucks = cheapest_data.data;
-
-    console.log(nearest_trucks,cheapest_trucks,vegan_trucks,best_rated_trucks);
 
     this.setState({
       best_rated_foodtrucks:best_rated_trucks,
@@ -142,6 +154,7 @@ class HomePage extends React.Component {
   toggleFilterModal = (toggle) =>{
     this.setState({filter_modal:toggle})
   }
+
   ToggleRatingStarting = (multiplier,starting,trucks_length) =>{
     var toggle = this.ToggleTrucks(multiplier,starting,trucks_length);
     this.setState({best_rated_starting:toggle});
@@ -176,19 +189,19 @@ class HomePage extends React.Component {
         var index = starting + i;
 
         if(truck_catagory[index]){
-        html.push(
-          <FoodtruckBox
-            address = {truck_catagory[index].address}
-            key = {index}
-            id = {i}
-            ClearOrder = {this.props.ClearOrder}
-            SetTruck = {this.props.SetTruck}
-            foodtruck = {truck_catagory[index]}
-            ChangeURL = {this.props.ChangeURL}
-          />
-        )
-
+          html.push(
+            <FoodtruckBox
+              address = {truck_catagory[index].address}
+              key = {index}
+              id = {i}
+              ClearOrder = {this.props.ClearOrder}
+              SetTruck = {this.props.SetTruck}
+              foodtruck = {truck_catagory[index]}
+              ChangeURL = {this.props.ChangeURL}
+            />
+          )
       }
+
     }
 
     return html;
@@ -196,11 +209,13 @@ class HomePage extends React.Component {
   }
 
   CreateFoodtruckRow = (title,foodtruck_catagory,toggle_catagory,toggle_func) => {
+
     var title_class = window.innnerWidth >= 844 ? "col-5" : "col-12 text-center";
     var see_all_class = window.innnerWidth >= 844 ? "col-12" : "col-12 text-center";
     var divider_class = window.innnerWidth >= 844 ? "col-3" : "col-4";
-    console.log(foodtruck_catagory);
+
     if(foodtruck_catagory.length > 0){
+
      return (
        <div className="container-fluid row margin-top-5">
 
@@ -225,6 +240,7 @@ class HomePage extends React.Component {
                 <div className="col-6">
                   <img src ={ToggleIcon} onClick = {()=>{console.log(toggle_func,toggle_catagory,foodtruck_catagory.length);toggle_func(-1,toggle_catagory,foodtruck_catagory.length)}} className="w100 truck_row_toggle_icon rotate-180" />
                 </div>
+
                 <div className="col-6">
                   <img src ={ToggleIcon} onClick = {()=>{toggle_func(1,toggle_catagory,foodtruck_catagory.length)}} className="w100 truck_row_toggle_icon" />
                 </div>
@@ -237,23 +253,27 @@ class HomePage extends React.Component {
               {this.CreateFoodtruckBoxes(foodtruck_catagory,toggle_catagory)}
             </div>
 
-
        </div>
      )
+
    }else{
      return <NoResults title = {title}/>
    }
+
   }
 
   renderFilter =() =>{
     if(window.innerWidth >= 844){
 
-          return(      <div className="col-2">
-                   <Filter price_sort = {this.state.price_sort} changePriceSort = {this.changePriceSort} radius = {this.state.radius} changeRadius = {this.changeRadius} sort = {this.state.sort} changeSort = {this.changeSort}/>
-                </div>
-              )
+          return(
+             <div className="col-2">
+                 <Filter price_sort = {this.state.price_sort} changePriceSort = {this.changePriceSort} radius = {this.state.radius} changeRadius = {this.changeRadius} sort = {this.state.sort} changeSort = {this.changeSort}/>
+              </div>
+            )
     }else{
+
       var visibility = this.state.filter_modal ? "visible" : "invisible";
+
       return (
         <div className={"filter_modal  "+visibility} >
           <div className="filter_modal_background"/>
@@ -263,12 +283,16 @@ class HomePage extends React.Component {
           <Filter price_sort = {this.state.price_sort} changePriceSort = {this.changePriceSort} radius = {this.state.radius} changeRadius = {this.changeRadius} sort = {this.state.sort} changeSort = {this.changeSort}/>
         </div>
       )
+
     }
+
   }
 
   renderFoodtruckSection(){
+
     var spacer = window.innerWidth >= 844 ? null : <div className="col-1 margin-left-2_5"/> ;
     var active = this.state.filter_modal ? "filter_icon_mobile_active" : ""
+
     var filter_icon = window.innerWidth >= 844 ? null : <img src = {Filter_Mobile_Icon} onClick = {()=>{
       this.toggleFilterModal(true);
     }}className={"filter_icon_mobile " + active} />;
@@ -276,16 +300,14 @@ class HomePage extends React.Component {
     if(this.state.is_loading){
         return <Loading text = "There are no Trucks in Radius Yet"  key = {this.state.radius}/>
     }
-    if(!this.state.is_loading && this.state.nearbyFoodtrucks.length < 1 ){
-        return <NoResults text = "There are no Trucks in Radius Yet"  key = {this.state.radius}/>
-    }
-
 
       return(
         <div className='row' key = {this.state.radius}>
+
           {filter_icon}
           {this.renderFilter()}
           {spacer}
+
           <div className="foodtruck_container col-10">
 
             {this.CreateFoodtruckRow("Nearest You",this.state.nearbyFoodtrucks,this.state.nearby_starting,this.ToggleNearbyStarting)}
@@ -311,6 +333,7 @@ class HomePage extends React.Component {
 
   //------------------------------Renderer--------------------------------
   render(){
+
       var modal_is_active = this.state.see_all ? "active_modal_see_all no-point" : "";
 
       if(this.state.see_all){
@@ -335,23 +358,15 @@ class HomePage extends React.Component {
       }
 
         return (
-          <div className={"container-fluid pb5 "} key = {this.props.lat}>
+          <div className="container-fluid pb5" key = {this.props.address}>
 
             <Navbar
               url = {this.props.url}
-              PostAddress = {this.props.PostAddress}
               orders = {this.props.orders}
               account = {this.props.account}
-              isMap = {false}
-              FoodtrucksNearMe = {this.FoodtrucksNearMe}
-              ChangeAddressFormat = {this.props.ChangeAddressFormat}
-              changeZip = {this.props.zip}
-              ConvertAddress = {this.props.ConvertAddress}
-              ChangeAddress = {this.props.ChangeAddress}
+              ChangeCurrentAddress = {this.ChangeCurrentAddress}
               address = {this.props.address}
-              changeFlag = {this.changeFlag}
               ChangeURL = {this.props.ChangeURL}
-              navStyle ="white"
               />
 
               {this.renderFoodtruckSection()}

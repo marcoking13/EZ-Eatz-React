@@ -17,14 +17,27 @@ class AuthenticationPage extends React.Component {
       address:"",
       username:"",
       password:"",
-
+      finished:false
     }
 
   }
 
+  CheckIfUserFinishedFormsThenSubmit(){
+    if(this.state.counter >= this.state.limit){
+        var info = {
+             username:this.state.username,
+             password:this.state.password,
+             address:this.state.address,
+             image:"",
+             verified:false,
+             name:this.state.name
+           }
+        this.SubmitAuthentication(info);
+     }
+  }
+
   ChangeInput = (info,key) =>{
 
-      if(this.state.counter < this.state.limit){
 
         if(key == "username"){
           this.setState({username:info,counter:this.state.counter + 1});
@@ -38,50 +51,41 @@ class AuthenticationPage extends React.Component {
          if(key == "name"){
             this.setState({name:info,counter:this.state.counter + 1});
         }
+        console.log(this.state.counter,this.state.limit);
 
-    }
+        this.CheckIfUserFinishedFormsThenSubmit();
+
+
 
  }
 
   Reset = () =>{
-
-    this.setState({address:"",username:"",password:"",name:"",counter:0});
-
+    this.setState({address:"",username:"",password:"",name:"",counter:0,finished:false});
   }
 
   CheckInputs = (data,alertValue)=>{
+    console.log(data);
 
     if(data){
-
+      this.setState({finished:true});
       this.props.LetUserInside(data);
-
     }else{
-
       alert(alertValue);
       this.Reset();
-
     }
 
   }
 
   Verify = async(info,url,alertValue)=>{
-
     const {data} = await axios.post(url,info);
-
     this.CheckInputs(data,alertValue);
-
   }
 
   GoogleAuthentication = (info)=>{
-
     this.Verify(info,"/api/google_login","Error Has Occured with Google!");
-
   }
 
   SubmitAuthentication = (info) =>{
-
-    var url = "";
-    var alertValue = "";
 
      if(this.state.key == "login"){
 
@@ -90,17 +94,13 @@ class AuthenticationPage extends React.Component {
         password:this.state.password
       }
 
-      url = "/api/login";
-      alertValue = "Wrong Username or Password!";
+      this.Verify(info,"api/login","Wrong Username or Password!");
 
      }else{
 
-        url = "/api/signup";
-        alertValue = "Username Already Taken!";
+      this.Verify(info,"api/signup","Username Already Taken!");
 
     }
-
-    this.Verify(info,url,alertValue);
 
   }
 
@@ -112,7 +112,9 @@ class AuthenticationPage extends React.Component {
 
       return(
         <Form
+          finished = {this.state.finished}
           ChangeInput = {this.ChangeInput}
+          ChangeURL = {this.props.ChangeURL}
           dataKey = {dataItem.key}
           GoogleAuthentication={this.GoogleAuthentication}
           type = {this.state.key}
@@ -124,17 +126,6 @@ class AuthenticationPage extends React.Component {
 
     }
     else{
-
-      var info = {
-           username:this.state.username,
-           password:this.state.password,
-           address:this.state.address,
-           image:"",
-           verified:false,
-           name:this.state.name
-         }
-
-        this.SubmitAuthentication(info);
 
         return <div />
 

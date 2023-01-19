@@ -13,7 +13,7 @@ class FormComponent extends React.Component {
     super(props);
     this.state = {
       input : "",
-      key: this.props.key
+      key: this.props.key,
     }
 
     this.formRef = React.createRef();
@@ -41,17 +41,19 @@ class FormComponent extends React.Component {
   componentDidMount(){
 
       /* global google */
-      setTimeout(()=>{google.accounts.id.initialize({
-        client_id:"701475510454-o2lcvanv7qef8sd256f5jr5seqhhk38j.apps.googleusercontent.com",
-        callback:this.handleGoogleLogin
-      });
+      if(google){
+        var timer = setTimeout(()=>{google.accounts.id.initialize({
+          client_id:"701475510454-o2lcvanv7qef8sd256f5jr5seqhhk38j.apps.googleusercontent.com",
+          callback:this.handleGoogleLogin
+        });
 
-      google.accounts.id.renderButton(
-        document.getElementById("google_login"),
-        {theme:"outline",size:"large"}
-      )
+        google.accounts.id.renderButton(
+          document.getElementById("google_login"),
+          {theme:"outline",size:"large"}
+        )
 
-    },500);
+      },500);
+  }
 
   }
 
@@ -83,11 +85,14 @@ class FormComponent extends React.Component {
           this.formRef.current.classList.add("remove_form");
         }
 
-       setTimeout(()=>{
+      if(this.props.finished == false){
+       var timer = setTimeout(()=>{
 
           this.props.ChangeInput(this.state.input,this.props.dataKey);
-
-          if(this.formRef){
+          if(this.props.finished || !this.formRef.current){
+            clearInterval(timer);
+            return;
+          }else{
             this.formRef.current.classList.add("add_form");
             this.formRef.current.classList.remove("remove_form");
            }
@@ -95,6 +100,7 @@ class FormComponent extends React.Component {
           this.setState({input:"",key:""});
 
         },500);
+      }
 
       }
 
@@ -119,7 +125,7 @@ class FormComponent extends React.Component {
       <div className="container-fluid form_component padding-top-5"style = {{background:`url(${background})`,height:height + "px",paddingBottom:"100%"}}>
 
         <p className="ez_title margin-left-5">EZ<strong className="ez_title_end">Eatz</strong></p>
-
+        <button class="back_button"onClick={()=>{this.props.ChangeURL("landing")}}> Go Back </button>
         <div id="google_login"></div>
 
         <div className="row add_form  " ref ={this.formRef}>

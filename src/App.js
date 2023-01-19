@@ -272,9 +272,10 @@ class App extends Component {
 
 //----------------------------State Changer-----------------------------
    ChangeAddress  = async (address,lat,lng)=>{
-     console.log(address,lat,lng);
-    this.setState({address:address,lat:lat,lng:lng});
+
     const response = await axios.post("/api/change_user_address",{username:this.state.username,address:address,lat:lat,lng:lng});
+    this.setState({address:address,lat:lat,lng:lng});
+    console.log(this.state.address);
   }
 
    ChangeURL = (url) =>{
@@ -319,7 +320,7 @@ class App extends Component {
               truck = {this.state.truck}
               ClearOrder = {this.ClearOrder}
               CapitlizeWordsOfSentence = {this.CapitlizeWordsOfSentence}
-              ChangeAddress = {this.ChangeAddress}
+              ChangeCurrentAddress = {this.ChangeCurrentAddress}
               lat = {this.state.lat}
               lng = {this.state.lng}
               address = {this.state.address}
@@ -392,7 +393,6 @@ class App extends Component {
                   SetTruck = {this.SetTruck}
                   orders= {this.state.orders}
                   ClearCurrentTruck = {this.ClearCurrentTruck}
-                  ConvertAddress = {this.ConvertAddress}
                   ChangeAddress = {this.ChangeAddress}
                   CapitlizeWordsOfSentence = {this.CapitlizeWordsOfSentence}
                   foodtrucks = {this.state.truck}

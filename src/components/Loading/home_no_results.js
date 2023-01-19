@@ -1,6 +1,6 @@
 import React from "react";
 import Background from "./../../images/home_no_results.png";
-
+import MobileBackground from "./../../images/no_results_mobile.png";
 import "./../../css/utility.css";
 import "./../../css/home_page.css";
 
@@ -8,6 +8,8 @@ class HomeNoResults extends React.Component{
 
 
   render(){
+    
+      var background = window.innerWidth >= 844 ? Background : MobileBackground;
 
       return(
 
@@ -19,7 +21,7 @@ class HomeNoResults extends React.Component{
             </div>
           </div>
 
-          <img className="w100" style={{height:"300px"}} src = {Background} />
+          <img className="w100" style={{height:"300px"}} src = {background} />
 
 
         </div>

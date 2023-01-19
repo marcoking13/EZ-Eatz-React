@@ -10,6 +10,15 @@
   border-radius:30px;
   font-size:16px !important;
 }
+.red{
+  color:red;
+}
+.relative{
+  position: relative;
+}
+.background-white{
+  background:white;
+}
 .new_ez_button:hover .notify_icon{
   color:white !important;
 }
