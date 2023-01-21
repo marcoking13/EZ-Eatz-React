@@ -35,9 +35,9 @@ class NavBarHome extends React.Component {
 
   }
 
-  renderToggle = (toggle) =>{
+  renderToggle = (url) =>{
 
-    if(!toggle){
+    if(url !== "map"){
       return this.renderButton(MapIcon2,"See Map","map")
     }else{
       return this.renderButton(Truck,"See Trucks","home")
@@ -59,6 +59,7 @@ class NavBarHome extends React.Component {
 
     return(
       <button className="new_ez_button relative " onClick = {()=>{
+        console.log(url);
         this.props.ChangeURL(url);
 
       }}>
@@ -87,7 +88,7 @@ class NavBarHome extends React.Component {
           <div className="row">
 
             <div className="col-2">
-              {this.renderToggle(false)}
+              {this.renderToggle(this.props.url)}
             </div>
 
             <div className="col-5">

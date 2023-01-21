@@ -1,7 +1,5 @@
 import React from "react";
 
-import cookies from "react-cookies";
-import Geocode from "react-geocode";
 import axios from "axios";
 
 import "./../../css/home_page.css";

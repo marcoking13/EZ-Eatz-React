@@ -6,6 +6,7 @@ router.post("/api/change_user_address",controller.ChangeAddress);
 router.post("/api/signup",controller.UserSignup);
 router.post("/api/login",controller.UserLogin);
 router.post("/api/google_login",controller.GoogleLogin );
+router.post("/api/geocode",controller.ConvertAddressToCoords );
 
 
 module.exports = router;

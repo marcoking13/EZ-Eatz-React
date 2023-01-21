@@ -26,13 +26,9 @@ const LoadingBox = (props)=>{
         <div className="col-2"></div>
 
         <div className="col-10">
-
           <div className="row">
-
             {LoadingLoop()}
-
           </div>
-
         </div>
 
         </div>

@@ -5,7 +5,7 @@ import axios from 'axios';
 import cookies from "react-cookies";
 
 import Loading from "./../components/Loading/loading_map";
-import NoResults from "./../components/Loading/no_results";
+import NoResults from "./../components/Loading/no_results_map";
 import Navbar from "./../components/Navbar/home_nav_bar";
 import Modal from "./../components/Maps/modal.js";
 
@@ -28,7 +28,7 @@ const MyMapComponent = compose(
   withGoogleMap
 )((props) =>
 
-     <GoogleMap  zoom={12} center = {{lat:props.center_lat,lng:props.center_lng}} key = {props.address} onClick = {()=>{
+     <GoogleMap  zoom={12} center = {{lat:props.lat,lng:props.lng}} key = {props.address} onClick = {()=>{
        if(props.modal){
          props.setModal(null);
        }
@@ -52,13 +52,11 @@ const MyMapComponent = compose(
             position={{ lat: marker.lat, lng: marker.lng }}
             icon = {{url:marker.url, scaledSize: new window.google.maps.Size(60,60)}}
             style={{borderRadius:"50%"}}
-            onClick = {()=>{
 
+            onClick = {()=>{
               props.setModal({modal:marker.truck});
               props.SetCenter(marker.lat,marker.lng);
-
             }}>
-
 
           </Marker>
 
@@ -79,25 +77,27 @@ export default class Maps extends React.Component {
       place:"",
       markers:[],
       is_loading:true,
-      center_lat : this.props.lat,
-      center_lng : this.props.lng,
       modal:null
     }
 
   }
 
   componentWillMount(){
-
+    this.SetCenter(this.props.address,this.props.lat,this.props.lng);
     this.SetMarkersOnMap();
 
   }
 
-  SetCenter = (lat,lng) =>{
+  SetCenter = (address,lat,lng) =>{
 
     this.setState({
-      center_lat:lat,
-      center_lng:lng
-    })
+      lat:lat,
+      is_loading:false,
+      lng:lng,
+      address:address
+    });
+
+    this.props.ChangeAddress(address,lat,lng);
 
   }
 
@@ -105,36 +105,19 @@ export default class Maps extends React.Component {
     this.setState({modal:truck})
   }
 
-  componentDidMount(){
-
-    this.ConvertAddress();
-
-  }
-
-  ConvertAddress = async () =>{
-
-    const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
-    const { lat, lng } = response.data.results[0].geometry.location;
-
-    this.setState({lat:lat,lng:lng,is_loading:false});
-
-  }
-
   SetMarkersOnMap = async() =>{
 
     const foodtrucks =  await axios.post("/api/trucks",null);
+    
     var markers = [];
     var trucks = foodtrucks.data;
     var i = 0;
 
     for(var i = 0 ; i <trucks.length; i ++){
-
         var address = trucks[i].address.street +  "," + trucks[i].address.city + "," +trucks[i].address.state;
         var lat = trucks[i].lat;
         var lng = trucks[i].lng;
-
         markers.push({lat:lat,lng:lng,url:trucks[i].mapLogo,id:trucks[i].objectID,truck:trucks[i]});
-
       }
 
       this.setState({markers:markers});
@@ -171,7 +154,7 @@ export default class Maps extends React.Component {
 
    }
    else{
-     return <NoResults text = "Enter Your Address to View Map!"/>
+     return <NoResults text = "Enter a Valid Address to View Map!"/>
    }
 
 }
@@ -184,8 +167,8 @@ export default class Maps extends React.Component {
             url = {this.props.url}
             place = {this.state.place}
             account = {this.props.account}
-            ChangeCurrentAddress = {this.props.ChangeCurrentAddress}
-            address = {this.props.address}
+            ChangeCurrentAddress = {this.SetCenter}
+            address = {this.state.address}
             toggle_map = {false}
             orders = {this.props.orders}
             ChangeURL = {this.props.ChangeURL}

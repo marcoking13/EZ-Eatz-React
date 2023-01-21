@@ -17,27 +17,18 @@ class AddressInput extends React.Component{
      this.setState({address:input})
   }
 
-  submitLocation =  async(address) =>{
+  submitLocation =  async(input_address) =>{
 
-      var location = {
-        address:"Enter Address",lat:null,lng:null
-      }
-
-      const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
-
-      if(response && response.data.results.length > 0){
-
-        const { lat, lng } = response.data.results[0].geometry.location;
-        location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng };
-        this.setState({address:location.address});
-        this.props.ChangeCurrentAddress(location.address);
-
-      }else{
-
-          this.setState({address:address})
-          this.props.ChangeCurrentAddress(location.address);
-
-      }
+      const location = await axios.post(`/api/geocode`,{address:input_address});
+      console.log(location);
+      if(location.data){
+        const {address,lat,lng} = location.data;
+        this.setState({address:address});
+        this.props.ChangeCurrentAddress(address,lat,lng);
+    }else{
+      this.setState({address:input_address});
+      this.props.ChangeCurrentAddress(input_address,null,null);
+    }
 
 }
 

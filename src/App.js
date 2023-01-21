@@ -272,10 +272,11 @@ class App extends Component {
 
 //----------------------------State Changer-----------------------------
    ChangeAddress  = async (address,lat,lng)=>{
+     this.setState({address:address,lat:lat,lng:lng});
+     console.log(this.state.address);
 
     const response = await axios.post("/api/change_user_address",{username:this.state.username,address:address,lat:lat,lng:lng});
-    this.setState({address:address,lat:lat,lng:lng});
-    console.log(this.state.address);
+
   }
 
    ChangeURL = (url) =>{

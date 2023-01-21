@@ -1,9 +1,10 @@
 const UserConstructor = require("./../config/user_constructor.js");
 const express = require("express");
+const axios = require("axios");
 const router = express.Router();
 
 const ChangeAddress = (req,res,next) => {
-      console.log(req.body);
+
     var updated_props = {
       address:req.body.address,
       username:req.body.username,
@@ -11,16 +12,35 @@ const ChangeAddress = (req,res,next) => {
       lng:req.body.lng
     }
 
+    console.log(updated_props);
+
     UserConstructor.UpdateAccount(updated_props,(feedback)=>{
       console.log(feedback);
     });
 
   }
 
+const ConvertAddressToCoords = async (req,res,next) => {
+
+    const address = req.body.address;
+    console.log(req.body)
+     const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`)
+        console.log(response.data);
+        if(response && response.data.results.length > 0){
+          const { lat, lng } = response.data.results[0].geometry.location;
+          var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng };
+          res.json(location);
+        }else{
+            res.json(null)
+          }
+
+ }
+
 
 const CreateUser = (data) => {
 
   var {name,address,password,username} = data;
+
   var potential_user =   {
       name:name,
       image:"",
@@ -44,7 +64,7 @@ const UserSignup = (req,res,next) => {
       password:req.body.password
     }
     var data = req.body;
-    console.log(req.body);
+
     UserConstructor.FindOneUser(creds,(user)=>{
 
       if(user){
@@ -103,3 +123,4 @@ exports.GoogleLogin = GoogleLogin;
 exports.UserLogin = UserLogin;
 exports.UserSignup = UserSignup;
 exports.ChangeAddress = ChangeAddress;
+exports.ConvertAddressToCoords = ConvertAddressToCoords;
