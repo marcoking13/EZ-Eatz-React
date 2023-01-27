@@ -1,0 +1,88 @@
+.add_foodtruck_page{
+margin-top:5%;
+}
+.input_add_truck{
+  margin-top:5%;
+  border-radius:0px;
+  font-family:"Roboto";
+  font-size: 16px;
+  width:100%;
+}
+.margin-top-2_5{
+  margin-top: 2.5%;
+}
+.catagory_row_title{
+  width:100%;
+  border-top:2px solid black;
+  border-bottom:2px solid black;
+  font-size: 20px;
+  font-family: "Roboto";
+  margin-bottom:2.5%;
+  padding:5%;
+  margin-top:2.5%;
+}
+.menu_row{
+  padding-left:2.5%;
+  padding-right:2.5%;
+}
+.item_name_result{
+  margin-left: 10%;
+  font-family: "Roboto";
+}
+.add_foodtruck_subtitle{
+  text-align: left;
+  margin-left: 10%;
+  margin-top:5%;
+  font-size: 24px;
+  font-family: "Roboto";
+}
+
+.background_container_result{
+  width:100%;
+}
+.background_result{
+  width:100%;
+
+}
+.logo_result{
+  width:15%;
+  margin-left: 5%;
+  float:left;
+
+}
+.catagory_text_list{
+  font-family: "Roboto";
+  font-size: 18px;
+  text-align: center;
+}
+.admin_menu_container{
+  background:#FAF9F6 !important;
+  box-shadow:2px 1px 2px 1px #e6e6e6;
+  padding:0%;
+}
+.menu_container_result{
+  margin-top: 10%;
+}
+.title_result{
+  font-size: 20px;
+  font-family: "Roboto";
+
+}
+.address_result{
+  font-size: 17px;
+  font-family: "Roboto"
+}
+.text_result{
+  margin-top: 2.5%;
+}
+.add_symbol{
+  width:100%;
+  margin-top:1%;
+  float:right;
+  text-align: center;
+  background:white;
+  border:3px solid black;
+  color:black;
+  font-size: 30px;
+  font-family: "Roboto";
+}

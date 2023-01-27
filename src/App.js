@@ -22,6 +22,8 @@ import HomePage from "./containers/home_page.js";
 import MenuPage from "./containers/menu_page.js";
 import GooglePage from "./containers/google_page.js";
 
+import AddFoodTruckPage from "./components/Admin/add_food_truck_page.js";
+
 
 class App extends Component {
   constructor(props){
@@ -307,6 +309,9 @@ class App extends Component {
         orders:this.state.orders,
       }
 
+      if(this.state.url == "/admin/add-foodtruck"){
+        return <AddFoodTruckPage />
+      }
       if(this.state.loading){
         return <div>Loading.....</div>
       }
