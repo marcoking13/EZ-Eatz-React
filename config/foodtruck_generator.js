@@ -1,20 +1,18 @@
-const UniqueNames  = require("unique-names-generator")
 const fakeAddress = require("fake-address-generator");
-const Foodtruck = require("./foodtruck_constructor.js");
+const UniqueNames  = require("unique-names-generator")
+const Foodtruck = require("./classes/foodtruck_constructor.js");
 const PlaceHolderMenu = require("./placeholder_menu.js");
-const Address = require("./address_constructor.js");
-
+const Address = require("./classes/address_constructor.js");
 const FreezeDry = require("./foodtrucks/freeze_dry.js");
 const PitaJungle = require("./foodtrucks/pita_jungle.js");
 const RotatingChicken = require("./foodtrucks/rotating_chicken.js");
 const BurgerJoint = require("./foodtrucks/burger_joint.js")
 const ChinaBowl = require("./foodtrucks/china_bowl.js");
 const TheStand = require("./foodtrucks/the_stand.js");
-
 const GenerateFoodtruck = require("./foodtrucks/generated_foodtruck.js");
 
-const FoodtruckGenerator = async() => {
 
+const FoodtruckGenerator = async() => {
 
   const names = [];
   const limit = 50;
@@ -32,8 +30,6 @@ const FoodtruckGenerator = async() => {
   const menus = [];
   const placeholder_menu = PlaceHolderMenu;
 
-
-
   const ModifyExistingTrucks = async() => {
     const config = [PitaJungle,RotatingChicken,BurgerJoint,FreezeDry,TheStand,ChinaBowl,FreezeDry,PitaJungle,RotatingChicken,BurgerJoint,FreezeDry,TheStand,ChinaBowl,FreezeDry,PitaJungle,RotatingChicken,BurgerJoint,FreezeDry,TheStand,ChinaBowl,FreezeDry];
     const public_images ="./../public/assets/images/";
@@ -50,10 +46,8 @@ const FoodtruckGenerator = async() => {
       foodtrucks.push(config[i](address,id,ownerID));
 
       var price_average = foodtrucks[i].priceAverage();
-
-      foodtrucks[i].expensive = foodtrucks[i].expensive(price_average);
-
       var formatted_address = `${foodtrucks[i].address.city},${foodtrucks[i].address.state}`;
+      foodtrucks[i].expensive = foodtrucks[i].expensive(price_average);
 
       await foodtrucks[i].convert_address(formatted_address)
 
@@ -61,14 +55,13 @@ const FoodtruckGenerator = async() => {
 
     }
 
-
-
   }
 
-
   const TypeGenerator = ()=>{
+
     const types = ["vegan","all-american","asian","greek","healthy","fast-food","salads","steak","burgers","dessert"];
     var generated_types = [];
+
     for(var i = 0; i <2; i++){
       const random_counter = Math.floor(Math.random() * types.length);
       var random_type = types[random_counter];
@@ -80,17 +73,13 @@ const FoodtruckGenerator = async() => {
   }
 
   const LogoGenerator = (i,suffix,type)=>{
-
     var url = "./assets/images/"+type+"/";
     return url+suffix+i+".png";
-
   }
 
   const StarsGenerator = ()=>{
-
     var star =(Math.floor(Math.random() * 4) +1)
     return star;
-
   }
 
   const IDGenerator = () => {
@@ -146,7 +135,6 @@ const FoodtruckGenerator = async() => {
 
     var random_name =  UniqueNames.uniqueNamesGenerator(config);
     random_name = random_name.replace("_"," ")
-
     random_name = random_name.charAt(0).toUpperCase() + random_name.slice(1);
 
     return random_name;
@@ -157,6 +145,7 @@ const FoodtruckGenerator = async() => {
 const InitGenerator = async() => {
 
     var img_counter = 1;
+
     for(var i = 0; i < 100; i++){
 
         if(img_counter > 19){
@@ -191,20 +180,15 @@ const InitGenerator = async() => {
 
        await foodtruck.convert_address(formatted_address)
 
-
-        trucks.push(foodtruck);
-
-
+       trucks.push(foodtruck);
 
       }
 
 
     }
 
-
     await ModifyExistingTrucks();
     await InitGenerator();
-    console.log(trucks);
     return trucks;
 
 }

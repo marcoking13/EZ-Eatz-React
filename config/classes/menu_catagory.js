@@ -1,4 +1,5 @@
 class Catagory  {
+
   constructor(name,id,menu){
       this.name = name;
       this.id = id;

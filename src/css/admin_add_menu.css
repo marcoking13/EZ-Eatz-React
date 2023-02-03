@@ -1,5 +1,11 @@
 .add_foodtruck_page{
-margin-top:5%;
+margin-top:2.5%;
+}
+.add_foodtruck_title{
+  font-size: 22px;
+  margin-top: 5%;
+  font-family:"Roboto";
+  margin-left: 5%;
 }
 .input_add_truck{
   margin-top:5%;
@@ -13,9 +19,10 @@ margin-top:5%;
 }
 .catagory_row_title{
   width:100%;
-  border-top:2px solid black;
-  border-bottom:2px solid black;
-  font-size: 20px;
+  /* border-top:2px solid black;
+  border-bottom:2px solid black; */
+  background:#f2ede9;
+  font-size: 22px;
   font-family: "Roboto";
   margin-bottom:2.5%;
   padding:5%;
@@ -27,22 +34,50 @@ margin-top:5%;
 }
 .item_name_result{
   margin-left: 10%;
+  font-size:18px;
   font-family: "Roboto";
 }
 .add_foodtruck_subtitle{
   text-align: left;
   margin-left: 10%;
-  margin-top:5%;
+  margin-top:10%;
   font-size: 24px;
   font-family: "Roboto";
 }
+.padding-left-5{
+  padding-left:5%;
 
+}
+.item_name_result{
+  vertical-align: top !important;
+}
+.padding-left-10{
+  padding-left:10%;
+}
+.padding-left-2_5{
+  padding-left: 2.5%
+}
+.f16px{
+  font-size: 16px !important;
+}
+.light_border{
+  border-bottom:1px solid #f2ede9;
+}
+p{
+  position: relative;
+}
 .background_container_result{
   width:100%;
+}
+.catagory_text_list{
+  margin-top:5%;
 }
 .background_result{
   width:100%;
 
+}
+.add_symbol{
+  margin-bottom:10%;
 }
 .logo_result{
   width:15%;
@@ -56,8 +91,9 @@ margin-top:5%;
   text-align: center;
 }
 .admin_menu_container{
-  background:#FAF9F6 !important;
-  box-shadow:2px 1px 2px 1px #e6e6e6;
+  background:#fcfaf8 !important;
+  margin-top:2.5%;
+  box-shadow:1px 1px 1px 1px #fcfaf8;
   padding:0%;
 }
 .menu_container_result{

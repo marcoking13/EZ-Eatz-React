@@ -1,16 +1,16 @@
 import React from "react";
 import JWT_Decode from "jwt-decode";
 
-import FormIcon from "./../../images/form_icon.svg";
-import LandingBackground from "./../../images/landing_background.png";
-import LandingBackgroundMobile from "./../../images/landing_background.png";
-
+import FormIcon from "./../../../images/form_icon.svg";
+import LandingBackground from "./../../../images/Admin_Landing_Background.png";
+import LandingBackgroundMobile from "./../../../images/landing_background.png";
 
 
 class FormComponent extends React.Component {
 
   constructor(props){
     super(props);
+
     this.state = {
       input : "",
       key: this.props.key,
@@ -60,23 +60,18 @@ class FormComponent extends React.Component {
   EnterInformation = (event) =>{
 
       if(!this.state.input){
-
         this.errorRef.current.innerHTML = "*Must Enter a Value!";
         return;
-
       }
       else if(this.props.type == "signup" && this.props.dataKey == "password" && this.state.input.length < 10){
-
         this.errorRef.current.innerHTML = "*Password must be 10 characters or longer";
         return;
-
       }
       else if(this.props.type == "signup" && this.props.dataKey == "username" && this.state.input.length < 7){
-
         this.errorRef.current.innerHTML = "*Username must be 7 characters or longer";
         return;
-
-      }else{
+      }
+      else{
 
         this.errorRef.current.innerHTML = "";
 
@@ -86,43 +81,42 @@ class FormComponent extends React.Component {
         }
 
       if(this.props.finished == false){
-       var timer = setTimeout(()=>{
 
+          var timer = setTimeout(()=>{
           this.props.ChangeInput(this.state.input,this.props.dataKey);
-          if(this.props.finished || !this.formRef.current){
-            clearInterval(timer);
-            return;
-          }else{
-            this.formRef.current.classList.add("add_form");
-            this.formRef.current.classList.remove("remove_form");
-           }
 
-          this.setState({input:"",key:""});
+            if(this.props.finished || !this.formRef.current){
+              clearInterval(timer);
+              return;
+            }else{
+              this.formRef.current.classList.add("add_form");
+              this.formRef.current.classList.remove("remove_form");
+             }
 
-        },500);
-      }
+            this.setState({input:"",key:""});
+
+          },500);
+
+        }
 
       }
 
   }
 
  CapitalizeFirstLetter = (word) => {
-
   return word.charAt(0).toUpperCase() + word.slice(1);
-
-}
+ }
 
   render(){
 
     var width = window.innerWidth;
-
     var background = width >= 844 ? LandingBackground : LandingBackgroundMobile;
     var height = width >= 844 ? 1080 : 900;
     var col_spacer = width >= 844 ? 4 : 2;
     var col_container = width >=844 ? 4 : 8;
 
     return(
-      <div className="container-fluid form_component padding-top-5"style = {{background:`url(${background})`,height:height + "px",paddingBottom:"100%"}}>
+      <div className="container-fluid form_component padding-top-5 padding-bottom-100"style = {{background:`url(${background})`,height:height + "px"}}>
 
         <p className="ez_title margin-left-5">EZ<strong className="ez_title_end">Eatz</strong></p>
         <button class="back_button"onClick={()=>{this.props.ChangeURL("landing")}}> Go Back </button>
@@ -132,7 +126,7 @@ class FormComponent extends React.Component {
 
           <div className={"col-"+col_spacer + " form_spacer"}/>
 
-          <div className={"col-"+col_container+" form_container jumbotron "}style={{background:"white",borderRadius:"5px"}}>
+          <div className={"col-"+col_container+" form_container jumbotron background-white border-radius-5px"}>
 
             <div className=" form-group">
               <p className="form_text "> {this.props.title} </p>

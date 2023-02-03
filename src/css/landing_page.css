@@ -7,6 +7,16 @@
 .relative{
   position: relative;
 }
+.full_background{
+  height:1080px;
+  padding-bottom:100%
+}
+.admin_button{
+  position: absolute !important;
+  bottom:5% !important;
+  width:90% !important;
+  right:5% !important;
+}
 .adjust_up{
   bottom:20px;
 }

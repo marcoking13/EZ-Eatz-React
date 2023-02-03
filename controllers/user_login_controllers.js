@@ -1,4 +1,4 @@
-const UserConstructor = require("./../config/user_constructor.js");
+const UserConstructor = require("./../config/classes/user_constructor.js");
 const express = require("express");
 const axios = require("axios");
 const router = express.Router();

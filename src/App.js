@@ -12,6 +12,8 @@ import "./css/layout.css";
 
 import LoginConfig from "./config/login_info.js";
 import SignupConfig from "./config/signup_info.js";
+import AdminSignupConfig from "./config/admin_signup_info.js";
+import AdminLoginConfig from "./config/admin_signup_info.js";
 
 import LandingPage from "./containers/landing_page";
 import AuthenticationPage from "./containers/authentication_page";
@@ -23,6 +25,9 @@ import MenuPage from "./containers/menu_page.js";
 import GooglePage from "./containers/google_page.js";
 
 import AddFoodTruckPage from "./components/Admin/add_food_truck_page.js";
+import AdminLandingPage from "./containers/Admin/landing_page";
+import AdminLoginPage from "./containers/Admin/login_page";
+import AdminSignupPage from "./containers/Admin/signup_page";
 
 
 class App extends Component {
@@ -39,14 +44,24 @@ class App extends Component {
       profile_color:null,
       account:"",
       loading:false,
-      address:this.props.address,
+      address:"",
       lat:null ,
       lng:null,
       name:"",
       profilePhoto:null,
       orders:[],
       checkout_truck:null,
-      truck:null
+      truck:null,
+      adminOrders:[],
+      adminTruck:null,
+      adminPhoto:null,
+      adminName:"",
+      adminLat:null,
+      adminLng:null,
+      adminAddress:"",
+      adminProfileColor:null,
+      adminZip:""
+
 
     }
 
@@ -191,6 +206,33 @@ class App extends Component {
 
 }
 
+LetUserInsideAdmin = async (data) => {
+
+  var {address,name,image,username,orders,profile_color,truck} = data;
+
+  this.setState({loading:true});
+
+  const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
+
+  if(response.data.results.length > 0){
+
+    const { lat, lng } = response.data.results[0].geometry.location;
+
+    var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng};
+    this.setState({url:"/admin/home",loading:false,adminProfileColor:profile_color,adminAddress:location.address,adminName:name,adminProfilePhoto:image,adminUsername:username,adminOrders:orders,adminLat:lat,adminLng:lng});
+
+  }else{
+
+    this.setState({url:"/admin/home",loading:false,adminProfileColor:profile_color,adminAddress:location.address,adminName:name,adminProfilePhoto:image,adminUsername:username,adminOrders:orders});
+
+  }
+
+
+}
+
+
+
+
  GuestEntrance = async (address) =>{
 
     this.setState({loading:true});
@@ -286,9 +328,7 @@ class App extends Component {
     cookie.remove("url",{path:"/"});
 
     if(url !== "modify"){
-
       cookie.save("url",url,{path:"/"});
-
     }
 
     this.setState({url:url});
@@ -311,6 +351,15 @@ class App extends Component {
 
       if(this.state.url == "/admin/add-foodtruck"){
         return <AddFoodTruckPage />
+      }
+      if(this.state.url == "/admin/"){
+        return <AdminLandingPage ChangeURL={this.ChangeURL}  />
+      }
+      if(this.state.url == "/admin/login"){
+        return <AdminLoginPage ChangeURL={this.ChangeURL} config = {AdminLoginConfig} LetUserInside = {this.LetUserInside}  />
+      }
+      if(this.state.url == "/admin/signup"){
+        return <AdminSignupPage ChangeURL={this.ChangeURL} config = {AdminSignupConfig} LetUserInside = {this.LetUserInside}  />
       }
       if(this.state.loading){
         return <div>Loading.....</div>

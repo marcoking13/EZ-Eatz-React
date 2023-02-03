@@ -1,16 +1,15 @@
-const ConvertToCoords  = require("./geocode");
-const CalculateDistance = require("./../distance_calculator.js");
-const MongoClient = require("mongodb").MongoClient;
-const FoodtruckGenerator = require("./foodtruck_generator.js")
-var url = process.env.MONGODB_URI || "mongodb://sableye12:thirdpi1@iad2-c11-0.mongo.objectrocket.com:54979,iad2-c11-2.mongo.objectrocket.com:54979,iad2-c11-1.mongo.objectrocket.com:54979/ezEatz?replicaSet=1ef93570889249a49db7dbe2d95a2050" ;
-
+const CalculateDistance = require("./../../distance_calculator.js");
+const FoodtruckGenerator = require("./../foodtruck_generator.js")
+const db = require("./../../database/database.js");
 
 class Foodtruck {
-constructor(ownerID,objectID,name,vegan_friendly,type,stars,lat,lng,address,logo,banner,background,mapLogo,routes,menu) {
+
+   constructor(ownerID,objectID,name,vegan_friendly,type,stars,lat,lng,address,logo,banner,background,mapLogo,routes,menu,ownerName) {
     this.ownerID = ownerID;
     this.priceAverage = 0;
     this.objectID = objectID;
     this.name = name;
+    this.ownerName = ownerName;
     this.vegan_friendly = vegan_friendly;
     this.logo = logo;
     this.lat = lat;
@@ -25,8 +24,9 @@ constructor(ownerID,objectID,name,vegan_friendly,type,stars,lat,lng,address,logo
     this.mapLogo = mapLogo;
     this.routes = routes;
     this.menu = menu;
+}
 
-    this.convert_address = async function(address){
+   async convert_address (address){
 
         var {lat,lng} = await ConvertToCoords(address);
         //
@@ -40,63 +40,7 @@ constructor(ownerID,objectID,name,vegan_friendly,type,stars,lat,lng,address,logo
 
     }
 
-    // this.expensive = function(average){
-    //
-    //   if(average < 5){
-    //     return 1
-    //   }else if (average > 5 && average < 10){
-    //     return 2
-    //   }else if (average > 10 && average < 30){
-    //     return 3
-    //   }
-    //   else if(average > 30 && average < 100){
-    //     return 4
-    //   }else{
-    //     return 5
-    //   }
-    //
-    //
-    // }
-    // this.priceAverage = function(){
-    //
-    //   var total = 0;
-    //   var items = 0;
-    //
-    //   this.menu.catagories.map((catagory)=>{
-    //     catagory.menu.map((item)=>{
-    //       total += item.price;
-    //       items ++;
-    //     });
-    //   })
-    //
-    //   var average = parseInt(total / items);
-    //
-    //
-    //   return average;
-    //
-    // }
-
-  }
-  //
-  //  FindAllTruckPublic(cb){
-  //
-  //   MongoClient.connect(url, async (err,db)=>{
-  //     var db_instance = db.db("ezEatz");
-  //     db_instance.collection("foodtrucks").find({}).toArray((found_trucks)=>{
-  //
-  //         if(found_trucks && found_trucks.length > 0){
-  //           cb(found_trucks);
-  //         }else{
-  //           cb([]);
-  //         }
-  //
-  //     });
-  //   });
-  //
-  // }
-
-
-  SetExpensive(average){
+   SetExpensive(average){
 
     if(average < 5){
       this.expensive = 1
@@ -113,7 +57,7 @@ constructor(ownerID,objectID,name,vegan_friendly,type,stars,lat,lng,address,logo
 
   }
 
-  PriceAverage(){
+   PriceAverage(){
 
 
       var total = 0;
@@ -133,10 +77,9 @@ constructor(ownerID,objectID,name,vegan_friendly,type,stars,lat,lng,address,logo
 
   }
 
-  static FindAllTrucks(cb){
+   static async FindAllTrucks(cb){
 
-    MongoClient.connect(url, async (err,db)=>{
-        var db_instance = db.db("ezEatz");
+        var db_instance =  db.GetDB();
         var found_trucks = await db_instance.collection("foodtrucks").find({}).toArray();
 
             if(found_trucks && found_trucks.length > 0){
@@ -145,32 +88,42 @@ constructor(ownerID,objectID,name,vegan_friendly,type,stars,lat,lng,address,logo
               cb([]);
             }
 
-      });
+
 
   }
 
-  static async InsertManyFoodtrucks(cb){
+   static async InsertFoodtruck(truck,cb){
 
-          var new_trucks = await FoodtruckGenerator();
-          MongoClient.connect(url, async (err,db)=>{
-            var db_instance = db.db("ezEatz");
-            const insert_response = await db_instance.collection("foodtrucks").insertMany(new_trucks);
+      var db_instance =  db.GetDB();
+      const insert_response = await db_instance.collection("foodtrucks").insertOne(truck);
+      if(!insert_response){
+        cb(null);
+      }else{
+        cb("Inserted Foodtrucks");
+      }
+
+
+  }
+
+   static async InsertManyFoodtrucks(cb){
+
+          var new_trucks =  FoodtruckGenerator();
+          var db_instance = db.GetDB();
+          const insert_response = await db_instance.collection("foodtrucks").insertMany(new_trucks);
 
               if(!insert_response){
-                cb(err);
+                cb([]);
               }else{
                 cb("Inserted Foodtrucks");
               }
 
-          });
+
 
   }
 
+   static async FindBestRatedTrucks(cb){
 
-static FindBestRatedTrucks(cb){
-
-  MongoClient.connect(url, async (err,db)=>{
-      var db_instance = db.db("ezEatz");
+      var db_instance =  db.GetDB();
       var found_trucks = await db_instance.collection("foodtrucks").find({stars: {$gt:3.5}}).toArray();
 
       if(found_trucks && found_trucks.length > 0){
@@ -179,14 +132,12 @@ static FindBestRatedTrucks(cb){
           cb([]);
         }
 
-      });
 
   }
 
-  static FindCheapestTrucks(cb){
+   static async FindCheapestTrucks(cb){
 
-    MongoClient.connect(url, async (err,db)=>{
-      var db_instance = db.db("ezEatz");
+      var db_instance = db.GetDB();
       var found_trucks = await db_instance.collection("foodtrucks").find({expensive: {$lt:3.5}}).toArray();
 
          if(found_trucks && found_trucks.length > 0){
@@ -195,14 +146,13 @@ static FindBestRatedTrucks(cb){
            cb([]);
          }
 
-     });
+
 
  }
 
- static FindVeganTrucks(cb){
+   static async FindVeganTrucks(cb){
 
-    MongoClient.connect(url, async (err,db)=>{
-      var db_instance = db.db("ezEatz");
+      var db_instance = db.GetDB();
       var found_trucks = await db_instance.collection("foodtrucks").find({type: {$in:["vegan"]}}).toArray();
 
         if(found_trucks && found_trucks.length > 0){
@@ -211,14 +161,13 @@ static FindBestRatedTrucks(cb){
           cb([]);
         }
 
-    });
+
 
 }
 
-static FindTruckType(query,cb){
+   static async FindTruckType(query,cb){
 
-  MongoClient.connect(url, async (err,db)=>{
-      var db_instance = db.db("ezEatz");
+      var db_instance = db.GetDB();
       var found_trucks = await db_instance.collection("foodtrucks").find(query).toArray();
 
           if(found_trucks && found_trucks.length > 0){
@@ -227,16 +176,14 @@ static FindTruckType(query,cb){
             cb([]);
           }
 
-    });
+
 
 }
 
-
-
-  static FilterTrucks(data,lat,lng,radius,sort,price_sort,cb) {
+   static FilterTrucks(data,lat,lng,radius,sort,price_sort,cb) {
 
       var trucks = [];
-      console.log(data);
+
       if(!data || data.length <= 0){
         cb([]);
         return;
@@ -297,57 +244,8 @@ static FindTruckType(query,cb){
   }
 
 
-
 }
 
-
-
-class Catagory {
-
-  constructor(catagory,id,food){
-
-    this.catagory = catagory;
-    this.id = id;
-    this.food = food;
-
-  }
-
-}
-
-class Item {
-
-  constructor(name,id,price,image,calories,ingredients,options,addon){
-
-    this.options = options;
-    this.id = id;
-    this.ingredients = ingredients;
-    this.addon = addon;
-
-  }
-
-}
-
-class Ingredients{
-
-  constructor(name,display){
-
-    this.name = name;
-    this.display = display;
-  }
-
-
-}
-
-class Addon {
-
-    constructor(name,price){
-
-      this.name=name,
-      this.price=price
-
-    }
-
-}
 
 
 

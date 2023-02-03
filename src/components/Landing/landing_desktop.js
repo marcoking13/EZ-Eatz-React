@@ -80,9 +80,9 @@ class LandingDesktop extends React.Component{
       </div>
       </form>
 
-      <button className="width-50 margin-top-10 btn black-background white " type="submit" onClick = {(e)=>{
-        this.props.ChangeURL("/admin/add-foodtruck");
-      }}>Admin</button>
+      <button className="admin_button btn black-background white" onClick = {(e)=>{
+        this.props.ChangeURL("/admin/");
+      }}>I Own a Foodtruck</button>
     </div>
     );
 

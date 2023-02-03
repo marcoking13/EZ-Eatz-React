@@ -1,5 +1,4 @@
-const ConvertToCoords = require("./../config/geocode.js");
-const Geocoder = require("./../config/geocode_class.js");
+const Geocoder = require("./../config/classes/geocode_class.js");
 
 const GeoConverter = (req,res,next) => {
 

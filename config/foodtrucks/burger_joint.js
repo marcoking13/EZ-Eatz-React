@@ -1,16 +1,17 @@
-const Menu = require("./../menu_constructor.js")
-const Catagory = require("./../menu_catagory.js")
-const Item = require("./../menu_item_constructor.js")
-const Addon = require("./../addon_constructor.js")
-const Ingredients = require("./../ingredient_constructor.js")
-const Foodtruck = require("./../foodtruck_constructor.js")
-const Address = require("./../address_constructor.js");
+const Menu = require("./../classes/menu_constructor.js")
+const Catagory = require("./../classes/menu_catagory.js")
+const Item = require("./../classes/menu_item_constructor.js")
+const Addon = require("./../classes/addon_constructor.js")
+const Ingredients = require("./../classes/ingredient_constructor.js")
+const Foodtruck = require("./../classes/foodtruck_constructor.js")
+const Address = require("./../classes/address_constructor.js");
 
 const public_images ="./assets/images/";
 
 const fake_street = ["Scottsdale","Arcadia", "Tempe","Phoenix","Tucson","Paradise Valley","Queen Creek","Peoria","Chandler","Flagstaff","South Phoenix","Desert Ridge","Cave Creek"]
 
 const FoodtruckCreate = (random_street,id,ownerID,lat,lng) =>{
+  
   return (
     new Foodtruck(
   ownerID,

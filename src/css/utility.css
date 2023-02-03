@@ -4,14 +4,48 @@
 .mb20px{
   margin-bottom: 20px;
 }
+.border-radius-5px{
+  border-radius:5px;
+}
+.padding-bottom-100{
+  padding-bottom:100%;
+}
+.padding-bottom-15{
+  padding-bottom:15%;
+}
 .add-to-cart{
   color:black !important;
   border:black 2px solid !important;
   border-radius:30px;
   font-size:16px !important;
 }
+.padding-bottom-20{
+  padding-bottom:20%;
+}
+.margin-top-10{
+  margin-top: 10%;
+}
+.width-90{
+  width:90%;
+}
+.float-left{
+  float:left;
+}
+.padding-bottom-20{
+  padding-bottom: 20%;
+}
+.margin-left-35{
+  margin-left: 35%;
+}
+.margin-left{
+  margin-left:20%;
+}
+
 .red{
   color:red;
+}
+.padding-5{
+  padding:5%;
 }
 .relative{
   position: relative;

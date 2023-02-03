@@ -1,4 +1,5 @@
 class Item {
+
   constructor(name,id,description,price,image,calories,ingredients,options,addons){
     this.name = name;
     this.id = id;
@@ -9,7 +10,7 @@ class Item {
     this.calories = calories,
     this.price = price,
     this.description = description
-
   }
+
 }
 module.exports = Item;

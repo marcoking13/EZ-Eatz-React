@@ -1,4 +1,4 @@
-const FoodtruckClass = require("./../config/foodtruck_constructor.js");
+const FoodtruckClass = require("./../config/classes/foodtruck_constructor.js");
 
 
 
