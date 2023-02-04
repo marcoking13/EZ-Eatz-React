@@ -60,7 +60,7 @@
     "npm": "8.5.0",
     "node": "v16.14.2"
   },
-  "proxy": "http://localhost:4001",
+  "proxy": "http://localhost:4002",
   "browserslist": [
     ">0.2%",
     "not dead",

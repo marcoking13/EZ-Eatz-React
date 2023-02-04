@@ -23,6 +23,7 @@ class FormComponent extends React.Component {
 
   handleGoogleLogin = (response)=>{
     const credential = response.credential;
+    console.log(response);
     var userObject = JWT_Decode(credential);
 
     const new_account = {
@@ -50,7 +51,7 @@ class FormComponent extends React.Component {
         google.accounts.id.renderButton(
           document.getElementById("google_login"),
           {theme:"outline",size:"large"}
-        )
+        );
 
       },500);
   }
