@@ -122,6 +122,9 @@ font-weight: bold;
     font-size:16px;
     margin-top:2.5%;
   }
+  .menuItemImage{
+    height:300px;
+  }
   .underline{
     background:white;
   }
