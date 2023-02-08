@@ -1,11 +1,20 @@
 const Geocoder = require("./../config/classes/geocode_class.js");
+const axios = require("axios");
 
 const GeoConverter = (req,res,next) => {
 
     var address = req.body.address;
-    Geocoder.TurnCoordsToAddress(address,(formatted_address)=>{
-        res.json(formatted_address);
-      });
+    console.log(address + " devmcadoejvnfejo");
+    Geocoder.ConvertAddressToCoords(address,(response)=>{
+        console.log(response);
+        if(response){
+          res.json(response);
+        }else{
+          res.json(null);
+        }
+
+      })
+
 
 }
 

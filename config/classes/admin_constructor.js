@@ -36,10 +36,10 @@ class  Admin {
   static async FindOne(username,cb){
 
      var db_instance = db.GetDB();
-     const data = await db_instance.collection("adminUsers").findOne({username:username}).toArray();
+     const data = await db_instance.collection("adminUsers").findOne({username:username});
 
-     if(data.length > 0){
-       cb(data[0]);
+     if(data){
+       cb(data);
      }else{
        cb(null)
      }
@@ -65,7 +65,7 @@ class  Admin {
 
      var db_instance = db.GetDB();
      const search = await db_instance.collection("adminUsers").findOne({username:creds.username});
-
+     con
      if(search){
        cb(search);
      }else{
@@ -90,7 +90,48 @@ class  Admin {
            cb(true);
        }
 
-       });
+      });
+
+  }
+
+  static async UpdateLocation(data,cb){
+
+     var db_instance = db.GetDB();
+     console.log(data);
+     const newvalues = { $set: {address: data.address, lat:data.lat,lng:data.lng} };
+
+         db_instance.collection("adminUsers").updateOne({username:data.username},{$set:{address: data.address,lat:data.lat,lng:data.lng}}, function(err, res) {
+           console.log(err);
+         if (err){
+
+           cb(null)
+           return;
+         }else{
+
+           cb(data);
+       }
+
+      });
+
+  }
+
+  static async ToggleTracker(data,cb){
+
+     var db_instance = db.GetDB();
+     console.log(data);
+     const newvalues = { $set: {address: data.address, lat:data.lat,lng:data.lng} };
+
+         db_instance.collection("adminUsers").updateOne({username:data.username},{$set:{tracking:data.toggle}}, function(err, res) {
+           console.log(err);
+         if (err){
+           cb(null)
+           return;
+         }else{
+
+           cb(data);
+       }
+
+      });
 
   }
 
@@ -98,7 +139,6 @@ class  Admin {
 
       var db_instance = db.GetDB();
       const {...object} = this;
-      console.log(object);
 
       db_instance.collection("adminUsers").insertOne(object,(err,result)=>{
         console.log("Inserted")

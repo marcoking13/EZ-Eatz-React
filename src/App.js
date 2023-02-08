@@ -28,6 +28,8 @@ import AddFoodTruckPage from "./components/Admin/add_food_truck_page.js";
 import AdminLandingPage from "./containers/Admin/landing_page";
 import AdminLoginPage from "./containers/Admin/login_page";
 import AdminSignupPage from "./containers/Admin/signup_page";
+import AdminDashboardPage from "./containers/Admin/dashboard_page.js";
+import LocationAdminPage from "./containers/Admin/location_admin_page.js";
 
 
 class App extends Component {
@@ -209,22 +211,16 @@ class App extends Component {
 LetUserInsideAdmin = async (data) => {
 
   var {address,name,image,username,orders,profile_color,truck} = data;
-
+  console.log(data);
   this.setState({loading:true});
 
-  const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
-
-  if(response.data.results.length > 0){
-
-    const { lat, lng } = response.data.results[0].geometry.location;
-
-    var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng};
-    this.setState({url:"/admin/home",loading:false,adminProfileColor:profile_color,adminAddress:location.address,adminName:name,adminProfilePhoto:image,adminUsername:username,adminOrders:orders,adminLat:lat,adminLng:lng});
+  const response = await axios.post(`/util/get_coords`,{address:address});
+  console.log(response);
+  if(response){
+    this.setState({url:"/admin/dashboard",loading:false,adminProfileColor:profile_color,adminAddress:response.address,adminName:name,adminProfilePhoto:image,adminUsername:username,adminOrders:orders,adminLat:response.lat,adminLng:response.lng});
 
   }else{
-
-    this.setState({url:"/admin/home",loading:false,adminProfileColor:profile_color,adminAddress:location.address,adminName:name,adminProfilePhoto:image,adminUsername:username,adminOrders:orders});
-
+    this.setState({url:"/admin/dashboard",loading:false,adminProfileColor:profile_color,adminAddress:"",adminName:name,adminProfilePhoto:image,adminUsername:username,adminOrders:orders});
   }
 
 
@@ -349,17 +345,31 @@ LetUserInsideAdmin = async (data) => {
         orders:this.state.orders,
       }
 
-      if(this.state.url == "/admin/add-foodtruck"){
-        return <AddFoodTruckPage />
+      var admin_account= {
+        address:this.state.adminSddress,
+        name:this.state.adminName,
+        username:this.state.adminUsername,
+        profilePhoto:this.state.adminProfilePhoto,
+        profile_color:"red",
+        lat:this.state.adminLat,
+        lng:this.state.adminLng,
+        orders:this.state.orders,
+      }
+
+      if(this.state.url == "/admin/dashboard"){
+        return <AdminDashboardPage ChangeURL={this.ChangeURL} account = {admin_account} />
+      }
+      if(this.state.url == "/admin/location"){
+        return <LocationAdminPage ChangeURL={this.ChangeURL} account = {admin_account} />
       }
       if(this.state.url == "/admin/"){
         return <AdminLandingPage ChangeURL={this.ChangeURL}  />
       }
       if(this.state.url == "/admin/login"){
-        return <AdminLoginPage ChangeURL={this.ChangeURL} config = {AdminLoginConfig} LetUserInside = {this.LetUserInside}  />
+        return <AdminLoginPage ChangeURL={this.ChangeURL} config = {AdminLoginConfig} LetUserInside = {this.LetUserInsideAdmin}  />
       }
       if(this.state.url == "/admin/signup"){
-        return <AdminSignupPage ChangeURL={this.ChangeURL} config = {AdminSignupConfig} LetUserInside = {this.LetUserInside}  />
+        return <AdminSignupPage ChangeURL={this.ChangeURL} config = {AdminSignupConfig} LetUserInside = {this.LetUserInsideAdmin}  />
       }
       if(this.state.loading){
         return <div>Loading.....</div>

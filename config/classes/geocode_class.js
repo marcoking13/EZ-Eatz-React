@@ -1,6 +1,7 @@
 const GeocodeNormal = require('node-geocoder');
 const GeocodeReverse = require("react-geocode");
 const GeoDistance = require("geo-distance");
+const axios = require("axios");
 
 class Geocoder {
 
@@ -30,29 +31,35 @@ class Geocoder {
 
     }
 
-    static TurnAddressToCoords (address,cb){
+    static async ConvertAddressToCoords (address,cb){
 
-      const options = {
-        provider: 'google',
-        fetch: null,
-        apiKey: 'AIzaSyDT3CvnaTo7AnBgi4XRNHPrf0_hDTrF0EE',
-        formatter: null // 'gpx', 'string', ...
-      };
+      if(address.length <= 0){
+        cb(null);
+        return;
+      }else{
+          const response = await axios.post(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
+           console.log(response.data.results[0].geometry.location);
+          if(response.data.results){
 
-       const geocoder = NodeGeocoder(options);
-       geocoder.geocode(address,(res)=>{
+            if(response.data.results.length > 0){
 
-        if(res){
-          const { latitude, longitude } = res[0];
-          cb({lat:latitude,lng:longitude});
-        }else{
-          console.error(error);
-          cb(null);
+              const { lat, lng } = response.data.results[0].geometry.location;
+
+              var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng};
+              cb(location)
+
+            }else{
+              cb(null)
+            }
+
+          }else{
+            cb(null);
+          }
         }
 
-      });
+      }
 
-    }
+
 
     static CalculateDistance(userLocation,foodtruckLocation,radius){
 

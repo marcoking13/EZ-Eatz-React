@@ -86,12 +86,14 @@ class AuthenticationPage extends React.Component {
   }
 
   GoogleAuthentication = async (info) =>{
-    const {data} = await axios.post(info,"/admin/find_one","Error has Occcured");
+    console.log(info);
+    const {data} = await axios.post("/admin/find_one",info);
+    console.log(data);
     if(data){
       alert("User Already Exists!");
     }else{
       this.setState({
-        counter: this.state.limit - 1,
+        counter: 3,
         username:info.username,
         name:info.name,
         address:"",

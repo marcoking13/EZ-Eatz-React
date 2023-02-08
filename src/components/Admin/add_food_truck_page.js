@@ -3,6 +3,8 @@ import React from "react";
 import "./../../css/utility.css";
 import "./../../css/admin_add_menu.css";
 
+import MenuDisplay from "./Authentication/menu_display";
+
 import axios from "axios";
 
 
@@ -647,64 +649,6 @@ class AddFoodTruckPage extends React.Component {
 
   }
 
-  renderCatagories = () => {
-    if(this.state.menu.catagories.length >0){
-
-      var jsx = this.state.menu.catagories.map((catagory)=>{
-          return (
-            <div className="col-4 catagory_text_list">
-              {catagory.name}
-            </div>
-          )
-      })
-      return(
-        <div className="row">
-          {jsx}
-        </div>
-      )
-
-    }
-
-  }
-
-  renderMenu = ()=>{
-
-        var menu = this.state.menu.catagories.map((catagory,catagory_index)=>{
-
-          const catagory_jsx = <p className="catagory_row_title" key = {catagory_index} id = {catagory.name}> {catagory.name} </p>
-
-          const item_jsx = catagory.items.map((item,item_index)=>{
-               return (
-                 <div className="row light_border margin-top-2_5 padding-left-2_5 width-100">
-                    <div className="width-100 ">
-                      <p className="item_name_result" key = {item.name}>{item.name}</p>
-                    </div>
-                    <div className="width-100 ">
-                      <p className="item_name_result f16px" key = {item.price}>${item.price}</p>
-                    </div>
-                    <div className="width-100">
-                      <p className="item_name_result f16px" key = {item.description}>{item.description}</p>
-                    </div>
-                 </div>
-               )
-
-            });
-
-            return (
-              <div className="menu_row_container width-100">
-                {catagory_jsx}
-                <div className="row menu_row width-100">
-                {item_jsx}
-                </div>
-              </div>
-            )
-
-        });
-
-      return menu;
-
-  }
-
   limit = (input,value) => {
 
     if(input.length > value) {
@@ -717,6 +661,13 @@ class AddFoodTruckPage extends React.Component {
   }
 
   render(){
+
+    var account = {
+      address:this.state.address,
+      name:this.state.name,
+      background:this.state.background,
+      logo:this.state.logo
+    }
 
     return(
 
@@ -795,30 +746,7 @@ class AddFoodTruckPage extends React.Component {
             <div className="col-1"/>
 
             <div className="col-4 admin_menu_container relative">
-
-                  <div className="title_container_result">
-                      <div className="background_container_result">
-                        <img src = {this.state.background} className="width-100 background_result"/>
-                      </div>
-
-                    <div className="text_result">
-                      <img className="width-50 logo_result" src={this.state.logo} />
-                      <p className="title_result">{this.state.name} </p>
-                      <p className="address_result">{this.state.address} </p>
-                    </div>
-
-                  </div>
-
-                <div className="catagory_container_result margin-top-10 ">
-                  {this.renderCatagories()}
-                </div>
-
-                <div className="menu_container_result">
-                  {this.renderMenu()}
-                </div>
-
-              </div>
-
+                <MenuDisplay menu = {this.state.menu} account = {account} />
             </div>
 
             <button className="submit_menu" onClick = {()=>{
@@ -826,6 +754,8 @@ class AddFoodTruckPage extends React.Component {
             }}>Submit Menu</button>
 
           </div>
+          </div>
+          
 
       )
 

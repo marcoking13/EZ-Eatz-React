@@ -22,6 +22,7 @@ class FormComponent extends React.Component {
   }
 
   handleGoogleLogin = (response)=>{
+
     const credential = response.credential;
     var userObject = JWT_Decode(credential);
 
@@ -43,7 +44,7 @@ class FormComponent extends React.Component {
       /* global google */
       if(google){
         var timer = setTimeout(()=>{google.accounts.id.initialize({
-          client_id:"652597126493-l0ekbte8bpm6n1viv7p2thrf2plf09jv.apps.googleusercontent.com",
+          client_id:"701475510454-pv8nu2r7pcbipkp1eihv93r9s2u435nu.apps.googleusercontent.com",
           callback:this.handleGoogleLogin
         });
 
@@ -122,7 +123,7 @@ class FormComponent extends React.Component {
     var col_container = width >=844 ? 4 : 8;
 
     return(
-      <div className="container-fluid form_component padding-top-5"style = {{background:`url(${background})`,height:height + "px",paddingBottom:"100%"}}>
+      <div className="container-fluid form_component padding-top-5 padding-bottom-100"style = {{background:`url(${background})`,height:height + "px"}}>
 
         <p className="ez_title margin-left-5">EZ<strong className="ez_title_end">Eatz</strong></p>
         <button class="back_button"onClick={()=>{this.props.ChangeURL("landing")}}> Go Back </button>
@@ -132,7 +133,7 @@ class FormComponent extends React.Component {
 
           <div className={"col-"+col_spacer + " form_spacer"}/>
 
-          <div className={"col-"+col_container+" form_container jumbotron "}style={{background:"white",borderRadius:"5px"}}>
+          <div className={"col-"+col_container+" form_container jumbotron background-white border-radius-5px"}>
 
             <div className=" form-group">
               <p className="form_text "> {this.props.title} </p>

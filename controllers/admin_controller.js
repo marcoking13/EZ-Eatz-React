@@ -11,7 +11,8 @@ const AddTruckToUser = (req,res,next) =>{
 }
 
 const FindOneAdmin = (req,res,next) => {
-  AdminClass.FindOne(info.username,(results)=>{
+
+  AdminClass.FindOne(req.body.username,(results)=>{
     console.log(results);
     if(results){
       res.json(results);
@@ -21,11 +22,53 @@ const FindOneAdmin = (req,res,next) => {
   })
 }
 
+const UpdateLocation = async (req,res,next) => {
+  console.log(req.body);
+  AdminClass.FindOne(req.body.username,(results)=>{
+
+    if(results){
+      AdminClass.UpdateLocation(req.body,(data)=>{
+        console.log(data + "d");
+        AdminClass.FindOne(data.username,(result)=>{
+          console.log(result);
+        })
+      });
+    }
+
+  });
+
+}
+
+const TrackLocation = async (req,res,next) => {
+  AdminClass.FindOne(req.body.username,(results)=>{
+    let toggle = false;
+
+    if(results.tracking){
+      toggle = false;
+    }else{
+      toggle = true;
+    }
+
+    if(results){
+      AdminClass.ToggleTracker({username:req.body.username,toggle:toggle},(success)=>{
+        if(success){
+          res.json(toggle);
+        }else{
+          res.json(null);
+        }
+      })
+    }else{
+      res.json(null);
+    }
+  })
+}
+
 const AddTruckToDb = async (req,res,next) =>{
   var truck = req.body.truck;
+  console.log(truck);
   var user = {
     name:req.body.name,
-    address:req.body.truck.address,
+    address:req.body.address,
     username:req.body.username,
     password:req.body.password,
     orders:req.body.orders,
@@ -76,4 +119,7 @@ const AddTruckToDb = async (req,res,next) =>{
 
 
 exports.AddTruckToUser = AddTruckToUser;
+exports.FindOneAdmin = FindOneAdmin;
+exports.UpdateLocation = UpdateLocation;
 exports.AddTruckToDb = AddTruckToDb;
+exports.TrackLocation = TrackLocation;

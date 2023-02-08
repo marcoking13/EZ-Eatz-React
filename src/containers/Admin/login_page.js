@@ -25,6 +25,7 @@ class AuthenticationPage extends React.Component {
   CheckIfUserFinishedFormsThenSubmit(){
 
     if(this.state.counter >= this.state.limit){
+
         var info = {
              username:this.state.username,
              password:this.state.password,
@@ -33,7 +34,9 @@ class AuthenticationPage extends React.Component {
              verified:false,
              name:this.state.name
            }
+
         this.SubmitAuthentication(info);
+
      }
 
   }
@@ -65,6 +68,7 @@ class AuthenticationPage extends React.Component {
 
     if(data){
       this.setState({finished:true});
+      console.log(data);
       this.props.LetUserInside(data);
     }else{
       alert(alertValue);
@@ -75,11 +79,14 @@ class AuthenticationPage extends React.Component {
 
   Verify = async(info,url,alertValue)=>{
     const {data} = await axios.post(url,info);
-    this.CheckInputs(data,alertValue);
+    console.log(data);
+    if(data){
+      this.CheckInputs(data,alertValue);
+    }
   }
 
   GoogleAuthentication = (info)=>{
-    this.Verify(info,"/api/google_login","Error Has Occured with Google!");
+    this.Verify(info,"/admin/google_login","No Account Exists");
   }
 
   SubmitAuthentication = (info) =>{

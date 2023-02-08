@@ -1,0 +1,13 @@
+.navbar_admin{
+  box-shadow:1px 0px 0px 1px #e6e6e6;
+  border-bottom:1px solid #e6e6e6;
+  padding-top:2.5%;
+  padding-left:2.5%;
+  padding-bottom:2.5%;
+}
+
+.nav_admin_name{
+  font-family: "Roboto";
+  font-size:19px;
+
+}

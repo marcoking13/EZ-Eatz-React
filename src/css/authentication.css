@@ -137,6 +137,18 @@
     background-size:cover !important;
   }
 
+  .back_button{
+    width:50%;
+    position: absolute;
+    left:25%;
+    top:60%;
+  }
+  #google_login{
+    top:5%;
+    right:5%;
+    position: absolute;
+  }
+
   .form_container{
     margin-top:5% !important;
   }
@@ -145,11 +157,7 @@
     width:0% !important;
   }
 
-  #google_login{
-    top: 80% !important;
-    width: 70% !important;
-    left: 15% !important;
-  }
+
 
   .add_form{
     position: relative;

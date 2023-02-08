@@ -21,10 +21,10 @@ class FormComponent extends React.Component {
 
   }
 
-  handleGoogleLogin = (response)=>{
+  handleGoogleLogin =  async(response)=>{
     const credential = response.credential;
-    console.log(response);
-    var userObject = JWT_Decode(credential);
+
+    var userObject = await JWT_Decode(credential);
 
     const new_account = {
       address:null,
@@ -34,6 +34,8 @@ class FormComponent extends React.Component {
       password:userObject.sub,
       orders:[]
     }
+
+    console.log(new_account);
 
     this.props.GoogleAuthentication(new_account);
 
