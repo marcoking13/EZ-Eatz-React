@@ -32,7 +32,7 @@ class NewMobileNavBar extends React.Component {
 
   render(){
 
-    var is_input_visible = this.props.url == "home" || this.props.url == "maps" ? "visible" : "hidden";
+    var is_input_visible = this.props.url == "home" || this.props.url == "map" ? "visible" : "hidden";
 
       return(
         <div>
