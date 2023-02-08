@@ -18,6 +18,25 @@ const GeoConverter = (req,res,next) => {
 
 }
 
+const CheckIfImageIsReal = (req,res,next) =>{
+
+  var imageReq = new XMLHttpRequest();
+  imageReq.open("GET", req.body.url, true);
+  imageReq.send();
+
+  imageReq.onload = function() {
+    status = imageReq.status;
+    if (imageReq.status == 200) //if(statusText == OK)
+    {
+        res.json(true);
+    } else {
+        res.json(false);
+    }
+
+  }
+
+}
+
 const DistanceCalculator = (req,res) => {
 
     var {userLocation,foodtruckLocation,radius} = req.body;

@@ -134,6 +134,9 @@ font-weight: bold;
 .foodtruck_menu_name{
   font-size: 20px;
 }
+.menu_item{
+  height:400px;
+}
 
   .foodtruck_star_container{
     margin-left:2.5%;

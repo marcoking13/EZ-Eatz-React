@@ -1,9 +1,10 @@
 import React from "react";
-
+import axios from "axios";
 
 class  DesktopBox extends React.Component {
   render(){
       var fixedPrice = this.props.menu.food[this.props.i].price.toFixed(2);
+    
     // Returns the Box for the menu
     // Shows item name,image, and price
     // Whe clicked SetItem will set that item to the state and save it cookie
@@ -23,7 +24,7 @@ class  DesktopBox extends React.Component {
           </div>
 
         </div>
-        
+
       </div>
 
     );

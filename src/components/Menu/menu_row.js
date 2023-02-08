@@ -1,6 +1,8 @@
 import React from "react";
 
 import DesktopBox from "./desktop_menu_box_component.js";
+import axios from "axios";
+import Placeholder from "./../../images/placeholder_menu_item.png";
 
 class  MenuRow extends React.Component {
 
@@ -11,12 +13,15 @@ class  MenuRow extends React.Component {
       console.log(catagory);
       const catagory_name = <p className="menu_row_title" key = {catagory.catagory} id = {catagory.catagory}> {catagory.catagory} </p>
 
-      const food_items = catagory.menu.map((food_item,index)=>{
+      const food_items = catagory.menu.map(async (food_item,index)=>{
         console.log(food_item,index);
         var col_size = window.innerWidth >=  844 ? 4 : 6;
+
+        var {data} = await axios.post("/util/image_real",food_item.image);
+        var image = data ? food_item.image : Placeholder;
         return (
           <div className={"col-" + col_size + " menu_item"} onClick = {()=>{console.log(food_item);this.props.SetItem(food_item)}}>
-            <img className="menu_item_image" src = {food_item.image}/>
+            <img className="menu_item_image" src = {image}/>
             <div className="row">
               <p className="col-6 menu_item_description"> {food_item.name}</p>
               <p className="col-6 menu_item_description"> $ {food_item.price.toString()}</p>
