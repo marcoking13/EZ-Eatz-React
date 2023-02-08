@@ -49,3 +49,4 @@ const DistanceCalculator = (req,res) => {
 
 exports.GeoConverter = GeoConverter;
 exports.DistanceCalculator = DistanceCalculator;
+exports.CheckIfImageIsReal = CheckIfImageIsReal;

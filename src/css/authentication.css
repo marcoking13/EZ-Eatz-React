@@ -141,12 +141,11 @@
     width:50%;
     position: absolute;
     left:25%;
-    top:90%;
+    top:100%;
   }
   #google_login{
     top:5%;
-    right:5%;
-    width:20%;
+    right:25%;
     position: absolute;
   }
 
@@ -159,12 +158,12 @@
   }
 
 .ez_title{
-  text-align: left;
+  text-align: left !important;
   padding-left:2.5%;
 
 }
 .ez_title_end{
-  text-align:left;
+  text-align:left !important;
 }
 
 
