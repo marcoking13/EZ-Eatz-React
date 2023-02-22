@@ -17,10 +17,14 @@ class AddFoodTruckPage extends React.Component {
       types:[""],
       name:"",
       address:null,
+      truck:null,
       background:null,
+      isLoading:true,
       mapLogo:null,
       routes:[],
+      id:null,
       logo:null,
+      isEdit:this.props.isEdit,
       typeMax:3,
       menu:{
         catagories:[],
@@ -30,27 +34,87 @@ class AddFoodTruckPage extends React.Component {
 
   }
 
+  GetAdmin = async ()=>{
+
+    if(this.state.isEdit){
+      console.log(this.props.account);
+      const {data} = await axios.post("/admin/find_one",{username:this.props.account.username});
+
+      if(data){
+        console.log(data);
+        var address = data.address;
+        var name = data.truck.name;
+        var menu = data.truck.menu;
+        var logo = data.truck.logo;
+        var id = data.truck.objectID;
+        var mapLogo = data.truck.mapLogo;
+        var types = data.truck.types;
+        var background = data.truck.background;
+        // var {name,address,logo,mapLogo,background,types,menu} = data.truck;
+
+        this.setState({
+          types:types,
+          name:name,
+          isLoading:false,
+          id:id,
+          truck:data.truck,
+          address:address,
+          background:background,
+          mapLogo:mapLogo,
+          logo:logo,
+          menu:menu
+
+        })
+
+      }
+
+  }
+
+  }
+
+ componentDidMount(){
+   this.GetAdmin();
+ }
+
   // Submit To Props
   SubmitTruck = () => {
     var s = this.state;
 
-    var truck = {
-      ownerID: Math.floor(Math.random() * 99999999),
-      objectID: Math.floor(Math.random() * 99999999),
-      ownerName:this.props.ownerName,
-      types:s.types,
-      lat:null,
-      lng:null,
-      route:[],
-      name:s.name,
-      address:s.address,
-      mapLogo:s.mapLogo,
-      background:s.background,
-      logo:s.logo,
-      menu:s.menu
-    }
+    if(this.props.isEdit){
+      var edit_truck = {
+        types:s.types,
+        objectID:s.id,
+        lat:null,
+        lng:null,
+        name:s.name,
+        address:s.address,
+        mapLogo:s.mapLogo,
+        background:s.background,
+        logo:s.logo,
+        menu:s.menu
+      }
+      console.log(edit_truck);
+      this.props.editTruck(edit_truck);
+    }else{
 
-    this.props.submitTruck(truck);
+
+      var truck = {
+        ownerID: Math.floor(Math.random() * 99999999),
+        objectID: Math.floor(Math.random() * 99999999),
+        ownerName:this.props.ownerName,
+        types:s.types,
+        lat:null,
+        lng:null,
+        route:[],
+        name:s.name,
+        address:s.address,
+        mapLogo:s.mapLogo,
+        background:s.background,
+        logo:s.logo,
+        menu:s.menu
+      }
+      this.props.submitTruck(truck);
+    }
 
   }
 
@@ -662,11 +726,31 @@ class AddFoodTruckPage extends React.Component {
 
   render(){
 
+    var truck;
+    if(this.props.editTruck){
+      truck = {
+        types:this.state.types,
+        name:this.state.name,
+        address:this.state.address,
+        background:this.state.background,
+        mapLogo:this.state.mapLogo,
+        logo:this.state.logo,
+        menu:this.state.menu
+      }
+    }else{
+        truck = this.state.truck;
+      }
+
+
     var account = {
       address:this.state.address,
       name:this.state.name,
       background:this.state.background,
       logo:this.state.logo
+    }
+
+    if(this.state.isLoading){
+      return <div> ....Loading</div>
     }
 
     return(
@@ -746,7 +830,8 @@ class AddFoodTruckPage extends React.Component {
             <div className="col-1"/>
 
             <div className="col-4 admin_menu_container relative">
-                <MenuDisplay menu = {this.state.menu} account = {account} />
+                <MenuDisplay truck = {truck} account = {account} />
+            </div>
             </div>
 
             <button className="submit_menu" onClick = {()=>{
@@ -754,8 +839,8 @@ class AddFoodTruckPage extends React.Component {
             }}>Submit Menu</button>
 
           </div>
-          </div>
-          
+
+
 
       )
 

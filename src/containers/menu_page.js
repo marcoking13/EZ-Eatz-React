@@ -77,13 +77,13 @@ class MenuPage extends React.Component {
         <div className="row">
 
           <div clasName={"col-"+ listing_col_size+ " catagory_listings"}>
-            <CatagoryListings truck = {this.props.truck}/>
+          <CatagoryListings truck = {this.props.truck}/>
           </div>
 
           <div className={spacer_col_size}/>
 
           <div className={"menux col-"+menu_col_size}>
-            <MenuRows truck = {this.props.truck} SetItem = {this.props.SetItem}/>
+             <MenuRows truck = {this.props.truck} SetItem = {this.props.SetItem}/>
           </div>
 
         </div>

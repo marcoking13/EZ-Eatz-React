@@ -2,8 +2,8 @@ import React from "react";
 import JWT_Decode from "jwt-decode";
 
 import FormIcon from "./../../../images/form_icon.svg";
-import LandingBackground from "./../../../images/Admin_Landing_Background.png";
-import LandingBackgroundMobile from "./../../../images/landing_background.png";
+import LandingBackground from "./../../../images/5.png";
+
 
 
 class FormComponent extends React.Component {
@@ -113,7 +113,7 @@ class FormComponent extends React.Component {
   render(){
 
     var width = window.innerWidth;
-    var background = width >= 844 ? LandingBackground : LandingBackgroundMobile;
+    var background = width >= 844 ? LandingBackground : LandingBackground;
     var height = width >= 844 ? 1080 : 900;
     var col_spacer = width >= 844 ? 4 : 2;
     var col_container = width >=844 ? 4 : 8;

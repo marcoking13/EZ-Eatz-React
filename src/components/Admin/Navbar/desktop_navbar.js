@@ -15,7 +15,7 @@ class Navbar extends React.Component {
               name:"Location"
             },
             {
-              url:"/admin/menu",
+              url:"/admin/edit_truck",
               name:"Menu"
             },
             {

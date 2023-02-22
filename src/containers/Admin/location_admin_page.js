@@ -126,6 +126,7 @@ class LocationAdmin extends React.Component {
 
   render(){
     var active = this.state.tracking ? "active_tracker" : "";
+    var switch_on = this.state.tracking ? "Tracking On " : "Tracking Off"
     var location = {
       address:this.state.set_address,
       lat:this.state.lat,
@@ -142,7 +143,7 @@ class LocationAdmin extends React.Component {
 
           <div className="input_container_admin row">
             <div className="col-1"/>
-            <div className="col-10">
+            <div className="col-9">
               <form onSubmit = {(e)=>{e.preventDefault(); this.ChangeAddress()}}>
                 <input className="input_admin_map form-control width-100 text-center margin-top-2_5"
                   value = {this.state.new_address}
@@ -150,10 +151,10 @@ class LocationAdmin extends React.Component {
                 />
               </form>
             </div>
-            <div className="col-1">
-                <img className={"width-100 tracker "+active} src={Track} onClick = {()=>{
+            <div className="col-2">
+                <button className={"width-100 tracker_button btn btn-secondary "+active} onClick = {()=>{
                     this.ToggleTracker();
-                }}/>
+                }}>{switch_on}</button>
             </div>
           </div>
 

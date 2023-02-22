@@ -135,6 +135,35 @@ class Foodtruck {
 
   }
 
+  static async UpdateOne(data,cb){
+    var db_instance = db.GetDB();
+    var updateObj =
+      {
+        address: data.address,
+        logo:data.logo,
+        mapLogo:data.mapLogo,
+        menu:data.menu,
+        name:data.name,
+        lat:data.lat,
+        lng:data.lng,
+        types:data.types,
+        background:data.background
+      }
+
+    const updatedData = await db_instance.collection("foodtrucks").updateOne({objectID:data.objectID},{$set:  {
+        address: data.address,
+        logo:data.logo,
+        mapLogo:data.mapLogo,
+        menu:data.menu,
+        name:data.name,
+        lat:data.lat,
+        lng:data.lng,
+        types:data.types,
+        background:data.background
+      }});
+    console.log(updatedData);
+  }
+
    static async FindCheapestTrucks(cb){
 
       var db_instance = db.GetDB();

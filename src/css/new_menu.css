@@ -122,8 +122,8 @@ font-weight: bold;
     font-size:16px;
     margin-top:2.5%;
   }
-  .menuItemImage{
-    height:300px;
+  .menu_item_image{
+    height:200px !important;
   }
   .underline{
     background:white;

@@ -166,6 +166,7 @@ class AuthenticationPage extends React.Component {
       return(
           <AddFoodTruckPage
             submitTruck = {this.submitTruck}
+            isEdit = {false}
             ChangeURL = {this.props.ChangeURL}
           />
       )

@@ -30,7 +30,7 @@ import AdminLoginPage from "./containers/Admin/login_page";
 import AdminSignupPage from "./containers/Admin/signup_page";
 import AdminDashboardPage from "./containers/Admin/dashboard_page.js";
 import LocationAdminPage from "./containers/Admin/location_admin_page.js";
-
+import EditMenuPage from "./containers/Admin/edit_menu_page.js";
 
 class App extends Component {
   constructor(props){
@@ -358,6 +358,10 @@ LetUserInsideAdmin = async (data) => {
 
       if(this.state.url == "/admin/dashboard"){
         return <AdminDashboardPage ChangeURL={this.ChangeURL} account = {admin_account} />
+      }
+      if(this.state.url == "/admin/edit_truck"){
+        return <EditMenuPage ChangeURL={this.ChangeURL} account = {admin_account}  />
+
       }
       if(this.state.url == "/admin/location"){
         return <LocationAdminPage ChangeURL={this.ChangeURL} account = {admin_account} />

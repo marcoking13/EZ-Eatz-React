@@ -6,8 +6,8 @@ import "./../../css/landing_page.css";
 import axios from "axios";
 import cookie from "react-cookies";
 
-import DesktopPage from "./../../components/Admin/Landing/landing_desktop.js";
-import MobilePage from "./../../components/Admin/Landing/landing_mobile.js";
+import DesktopPage from "./../../components/Admin/Landing/new_landing_desktop.js";
+import MobilePage from "./../../components/Admin/Landing/new_landing_mobile.js";
 
 //-----------------------------------Component----------------------------------
 class LandingPage extends React.Component {

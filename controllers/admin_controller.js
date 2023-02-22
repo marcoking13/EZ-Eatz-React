@@ -10,6 +10,18 @@ const AddTruckToUser = (req,res,next) =>{
   console.log(req.body);
 }
 
+const EditTruck = (req,res,next) =>{
+  var data = req.body;
+  FoodtruckClass.UpdateOne(data,(results)=>{
+    console.log(results);
+    if(results){
+      res.json(true);
+    }else{
+      res.json(false);
+    }
+  })
+}
+
 const FindOneAdmin = (req,res,next) => {
 
   AdminClass.FindOne(req.body.username,(results)=>{
@@ -120,6 +132,7 @@ const AddTruckToDb = async (req,res,next) =>{
 
 exports.AddTruckToUser = AddTruckToUser;
 exports.FindOneAdmin = FindOneAdmin;
+exports.EditTruck = EditTruck;
 exports.UpdateLocation = UpdateLocation;
 exports.AddTruckToDb = AddTruckToDb;
 exports.TrackLocation = TrackLocation;

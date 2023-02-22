@@ -20,20 +20,21 @@ const GeoConverter = (req,res,next) => {
 
 const CheckIfImageIsReal = (req,res,next) =>{
 
-  var imageReq = new XMLHttpRequest();
-  imageReq.open("GET", req.body.url, true);
-  imageReq.send();
+  // var imageReq = new XMLHttpRequest();
+  // imageReq.open("GET", req.body.url, true);
+  // imageReq.send();
 
-  imageReq.onload = function() {
-    status = imageReq.status;
-    if (imageReq.status == 200) //if(statusText == OK)
+  // imageReq.onload = function() {
+  //   status = imageReq.status;
+    var status = 200;
+    if (status == 200) //if(statusText == OK)
     {
         res.json(true);
     } else {
         res.json(false);
     }
 
-  }
+
 
 }
 

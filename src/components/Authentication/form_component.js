@@ -2,10 +2,8 @@ import React from "react";
 import JWT_Decode from "jwt-decode";
 
 import FormIcon from "./../../images/form_icon.svg";
-import LandingBackground from "./../../images/landing_background.png";
+import LandingBackground from "./../../images/5.png";
 import LandingBackgroundMobile from "./../../images/landing_background.png";
-
-
 
 class FormComponent extends React.Component {
 

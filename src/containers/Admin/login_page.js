@@ -82,11 +82,14 @@ class AuthenticationPage extends React.Component {
     console.log(data);
     if(data){
       this.CheckInputs(data,alertValue);
+    }else{
+      alert(alertValue);
+      this.Reset();
     }
   }
 
   GoogleAuthentication = (info)=>{
-    this.Verify(info,"/admin/google_login","No Account Exists");
+    this.Verify(info,"/admin/google_login","No Google Account Attached to Foodtrucks");
   }
 
   SubmitAuthentication = (info) =>{

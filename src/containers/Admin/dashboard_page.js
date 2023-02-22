@@ -30,6 +30,7 @@ class DashboardPage extends React.Component {
      const {data} = await axios.post("/admin/find_one",{username:this.props.account.username});
 
      if(data){
+
        const response = await axios.post("/util/get_coords",{address:data.address});
 
        var location = {
@@ -37,10 +38,12 @@ class DashboardPage extends React.Component {
          lng:data.lng,
          address:data.address
        }
+
        if(response.data){
          location.lat = response.data.lat;
          response.lng = response.data.lng;
        }
+
        this.setState({
          menu:data.truck.menu,
          truck:data.truck,
@@ -49,7 +52,9 @@ class DashboardPage extends React.Component {
          loading:false,
          location:location
        })
+
      }
+
    }
 
   componentDidMount(){
@@ -67,7 +72,7 @@ class DashboardPage extends React.Component {
           <div className="menu_section container-fluid">
             <div className="row width-90 margin-left-5 margin-top-2_5">
                 <div className="col-4 borders-gray-left borders-gray-right relative">
-                  <img className="edit_icon" src={Edit} />
+                  <img className="edit_icon" src={Edit} onClick = {()=>{this.props.ChangeURL("/admin/edit_truck")}}/>
                   <p className="dashboard_title">{this.state.truck.name+ "'s "} Menu</p>
                   <MenuDisplay truck = {this.state.truck}/>
                 </div>

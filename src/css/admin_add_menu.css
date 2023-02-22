@@ -122,3 +122,8 @@ p{
   font-size: 30px;
   font-family: "Roboto";
 }
+.submit_menu{
+  width:100% !important;
+  margin-top:5%;
+  
+}

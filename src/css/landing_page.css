@@ -1,8 +1,9 @@
 
 .ez_title{
-  font-family:"Nunito";
+  font-family:"Fredoka One";
   color:black;
-  font-size:40px;
+  font-weight: bold;
+  font-size:35px;
 }
 .relative{
   position: relative;
@@ -20,6 +21,9 @@
 .adjust_up{
   bottom:20px;
 }
+.medium-font{
+  font-size:20px;
+}
 .icon_text{
   float:left;
   display: inline;
@@ -32,15 +36,27 @@
 }
 .ez_title_end{
   font-family:"Fredoka One";
-  font-size:40px;
+  font-size:30px;
+  font-weight: normal;
   color:#ff3333;
   font-weight: none !important;
 }
 .slogan_landing{
   font-size:40px;
   font-weight: bold;
-  font-family:"Fredoka One";
+  font-family:"Roboto";
 
+}
+.new_sub_slogan_landing{
+  font-size:60px !important;
+  line-height:1.5;
+  text-align: center;
+  color:white;
+  font-weight: 600;
+  font-family:"Exo 2";
+}
+.bottom-30px{
+  bottom:20px;
 }
 .bold{
   font-weight: bold;
@@ -50,6 +66,15 @@
   letter-spacing: 0px;
 
 
+}
+.cb{
+  color:black !important;
+}
+.btn_landing{
+  font-family: "Fredoka One";
+}
+.fone{
+    font-family: "Fredoka One";
 }
 .reward_slogan{
   font-size:20px;
@@ -83,11 +108,105 @@
 .ez_logo_mobile{
   opacity:0;
 }
+.admin_button_mobile{
+  position:absolute;
+  bottom:-30% !important;
+  background:none !important;
+  color:black !important;
+  border-color:none !important;
+  box-shadow:2px 2px 2px 2px orange;
+}
+.admin_text{
+  font-size: 30px;
+  font-family: "Roboto";
+  text-align: left !important;
+}
+.admin_show_title{
+  font-size: 28px;
+  text-align: center;
+  font-weight: 600;
+  font-family: "Exo 2";
+}
+.admin_show_description{
+  font-size: 18px;
+  text-align: center;
+  font-family: "Montserrat";
+}
+.show_image_admin{
+  width:90%;
+  height:500px;
+}
+.admin_info_description{
+  font-size: 18px;
+  text-align: left;
+  font-family: "Montserrat";
+}
+.admin_info_title{
+  font-size: 28px;
+  text-align: left;
+  font-weight: 600;
+  font-family: "Exo 2";
+}
+.text_right{
+  text-align: right;
+}
+.admin_show_link{
+  font-size: 20px;
+  border-bottom:2px solid red;
+  padding-bottom:2.5%;
+  color:red;
+  font-weight: bold;
+  margin-left:25%;
+
+  width:50% !important;
+  text-align: center;
+  font-family: "Montserrat";
+}
+.ez_title{
+  font-family: "Exo 2" !important;
+}
 /*--------------------Mobile--------------------------*/
 
 @media screen and (max-width: 844px)
-{
 
+{
+  .row_border{
+    padding-bottom:5%;
+    border-bottom:2px solid #e6e6e6;
+  }
+  .show_image_admin{
+    height:200px;
+    margin-top:5%;    
+  }
+  .logo_m{
+    float: right;
+    margin-top: 10%;
+    width: 150% !important;
+    margin-right: -15%;
+  }
+  .admin_info_title{
+    font-size:15px;
+  }
+  .admin_info_description{
+    margin-top:15%;
+    font-size:14px;
+  }
+  .admin_show_description{
+    font-size:15px;
+  }
+  .admin_show_title{
+    font-size:20px;
+    margin-top:5%;
+  }
+  .ez_title{
+    text-align: center !important;
+    color:black !important;
+    font-size:35px !important;
+  }
+  .new_sub_slogan_landing{
+    color:black !important;
+    font-size:30px !important;
+  }
   .icon{
     float: left;
     width: 0%;

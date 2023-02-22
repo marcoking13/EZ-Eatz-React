@@ -24,11 +24,19 @@
   filter:invert(78%) sepia(77%) saturate(5989%) hue-rotate(328deg) brightness(104%) contrast(100%);
 }
 .active_tracker{
-  filter:invert(58%) sepia(63%) saturate(5012%) hue-rotate(331deg) brightness(115%) contrast(107%) !important;
+  border-color:red !important;
 }
-.tracker:hover{
-  
-    filter:invert(58%) sepia(63%) saturate(5012%) hue-rotate(331deg) brightness(115%) contrast(107%) !important;
+.tracker_button{
+  background:white;
+  color:black;
+  border-width: 2px;
+  margin-top: 10%;
+  border-color:black;
+}
+
+.tracker_button:hover{
+
+    background:black !important;
 
 
 }

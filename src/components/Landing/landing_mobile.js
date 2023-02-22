@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./../../css/landing_page.css";
-import LandingBackground from "./../../images/landing_background.png";
+import LandingBackground from "./../../images/5.png";
 import Logo from "./../../images/logo.png";
 import ProfileIcon from "./../../images/profile_icon.png";
 
@@ -89,6 +89,9 @@ class LandingMobile extends React.Component{
 
       </div>
       </form>
+      <button className="admin_button admin_button_mobile btn black-background white" onClick = {(e)=>{
+        this.props.ChangeURL("/admin/");
+      }}>I Own a Foodtruck</button>
     </div>
     );
 
