@@ -141,10 +141,11 @@
     width:50%;
     position: absolute;
     left:25%;
-    top:80%;
+    top:95%;
   }
   #google_login{
-    top:5%;
+    top:90%;
+    width:50%;
     right:25%;
     position: absolute;
   }
@@ -162,9 +163,6 @@
   padding-left:2.5%;
 
 }
-
-
-
 
   .add_form{
     position: relative;
