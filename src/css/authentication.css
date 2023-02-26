@@ -141,7 +141,7 @@
     width:50%;
     position: absolute;
     left:25%;
-    top:100%;
+    top:80%;
   }
   #google_login{
     top:5%;
@@ -162,9 +162,8 @@
   padding-left:2.5%;
 
 }
-.ez_title_end{
-  text-align:left !important;
-}
+
+
 
 
   .add_form{
