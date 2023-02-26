@@ -2,7 +2,7 @@ import React from "react";
 
 import "./../../../css/landing_page.css";
 import "./../../../css/utility.css";
-import LandingBackground from "./../../../images/mobile_1.png";
+import LandingBackground from "./../../../images/mobile_l.png";
 import Logo1 from "./../../../images/logo_1.png";
 import Logo2 from "./../../../images/logos_2.png";
 import Show1 from "./../../../images/show_2.png";

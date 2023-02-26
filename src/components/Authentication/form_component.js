@@ -3,7 +3,7 @@ import JWT_Decode from "jwt-decode";
 
 import FormIcon from "./../../images/form_icon.svg";
 import LandingBackground from "./../../images/5.png";
-import LandingBackgroundMobile from "./../../images/landing_background.png";
+import LandingBackgroundMobile from "./../../images/mobile_l.png";
 
 class FormComponent extends React.Component {
 
@@ -123,7 +123,7 @@ class FormComponent extends React.Component {
     return(
       <div className="container-fluid form_component padding-top-5 padding-bottom-100"style = {{background:`url(${background})`,height:height + "px"}}>
 
-        <p className="ez_title margin-left-5">EZ<strong className="ez_title_end">Eatz</strong></p>
+        <p className="ez_title margin-left-5">EZ-Eatz</p>
         <button class="back_button"onClick={()=>{this.props.ChangeURL("landing")}}> Go Back </button>
         <div id="google_login"></div>
 
