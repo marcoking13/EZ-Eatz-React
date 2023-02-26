@@ -166,7 +166,7 @@ class AdminLandingMobile extends React.Component{
     return(
     <div className="container-fluid">
 
-      <div className="background_landing_container width-100"style={{height:"700px",background:`url(${LandingBackground})`}}>
+      <div className="background_landing_container width-100"style={{height:"800px",background:`url(${LandingBackground})`}}>
         {this.renderNavbar()}
         <div className="row margin-top-5">
           <div className="col-12 margin-top-10">
