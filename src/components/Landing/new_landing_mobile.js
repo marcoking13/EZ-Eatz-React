@@ -196,6 +196,12 @@ class AdminLandingMobile extends React.Component{
               }}>Submit</button>
             </div>
 
+            <button className="width-100 btn shadowed_button margin-top-5" type="submit" onClick = {(e)=>{
+              this.props.ChangeURL("/admin/");
+            }}>I Own A Foodtruck</button>
+          </div>
+
+
           </div>
 
         </div>
