@@ -2,7 +2,7 @@ import React from "react";
 
 import "./../../../css/landing_page.css";
 import "./../../../css/utility.css";
-import LandingBackground from "./../../../images/2.png";
+import LandingBackground from "./../../../images/mobile_1.png";
 import Logo1 from "./../../../images/logo_1.png";
 import Logo2 from "./../../../images/logos_2.png";
 import Show1 from "./../../../images/show_2.png";
@@ -68,9 +68,7 @@ class AdminLandingMobile extends React.Component{
           <p className="admin_show_description">
           As a delivery driver, you'll make reliable money—working anytime, anywhere.
           </p>
-          <p className="admin_show_link">
-            Start Now
-          </p>
+        
         </div>
       </div>
     )
@@ -88,9 +86,7 @@ class AdminLandingMobile extends React.Component{
           Experience the best your neighborhood has to offer, all in one app.
 
           </p>
-          <p className="admin_show_link">
-            Start Now
-          </p>
+
         </div>
       </div>
     )
@@ -111,9 +107,7 @@ class AdminLandingMobile extends React.Component{
             Grow your business and reach new customers by partnering with us.
 
             </p>
-            <p className="admin_show_link">
-              Start Now
-            </p>
+
           </div>
         </div>
       )
@@ -147,7 +141,7 @@ class AdminLandingMobile extends React.Component{
       <div className="row padding-top-10" style={{background:"rgb(255, 240, 237"}}>
         <div className="col-1"/>
         <div className="col-10">
-          <div className="row">
+          <div className="row margin-top-20">
 
             <div className="col-6">
                 <img className=" show_image_admin" src = {Show2} />

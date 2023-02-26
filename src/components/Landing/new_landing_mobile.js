@@ -204,7 +204,7 @@ class AdminLandingMobile extends React.Component{
 
           </div>
 
-      
+
 
         <div className="row">
           <div className="col-1"/>
