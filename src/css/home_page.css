@@ -279,4 +279,10 @@ filter:invert(90);
   .foodtruck_wrapper{
     margin-left:0 !important;
   }
+  .ez_home_input{
+    border: none;
+    outline-color: white !important;
+    border-bottom: 1px solid #e6e6e6 !important;
+    margin-top:2.5% !important;
+  }
 }
