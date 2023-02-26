@@ -68,7 +68,7 @@ class AdminLandingMobile extends React.Component{
           <p className="admin_show_description">
           As a delivery driver, you'll make reliable money—working anytime, anywhere.
           </p>
-        
+
         </div>
       </div>
     )
@@ -191,11 +191,11 @@ class AdminLandingMobile extends React.Component{
                 this.props.ChangeURL("landing");
                 e.preventDefault();
               }}>See Foodtrucks</button>
-              <button className="width-90 margin-left-5 btn white-background white margin-top-5 cb" type="submit" onSubmit = {(e)=>{
+              <button className="width-100 btn white-background white margin-top-5 cb" type="submit" onSubmit = {(e)=>{
                 e.preventDefault();
               }}>
 
-                  <img style={{width:"30px",height:"30px",float:"left"}} src={GoogleLogo}/>
+                  <img style={{width:"15px",height:"15px",float:"left"}} src={GoogleLogo}/>
 
                 Sign with Google
 
