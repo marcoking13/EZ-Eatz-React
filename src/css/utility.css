@@ -1,3 +1,7 @@
+#root{
+  overflow-x: hidden !important;
+}
+
 .mt5{
   margin-top:5% !important;
 }

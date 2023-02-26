@@ -246,7 +246,7 @@ class ModifyPage extends React.Component {
     renderJumbotron(){
 
       var jumbotron_col_size = window.innerWidth >= 844 ? 2 : 12;
-      var margint = windw.innerWidth >= 844 ? "mt5" : ""
+      var margint = window.innerWidth >= 844 ? "mt5" : ""
 
         return (
           <div className={"container-fluid "+margint}>
