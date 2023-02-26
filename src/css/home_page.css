@@ -282,11 +282,14 @@ filter:invert(90);
   .shadowed_button{
      box-shadow:1px 1px 9px 2px black;
      background:none !important;
+     width:50% !important;
+     margin-left:25%;
      border-color:none !important;
 
   }
   .ez_home_input{
     border: none;
+    width:100%;
     outline-color: white !important;
     border-bottom: 1px solid #e6e6e6 !important;
     margin-top:2.5% !important;

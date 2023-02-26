@@ -46,7 +46,7 @@ class AddressInput extends React.Component{
               e.preventDefault();
               this.submitLocation(this.state.address)
             }}>
-            <input className="form-control ez_home_input nav_input" onChange = {(e)=>{
+            <input className="form-control ez_home_input" onChange = {(e)=>{
               this.handleInputChange(e.target.value);
             }} value = {this.state.address} placeholder="Enter Address"/>
             </form>
