@@ -50,7 +50,7 @@ class NewMobileNavBar extends React.Component {
 
 
 
-              <div class="row navbar_home_mobile padding-t">
+              <div class="row navbar_home_mobile padding-5">
                 <div class="col-12">
                     <p class="mobile_nav_text"onClick = {()=>{this.props.data.ChangeURL("/admin/")}}>Home</p>
                 </div>
@@ -70,7 +70,7 @@ class NewMobileNavBar extends React.Component {
                 </div>
 
 
-        
+
 
         </div>
 
