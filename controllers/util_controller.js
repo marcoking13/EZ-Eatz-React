@@ -4,9 +4,26 @@ const axios = require("axios");
 const GeoConverter = (req,res,next) => {
 
     var address = req.body.address;
-    console.log(address + " devmcadoejvnfejo");
+
     Geocoder.ConvertAddressToCoords(address,(response)=>{
-        console.log(response);
+
+        if(response){
+          res.json(response);
+        }else{
+          res.json(null);
+        }
+
+      })
+
+
+}
+
+const ReverseGeoConverter = (req,res,next) => {
+
+    var location = req.body;
+    console.log(location);
+    Geocoder.TurnCoordsToAddress(location,(response)=>{
+
         if(response){
           res.json(response);
         }else{
@@ -49,5 +66,6 @@ const DistanceCalculator = (req,res) => {
 
 
 exports.GeoConverter = GeoConverter;
+exports.ReverseGeoConverter = ReverseGeoConverter;
 exports.DistanceCalculator = DistanceCalculator;
 exports.CheckIfImageIsReal = CheckIfImageIsReal;

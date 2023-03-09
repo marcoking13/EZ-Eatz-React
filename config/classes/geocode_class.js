@@ -1,5 +1,6 @@
-const GeocodeNormal = require('node-geocoder');
-const GeocodeReverse = require("react-geocode");
+// const GeocodeNormal = require('node-geocoder');
+// const GeocodeReverse = require("react-geocode");
+const ReverseGeocoding = new require("reverse-geocoding")
 const GeoDistance = require("geo-distance");
 const axios = require("axios");
 
@@ -9,30 +10,27 @@ class Geocoder {
       this.address = null;
     }
 
-    static TurnCoordsToAddress(lat,lng,cb){
+    static TurnCoordsToAddress(location,cb){
 
-      GeocodeReverse.fromLatLng(lat,lng).then(
-        (response) => {
 
-          if(!response){
-             cb(null);
-             return;
-          }
+      ReverseGeocoding(location, function (err, data){
+        if(err){
+        console.log(err);
+        cb(null);
+      }else{
+        console.log(data);
+        cb(data);
+      }
 
-           const address = response.results[0].formatted_address;
-           cb(address);
+    });
 
-        },
-        (error) => {
-          console.error(error);
-          cb(null)
-        }
-      );
-
-    }
+  }
 
     static async ConvertAddressToCoords (address,cb){
-
+      if(!address){
+        cb(null);
+        return;
+      }
       if(address.length <= 0){
         cb(null);
         return;

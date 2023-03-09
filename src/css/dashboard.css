@@ -16,9 +16,9 @@
 }
 .edit_icon{
   position: absolute;
-  top:1%;
+  top:5%;
   right:5%;
-  width:10%;
+  width:2.5%;
 }
 .edit_icon:hover{
   filter:invert(78%) sepia(77%) saturate(5989%) hue-rotate(328deg) brightness(104%) contrast(100%);

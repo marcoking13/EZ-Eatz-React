@@ -2,6 +2,7 @@ import React from "react";
 // import FoodTruck from "./../../../config/foodtruck_contructor.js";
 import "./../../css/utility.css";
 import "./../../css/admin_add_menu.css";
+// import mongodb from "mongodb";
 
 import MenuDisplay from "./Authentication/menu_display";
 
@@ -16,14 +17,16 @@ class AddFoodTruckPage extends React.Component {
     this.state = {
       types:[""],
       name:"",
-      address:null,
-      truck:null,
-      background:null,
+      address:"",
+      truck:"",
+      background:"",
       isLoading:true,
       mapLogo:null,
       routes:[],
+      ownerID:null,
       id:null,
-      logo:null,
+      _id:null,
+      logo:"",
       isEdit:this.props.isEdit,
       typeMax:3,
       menu:{
@@ -39,17 +42,20 @@ class AddFoodTruckPage extends React.Component {
     if(this.state.isEdit){
       console.log(this.props.account);
       const {data} = await axios.post("/admin/find_one",{username:this.props.account.username});
-
+      console.log(data._id);
+      const truck_data = await axios.post("/admin/find_one_truck",{_id:data._id});
+      var foodtruckData = truck_data.data;
       if(data){
-        console.log(data);
-        var address = data.address;
-        var name = data.truck.name;
-        var menu = data.truck.menu;
-        var logo = data.truck.logo;
-        var id = data.truck.objectID;
-        var mapLogo = data.truck.mapLogo;
-        var types = data.truck.types;
-        var background = data.truck.background;
+        console.log(foodtruckData);
+        var address = foodtruckData.address;
+        var name = foodtruckData.name;
+        var menu = foodtruckData.menu;
+        var logo = foodtruckData.logo;
+        var ownerID = foodtruckData.ownerID;
+        var id = foodtruckData.objectID;
+        var mapLogo = foodtruckData.mapLogo;
+        var types = foodtruckData.type;
+        var background = foodtruckData.background;
         // var {name,address,logo,mapLogo,background,types,menu} = data.truck;
 
         this.setState({
@@ -59,6 +65,7 @@ class AddFoodTruckPage extends React.Component {
           id:id,
           truck:data.truck,
           address:address,
+          ownerID:ownerID,
           background:background,
           mapLogo:mapLogo,
           logo:logo,
@@ -68,7 +75,11 @@ class AddFoodTruckPage extends React.Component {
 
       }
 
-  }
+    }else{
+      this.setState({
+        isLoading:false
+      })
+    }
 
   }
 
@@ -84,6 +95,7 @@ class AddFoodTruckPage extends React.Component {
       var edit_truck = {
         types:s.types,
         objectID:s.id,
+        ownerID:s.ownerID,
         lat:null,
         lng:null,
         name:s.name,
@@ -91,7 +103,13 @@ class AddFoodTruckPage extends React.Component {
         mapLogo:s.mapLogo,
         background:s.background,
         logo:s.logo,
-        menu:s.menu
+        menu:s.menu,
+        priceAverage: 0,
+        vegan_friendly: false,
+        stars: 3,
+        distance: null,
+        distance_int: 0,
+        mapLogo: null
       }
       console.log(edit_truck);
       this.props.editTruck(edit_truck);
@@ -99,7 +117,7 @@ class AddFoodTruckPage extends React.Component {
 
 
       var truck = {
-        ownerID: Math.floor(Math.random() * 99999999),
+        ownerID: null,
         objectID: Math.floor(Math.random() * 99999999),
         ownerName:this.props.ownerName,
         types:s.types,
@@ -692,7 +710,7 @@ class AddFoodTruckPage extends React.Component {
   }
 
   renderTypeInputs = () => {
-
+    if(this.state.types.length > 0){
     return this.state.types.map((type,index)=>{
 
       return(
@@ -710,6 +728,9 @@ class AddFoodTruckPage extends React.Component {
       )
 
     })
+  }else{
+    return <div />
+  }
 
   }
 
@@ -726,9 +747,7 @@ class AddFoodTruckPage extends React.Component {
 
   render(){
 
-    var truck;
-    if(this.props.editTruck){
-      truck = {
+    var truck = {
         types:this.state.types,
         name:this.state.name,
         address:this.state.address,
@@ -736,9 +755,6 @@ class AddFoodTruckPage extends React.Component {
         mapLogo:this.state.mapLogo,
         logo:this.state.logo,
         menu:this.state.menu
-      }
-    }else{
-        truck = this.state.truck;
       }
 
 

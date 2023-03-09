@@ -28,7 +28,10 @@ class DashboardPage extends React.Component {
    GetAdmin = async ()=>{
 
      const {data} = await axios.post("/admin/find_one",{username:this.props.account.username});
-
+     console.log(data._id);
+     const tc = await axios.post("/admin/find_one_truck",{_id:data._id});
+     var truck_data = tc.data;
+     console.log(truck_data);
      if(data){
 
        const response = await axios.post("/util/get_coords",{address:data.address});
@@ -45,8 +48,8 @@ class DashboardPage extends React.Component {
        }
 
        this.setState({
-         menu:data.truck.menu,
-         truck:data.truck,
+         menu:truck_data.menu,
+         truck:truck_data,
          orders:data.orders,
          account:data,
          loading:false,
@@ -70,18 +73,18 @@ class DashboardPage extends React.Component {
         <div>
           <NavbarDesktop ChangeURL = {this.props.ChangeURL}/>
           <div className="menu_section container-fluid">
-            <div className="row width-90 margin-left-5 margin-top-2_5">
-                <div className="col-4 borders-gray-left borders-gray-right relative">
+            <div className="row margin-top-2_5">
+                <div className="col-12 margin-top-5 box-shadow-strong relative">
                   <img className="edit_icon" src={Edit} onClick = {()=>{this.props.ChangeURL("/admin/edit_truck")}}/>
                   <p className="dashboard_title">{this.state.truck.name+ "'s "} Menu</p>
                   <MenuDisplay truck = {this.state.truck}/>
                 </div>
-                <div className="col-4 borders-gray-right relative">
+                <div className="col-12 margin-top-5 box-shadow-strong relative">
                   <p className="dashboard_title">Your Location</p>
                   <img className="edit_icon" src={Edit} onClick = {()=>{this.props.ChangeURL("/admin/location")}}/>
                   <MapDisplay location = {this.state.location} />
                 </div>
-                <div className="col-4 borders-gray-right relative">
+                <div className="col-12  margin-top-5 box-shadow-strong relative">
                   <p className="dashboard_title">Your Orders</p>
                     <img className="edit_icon" src={Edit}/>
                   <OrdersDisplay orders = {this.state.orders} />

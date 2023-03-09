@@ -17,6 +17,10 @@
 .border-radius-5px{
   border-radius:5px;
 }
+.box-shadow-strong{
+  box-shadow:1px 1px 9px 2px black;
+
+}
 .background-white{
   background: white;
 }

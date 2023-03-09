@@ -1,5 +1,6 @@
 const CalculateDistance = require("./../../distance_calculator.js");
 const FoodtruckGenerator = require("./../foodtruck_generator.js")
+var mongodb = require("mongodb");
 const db = require("./../../database/database.js");
 
 class Foodtruck {
@@ -135,6 +136,60 @@ class Foodtruck {
 
   }
 
+  static async FindOne(_id,cb){
+
+    var db_instance =  db.GetDB();
+    // console.log(_id);
+    // console.log(new mongodb.ObjectId(_id));
+  // var k = await db_instance.collection("foodtrucks").find().toArray();
+  // console.log(k)
+    var found_trucks = await db_instance.collection("foodtrucks").findOne({ownerID:_id});
+    console.log(found_trucks);
+    if(found_trucks){
+        cb(found_trucks);
+      }else{
+        cb(null);
+      }
+
+  }
+
+  async save(_id){
+        var db_instance = db.GetDB();
+        console.log(_id);
+        if(!_id){
+          const insert_response = await db_instance.collection("foodtrucks").insertOne(this);
+          if(!insert_response){
+            console.log(null)
+          }else{
+
+            console.log(this);
+          }
+        }else{
+            const updatedData = await db_instance.collection("foodtrucks").updateOne({ownerID:_id},{$set:this});
+            console.log(updatedData);
+
+        }
+  }
+
+  static async UpdateLocation(_id,data,cb){
+    var db_instance = db.GetDB();
+    console.log(data);
+    const newvalues = { $set: {address: data.address, lat:data.lat,lng:data.lng} };
+
+        db_instance.collection("adminUsers").updateOne({ownerID:_id},{$set:{address: data.address,lat:data.lat,lng:data.lng}}, function(err, res) {
+          console.log(err);
+        if (err){
+
+          cb(null)
+          return;
+        }else{
+
+          cb(data);
+      }
+
+     });
+  }
+
   static async UpdateOne(data,cb){
     var db_instance = db.GetDB();
     var updateObj =
@@ -164,6 +219,11 @@ class Foodtruck {
     console.log(updatedData);
   }
 
+  static async DeleteAll(){
+      var db_instance = db.GetDB();
+    db_instance.collection("foodtrucks").deleteMany().then((results)=>{console.log(results)});
+
+  }
    static async FindCheapestTrucks(cb){
 
       var db_instance = db.GetDB();

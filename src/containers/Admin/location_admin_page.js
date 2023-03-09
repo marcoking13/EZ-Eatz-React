@@ -96,20 +96,35 @@ class LocationAdmin extends React.Component {
       this.setState({tracking:tracking})
       var interval = setInterval(()=>{
         this.TrackEveryPerSecond(interval);
-      },5000)
+      },1000)
 
     }
   }
 
-  TrackEveryPerSecond = (interval) =>{
+  TrackEveryPerSecond = async(interval) =>{
+
       if(this.state.tracking){
-      navigator.geolocation.getCurrentPosition((location)=>{
-        if(location){
-          var {coords} = location;
-          this.setState({
-            lat:coords.latitude,
-            lng:coords.longitude
-          })
+        navigator.geolocation.getCurrentPosition((location)=>{
+          if(location){
+            var {coords} = location;
+
+            var location = {
+              latitude:coords.latitude,
+              longitude:coords.longitude
+            }
+            const response = axios.post("/util/reverse_coords",location);
+            if (response) {
+                console.log(response)
+                location.address = response.formattedAddress;
+                const {data} = axios.post("/admin/change_location",location);
+                console.log(data);
+                this.setState({
+                  lat:coords.latitude,
+                  lng:coords.longitude,
+                  address:location.address
+                })
+              }
+
       }else{
         clearInterval(interval);
       }
@@ -121,7 +136,7 @@ class LocationAdmin extends React.Component {
     this.GetAdmin();
     var interval = setInterval(()=>{
       this.TrackEveryPerSecond(interval);
-    },5000)
+    },1000)
   }
 
   render(){

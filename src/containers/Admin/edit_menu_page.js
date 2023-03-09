@@ -9,6 +9,7 @@ import AddFoodTruckPage from "./../../components/Admin/add_food_truck_page.js";
 class EditMenuPage extends React.Component {
 
   EditTruck = async(truck) =>{
+    console.log(truck);
     const {data} = await axios.post("/admin/edit_truck",truck);
     if(data){
       alert("Menu Change Successful");

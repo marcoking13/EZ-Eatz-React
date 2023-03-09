@@ -7,6 +7,10 @@ class MenuDisplay extends React.Component {
   }
 
   renderCatagories = () => {
+    console.log(this.props.truck);
+    if(!this.props.truck.menu.catagories){
+      return <div />;
+    }
     if(this.props.truck.menu.catagories.length >0){
 
       var jsx = this.props.truck.menu.catagories.map((catagory)=>{
@@ -65,36 +69,41 @@ class MenuDisplay extends React.Component {
   }
 
   render(){
-    return(
-      <div className="width-100">
+    console.log(this.props);
 
-            <div className="title_container_result">
-                <div className="background_container_result">
-                  <img src = {this.props.truck.background} className="width-100 background_result"/>
+
+      return(
+        <div className="width-100">
+
+              <div className="title_container_result">
+                  <div className="background_container_result">
+                    <img src = {this.props.truck.background} className="width-100 background_result"/>
+                  </div>
+
+                <div className="text_result">
+                  <img className="width-50 logo_result" src={this.props.truck.logo} />
+                  <p className="title_result">{this.props.truck.name} </p>
+                  <p className="address_result">{this.props.truck.address} </p>
                 </div>
 
-              <div className="text_result">
-                <img className="width-50 logo_result" src={this.props.truck.logo} />
-                <p className="title_result">{this.props.truck.name} </p>
-                <p className="address_result">{this.props.truck.address} </p>
               </div>
 
+            <div className="catagory_container_result margin-top-10 ">
+              {this.renderCatagories()}
             </div>
 
-          <div className="catagory_container_result margin-top-10 ">
-            {this.renderCatagories()}
+            <div className="menu_container_result">
+              {this.renderMenu()}
+            </div>
+
           </div>
 
-          <div className="menu_container_result">
-            {this.renderMenu()}
-          </div>
 
-        </div>
+      )
 
 
-    )
   }
-}
 
+}
 
 export default MenuDisplay;

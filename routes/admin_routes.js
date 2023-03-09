@@ -9,5 +9,6 @@ router.post("/admin/google_login",controller.FindOneAdmin);
 router.post("/admin/change_location",controller.UpdateLocation);
 router.post("/admin/edit_truck",controller.EditTruck);
 router.post("/admin/track_location",controller.TrackLocation);
+router.post("/admin/find_one_truck",controller.FindAdminTruck);
 
 module.exports = router;

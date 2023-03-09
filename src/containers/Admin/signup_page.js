@@ -82,6 +82,7 @@ class AuthenticationPage extends React.Component {
 
   Verify = async(info,url,alertValue)=>{
     const {data} = await axios.post(url,info);
+    console.log(data);
     this.CheckInputs(data,alertValue);
   }
 
@@ -134,7 +135,7 @@ class AuthenticationPage extends React.Component {
   render(){
 
     var dataItem = this.state.data[this.state.counter];
-
+    console.log(this.state.counter,this.state.limit);
     if(this.state.counter >= this.state.limit){
       return(
           <AddFoodTruckPage

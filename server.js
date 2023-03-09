@@ -11,6 +11,7 @@ const port = process.env.PORT || 4002;
 
 const UserConstructor = require("./config/classes/user_constructor.js");
 const FoodtruckGenerator = require("./config/foodtruck_generator.js")
+const AdminClass = require("./config/classes/admin_constructor.js")
 const FoodtruckClass = require("./config/classes/foodtruck_constructor.js")
 
 app.use(bodyParser());
@@ -20,6 +21,8 @@ app.use(userLoginRoutes);
 app.use(adminRoutes);
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('build'));
+app.use(express.static('public'));
+
 
 db.MongoConnect(()=>{
   app.listen(port,function(){
@@ -29,18 +32,18 @@ db.MongoConnect(()=>{
 });
 
 
-const Init = () => {
+const Init = async () => {
 
-      FoodtruckClass.FindAllTrucks((foodtrucks)=>{
+    FoodtruckClass.FindAllTrucks((foodtrucks)=>{
 
           if(foodtrucks.length < 0){
 
-            FoodtruckClass.InsertManyFoodtrucks(db,(feedback)=>{
+            // FoodtruckClass.InsertManyFoodtrucks(db,(feedback)=>{
 
               app.get('/*', (req, res) => {
                 res.sendFile(__dirname + '/build/index.html');
               });
-            })
+            // })
 
           }else{
 

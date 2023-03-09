@@ -2,82 +2,47 @@ import React from "react";
 
 import "./../../../css/landing_page.css";
 import "./../../../css/utility.css";
-import LandingBackground from "./../../../images/Admin_Landing_Background.png";
-import ProfileIcon from "./../../../images/profile_icon.png";
+
+import LandingBackground from "./../../../images/2.png";
+
+import BoxConfig from "./../../../config/admin_landing_box.js";
+import Config from "./../../../config/admin_landing_graphics.js";
+
+import LoginBar from "./../../Landing/login_bar.js";
+import ShowcaseAdmin from "./../../Admin/Landing/showcase_admin.js";
+import GraphicsAndText from "./../../Landing/graphics_and_text.js";
+import Graphic_Box from "./../../Landing/graphic_box.js";
 
 class AdminLandingDesktop extends React.Component{
 
-  constructor(props){
-    super(props);
-    this.state = {
-      address : ""
-    }
-  }
-
-  renderErrorMessage(err){
-
-    if(err){
-      return <p className="text-center cr">Wrong Username or Password </p>
-    }else {
-      return null
-    }
-
-  }
-
   render(){
 
-
     return(
-    <div className="container-fluid landing_page full_background" style = {{background:`url(${LandingBackground})`}}>
+      <div className="container-fluid">
 
-      <div className="row navbar_landing width-90 margin-left-5" >
+        <div className="background_landing_container width-100" style={{height:"700px",background:`url(${LandingBackground})`}}>
 
-        <div className="col-7 margin-top-5">
-          <p className="ez_title ">EZ<strong className="ez_title_end">Eatz</strong></p>
-            <p className="ez_title ">Admin</p>
+          <LoginBar
+            login_url = "/admin/login"
+            signup_url = "/admin/signup"
+            ChangeURL = {this.props.ChangeURL}
+            isAdmin = {true}
+          />
+
+          <ShowcaseAdmin ChangeURL = {this.props.ChangeURL} />
+
         </div>
-        <div className="col-1"/>
 
-        <div className="col-2 margin-top-5">
-          <button className="width-100  btn btn_landing white-background" onClick={()=>{this.props.ChangeURL("/admin/login")}}>Login</button>
-        </div>
+          <GraphicsAndText config = {Config}  isAdmin = {true} />
 
-        <div className="col-2 margin-top-5">
-          <button onClick={()=>{this.props.ChangeURL("/admin/signup")}} className="width-100  btn signup_button_landing btn_landing black-background white"><img className="icon" src={ProfileIcon}/> Create Account</button>
-        </div>
+          <Graphic_Box config = {BoxConfig} />
+
       </div>
 
-      <form onSubmit = {(e)=>{
-        e.preventDefault();
-
-      }}>
-      <div className="row margin-top-5 width-90 margin-5">
-
-        <div className="col-1"/>
-
-        <div className="col-5 padding-5 background-white">
-          <h2 className="sub_slogan_landing margin-top-5"> Make Your Foodtruck Known to The World!  </h2>
-          <p className="reward_slogan nuniko margin-top-5">Do You Own A Foodtruck? Get Started Now!</p>
-
-          <div className="row">
-            <div className="col-4">
-              <button className="width-100 btn black-background white " type="submit" onSubmit = {(e)=>{
-                e.preventDefault();
-              }}>Get Started</button>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-      </form>
-
-
-    </div>
     );
 
   }
+
 }
 
 export default AdminLandingDesktop;

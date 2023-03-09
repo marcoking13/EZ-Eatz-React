@@ -44,6 +44,7 @@
     "react-scripts": "2.1.8",
     "recompose": "^0.30.0",
     "request": "^2.88.0",
+    "reverse-geocoding": "^3.0.2",
     "unique-names-generator": "^4.7.1",
     "universal-cookie": "^4.0.0"
   },

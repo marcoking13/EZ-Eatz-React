@@ -13,7 +13,7 @@ import "./css/layout.css";
 import LoginConfig from "./config/login_info.js";
 import SignupConfig from "./config/signup_info.js";
 import AdminSignupConfig from "./config/admin_signup_info.js";
-import AdminLoginConfig from "./config/admin_signup_info.js";
+import AdminLoginConfig from "./config/admin_login_info.js";
 
 import LandingPage from "./containers/landing_page";
 import AuthenticationPage from "./containers/authentication_page";
