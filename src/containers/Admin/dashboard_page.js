@@ -73,7 +73,7 @@ class DashboardPage extends React.Component {
         <div>
           <NavbarDesktop ChangeURL = {this.props.ChangeURL}/>
           <div className="menu_section container-fluid">
-            <div className="row margin-top-2_5">
+            <div className="row margin-top-2_5 padding-5">
                 <div className="col-12 margin-top-5 box-shadow-strong relative">
                   <img className="edit_icon" src={Edit} onClick = {()=>{this.props.ChangeURL("/admin/edit_truck")}}/>
                   <p className="dashboard_title">{this.state.truck.name+ "'s "} Menu</p>
