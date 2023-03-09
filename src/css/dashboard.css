@@ -43,3 +43,10 @@
 
 
 }
+
+@media screen and (max-width:844px){
+  .edit_icon{
+
+    width:5% !important;
+  }
+}
