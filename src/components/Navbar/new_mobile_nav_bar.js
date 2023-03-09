@@ -80,7 +80,7 @@ class NewMobileNavBar extends React.Component {
 
       <div style={{visibility:is_input_visible}}>
 
-        <div className="width-100">
+        <div className="width-100 margin-top-20">
           <AddressInput
             url = {this.props.url}
             address = {this.props.address}
