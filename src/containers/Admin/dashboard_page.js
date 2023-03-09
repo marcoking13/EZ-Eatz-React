@@ -80,13 +80,15 @@ class DashboardPage extends React.Component {
                   <MenuDisplay truck = {this.state.truck}/>
                 </div>
                 <div className="col-12 margin-top-5 box-shadow-strong relative">
-                  <p className="dashboard_title">Your Location</p>
                   <img className="edit_icon" src={Edit} onClick = {()=>{this.props.ChangeURL("/admin/location")}}/>
+                  <p className="dashboard_title">Your Location</p>
+
                   <MapDisplay location = {this.state.location} />
                 </div>
                 <div className="col-12  margin-top-5 box-shadow-strong relative">
+                  <img className="edit_icon" src={Edit}/>
                   <p className="dashboard_title">Your Orders</p>
-                    <img className="edit_icon" src={Edit}/>
+
                   <OrdersDisplay orders = {this.state.orders} />
                 </div>
             </div>
