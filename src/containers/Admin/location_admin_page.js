@@ -91,7 +91,7 @@ class LocationAdmin extends React.Component {
       tracking = true;
     }
     const {data} = await axios("/admin/track_location",this.state.account.username);
-    console.log(tracking);
+    console.log(data);
     if(data){
       this.setState({tracking:tracking})
       var interval = setInterval(()=>{
@@ -110,19 +110,21 @@ class LocationAdmin extends React.Component {
 
             var location = {
               latitude:coords.latitude,
-              longitude:coords.longitude
+              longitude:coords.longitude,
+              address:""
             }
             const response = axios.post("/util/reverse_coords",location);
+
             if (response) {
                 console.log(response)
-                location.address = response.formattedAddress;
-                const {data} = axios.post("/admin/change_location",location);
-                console.log(data);
-                this.setState({
-                  lat:coords.latitude,
-                  lng:coords.longitude,
-                  address:location.address
-                })
+                // location.address = response.formattedAddress;
+                // const {data} = axios.post("/admin/change_location",location);
+                // console.log(data);
+                // this.setState({
+                //   lat:coords.latitude,
+                //   lng:coords.longitude,
+                //   address:location.address
+                // })
               }
 
       }else{

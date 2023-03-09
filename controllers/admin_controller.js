@@ -55,6 +55,7 @@ const UpdateLocation = async (req,res,next) => {
   AdminClass.FindOne(req.body.username,(results)=>{
 
     if(results){
+
       var ownerID = results.ownerID;
 
       AdminClass.UpdateLocation(ownerID,req.body,(data)=>{
@@ -62,7 +63,9 @@ const UpdateLocation = async (req,res,next) => {
         FoodtruckClass.UpdateLocation(ownerID,req.body,(datas)=>{
           console.log(datas);
         })
+
       });
+
     }
 
   });

@@ -10,21 +10,29 @@ class Geocoder {
       this.address = null;
     }
 
-    static TurnCoordsToAddress(location,cb){
+    static async TurnCoordsToAddress  (location,cb){
 
+      //
+      // ReverseGeocoding(location, function (err, data){
+      //   if(err){
+      //
+      //   cb(null);
+      // }else{
+      //
+      //   cb(data);
+      // }
+      const response = await axios.post(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.latitude},${location.longitude}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
 
-      ReverseGeocoding(location, function (err, data){
-        if(err){
-        console.log(err);
-        cb(null);
+      if(response.data){
+        var address = response.data.results[0].formatted_address;
+        cb(address);
+
       }else{
-        console.log(data);
-        cb(data);
+        cb(null);
       }
+    }
 
-    });
 
-  }
 
     static async ConvertAddressToCoords (address,cb){
       if(!address){
