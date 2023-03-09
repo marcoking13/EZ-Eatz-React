@@ -38,24 +38,43 @@ class NewMobileNavBar extends React.Component {
         <div>
 
         <div className="pos-f-t">
+        <nav className="navbar navbar-dark bg-dark">
+          <button className="navbar-toggler"  id="button_navbar" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <p className="title_mobile red">EZ-Eatz</p>
+        </nav>
 
-          <div className="collapse bg-dark" id="navbarToggleExternalContent">
+          <div className="collapse bg-dark active_n" id="navbarToggleExternalContent">
 
-            <div className="bg-dark p-4 nav_container_mobile">
-              <span className="mobile_nav_text"onClick = {()=>{this.props.data.ChangeURL("home")}}>Home</span>
-              <span className="mobile_nav_text"onClick = {()=>{this.props.data.ChangeURL("map")}}>Maps</span>
-              <span className="mobile_nav_text ml2_5"onClick = {()=>{this.props.data.ChangeURL("checkout")}}>Checkout</span>
-              {this.renderProfilePicture()}
-            </div>
 
-          </div>
 
-          <nav className="navbar navbar-dark bg-dark">
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <p className="title_mobile red">EZ-Eatz</p>
-          </nav>
+
+              <div class="row navbar_home_mobile padding-t">
+                <div class="col-12">
+                    <p class="mobile_nav_text"onClick = {()=>{this.props.data.ChangeURL("/admin/")}}>Home</p>
+                </div>
+                <div class="col-12">
+                  <p class="mobile_nav_text"onClick = {()=>{this.props.data.ChangeURL("/admin/location")}}>Location</p>
+                </div>
+                <div class="col-12">
+                  <p class="mobile_nav_text"onClick = {()=>{this.props.data.ChangeURL("/admin/edit_menu")}}>Menu</p>
+                </div>
+                <div class="col-12">
+                  <p class="mobile_nav_text"onClick = {()=>{this.props.data.ChangeURL("/admin/orders")}}>Orders</p>
+                </div>
+                <div class="col-12">
+                  <p class="mobile_nav_text"onClick = {()=>{this.props.data.ChangeURL("/admin/account")}}>Account</p>
+                </div>
+
+                </div>
+
+
+        
+
+        </div>
+
+
 
       </div>
 

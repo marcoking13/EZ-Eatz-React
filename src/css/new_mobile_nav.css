@@ -1,13 +1,49 @@
 .mobile_nav_text{
-color:white;
-margin-left:10%;
-border:2px solid none;
+  color:white;
+  border:2px solid none;
+
 }
 .nav_container_mobile{
   margin-left: 5%;
 }
 .mobile_nav_text:hover{
   border-color:white;
+}
+.pos-f-t{
+  position: absolute;
+  top:0%;
+  width:100%;
+  z-index:9999;
+
+
+}
+.navbar-dark .navbar-toggler{
+  border-color:none !important;
+  border-width:0px !important;
+}
+.nav_collapse{
+  height:0px !important;
+
+}
+
+
+.link_nav{
+  font-family: "Roboto";
+  font-size:30px;
+  margin-top:5%;
+}
+.active_n{
+  animation:dropdown_nav .5s 1 ease-in !important;
+  height:1080px;
+}
+
+@keyframes dropdown_nav{
+  0%{
+    height:0px;
+  }
+  100%{
+    height:1080px;
+  }
 }
 @media screen and (max-width:600px){
   .ez_home_input{
