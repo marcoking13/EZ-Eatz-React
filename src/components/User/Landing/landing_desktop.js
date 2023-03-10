@@ -1,15 +1,15 @@
 import React from "react";
 
-import "./../../css/landing_page.css";
-import LandingBackground from "./../../images/2.png";
+import "./../../../css/landing_page.css";
+import LandingBackground from "./../../../images/2.png";
 
-import Config from "./../../config/admin_landing_graphics.js";
-import BoxConfig from "./../../config/admin_landing_box.js";
+import Config from "./../../../config/admin_landing_graphics.js";
+import BoxConfig from "./../../../config/admin_landing_box.js";
 
-import LoginBar from "./login_bar.js";
-import ShowboxUser from "./showbox_user.js";
-import GraphicsAndText from "./graphics_and_text.js";
-import GraphicBox from "./graphic_box.js";
+import LoginBar from "./../../Landing/login_bar.js";
+import ShowboxUser from "./../../Landing/showbox_user.js";
+import GraphicsAndText from "./../../Landing/graphics_and_text.js";
+import GraphicBox from "./../../Landing/graphic_box.js";
 
 class LandingDesktop extends React.Component{
 

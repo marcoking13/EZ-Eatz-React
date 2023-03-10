@@ -1,7 +1,7 @@
 import React from "react";
 
-import "./../../css/filter.css";
-import "./../../css/utility.css";
+import "./../../../css/filter.css";
+import "./../../../css/utility.css";
 
 
 class Filter extends React.Component {
@@ -88,7 +88,7 @@ class Filter extends React.Component {
   }
 
   renderFilterBubble = (name,sort)=>{
-    
+
     var active = this.props.sort.name == sort.name ? "active_filter_bubble" : "" ;
     return(
       <div style={{marginLeft:"10%"}} sort = {sort} onClick = {()=>{

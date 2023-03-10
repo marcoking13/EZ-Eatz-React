@@ -4,19 +4,18 @@ import GeoDistance from "geo-distance";
 import {Map, Marker, GoogleApiWrapper, google} from 'google-maps-react';
 import axios from "axios";
 
-import NoResults from "./../components/Loading/home_no_results"
+import FoodtruckRow from "./../components/User/Home/foodtruck_row"
 import Loading from "./../components/Loading/loading_home";
 import Navbar from "./../components/Navbar/home_nav_bar.js";
-import FoodtruckBox from "./../components/Home/foodtruck_box_home.js";
-import SeeAll from "./../components/Home/see_all.js";
-import Filter from "./../components/Home/filter.js";
+import SeeAll from "./../components/User/Home/see_all.js";
+import Filter from "./../components/User/Home/filter.js";
 import Filter_Mobile_Icon from "./../images/filter_mobile_icon.png";
 import Footer from "./../components/Footer/footnote.js";
 
 import "./../css/home_page.css";
 
 import GoogleMapsSection from "./../images/maps_2.png";
-import ToggleIcon from "./../images/arrow_row_icon.svg";
+
 
 ///-------------------------Component----------------------//
 class HomePage extends React.Component {
@@ -53,6 +52,10 @@ class HomePage extends React.Component {
 
   }
 
+  componentDidMount(){
+    this.IntializePage();
+  }
+
 //------------------------------State Changer-------------------------------//
 
   changeRadius = (radius) => {
@@ -65,9 +68,7 @@ class HomePage extends React.Component {
     this.props.ChangeAddress(address,lat,lng)
     this.IntializePage()
   }
-  toggleSeeAll = (trucks,title) =>{
-    this.setState({see_all:trucks,title:title});
-  }
+
 
   changePriceSort = (price_sort) => {
     this.setState({price_sort:price_sort});
@@ -140,6 +141,7 @@ class HomePage extends React.Component {
   }
 
   ToggleTrucks = (multiplier,starting,trucks_length) => {
+
     var toggle_amount = multiplier * 4;
     var new_toggle = starting + toggle_amount;
 
@@ -151,114 +153,42 @@ class HomePage extends React.Component {
 
   }
 
+  toggleSeeAll = (trucks,title) =>{
+    this.setState({see_all:trucks,title:title});
+  }
+
   toggleFilterModal = (toggle) =>{
     this.setState({filter_modal:toggle})
   }
+  //
+  // ToggleRatingStarting = (multiplier,starting,trucks_length) =>{
+  //   var toggle = this.ToggleTrucks(multiplier,starting,trucks_length);
+  //   this.setState({best_rated_starting:toggle});
+  // }
+  //
+  // ToggleVeganStarting = (multiplier,starting,trucks_length) =>{
+  //   var toggle = this.ToggleTrucks(multiplier,starting,trucks_length);
+  //   this.setState({vegan_starting:toggle});
+  // }
+  //
+  // ToggleNearbyStarting = (multiplier,starting,trucks_length) =>{
+  //   var toggle = this.ToggleTrucks(multiplier,starting,trucks_length);
+  //   this.setState({nearby_starting:toggle});
+  // }
+  //
+  // ToggleExpensiveStarting = (multiplier,starting,trucks_length) =>{
+  //   var toggle = this.ToggleTrucks(multiplier,starting,trucks_length);
+  //   this.setState({cheapest_starting:toggle});
+  // }
 
-  ToggleRatingStarting = (multiplier,starting,trucks_length) =>{
+  ToggleCatagory = (multiplier,starting,trucks_length,catagory_toggle)=>{
+
+    var obj = {};
+    const toggle_props = catagory_toggle;
     var toggle = this.ToggleTrucks(multiplier,starting,trucks_length);
-    this.setState({best_rated_starting:toggle});
-  }
 
-  ToggleVeganStarting = (multiplier,starting,trucks_length) =>{
-    var toggle = this.ToggleTrucks(multiplier,starting,trucks_length);
-    this.setState({vegan_starting:toggle});
-  }
-
-  ToggleNearbyStarting = (multiplier,starting,trucks_length) =>{
-    var toggle = this.ToggleTrucks(multiplier,starting,trucks_length);
-    this.setState({nearby_starting:toggle});
-  }
-
-  ToggleExpensiveStarting = (multiplier,starting,trucks_length) =>{
-    var toggle = this.ToggleTrucks(multiplier,starting,trucks_length);
-    this.setState({cheapest_starting:toggle});
-  }
-
-  componentDidMount(){
-    this.IntializePage();
-  }
-
-  CreateFoodtruckBoxes = (truck_catagory,starting) => {
-
-    var limit = 4;
-    var html = [];
-
-      for (var i = 0 ; i < limit; i ++){
-
-        var index = starting + i;
-
-        if(truck_catagory[index]){
-          html.push(
-            <FoodtruckBox
-              address = {truck_catagory[index].address}
-              key = {index}
-              id = {i}
-              ClearOrder = {this.props.ClearOrder}
-              SetTruck = {this.props.SetTruck}
-              foodtruck = {truck_catagory[index]}
-              ChangeURL = {this.props.ChangeURL}
-            />
-          )
-      }
-
-    }
-
-    return html;
-
-  }
-
-  CreateFoodtruckRow = (title,foodtruck_catagory,toggle_catagory,toggle_func) => {
-
-    var title_class = window.innnerWidth >= 844 ? "col-5" : "col-12 text-center";
-    var see_all_class = window.innnerWidth >= 844 ? "col-12" : "col-12 text-center";
-    var divider_class = window.innnerWidth >= 844 ? "col-3" : "col-4";
-
-    if(foodtruck_catagory.length > 0){
-
-     return (
-       <div className="container-fluid row margin-top-5">
-
-            <div className={title_class}>
-              <p className="truck_row_title">{title}</p>
-            </div>
-
-            <div className={divider_class}/>
-
-            <div className={see_all_class}>
-              <p className="hyperlink" onClick = {()=>{
-                this.toggleSeeAll(foodtruck_catagory,title)
-              }}>See All</p>
-            </div>
-
-            <div className="col-10"/>
-
-            <div className="col-1">
-
-              <div className="row">
-
-                <div className="col-6">
-                  <img src ={ToggleIcon} onClick = {()=>{console.log(toggle_func,toggle_catagory,foodtruck_catagory.length);toggle_func(-1,toggle_catagory,foodtruck_catagory.length)}} className="w100 truck_row_toggle_icon rotate-180" />
-                </div>
-
-                <div className="col-6">
-                  <img src ={ToggleIcon} onClick = {()=>{toggle_func(1,toggle_catagory,foodtruck_catagory.length)}} className="w100 truck_row_toggle_icon" />
-                </div>
-
-              </div>
-
-            </div>
-
-            <div className="row">
-              {this.CreateFoodtruckBoxes(foodtruck_catagory,toggle_catagory)}
-            </div>
-
-       </div>
-     )
-
-   }else{
-     return <NoResults title = {title}/>
-   }
+    obj = {...obj, [toggle_props]: toggle };
+    this.setState(obj)
 
   }
 
@@ -270,6 +200,7 @@ class HomePage extends React.Component {
                  <Filter price_sort = {this.state.price_sort} changePriceSort = {this.changePriceSort} radius = {this.state.radius} changeRadius = {this.changeRadius} sort = {this.state.sort} changeSort = {this.changeSort}/>
               </div>
             )
+
     }else{
 
       var visibility = this.state.filter_modal ? "visible" : "invisible";
@@ -310,8 +241,23 @@ class HomePage extends React.Component {
 
           <div className="foodtruck_container col-10">
 
-            {this.CreateFoodtruckRow("Nearest You",this.state.nearbyFoodtrucks,this.state.nearby_starting,this.ToggleNearbyStarting)}
-            {this.CreateFoodtruckRow("Best Rated",this.state.best_rated_foodtrucks,this.state.best_rated_starting,this.ToggleRatingStarting)}
+            <FoodtruckRow
+              title = "Nearest You"
+              catagory={this.state.nearbyFoodtrucks}
+              toggle_catagory = {this.state.nearby_starting}
+              toggle_func = {this.ToggleCatagory}
+              toggle_prop = "nearby_starting"
+
+              />
+
+            <FoodtruckRow
+              title = "Best Rated"
+              catagory={this.state.best_rated_foodtrucks}
+              toggle_catagory = {this.state.best_rated_starting}
+              toggle_prop = "best_rated_starting"
+              toggle_func = {this.ToggleCatagory}
+             />
+
 
             <div className="relative w100 maps_ad_container">
               <img src = {GoogleMapsSection} className="w100" />
@@ -320,13 +266,29 @@ class HomePage extends React.Component {
               }} className="button black ui add-to-cart cw google_home_button">See Map</button>
             </div>
 
-            {this.CreateFoodtruckRow("Most Affordable",this.state.cheapest_trucks,this.state.cheapest_starting,this.ToggleExpensiveStarting)}
-            {this.CreateFoodtruckRow("Vegan Options",this.state.vegan_trucks,this.state.vegan_starting,this.ToggleVeganStarting)}
+            <FoodtruckRow
+              title = "Most Affordable"
+              catagory={this.state.cheapest_trucks}
+              toggle_prop = "cheapest_starting"
+              toggle_catagory = {this.state.cheapest_starting}
+              toggle_func = {this.ToggleCatagory}
+              />
+
+            <FoodtruckRow
+              title = "Vegan Options"
+              catagory={this.state.vegan_trucks}
+              toggle_prop = "vegan_starting"
+              toggle_catagory = {this.state.vegan_starting}
+              toggle_func = {this.ToggleCatagory}
+             />
+
 
           </div>
 
         </div>
+
       )
+
     }
 
 

@@ -11,14 +11,16 @@ export default class GraphicBox extends React.Component {
 
       const offset = isImgFirst ?  {position:"relative",top:"50px"} : null;
       const background = !isImgFirst ?  {background:`rgb(255, 240, 237)`} : null;
+      const col_img_size = window.innerWidth >= 844 ?   8 : 6;
+      const col_text_size = window.innerWidth >= 844 ?   4 : 6;
 
       const img_col =
-      <div className="col-8">
+      <div className={"col-"+col_img_size}>
           <img className=" show_image_admin" style={offset} src = {item.img} />
       </div>
 
       const text_col =
-       <div className="col-4">
+       <div className={"col-"+col_text_size}>
             <p className="admin_info_title">{item.title}</p>
             <p className="admin_info_description">
               {item.description}
@@ -56,10 +58,11 @@ export default class GraphicBox extends React.Component {
   }
 
   render(){
-
+    const spacer = window.innerWidth >= 844 ? <div className="col-1"/> : <span />
+    const container_size = window.innerWidth >= 844 ? 12 : 10;
     return(
       <div className="row">
-        <div className="col-12">
+        <div className={"col-"+container_size}>
 
             {this.RenderRows()}
 

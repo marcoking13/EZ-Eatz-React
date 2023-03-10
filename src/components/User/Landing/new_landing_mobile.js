@@ -1,16 +1,16 @@
 import React from "react";
 
-import "./../../css/landing_page.css";
-import "./../../css/utility.css";
-import LandingBackground from "./../../images/mobile_l.png";
-import Logo1 from "./../../images/logo_1.png";
-import Logo2 from "./../../images/logos_2.png";
-import Show1 from "./../../images/show_2.png";
-import Show2 from "./../../images/show_1.png";
-import Logo3 from "./../../images/logos_3.png";
-import Logo from "./../../images/logo.png";
-import ProfileIcon from "./../../images/profile_icon.png";
-import GoogleLogo from "./../../images/googleLogo.png";
+import "./../../../css/landing_page.css";
+import "./../../../css/utility.css";
+import LandingBackground from "./../../../images/mobile_l.png";
+import Logo1 from "./../../../images/logo_1.png";
+import Logo2 from "./../../../images/logos_2.png";
+import Show1 from "./../../../images/show_2.png";
+import Show2 from "./../../../images/show_1.png";
+import Logo3 from "./../../../images/logos_3.png";
+import Logo from "./../../../images/logo.png";
+import ProfileIcon from "./../../../images/profile_icon.png";
+import GoogleLogo from "./../../../images/googleLogo.png";
 
 class AdminLandingMobile extends React.Component{
 
@@ -202,7 +202,7 @@ class AdminLandingMobile extends React.Component{
           </div>
 
 
-          </div>
+        </div>
 
 
 

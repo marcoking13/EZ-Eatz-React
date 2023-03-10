@@ -13,7 +13,6 @@ const AddTruckToUser = (req,res,next) =>{
 
 const EditTruck = async (req,res,next) =>{
   var truck = req.body;
-  console.log(truck);
   var latitude = null;
   var longitude = null;
 
@@ -30,7 +29,6 @@ const EditTruck = async (req,res,next) =>{
     truck.lat = latitude;
     truck.longitude = lng;
     new_truck = new FoodtruckClass(truck.ownerID,truck.objectID,truck.name,false,truck.types,3,latitude,longitude,truck.address,truck.logo,truck.background,truck.background,truck.mapLogo,truck.routes,truck.menu,truck.ownerName)
-    console.log(truck.ownerID)
     await new_truck.save(truck.ownerID);
     res.json(true);
   }
@@ -41,7 +39,6 @@ const EditTruck = async (req,res,next) =>{
 
 const FindOneAdmin = (req,res,next) => {
   AdminClass.FindOne(req.body.username,(results)=>{
-    console.log(results);
     if(results){
       res.json(results);
     }else{
@@ -51,17 +48,15 @@ const FindOneAdmin = (req,res,next) => {
 }
 
 const UpdateLocation = async (req,res,next) => {
-  console.log(req.body);
   AdminClass.FindOne(req.body.username,(results)=>{
 
     if(results){
 
       var ownerID = results.ownerID;
-
+      console.log(ownerID);  
       AdminClass.UpdateLocation(ownerID,req.body,(data)=>{
-          console.log(data);
         FoodtruckClass.UpdateLocation(ownerID,req.body,(datas)=>{
-          console.log(datas);
+          console.log("datas");
         })
 
       });

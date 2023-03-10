@@ -6,8 +6,7 @@ import "./../css/landing_page.css";
 import axios from "axios";
 import cookie from "react-cookies";
 
-import DesktopPage from "./../components/Landing/landing_desktop.js";
-import MobilePage from "./../components/Landing/new_landing_mobile.js";
+import Page from "./../components/User/Landing/landing_desktop.js";
 
 //-----------------------------------Component----------------------------------
 class LandingPage extends React.Component {
@@ -74,9 +73,9 @@ class LandingPage extends React.Component {
 //-------------------------------------------------------------------------------------------
   render(){
 
-      if(window.innerWidth >= 844){
+
         return (
-          <DesktopPage
+          <Page
               err = {this.state.err }
               GuestEntrance = {this.props.GuestEntrance}
               ChangeURL= {this.props.ChangeURL}
@@ -87,22 +86,9 @@ class LandingPage extends React.Component {
               handleSubmit  = {this.handleSubmit}
             />
           )
-      }else{
-        return(
-          <MobilePage
-            err = {this.state.err }
-            GuestEntrance = {this.props.GuestEntrance}
-            ChangeURL= {this.props.ChangeURL}
-            username={this.state.username}
-            password = {this.state.password}
-            changeUsername= {this.changeUsername}
-            changePassword={this.changePassword}
-            handleSubmit  = {this.handleSubmit}
-          />
-        )
+          
       }
 
-    }
 
 }
 

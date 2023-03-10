@@ -18,10 +18,9 @@ const GeoConverter = (req,res,next) => {
 
 }
 
-const ReverseGeoConverter = (req,res,next) => {
+const ReverseGeoConverter = async (req,res,next) => {
 
     var location = req.body;
-    console.log(location);
     Geocoder.TurnCoordsToAddress(location,(response)=>{
 
         if(response){

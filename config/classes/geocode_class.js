@@ -12,15 +12,6 @@ class Geocoder {
 
     static async TurnCoordsToAddress  (location,cb){
 
-      //
-      // ReverseGeocoding(location, function (err, data){
-      //   if(err){
-      //
-      //   cb(null);
-      // }else{
-      //
-      //   cb(data);
-      // }
       const response = await axios.post(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.latitude},${location.longitude}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
 
       if(response.data){
@@ -30,6 +21,7 @@ class Geocoder {
       }else{
         cb(null);
       }
+
     }
 
 
@@ -44,7 +36,6 @@ class Geocoder {
         return;
       }else{
           const response = await axios.post(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
-           console.log(response.data.results[0].geometry.location);
           if(response.data.results){
 
             if(response.data.results.length > 0){

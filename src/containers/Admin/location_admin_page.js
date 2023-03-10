@@ -44,7 +44,7 @@ class LocationAdmin extends React.Component {
     this.setState({
       lat:data.lat,
       lng:data.lng,
-      set_address:data.address,
+      new_address:data.address,
       loading:false
     });
       //
@@ -104,7 +104,7 @@ class LocationAdmin extends React.Component {
   TrackEveryPerSecond = async(interval) =>{
 
       if(this.state.tracking){
-        navigator.geolocation.getCurrentPosition((location)=>{
+        navigator.geolocation.getCurrentPosition(async(location)=>{
           if(location){
             var {coords} = location;
 
@@ -113,18 +113,25 @@ class LocationAdmin extends React.Component {
               longitude:coords.longitude,
               address:""
             }
-            const response = axios.post("/util/reverse_coords",location);
+            const r = await axios.post("/util/reverse_coords",location);
 
-            if (response) {
-                console.log(response)
-                // location.address = response.formattedAddress;
-                // const {data} = axios.post("/admin/change_location",location);
-                // console.log(data);
-                // this.setState({
-                //   lat:coords.latitude,
-                //   lng:coords.longitude,
-                //   address:location.address
-                // })
+            if (r) {
+
+                location.address = r.data;
+                const updated_account = {...this.state.account};
+                updated_account.address = location.address;
+                updated_account.latitude = location.latitude;
+                updated_account.longitude = location.longitude;
+                console.log(updated_account);
+                const {data} = axios.post("/admin/change_location",updated_account);
+                console.log(data);
+                this.setState({
+                  lat:coords.latitude,
+                  lng:coords.longitude,
+                  tracking:true,
+                  set_address:location.address,
+                  new_address:location.address
+                })
               }
 
       }else{
@@ -145,7 +152,7 @@ class LocationAdmin extends React.Component {
     var active = this.state.tracking ? "active_tracker" : "";
     var switch_on = this.state.tracking ? "Tracking On " : "Tracking Off"
     var location = {
-      address:this.state.set_address,
+      address:this.state.new_address,
       lat:this.state.lat,
       lng:this.state.lng
     }
