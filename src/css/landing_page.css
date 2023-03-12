@@ -172,6 +172,7 @@
 {
   .row_border{
     padding-bottom:5%;
+    padding-top:5%;
     border-bottom:2px solid #e6e6e6;
   }
   .show_image_admin{
@@ -205,7 +206,7 @@
   }
   .new_sub_slogan_landing{
     color:black !important;
-    font-size:30px !important;
+    font-size:25px !important;
   }
   .icon{
     float: left;
@@ -232,6 +233,9 @@
 .ez_title_end {
   text-align:center;
   font-size:55px;
+}
+.background_landing_container{
+  height:600px !important;
 }
 
     .ez_logo_mobile{

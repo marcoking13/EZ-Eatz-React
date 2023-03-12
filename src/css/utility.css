@@ -1,7 +1,17 @@
+@media screen and (max-width:844px){
+  .mb-margin-top-20{
+    margin-top: 20%;
+  }
+}
+
+
+
 #root{
   overflow-x: hidden !important;
 }
-
+.padding-top-20{
+  padding-top:20% !important;
+}
 .mt5{
   margin-top:5% !important;
 }

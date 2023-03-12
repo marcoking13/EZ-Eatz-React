@@ -6,8 +6,8 @@ import "./../../css/landing_page.css";
 import axios from "axios";
 import cookie from "react-cookies";
 
-import DesktopPage from "./../../components/Admin/Landing/landing_desktop.js";
-import MobilePage from "./../../components/Admin/Landing/new_landing_mobile.js";
+import Page from "./../../components/Admin/Landing/landing_desktop.js";
+// import MobilePage from "./../../components/Admin/Landing/new_landing_mobile.js";
 
 //-----------------------------------Component----------------------------------
 class LandingPage extends React.Component {
@@ -74,32 +74,19 @@ class LandingPage extends React.Component {
 //-------------------------------------------------------------------------------------------
   render(){
 
-      if(window.innerWidth >= 844){
-        return (
-          <DesktopPage
-              err = {this.state.err}
-              ChangeURL= {this.props.ChangeURL}
-              username={this.state.username}
-              password = {this.state.password}
-              changeUsername= {this.changeUsername}
-              changePassword={this.changePassword}
-              handleSubmit  = {this.handleSubmit}
-            />
-          )
-      }else{
-        return(
-          <MobilePage
-            err = {this.state.err }
-            ChangeURL= {this.props.ChangeURL}
-            username={this.state.username}
-            password = {this.state.password}
-            changeUsername= {this.changeUsername}
-            changePassword={this.changePassword}
-            handleSubmit  = {this.handleSubmit}
-          />
-        )
-      }
-
+    return(
+      <div>
+      <Page
+          err = {this.state.err}
+          ChangeURL= {this.props.ChangeURL}
+          username={this.state.username}
+          password = {this.state.password}
+          changeUsername= {this.changeUsername}
+          changePassword={this.changePassword}
+          handleSubmit  = {this.handleSubmit}
+        />
+      </div>
+    )
     }
 
 }

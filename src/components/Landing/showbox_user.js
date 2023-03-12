@@ -11,7 +11,7 @@ constructor(props){
 
 renderDesktop(){
   return(
-    <div className="row">
+    <div className="row ">
 
         <div className="col-12">
           <h2 className="sub_slogan_landing margin-top-5 new_sub_slogan_landing"> Restaurants and more, <br />delivered to your door <br />
@@ -49,7 +49,7 @@ renderDesktop(){
 
 renderMobile(){
   return(
-      <div className="row">
+      <div className="row margin-top-20">
 
         <div className="col-12">
           <h2 className="sub_slogan_landing margin-top-5 new_sub_slogan_landing"> Restaurants and more, <br />delivered to your door <br />  </h2>

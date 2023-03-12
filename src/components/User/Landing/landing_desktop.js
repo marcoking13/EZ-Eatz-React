@@ -1,10 +1,11 @@
 import React from "react";
 
 import "./../../../css/landing_page.css";
-import LandingBackground from "./../../../images/2.png";
 
 import Config from "./../../../config/admin_landing_graphics.js";
 import BoxConfig from "./../../../config/admin_landing_box.js";
+import MobileBackground from "./../../../images/mobile_l.png";
+import DesktopBackground from "./../../../images/2.png";
 
 import LoginBar from "./../../Landing/login_bar.js";
 import ShowboxUser from "./../../Landing/showbox_user.js";
@@ -13,12 +14,14 @@ import GraphicBox from "./../../Landing/graphic_box.js";
 
 class LandingDesktop extends React.Component{
 
+
   render(){
+    var Background  =  window.innerWidth <= 844 ? MobileBackground : DesktopBackground;
 
     return(
       <div className="container-fluid">
 
-        <div className="background_landing_container width-100"style={{height:"700px",background:`url(${LandingBackground})`}}>
+        <div className="background_landing_container width-100"style={{height:"700px",background:`url(${Background})`}}>
           <LoginBar ChangeURL = {this.props.ChangeURL} />
           <ShowboxUser GuestEntrance = {this.props.GuestEntrance} ChangeURL = {this.props.ChangeURL} />
        </div>

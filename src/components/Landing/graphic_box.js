@@ -46,7 +46,7 @@ export default class GraphicBox extends React.Component {
         })
 
         return (
-          <div className="row padding-5 " style={background}>
+          <div className="row padding-5 padding-top-20 " style={background}>
             {cols}
           </div>
         )
@@ -59,10 +59,10 @@ export default class GraphicBox extends React.Component {
 
   render(){
     const spacer = window.innerWidth >= 844 ? <div className="col-1"/> : <span />
-    const container_size = window.innerWidth >= 844 ? 12 : 10;
+
     return(
       <div className="row">
-        <div className={"col-"+container_size}>
+        <div className={"col-12"}>
 
             {this.RenderRows()}
 

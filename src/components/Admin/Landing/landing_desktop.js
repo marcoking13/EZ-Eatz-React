@@ -3,11 +3,10 @@ import React from "react";
 import "./../../../css/landing_page.css";
 import "./../../../css/utility.css";
 
-import LandingBackground from "./../../../images/2.png";
-
 import BoxConfig from "./../../../config/admin_landing_box.js";
 import Config from "./../../../config/admin_landing_graphics.js";
-
+import MobileBackground from "./../../../images/mobile_l.png";
+import DesktopBackground from "./../../../images/2.png";
 import LoginBar from "./../../Landing/login_bar.js";
 import ShowcaseAdmin from "./../../Admin/Landing/showcase_admin.js";
 import GraphicsAndText from "./../../Landing/graphics_and_text.js";
@@ -17,10 +16,12 @@ class AdminLandingDesktop extends React.Component{
 
   render(){
 
+    var Background  =  window.innerWidth <= 844 ? MobileBackground : DesktopBackground;
+
     return(
       <div className="container-fluid">
 
-        <div className="background_landing_container width-100" style={{height:"700px",background:`url(${LandingBackground})`}}>
+        <div className="background_landing_container width-100" style={{height:"700px",background:`url(${Background})`}}>
 
           <LoginBar
             login_url = "/admin/login"
