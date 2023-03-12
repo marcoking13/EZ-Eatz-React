@@ -8,7 +8,7 @@ import Config from "./../../../config/admin_landing_graphics.js";
 import MobileBackground from "./../../../images/mobile_l.png";
 import DesktopBackground from "./../../../images/2.png";
 import LoginBar from "./../../Landing/login_bar.js";
-import ShowcaseAdmin from "./../../Admin/Landing/showcase_admin.js";
+import ShowcaseAdmin from "./../../Landing/showcase_admin.js";
 import GraphicsAndText from "./../../Landing/graphics_and_text.js";
 import Graphic_Box from "./../../Landing/graphic_box.js";
 

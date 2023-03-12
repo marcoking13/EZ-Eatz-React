@@ -7,7 +7,6 @@ import axios from "axios";
 import cookie from "react-cookies";
 
 import Page from "./../../components/Admin/Landing/landing_desktop.js";
-// import MobilePage from "./../../components/Admin/Landing/new_landing_mobile.js";
 
 //-----------------------------------Component----------------------------------
 class LandingPage extends React.Component {

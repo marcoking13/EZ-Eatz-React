@@ -4,11 +4,11 @@ import GeoDistance from "geo-distance";
 import {Map, Marker, GoogleApiWrapper, google} from 'google-maps-react';
 import axios from "axios";
 
-import FoodtruckRow from "./../components/User/Home/foodtruck_row"
+import FoodtruckRow from "./../components/Home/foodtruck_row"
 import Loading from "./../components/Loading/loading_home";
 import Navbar from "./../components/Navbar/home_nav_bar.js";
-import SeeAll from "./../components/User/Home/see_all.js";
-import Filter from "./../components/User/Home/filter.js";
+import SeeAll from "./../components/Home/see_all.js";
+import Filter from "./../components/Home/filter.js";
 import Filter_Mobile_Icon from "./../images/filter_mobile_icon.png";
 import Footer from "./../components/Footer/footnote.js";
 
