@@ -3,7 +3,7 @@ import React from "react";
 import FoodtruckBox from "./foodtruck_box_home.js";
 import NoResults from "./home_no_results";
 
-import ToggleIcon from "./../../../images/arrow_row_icon.svg";
+import ToggleIcon from "./../../images/arrow_row_icon.svg";
 
 
 class FoodtruckRow extends React.Component {

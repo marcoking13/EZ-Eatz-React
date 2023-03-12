@@ -1,6 +1,6 @@
 import React from "react";
 
-import GoogleLogo from "./../../../images/googleLogo.png";
+import GoogleLogo from "./../../images/googleLogo.png";
 
 class ShowcaseAdmin extends React.Component {
 

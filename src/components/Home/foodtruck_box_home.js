@@ -1,8 +1,8 @@
 import React from "react";
 import cookie from "react-cookies";
-import "./../../../css/home_page.css";
-import FullStar from "./../../../images/full_star.png";
-import EmptyStar from "./../../../images/empty_star.png";
+import "./../../css/home_page.css";
+import FullStar from "./../../images/full_star.png";
+import EmptyStar from "./../../images/empty_star.png";
 
 var distance;
 

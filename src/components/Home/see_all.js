@@ -1,8 +1,8 @@
 import React from "react";
 import cookie from "react-cookies";
 
-import "./../../../css/home_page.css";
-import "./../../../css/see_all.css";
+import "./../../css/home_page.css";
+import "./../../css/see_all.css";
 
 import FoodtruckBox from "./foodtruck_box_home.js";
 
