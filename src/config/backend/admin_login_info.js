@@ -14,5 +14,6 @@ export default{
   }
 
 ],
-key:"admin_signup"
+key:"admin_login",
+url:"/admin/login"
 }

@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import axios from  "axios";
-import cookie from "react-cookies";
-import Geocode from "react-geocode";
 
 import './css/Fonts.css';
 import "./css/utility.css";
 import "./css/authentication.css";
-
 import "./css/landing_page.css";
 import "./css/layout.css";
 
-import LoginConfig from "./config/login_info.js";
-import SignupConfig from "./config/signup_info.js";
-import AdminSignupConfig from "./config/admin_signup_info.js";
-import AdminLoginConfig from "./config/admin_login_info.js";
+import LoginConfig from "./config/backend/login_info.js";
+import SignupConfig from "./config/backend/signup_info.js";
+import AdminSignupConfig from "./config/backend/admin_signup_info.js";
+import AdminLoginConfig from "./config/backend/admin_login_info.js";
 
 import LandingPage from "./containers/landing_page";
-import AuthenticationPage from "./containers/authentication_page";
+import AuthenticationPage from "./containers/new_authentication_page";
 
 import ModifyPage from "./containers/modify_page";
 import CheckoutPage from "./containers/checkout_page.js";
@@ -26,8 +23,7 @@ import GooglePage from "./containers/google_page.js";
 
 import AddFoodTruckPage from "./components/Admin/add_food_truck_page.js";
 import AdminLandingPage from "./containers/Admin/landing_page";
-import AdminLoginPage from "./containers/Admin/login_page";
-import AdminSignupPage from "./containers/Admin/signup_page";
+
 import AdminDashboardPage from "./containers/Admin/dashboard_page.js";
 import LocationAdminPage from "./containers/Admin/location_admin_page.js";
 import EditMenuPage from "./containers/Admin/edit_menu_page.js";
@@ -67,15 +63,11 @@ class App extends Component {
 
     }
 
-
   }
-
-
 
   SetCheckoutTruck = (truck) => {
     this.setState({checkout_truck:truck});
   }
-
 
   CapitlizeWordsOfSentence = (sentence) => {
 
@@ -84,8 +76,6 @@ class App extends Component {
     new_sentence.map((word) => {
         return word[0].toUpperCase() + word.substring(1);
     }).join(" ");
-
-    console.log(new_sentence);
 
     return new_sentence;
 
@@ -107,72 +97,12 @@ class App extends Component {
     this.setState({truck:null});
   }
 
-  componentWillMount(){
-
-      if(cookie.load("account",{path:"/"})){
-        this.Initialization();
-      }
-
-      this.ClearCookieTimer();
-
-  }
-
-
   SetTruck = (truck) => {
-
     this.setState({truck:truck})
-
   }
-
 
   SetItem = (item) => {
-
     this.setState({item:item,url:"modify"});
-
-  }
-
-
-  ClearCookieTimer = ()=>{
-
-    var seconds = 0;
-    var minutes;
-
-    this.cookieIntervals = setInterval(()=>{
-      minutes = seconds / 60;
-
-      seconds ++;
-
-      if(minutes >= 60){
-        seconds = 0;
-        minutes = 0;
-        cookie.remove("currentItem",{path:"/"});
-        cookie.remove("foodtruckCurrent",{path:"/"});
-        cookie.remove("account",{path:"/"});
-      }
-
-    },1000);
-
-  }
-
-  Initialization(){
-
-      axios.get("/api/users").then((res)=>{
-
-        var users = res.data;
-        var savedUser = JSON.parse(cookie.load("account",{path:"/"}));
-
-        for(var i = 0; i<= users.length; i++){
-          var loopedUsername = users[i].account.username;
-
-          if(loopedUsername === savedUser.username){
-            this.SetAddress(cookie.load("address",{path:"/"}));
-            break;
-          }
-
-        }
-
-     });
-
   }
 
   ChangeAddressFormat = (address)=>{
@@ -180,128 +110,107 @@ class App extends Component {
   }
 
   AddToOrder = (order,truck) =>{
-    cookie.remove("orders",{path:"/"});
     this.setState({orders:this.state.orders.concat(order),checkout_truck:truck});
   }
+//
+//   LetUserInside = async (data) => {
+//
+//     var {address,name,orders,image,username,orders,profile_color} = data;
+//
+//     this.setState({loading:true});
+//
+//     const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
+//
+//     if(response.data.results.length > 0){
+//
+//       const { lat, lng } = response.data.results[0].geometry.location;
+//
+//       var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng};
+//       this.setState({url:"home",loading:false,profile_color:profile_color,address:location.address,name:name,profilePhoto:image,username:username,orders:orders,lat:lat,lng:lng});
+//
+//     }else{
+//       this.setState({url:"home",loading:false,address:address,name:name,profilePhoto:image,username:username,orders:orders,profile_color:profile_color});
+//     }
+//
+// }
 
-  LetUserInside = async (data) => {
+Entrance = async (address,data,isAdmin) =>  {
+  const response = await axios.post(`/util/get_coords`,address);
 
-    var {address,name,orders,image,username,orders,profile_color} = data;
+  var account = {
+    address:address,
+    lat:null,
+    lng:null,
+    name:"Guest " + Math.floor(Math.random() *999),
+    username:Math.floor(Math.random() * 90000),
+    orders:[],
+    profile_color:"red",
+    image:null
+  }
 
-    this.setState({loading:true});
-
-    const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
-
-    if(response.data.results.length > 0){
-
-      const { lat, lng } = response.data.results[0].geometry.location;
-
-      var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng};
-      this.setState({url:"home",loading:false,profile_color:profile_color,address:location.address,name:name,profilePhoto:image,username:username,orders:orders,lat:lat,lng:lng});
-
-    }else{
-
-      this.setState({url:"home",loading:false,address:address,name:name,profilePhoto:image,username:username,orders:orders,profile_color:profile_color});
-
-    }
-
-
-}
-
-LetUserInsideAdmin = async (data) => {
-
-  var {address,name,image,username,orders,profile_color,truck} = data;
-  console.log(data);
-  this.setState({loading:true});
-
-  const response = await axios.post(`/util/get_coords`,{address:address});
-  console.log(response);
   if(response){
-    this.setState({url:"/admin/dashboard",loading:false,adminProfileColor:profile_color,adminAddress:response.address,adminName:name,adminProfilePhoto:image,adminUsername:username,adminOrders:orders,adminLat:response.lat,adminLng:response.lng});
+    account.lat = response.lat;
+    account.lng = response.lng;
+  }
 
+  if(data){
+    account.name = data.name;
+    account.username = data.username;
+    account.orders = data.orders;
+    account.profile_color = data.profile_color;
+    account.image = data.profile_color;
+  }
+
+  if(isAdmin){
+      this.setState(
+        {
+          url:"/admin/dashboard",
+          loading:false,
+          adminProfileColor:data.profile_color,
+          adminAddress:account.address,
+          adminName:data.name,
+          adminLat:account.lat,
+          adminLng:account.lng,
+          adminProfilePhoto:data.image,
+          adminUsername:data.username,
+          adminOrders:data.orders
+        }
+      );
   }else{
-    this.setState({url:"/admin/dashboard",loading:false,adminProfileColor:profile_color,adminAddress:"",adminName:name,adminProfilePhoto:image,adminUsername:username,adminOrders:orders});
+    this.setState(
+      {
+        url:"home",
+        loading:false,
+        lat:account.lat,
+        lng:account.lng,
+        address:account.address,
+        name:account.name,
+        profilePhoto:account.image,
+        username:account.username,
+        orders:account.orders,
+        profile_color:account.profile_color
+      }
+    );
   }
 
 
 }
 
-
-
-
- GuestEntrance = async (address) =>{
-
-    this.setState({loading:true});
-
-    const response = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
-
-    var guest_account = {
-      lat:null,
-      lng:null,
-      name:"Guest",
-      username:Math.floor((Math.random() * 3000) + (3000 * (Math.random() *2000)+20)),
-      password:null,
-      profile_color:"black",
-      address:address,
-      orders:[]
-    }
-
-    if(response.data.results.length > 0){
-
-        const { lat, lng } = response.data.results[0].geometry.location;
-
-        var location = {address:response.data.results[0].formatted_address,lat:lat, lng:lng};
-
-        this.setState({
-          loading:false,
-          name:guest_account.name,
-          profile_color:guest_account.profile_color,
-          profileIcon:null,
-          username:guest_account.name,
-          orders:[],
-          address:guest_account.address,
-          lat:lat,
-          lng:lng,
-          url:"home"
-        });
-
-      }
-   else{
-
-     this.setState({
-       loading:false,
-       name:guest_account.name,
-       profile_color:guest_account.profile_color,
-       profileIcon:null,
-       username:guest_account.name,
-       orders:[],
-       address:guest_account.address,
-       url:"home"
-     });
-
-    }
-
- }
 
   ClearOrder = (order,truck) =>{
 
-    // cookie.remove("orders",{path:"/"});
-    // var foodtruckID  = cookie.load("foodtruckCurrent",{path:"/"});
-    console.log(truck,this.state.truck);
     if(truck === this.state.checkout_truck || !this.state.checkout_truck){
-
       this.setState({orders:this.state.orders.concat(order),checkout_truck:truck});
       return true;
     }else{
 
       var confirm_bool = window.confirm("Warning: Adding from another foodtruck will clear your current order");
-      console.log(confirm_bool);
 
       if(confirm_bool){
         this.setState({orders:[]}, ()=>{
           this.setState({orders:this.state.orders.concat(order),checkout_truck:truck});
         });
-        console.log(this.state.orders);
+
         return true;
       }else{
         return false;
@@ -313,25 +222,13 @@ LetUserInsideAdmin = async (data) => {
 //----------------------------State Changer-----------------------------
    ChangeAddress  = async (address,lat,lng)=>{
      this.setState({address:address,lat:lat,lng:lng});
-     console.log(this.state.address);
-
-    const response = await axios.post("/api/change_user_address",{username:this.state.username,address:address,lat:lat,lng:lng});
-
+     const response = await axios.post("/api/change_user_address",{username:this.state.username,address:address,lat:lat,lng:lng});
   }
 
    ChangeURL = (url) =>{
-
-    cookie.remove("url",{path:"/"});
-
-    if(url !== "modify"){
-      cookie.save("url",url,{path:"/"});
-    }
-
-    this.setState({url:url});
-
+     this.setState({url:url});
   }
 
-// JSX will return component depending on url state
   render() {
 
       var account = {
@@ -361,19 +258,18 @@ LetUserInsideAdmin = async (data) => {
       }
       if(this.state.url == "/admin/edit_truck"){
         return <EditMenuPage ChangeURL={this.ChangeURL} account = {admin_account}  />
-
       }
       if(this.state.url == "/admin/location"){
-        return <LocationAdminPage ChangeURL={this.ChangeURL} account = {admin_account} />
+        return <LocationAdminPage ChangeURL = {this.ChangeURL} account = {admin_account} />
       }
       if(this.state.url == "/admin/"){
-        return <AdminLandingPage ChangeURL={this.ChangeURL}  />
+        return <AdminLandingPage ChangeURL = {this.ChangeURL}  />
       }
       if(this.state.url == "/admin/login"){
-        return <AdminLoginPage ChangeURL={this.ChangeURL} config = {AdminLoginConfig} LetUserInside = {this.LetUserInsideAdmin}  />
+        return <AuthenticationPage  LetUserInside = {this.Entrance} config = {AdminLoginConfig} ChangeURL = {this.ChangeURL} isAdmin ={true} />
       }
       if(this.state.url == "/admin/signup"){
-        return <AdminSignupPage ChangeURL={this.ChangeURL} config = {AdminSignupConfig} LetUserInside = {this.LetUserInsideAdmin}  />
+        return <AuthenticationPage  LetUserInside = {this.Entrance} config = {AdminSignupConfig} ChangeURL = {this.ChangeURL} isAdmin = {true} />
       }
       if(this.state.loading){
         return <div>Loading.....</div>
@@ -451,7 +347,7 @@ LetUserInsideAdmin = async (data) => {
           );
         }
         if(this.state.url === "landing"){
-            return <LandingPage  ChangeURL={this.ChangeURL} GuestEntrance = {this.GuestEntrance} />
+            return <LandingPage  ChangeURL={this.ChangeURL} GuestEntrance = {this.Entrance} />
           }
           if(this.state.url === "home"){
              return (
@@ -472,13 +368,13 @@ LetUserInsideAdmin = async (data) => {
                 />
                 )
            }
-          if(this.state.url === "usersign")
+          if(this.state.url === "/api/signup")
           {
-               return <AuthenticationPage  LetUserInside = {this.LetUserInside} config = {SignupConfig} ChangeURL={this.ChangeURL} type="user" />
+               return <AuthenticationPage  LetUserInside = {this.Entrance} config = {SignupConfig} ChangeURL={this.ChangeURL} isAdmin={false} />
           }
-          if(this.state.url === "userlogin")
+          if(this.state.url === "/api/login")
           {
-              return <AuthenticationPage LetUserInside = {this.LetUserInside} config = {LoginConfig} ChangeURL={this.ChangeURL} type="user" />
+              return <AuthenticationPage LetUserInside = {this.Entrance} config = {LoginConfig} ChangeURL={this.ChangeURL} isAdmin={false} />
           }
       }
 

@@ -26,7 +26,7 @@ class LoginBar extends React.Component{
 
   renderDesktop = () => {
     var admin_text = this.props.isAdmin ? <p className="ez_title text-center medium-font margin-top-2_5 cw bottom-30px">Admin</p> : <span />
-
+    console.log(this.props);
       return(
         <div className="row" >
 
@@ -67,11 +67,11 @@ class LoginBar extends React.Component{
           <div className="col-9 margin-top-2_5">
             <div className="row">
               <div className="col-5">
-                <button className="width-100  btn btn_landing " onClick={()=>{this.props.ChangeURL(this.props.signup_url)}} style={{fontSize:"14px"}}>Login</button>
+                <button className="width-100  btn btn_landing " onClick={()=>{this.props.ChangeURL(this.props.login_url)}} style={{fontSize:"14px"}}>Login</button>
               </div>
 
               <div className="col-5">
-                <button onClick={()=>{this.props.ChangeURL(this.props.login_url)}} className="width-100  btn signup_button_landing btn_landing black-background white"style={{fontSize:"14px"}}>Signup</button>
+                <button onClick={()=>{this.props.ChangeURL(this.props.signup_url)}} className="width-100  btn signup_button_landing btn_landing black-background white"style={{fontSize:"14px"}}>Signup</button>
               </div>
 
             </div>

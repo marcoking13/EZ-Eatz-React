@@ -28,7 +28,7 @@ class DashboardPage extends React.Component {
    GetAdmin = async ()=>{
 
      const {data} = await axios.post("/admin/find_one",{username:this.props.account.username});
-     console.log(data._id);
+     console.log(this.props);
      const tc = await axios.post("/admin/find_one_truck",{_id:data._id});
      var truck_data = tc.data;
      console.log(truck_data);

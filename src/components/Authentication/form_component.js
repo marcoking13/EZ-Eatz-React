@@ -52,7 +52,8 @@ class FormComponent extends React.Component {
         )
 
       },500);
-  }
+
+    }
 
   }
 
@@ -85,9 +86,11 @@ class FormComponent extends React.Component {
         }
 
       if(this.props.finished == false){
+
        var timer = setTimeout(()=>{
 
           this.props.ChangeInput(this.state.input,this.props.dataKey);
+
           if(this.props.finished || !this.formRef.current){
             clearInterval(timer);
             return;
@@ -99,17 +102,18 @@ class FormComponent extends React.Component {
           this.setState({input:"",key:""});
 
         },500);
-      }
 
       }
+
+    }
 
   }
 
  CapitalizeFirstLetter = (word) => {
 
-  return word.charAt(0).toUpperCase() + word.slice(1);
+   return word.charAt(0).toUpperCase() + word.slice(1);
 
-}
+ }
 
   render(){
 
@@ -132,7 +136,7 @@ class FormComponent extends React.Component {
           <div className={"col-"+col_spacer + " form_spacer"}/>
 
           <div className={"col-"+col_container+" form_container jumbotron background-white border-radius-5px"}>
-
+          <form onSubmit= {(e)=>{e.preventDefault();this.props.EnterInformation(e)}}>
             <div className=" form-group">
               <p className="form_text "> {this.props.title} </p>
               <input type = {this.props.dataKey} className="form-control form_input" placeholder = {this.props.placeholder} onChange = {(e)=>{this.setState({input:e.target.value})}} value = {this.state.input}/>
@@ -144,12 +148,13 @@ class FormComponent extends React.Component {
                   Stop in reply to any messages from us!
               </p>
 
-              <button className="width-50 float-right btn btn-primary form_button" type="submit" onClick = {(e)=>{this.EnterInformation(e)}}>
+              <button className="width-50 float-right btn btn-primary form_button" type="submit" onClick = {(e)=>{e.preventDefault();this.EnterInformation(e)}}>
                   <img className="form_icon " src = {FormIcon} />
                   Submit
               </button>
 
             </div>
+            </form>
 
             <p className="error_text text-center" ref={this.errorRef}></p>
 

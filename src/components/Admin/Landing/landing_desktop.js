@@ -3,8 +3,8 @@ import React from "react";
 import "./../../../css/landing_page.css";
 import "./../../../css/utility.css";
 
-import BoxConfig from "./../../../config/admin_landing_box.js";
-import Config from "./../../../config/admin_landing_graphics.js";
+import BoxConfig from "./../../../config/frontend/admin_landing_box.js";
+import Config from "./../../../config/frontend/admin_landing_graphics.js";
 import MobileBackground from "./../../../images/mobile_l.png";
 import DesktopBackground from "./../../../images/2.png";
 import LoginBar from "./../../Landing/login_bar.js";

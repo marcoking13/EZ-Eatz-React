@@ -26,5 +26,6 @@ export default{
   }
 
 ],
-key:"signup"
+key:"signup",
+url:"/api/signup"
 }

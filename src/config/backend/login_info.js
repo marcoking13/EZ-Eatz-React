@@ -1,18 +1,20 @@
-export default{
+export default {
   data:[
   {
-    title:"Enter Username",
+    title:"What is Your Username or Email?",
     instructions:"",
     placeholder:"",
     key:"username",
   },
   {
-    title:"Enter Password",
+    title:"What is Your Password?",
     instructions:"",
     placeholder:"",
     key:"password",
   }
 
+
 ],
-key:"admin_login"
+key:"login",
+url:"/api/login"
 }

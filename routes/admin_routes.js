@@ -5,6 +5,7 @@ const router = express.Router();
 router.post("/admin/add_truck",controller.AddTruckToUser);
 router.post("/admin/find_one",controller.FindOneAdmin);
 router.post("/admin/signup",controller.AddTruckToDb);
+router.post("/admin/login",controller.FindOneAdmin);
 router.post("/admin/google_login",controller.FindOneAdmin);
 router.post("/admin/change_location",controller.UpdateLocation);
 router.post("/admin/edit_truck",controller.EditTruck);

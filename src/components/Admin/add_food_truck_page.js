@@ -40,13 +40,13 @@ class AddFoodTruckPage extends React.Component {
   GetAdmin = async ()=>{
 
     if(this.state.isEdit){
-      console.log(this.props.account);
+
       const {data} = await axios.post("/admin/find_one",{username:this.props.account.username});
-      console.log(data._id);
       const truck_data = await axios.post("/admin/find_one_truck",{_id:data._id});
       var foodtruckData = truck_data.data;
+
       if(data){
-        console.log(foodtruckData);
+
         var address = foodtruckData.address;
         var name = foodtruckData.name;
         var menu = foodtruckData.menu;
@@ -56,7 +56,6 @@ class AddFoodTruckPage extends React.Component {
         var mapLogo = foodtruckData.mapLogo;
         var types = foodtruckData.type;
         var background = foodtruckData.background;
-        // var {name,address,logo,mapLogo,background,types,menu} = data.truck;
 
         this.setState({
           types:types,
@@ -131,7 +130,7 @@ class AddFoodTruckPage extends React.Component {
         logo:s.logo,
         menu:s.menu
       }
-      this.props.submitTruck(truck);
+      this.props.SubmitInput(truck,this.props.dataKey);
     }
 
   }

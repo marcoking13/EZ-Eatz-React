@@ -53,7 +53,6 @@ const UpdateLocation = async (req,res,next) => {
     if(results){
 
       var ownerID = results.ownerID;
-      console.log(ownerID);  
       AdminClass.UpdateLocation(ownerID,req.body,(data)=>{
         FoodtruckClass.UpdateLocation(ownerID,req.body,(datas)=>{
           console.log("datas");
@@ -68,6 +67,7 @@ const UpdateLocation = async (req,res,next) => {
 }
 
 const TrackLocation = async (req,res,next) => {
+
   AdminClass.FindOne(req.body.username,(results)=>{
     let toggle = false;
 
@@ -78,6 +78,7 @@ const TrackLocation = async (req,res,next) => {
     }
 
     if(results){
+
       AdminClass.ToggleTracker({username:req.body.username,toggle:toggle},(success)=>{
         if(success){
           res.json(toggle);
@@ -88,11 +89,14 @@ const TrackLocation = async (req,res,next) => {
     }else{
       res.json(null);
     }
+
   })
+
 }
 
 const AddTruckToDb = async (req,res,next) =>{
   var truck = req.body.truck;
+
   var user = {
     name:req.body.name,
     address:req.body.address,
@@ -110,22 +114,27 @@ const AddTruckToDb = async (req,res,next) =>{
     }
   }
 
+  if(truck.address.length <= 0){
+    truck.address = "none";
+  }
   var latitude = null;
   var longitude = null;
 
   const coords = await axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${truck.address}&key=AIzaSyC39c6JQfUTYtacJlXTKRjIRVzebGpZ-GM`);
 
-if(coords){
-  if(coords.data.results.length > 0){
+  if(coords){
 
-    var { lat, lng } = coords.data.results[0].geometry.location;
-    latitude = lat;
-    longitude = lng;
-    user.location.lat = lat;
-    user.location.lng = lng;
+    if(coords.data.results.length > 0){
+
+      var { lat, lng } = coords.data.results[0].geometry.location;
+      latitude = lat;
+      longitude = lng;
+      user.location.lat = lat;
+      user.location.lng = lng;
+
+    }
 
   }
-}
 
 
   AdminClass.FindOneUser({username:req.body.username},(result)=>{
@@ -137,14 +146,11 @@ if(coords){
          truck.ownerID = new mongodb.ObjectId(result._id);
          new_truck = new FoodtruckClass(truck.ownerID,truck.objectID,truck.name,false,truck.types,3,latitude,longitude,truck.address,truck.logo,truck.background,truck.background,truck.mapLogo,truck.routes,truck.menu,truck.ownerName)
          new_truck.save(null);
-         res.json(true);
+         res.json(new_admin);
       });
     }else{
       res.json(true);
     }
-
-    // AdminClass.FindAllUsers((users)=>{console.log(users)})
-
 
 })
 
