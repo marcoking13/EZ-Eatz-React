@@ -167,19 +167,24 @@ class LocationAdmin extends React.Component {
 
           <div className="input_container_admin row">
             <div className="col-1"/>
-            <div className="col-9">
-              <form onSubmit = {(e)=>{e.preventDefault(); this.ChangeAddress()}}>
-                <input className="input_admin_map form-control width-100 text-center margin-top-2_5"
+            <div className="col-10">
+              <div className="row margin-top-2_5">
+                <div className="col-9">
+                <form onSubmit = {(e)=>{e.preventDefault(); this.ChangeAddress()}}>
+                <input className="input_admin_map form-control width-100 text-center"
                   value = {this.state.new_address}
                   onChange = {(e)=>{this.HandleAddressChange(e.target.value)}}
                 />
               </form>
+              </div>
+              <div className="col-3">
+                  <button className={"width-100 tracker_button btn btn-secondary "+active} onClick = {()=>{
+                      this.ToggleTracker();
+                  }}>{switch_on}</button>
+              </div>
+              </div>
             </div>
-            <div className="col-2">
-                <button className={"width-100 tracker_button btn btn-secondary "+active} onClick = {()=>{
-                    this.ToggleTracker();
-                }}>{switch_on}</button>
-            </div>
+
           </div>
 
 

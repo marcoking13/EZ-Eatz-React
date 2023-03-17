@@ -32,17 +32,6 @@ class MenuPage extends React.Component {
     this.setState({item:item})
   }
 
-  renderExpensive = () =>{
-    var expensive = "";
-
-    for(var i = 0; i < this.props.truck.expensive; i++){
-      expensive += "$";
-    }
-
-    return expensive;
-
-  }
-
 //------------------------------------------------Renderer----------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------
   render(){
@@ -66,8 +55,6 @@ class MenuPage extends React.Component {
         />
 
         <Showcase
-          SetAddress = {this.props.SetAddress}
-          renderExpensive = {this.renderExpensive}
           ChangeURL = {this.props.ChangeURL}
           truck = {this.props.truck}
         />

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 
 import Form from "./../components/Authentication/form_component";
-import AddFoodTruckPage from "./../components/Admin/add_food_truck_page.js";
+import AddFoodTruckPage from "./../components/Admin/new_add_food_truck_page.js";
 
 class AuthenticationPage extends React.Component {
 
@@ -86,7 +86,7 @@ class AuthenticationPage extends React.Component {
   }
 
   DirectUser = (data) => {
-    console.log(data);
+
     if(data){
       this.setState({finished:true});
       this.props.LetUserInside(data.address,data,this.props.isAdmin);

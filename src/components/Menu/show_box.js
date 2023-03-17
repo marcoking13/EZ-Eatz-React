@@ -43,11 +43,23 @@ class ShowBox extends React.Component {
 
     }
 
+    renderExpensive = () =>{
+      var expensive = "";
+
+      for(var i = 0; i < this.props.truck.expensive; i++){
+        expensive += "$";
+      }
+
+      return expensive;
+
+    }
+
 
 
   render(){
     var logo_col = window.innerWidth >= 844 ? 1 : 3;
     var star_col_size = window.innerWidth >= 844 ? 2 : 3;
+    var types = this.props.truck.types.length >0 ? this.props.truck.type[0] : "No Types";
         return(
             <div className="container-fluid">
 
@@ -67,7 +79,7 @@ class ShowBox extends React.Component {
 
                   <div className="col-12">
                     <p className="foodtruck_menu_name">{this.props.truck.name} ({this.props.truck.address.city}, { this.props.truck.address.state})</p>
-                    <p className="foodtruck_menu_details">10-30 min | {this.props.truck.type[0]} | {this.props.renderExpensive()}</p>
+                    <p className="foodtruck_menu_details">10-30 min | {types} | {this.renderExpensive()}</p>
                   </div>
 
                   <div className="margin-left-5"/>

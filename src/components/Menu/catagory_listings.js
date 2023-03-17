@@ -6,22 +6,26 @@ class  CatagoryListings extends React.Component {
 
 
   renderCatagories = ()=>{
-    console.log(this.props.truck.menu.catagories);
-    return this.props.truck.menu.catagories.map((catagory)=>{
-      var col_size = window.innerWidth >= 844 ? 12 : 4;
 
-      return(
-        <li class={"col-"+col_size + " mt5"} style={{listStyleType:"none"}}>
-          <a href = {"#"+catagory.catagory} className="normal-anchor" >
-          <div className="menu_catagory_list">
-            <p className="menu_catagory_list_text ml10 w100">{catagory.catagory}</p>
-            <div className="underline ml10"/>
-          </div>
-          </a>
-        </li>
-      )
+    if(this.props.truck.menu.catagories.length > 0){
+      return this.props.truck.menu.catagories.map((catagory)=>{
+        var col_size = window.innerWidth >= 844 ? 12 : 4;
 
-    })
+        return(
+          <li class={"col-"+col_size + " mt5"} style={{listStyleType:"none"}}>
+            <a href = {"#"+catagory.catagory} className="normal-anchor" >
+            <div className="menu_catagory_list">
+              <p className="menu_catagory_list_text ml10 w100">{catagory.catagory}</p>
+              <div className="underline ml10"/>
+            </div>
+            </a>
+          </li>
+        )
+
+      })
+    }else{
+      return <p> N/A </p>
+    }
 
   }
 

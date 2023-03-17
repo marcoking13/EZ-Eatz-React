@@ -8,31 +8,35 @@ class  MenuRow extends React.Component {
 
 
   RenderRow = () =>{
+    var food_items = <p> No Items </p>
 
-    const rows = this.props.truck.menu.catagories.map((catagory)=>{
-      console.log(catagory);
-      const catagory_name = <p className="menu_row_title" key = {catagory.catagory} id = {catagory.catagory}> {catagory.catagory} </p>
+    if(this.props.truck.menu.catagories.length > 0){
+        const rows = this.props.truck.menu.catagories.map((catagory)=>{
+        const catagory_name = <p className="menu_row_title" key = {catagory.catagory} id = {catagory.catagory}> {catagory.catagory} </p>
 
-      const food_items = catagory.menu.map((food_item,index)=>{
-        console.log(food_item,index);
-        var col_size = window.innerWidth >=  844 ? 4 : 6;
+        if(catagory.menu.length<=0){
+          return food_items
+        }else{
 
-        var data = true;
-        console.log(food_item.image);
+          food_items = catagory.menu.map((food_item,index)=>{
+          var col_size = window.innerWidth >=  844 ? 4 : 6;
+          var data = true;
 
-        return (
-          <div className={"col-" + col_size + " menu_item"} onClick = {()=>{console.log(food_item);this.props.SetItem(food_item)}}>
-            <img className="menu_item_image" src = {food_item.image}/>
-            <div className="row">
-              <p className="col-6 menu_item_description"> {food_item.name}</p>
-              <p className="col-6 menu_item_description"> $ {food_item.price.toString()}</p>
-              <p className="col-12 menu_item_description"> {food_item.description}</p>
+          return (
+            <div className={"col-" + col_size + " menu_item"} onClick = {()=>{console.log(food_item);this.props.SetItem(food_item)}}>
+              <img className="menu_item_image" src = {food_item.image}/>
+              <div className="row">
+                <p className="col-6 menu_item_description"> {food_item.name}</p>
+                <p className="col-6 menu_item_description"> $ {food_item.price.toString()}</p>
+                <p className="col-12 menu_item_description"> {food_item.description}</p>
+              </div>
+
             </div>
+          )
 
-          </div>
-        )
+        });
 
-      });
+    }
 
       return (
         <div className="menu_row_container">
@@ -44,8 +48,11 @@ class  MenuRow extends React.Component {
       )
 
     });
-    console.log(rows);
+
     return rows;
+  }else{
+    return <p>No Catagories</p>
+  }
   }
     // Renderer
   render(){
