@@ -772,66 +772,69 @@ class AddFoodTruckPage extends React.Component {
       }
 
       return (
-        <div className="container-fluid" style={{position:"absolute",top:0,left:0,width:"100%;background:black;opacity:.5"}}>
+        <div className="container-fluid" style={{position:"absolute",top:0,left:0,width:"100%",background:"black",opacity:.7,height:"1080px"}}>
           <div class="row">
             <div class="col-3"/>
-            <div class="col-6">
+            <div class="col-6"style={{background:"white"}}>
               <div class="row">
                 <div className="col-6">
-                <div className="row">
-                <div className="col-12">
-                  <input className="form-control input_add_truck" placeholder="Enter Foodtruck Name" value = {this.state.name}
-                    onChange = {(e)=>{
-                      this.HandleNameChange(e.target.value);
-                    }}
-                />
+                  <div className="row">
+                    <div className="col-12">
+                      <input className="form-control input_add_truck" placeholder="Enter Foodtruck Name" value = {this.state.name}
+                        onChange = {(e)=>{
+                          this.HandleNameChange(e.target.value);
+                        }}
+                    />
+                    </div>
+
+                    <div className="col-12">
+                      <input className="form-control input_add_truck" placeholder="Enter Foodtruck Address" value = {this.state.address}
+                        onChange = {(e)=>{
+                          this.HandleAddressChange(e.target.value);
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-12">
+                      <input className="form-control input_add_truck" placeholder="Enter Logo Url" value = {this.state.logo}
+                        onChange = {(e)=>{
+                          this.HandleLogoChange(e.target.value);
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-12">
+                      <input className="form-control input_add_truck" placeholder="Enter Map Logo Url" value = {this.state.mapLogo}
+                        onChange = {(e)=>{
+                          this.HandleMapLogoChange(e.target.value);
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-12">
+                      <input className="form-control input_add_truck" placeholder="Enter Background Logo Url" value = {this.state.background}
+                        onChange = {(e)=>{
+                          this.HandleBackgroundLogoChange(e.target.value);
+                        }}
+                      />
+                    </div>
+
+                  <div className="col-7">
+                    {this.renderTypeInputs()}
+                    <div className="add_symbol" onClick = {()=>{
+                        this.AddType();
+                    }}>Add Cuisine Food</div>
+                  </div>
+
                 </div>
 
-                <div className="col-12">
-                  <input className="form-control input_add_truck" placeholder="Enter Foodtruck Address" value = {this.state.address}
-                    onChange = {(e)=>{
-                      this.HandleAddressChange(e.target.value);
-                    }}
-                  />
-                </div>
+             </div>
+               <div className="col-6">
+                 <MenuDisplay truck = {truck} account = {this.props.account} />
+               </div>
+           </div>
+        </div>
 
-                <div className="col-12">
-                  <input className="form-control input_add_truck" placeholder="Enter Logo Url" value = {this.state.logo}
-                    onChange = {(e)=>{
-                      this.HandleLogoChange(e.target.value);
-                    }}
-                  />
-                </div>
-
-                <div className="col-12">
-                  <input className="form-control input_add_truck" placeholder="Enter Map Logo Url" value = {this.state.mapLogo}
-                    onChange = {(e)=>{
-                      this.HandleMapLogoChange(e.target.value);
-                    }}
-                  />
-                </div>
-
-                <div className="col-12">
-                  <input className="form-control input_add_truck" placeholder="Enter Background Logo Url" value = {this.state.background}
-                    onChange = {(e)=>{
-                      this.HandleBackgroundLogoChange(e.target.value);
-                    }}
-                  />
-                </div>
-
-            <div className="col-7">
-              {this.renderTypeInputs()}
-              <div className="add_symbol" onClick = {()=>{
-                  this.AddType();
-              }}>Add Cuisine Food</div>
-            </div>
-          </div>
-          </div>
-          </div>
-          </div>
-          <div className="col-6">
-            <MenuDisplay truck = {truck} account = {this.props.account} />
-          </div>
 
           </div>
         </div>
@@ -854,7 +857,7 @@ class AddFoodTruckPage extends React.Component {
       }
 
     return(
-      <div>
+      <div className="width-100">
       <p className="add_foodtruck_title"> Create Your Menu </p>
 
       <Showcase

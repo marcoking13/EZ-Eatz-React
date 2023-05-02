@@ -49,26 +49,25 @@ renderDesktop(){
 
 renderMobile(){
   return(
-      <div className="row margin-top-20">
+      <div className="row margin-top-10">
 
         <div className="col-12">
-          <h2 className="sub_slogan_landing margin-top-5 new_sub_slogan_landing"> Restaurants and more, <br />delivered to your door <br />  </h2>
+          <h2 className="sub_slogan_landing margin-top-5 new_sub_slogan_landing" style="text-align:left;font-size:35px"> Restaurants and more, delivered to your door <br />  </h2>
         </div>
 
         <div className="col-1"/>
 
         <div className="col-10 margin-top-10">
-          <input className="form-control width-100" placeholder = "Enter you address" value = {this.state.address} onChange = {(e)=>{
+          <input className="form-control width-100" style="padding:5%;"placeholder = "Enter you address" value = {this.state.address} onChange = {(e)=>{
             this.setState({address:e.target.value})
           }}/>
-          <button className="width-100 btn black-background white margin-top-5 " type="submit" onClick = {(e)=>{
+
+          <button className="width-100 btn black-background white margin-top-5 " style="padding:5%" type="submit" onClick = {(e)=>{
             this.props.GuestEntrance(this.state.address,null,false);
           }}>Submit</button>
+          <p style="font-size:20px;margin-top:2.5%"><a>Sign In Here </a> if you are a foodtruck owner </p>
         </div>
 
-        <button className="width-100 btn shadowed_button margin-top-5" type="submit" onClick = {(e)=>{
-          this.props.ChangeURL("/admin/");
-        }}>I Own A Foodtruck</button>
 
 
     </div>

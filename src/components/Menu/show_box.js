@@ -59,7 +59,7 @@ class ShowBox extends React.Component {
   render(){
     var logo_col = window.innerWidth >= 844 ? 1 : 3;
     var star_col_size = window.innerWidth >= 844 ? 2 : 3;
-    var types = this.props.truck.types.length >0 ? this.props.truck.type[0] : "No Types";
+    var types = this.props.truck.types.length > 0 ? this.props.truck.types[0] : "No Types";
         return(
             <div className="container-fluid">
 
